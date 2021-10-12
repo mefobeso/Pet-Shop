@@ -14,9 +14,7 @@ img{
     display: block;
     max-width: 100%;
 }
-a{
-    text-decoration: none;
-}
+
 .container
 {
     display: flex;
@@ -82,34 +80,27 @@ a{
             position:absolute;  
         }
         &-logo img{   
-            max-height: 50px;
+            height: 50px;
+            width: 130px;
         }
         &-navbar ul{
-            padding-left: 200px;
+            padding-left: 400px;
             width: 100%;
             list-style: none;
-            margin: 0 auto;
             height: 100%;
             text-transform: uppercase;
             font-weight: bold;
             letter-spacing: 2px;
             position: relative;
+            display:flex;
+            justify-content: space-between;
         }
         &-navbar ul li{ 
             float: left;
-            padding: 12px 0;
+            padding-top: 12px;
             color: #05465e;    
-            padding-left:90px; 
             transition: all 0.2s ease; 
             cursor: pointer;
-        }
-        &-navbar ul li:nth-child(4){ 
-            padding-left:245px;
-           
-        }
-        &-navbar ul li:last-child{ 
-            padding-left:90px;
-           
         }
         &-navbar ul li:hover{
             color:#18bc9c;
@@ -125,7 +116,7 @@ a{
         }
         &-navbar ul li:nth-child(4)
         {
-            margin-left: 130px;
+            margin-left: 300px;
         }
         &-navbar ul li img{
             max-height: 50px; 
@@ -133,15 +124,14 @@ a{
     }
     &-footer{
         width: 1265px;
-        height: 80px;
+        height: 50px;
         display: flex;
-        margin: 10px auto;
+        margin: 5px auto;
         font-family: 'Righteous';
         align-items: center;
         &-items{
             list-style: none;
-            display: flex;
-            
+            display: flex;         
             &-link{  
                 font-weight: 500;
                 font-size: 20px;
@@ -312,3 +302,6 @@ a{
 
 
 
+a{
+    text-decoration: none;
+}

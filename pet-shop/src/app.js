@@ -4,7 +4,7 @@ import FadeLoader from 'react-spinners/FadeLoader';
 // Pages
 import HomePage from "./components/HomePage";
 import LandingPage from "./components/LandingPage";
-import Policies from "./components/policies/Policies";
+import Login from "./components/login-page/Login";
 function App(){
     const [loading, setLoading] = useState(false);
 
@@ -29,7 +29,7 @@ function App(){
             <Switch>
                 <Route exact path="/" component={LandingPage}/>
                 <Route exact path="/home" component={HomePage}/>
-                <Route exact path="/catalog" component={Policies}/>
+                <Route exact path="/login" component={Login}/>
             </Switch>
         </Router>
     );

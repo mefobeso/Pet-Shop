@@ -1,8 +1,10 @@
-import React from 'react';
+import React,{useState} from 'react';
 // Font Awesome
 import '../FontAwesome';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+
 function Headerwhite(){
+    const [login, setLogin] = useState("logged-out")
     return(
             <div className="white-header">
                 <nav className="white-header-navbar">
@@ -85,7 +87,7 @@ function Headerwhite(){
                             </div>
                         </div>          
                     </li>
-                    <li><FontAwesomeIcon icon="user-circle"/> My Account</li>
+                    <li><FontAwesomeIcon icon="user-circle"/> {login==="logged-in"?"My Account":"Login/Register"}</li>
                     <li><FontAwesomeIcon icon="shopping-cart"/></li>
                 </ul>
                 </nav>       
