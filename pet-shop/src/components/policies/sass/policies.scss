@@ -1,0 +1,31 @@
+.policies{
+    &-container{
+        height: 250px;
+        width: 1265px;
+        margin: 100px auto;
+        display: flex;
+        justify-content: space-between;
+        font-family: "Righteous";
+        color: white;
+    }
+    &-items{
+        height:100%;
+        width: 360px;
+        text-align: center;
+        padding:  50px;
+    }
+    &-icon{
+        font-size: 40px;
+        margin-bottom:20px;
+    }
+}
+.policies-items.left{
+    background-color: #51CA46;
+}
+.policies-items.middle{
+    background-color: #46CAA2;
+}
+.policies-items.right{
+    background-color: #469ACA;
+    
+}

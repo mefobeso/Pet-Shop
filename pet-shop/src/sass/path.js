@@ -1,0 +1,1 @@
+import {} from "../components/assets/homepage_background.jpg"
