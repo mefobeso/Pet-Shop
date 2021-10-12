@@ -19,7 +19,7 @@
     "predeploy":"npm run build",
     "deploy":"gh-pages -d build",
     "edit": "sass ./app.scss ./css/app.css --watch",
-    "build": "react-scripts build",
+    "build": "react-scripts build", 
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
