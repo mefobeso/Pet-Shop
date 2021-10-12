@@ -31,7 +31,7 @@ export default function Slider() {
                     <div key={obj.id} 
                     className={slideIndex === index +1 ? "slide active-anim" :"slide"}>
                         <img 
-                            src={process.env.PUBLIC_URL+`imgs/slider_${index+1}.jpg`}  
+                            src={process.env.PUBLIC_URL+`/imgs/slider_${index+1}.jpg`}  
                             alt="slider"
                         />
                         <p className="text">{obj.title}</p>
