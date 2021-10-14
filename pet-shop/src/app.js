@@ -5,6 +5,8 @@ import FadeLoader from 'react-spinners/FadeLoader';
 import HomePage from "./components/HomePage";
 import LandingPage from "./components/LandingPage";
 import Login from "./components/login-page/Login";
+import Register from "./components/login-page/Register";
+import Reset from "./components/login-page/Reset";
 function App(){
     const [loading, setLoading] = useState(false);
 
@@ -12,7 +14,7 @@ function App(){
         setLoading(true);
         setTimeout(() =>{
             setLoading(false)
-        },1000)
+        },500)
     },[])
     return(
         loading ?
@@ -30,6 +32,8 @@ function App(){
                 <Route exact path="/" component={LandingPage}/>
                 <Route exact path="/home" component={HomePage}/>
                 <Route exact path="/login" component={Login}/>
+                <Route exact path="/register" component={Register}/>
+                <Route exact path="/forgot-password" component={Reset}/>
             </Switch>
         </Router>
     );

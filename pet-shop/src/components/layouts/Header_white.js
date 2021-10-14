@@ -87,7 +87,11 @@ function Headerwhite(){
                             </div>
                         </div>          
                     </li>
-                    <li><FontAwesomeIcon icon="user-circle"/> {login==="logged-in"?"My Account":"Login/Register"}</li>
+                    <li>
+                        <a href="/login" className="white-header-login" >
+                            <FontAwesomeIcon icon="user-circle"/> {login==="logged-in"?"My Account":"Login/Register"}
+                        </a>
+                    </li>
                     <li><FontAwesomeIcon icon="shopping-cart"/></li>
                 </ul>
                 </nav>       

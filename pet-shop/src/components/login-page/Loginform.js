@@ -15,8 +15,8 @@ export default function Loginform() {
                         <br/><br/>
                         <button className="btn btn-login">LOGIN</button>
                         <br/><br/><br/><br/>
-                        <a href="#">CAN'T SIGN IN</a>
-                        <a href="#">CREATE ACCOUNT</a>
+                        <a href="/forgot-password" className="login-link">CAN'T SIGN IN</a>
+                        <a href="/register" className="login-link">CREATE ACCOUNT</a>
                 </form>
         </div>
     )

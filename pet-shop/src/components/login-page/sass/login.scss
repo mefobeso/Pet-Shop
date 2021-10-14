@@ -1,21 +1,25 @@
+$t-color: rgb(248, 248, 248);
 * input{
     border: none;
 }
 .login{
     border-radius: 8px;
-    padding-top:20px;
-    font-family: 'Roboto';
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.562), rgba(255, 255, 255, 0) );
+    padding-top:45px;
+    font-family: 'Righteous';
+    background-image: linear-gradient(to bottom, rgba(170, 170, 170, 0.562), rgba(255, 255, 255, 0) 80%);
     position: absolute;
     z-index: 1;
     width: 280px;
-    top: 30%;
+    top: 25%;
     left: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    color: #fff;
+    color: $t-color;
+    &-title{
+        font-size: 25px;
+    }
     &-container{
         width: 100%;
         height: auto;
@@ -23,23 +27,23 @@
     &-background{
         opacity: 0.6;
         background-position: center center;
-        height:658px;
+        height:630px;
         background-image: url("https://images.unsplash.com/photo-1494256997604-768d1f608cac?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1229&q=80");
         background-size: cover;
     }
-    &-form{
-
-    }
     &-input{
         font-family: FontAwesome;
-        border-bottom: solid 2px #fff;
+        border-bottom: solid 2px $t-color;
         height:22px;
         background-color: transparent;
         font-size: 17px;
         font-weight: thin;
     }
     &-input::placeholder{
-        color: #fff;
+        color: $t-color;
+    }
+    &-link{
+        color: $t-color;
     }
 }
 .login button{
@@ -49,8 +53,14 @@
     height:30px;
     cursor: pointer;
 }
-.login a{
-    text-decoration: none;
-    color: #fff;
+.reset{
+    &-input{
+        width: 220px;
+        border-radius: 8px;
+        height:20px;
+        display: flex;
+        justify-self: left;
+    }
 }
+
 
