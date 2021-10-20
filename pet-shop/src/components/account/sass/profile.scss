@@ -1,0 +1,65 @@
+$t-color:rgba(0, 0, 0, 0.5);
+.profile{
+    display: grid;
+    grid-template-columns: 300px 900px;
+    grid-column-gap: 65px;
+    &-bg{
+        height: 170px;
+        width: 100%;
+        position: absolute;
+    }
+    &-container{
+        height: 570px;
+        width: 1265px;
+        margin: 70px auto 0px;
+        position: relative;
+        font-family: 'Open Sans';
+        font-size: 20px;
+    }
+    &-info{
+        height: 530px;
+        background-color: #fff;
+        width: 300px;
+        text-align: center;
+        border: 0.1px outset rgba(0, 0, 0, 0.336);
+        &-ava{
+            height: 140px;
+            width: 140px;
+            border-radius: 50%;
+            box-shadow: -1px 4px 7px 0px #00000080;
+            margin: 30px auto;
+        }
+        &-text{
+            margin-top : 50px;
+        }
+        // &-name{
+        //     margin-left: 60px;
+        // }
+        &-dog{
+            color: rgba(168, 124, 41, 0.863);
+        }
+        &-dollar{
+            color: green;
+        }
+    }
+    &-content{
+        height: 530px;
+        background-color: #fff;
+        border: 0.1px outset rgba(0, 0, 0, 0.336);
+        &-tabs{
+            height: 110px;
+            display: grid;
+            grid-template-columns: 300px 300px 300px;
+            border-bottom: 1px solid black;
+            &-item{
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            &-item.active{
+                box-shadow: -2px 5px 6px 2px #000000a1
+            }
+        }
+    } 
+}

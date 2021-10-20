@@ -11,8 +11,8 @@ function Header(){
                       <img src={process.env.PUBLIC_URL +"/logo.png"} alt="logo"></img>
                 </a>
                 <ul>
-                    <li>Home</li>
-                    <li>Item <FontAwesomeIcon icon="angle-down"/>
+                    <li><a>Home</a></li>
+                    <li><a href="/product">Item <FontAwesomeIcon icon="angle-down"/></a>
                         <div className="header-menu">
                             <div className="header-menu-inner">
                                 <p>Dresses</p>
@@ -49,7 +49,10 @@ function Header(){
                             </div>
                         </div>                 
                     </li>
-                    <li>Pet <FontAwesomeIcon icon="angle-down"/>
+                    <li>
+                        <a>
+                            Pet <FontAwesomeIcon icon="angle-down"/>
+                        </a> 
                     <div className="header-menu">
                             <div className="header-menu-inner">
                                 <p>Dresses</p>

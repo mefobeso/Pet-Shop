@@ -33,7 +33,7 @@
   background-size: cover;
 }
 .login-input {
-  font-family: FontAwesome;
+  font-family: FontAwesome, sans-serif;
   border-bottom: solid 2px #f8f8f8;
   height: 22px;
   background-color: transparent;

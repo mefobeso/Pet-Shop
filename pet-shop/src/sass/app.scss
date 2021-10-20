@@ -105,6 +105,12 @@ img{
         &-navbar ul li:hover{
             color:#18bc9c;
         }
+        &-navbar ul li a{ 
+            color: #05465e;    
+        }
+        &-navbar ul li a:hover{
+            color:#18bc9c;
+        }
         &-navbar ul li:hover .white-header-menu{
             visibility: visible;
             opacity: 1;
@@ -207,15 +213,18 @@ img{
         transition: all 0.4s ease; 
         cursor: pointer;
     }
-    &-navbar ul li:hover{
-        color:#18bc9c;
-    }
     &-navbar ul li:hover .header-menu{
         visibility: visible;
         opacity: 1;
         color: #fff;
     }
     &-navbar ul li .header-menu p:hover{
+        color:#18bc9c;
+    }
+    &-navbar ul li a{ 
+        color: #fff;    
+    }
+    &-navbar ul li a:hover{
         color:#18bc9c;
     }
     &-navbar ul li:nth-child(4)

@@ -14,7 +14,7 @@ export default function Resetform() {
                         <br/>   
                         <button className="btn btn-login">Next</button>
                         <br/><br/><br/><br/><br/><br/>
-                        <a href="/login" className="login-link">ALREADY HAVE AN ACCOUNT ?</a>
+                        <a href="/login" className="login-link">CREATE ACCOUNT</a>
                 </form>
         </div>
     )

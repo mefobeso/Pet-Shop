@@ -7,6 +7,7 @@ import LandingPage from "./components/LandingPage";
 import Login from "./components/login-page/Login";
 import Register from "./components/login-page/Register";
 import Reset from "./components/login-page/Reset";
+import Profile from "./components/account/Profile";
 function App(){
     const [loading, setLoading] = useState(false);
 
@@ -34,6 +35,7 @@ function App(){
                 <Route exact path="/login" component={Login}/>
                 <Route exact path="/register" component={Register}/>
                 <Route exact path="/forgot-password" component={Reset}/>
+                <Route exact path="/profile" component={Profile}/>
             </Switch>
         </Router>
     );

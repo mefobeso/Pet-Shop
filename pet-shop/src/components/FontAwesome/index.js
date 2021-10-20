@@ -10,7 +10,13 @@ import
     faPhone,
     faHome,
     faTruck,
-    faGlobe
+    faGlobe,
+    faDog,
+    faCat,
+    faDollarSign,
+    faIdCard,
+    faHistory,
+    faGifts
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add
@@ -24,5 +30,11 @@ library.add
     faPhone,
     faHome,
     faTruck,
-    faGlobe
+    faGlobe,
+    faDog,
+    faCat,
+    faDollarSign,
+    faIdCard,
+    faHistory,
+    faGifts
 );

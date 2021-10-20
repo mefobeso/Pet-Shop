@@ -13,7 +13,7 @@ function Headerwhite(){
                 </a>
                 <ul>
                     <li>Home</li>
-                    <li>Item <FontAwesomeIcon icon="angle-down"/>
+                    <li><a href="/product" className="">Item <FontAwesomeIcon icon="angle-down"/></a>
                         <div className="white-header-menu">
                             <div className="white-header-menu-inner">
                                 <p>Dresses</p>
@@ -88,7 +88,7 @@ function Headerwhite(){
                         </div>          
                     </li>
                     <li>
-                        <a href="/login" className="white-header-login" >
+                        <a href={login==="logged-in"?"/profile":"/login"} className="white-header-login" >
                             <FontAwesomeIcon icon="user-circle"/> {login==="logged-in"?"My Account":"Login/Register"}
                         </a>
                     </li>
