@@ -8,6 +8,7 @@ import Footerwhite from './layouts/Footer_white';
 import Banner2 from './banner_2/Banner2';
 import Bannerside from './banner_side/Bannerside';
 import Policies from './policies/Policies';
+
 // FontAwesome
 
 function HomePage(){

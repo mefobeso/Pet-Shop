@@ -12,7 +12,7 @@ function Headerwhite(){
                       <img src={process.env.PUBLIC_URL +"/logo-white.png"} alt="logo"></img>
                 </a>
                 <ul>
-                    <li>Home</li>
+                    <li><a href="/home">Home</a></li>
                     <li><a href="/product" className="">Item <FontAwesomeIcon icon="angle-down"/></a>
                         <div className="white-header-menu">
                             <div className="white-header-menu-inner">

@@ -16,7 +16,8 @@ import
     faDollarSign,
     faIdCard,
     faHistory,
-    faGifts
+    faGifts,
+    faStar
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add
@@ -36,5 +37,6 @@ library.add
     faDollarSign,
     faIdCard,
     faHistory,
-    faGifts
+    faGifts,  
+    faStar
 );
