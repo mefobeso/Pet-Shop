@@ -7,7 +7,7 @@
 }
 .slide-container {
   max-width: 1265px;
-  height: 650px;
+  height: 720px;
   margin: 10px auto;
   position: relative;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
@@ -83,7 +83,7 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 3px solid #f1f1f1;
+  border: 3.5px solid #f1f1f1;
   margin: 0 5px;
   background: #f1f1f1;
   cursor: pointer;

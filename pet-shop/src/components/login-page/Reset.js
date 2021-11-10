@@ -1,15 +1,21 @@
 import React from 'react';
-import Headerwhite from '../layouts/Header_white';
-import Footerwhite from '../layouts/Footer_white';
-import Resetform from './Resetform';
-
 import "./sass/css/login.css";
 export default function Reset() {
     return (
-        <div>
-            <Headerwhite/>
-            <Resetform/>
-            <Footerwhite/>
+        <div className="login-container">
+            
+                <div className="login-background"></div>
+                <form className="login">
+                        <p className="login-title">RESET PASSWORD</p>
+                        <br/><br/>
+                        <p>Enter your email :</p>
+                        <input type="text" className="login-input" />
+                        <br/>   
+                        <button>Next</button>
+                        <br/><br/><br/><br/>
+                        <br/>
+                        <br/>
+                </form>
         </div>
     )
 }

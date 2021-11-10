@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import "../FontAwesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function Headerwhite() {
-  const [login, setLogin] = useState("logged-out");
+function Headerwhite(props) {
+  const [login, setLogin] = useState(false);
   return (
     <div className="white-header">
       <nav className="white-header-navbar">
@@ -98,11 +98,11 @@ function Headerwhite() {
           </li>
           <li>
             <a
-              href={login === "logged-in" ? "/profile" : "/login"}
+              href={login ? "/profile" : "/login"}
               className="white-header-login"
             >
               <FontAwesomeIcon icon="user-circle" />{" "}
-              {login === "logged-in" ? "My Account" : "Login/Register"}
+              {login ? "My Account" : "Login/Register"}
             </a>
           </li>
           <li>

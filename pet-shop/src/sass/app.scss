@@ -1,4 +1,5 @@
 // variables
+
 $ln-bg: linear-gradient(to right, #179fd1, #05465e);
 * {
   box-sizing: border-box;
@@ -7,6 +8,7 @@ $ln-bg: linear-gradient(to right, #179fd1, #05465e);
 }
 body {
   overflow-x: hidden;
+
   font-family: "Open Sans", sans-serif;
 }
 img {
@@ -20,26 +22,21 @@ img {
   top: 50%;
   left: 50%;
 }
-.background {
+.bg {
+  height: 100vh;
   &-landing {
     height: 650px;
     background-image: url("https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1169&q=80");
     background-position: center;
     background-size: cover;
   }
-  &-footer {
+  &-ln {
     background-image: $ln-bg;
   }
 }
 .head-container {
-  background-image: $ln-bg;
-  height: 80px;
+  height: 5em;
   padding: 15px 135px;
-}
-.blablawhite {
-  height: 80px;
-  padding: 15px 135px;
-  background-color: #fff;
 }
 .white {
   &-header {
@@ -52,7 +49,7 @@ img {
       top: 50px;
       left: 0px;
       width: 100%;
-      height: 200px;
+      height: 15rem;
       transition: all 0.4s ease;
       box-sizing: border-box;
       visibility: hidden;
@@ -94,15 +91,14 @@ img {
       transition: all 0.2s ease;
       cursor: pointer;
     }
-    &-navbar ul li:hover {
-      color: #18bc9c;
-    }
+
     &-navbar ul li a {
       color: #05465e;
       text-decoration: none;
     }
     &-navbar ul li a:hover {
       color: #18bc9c;
+      transition: 1s;
     }
     &-navbar ul li:hover .white-header-menu {
       visibility: visible;
@@ -146,13 +142,13 @@ img {
   }
 }
 .header {
-  height: 50px;
+  height: 2.5em;
   &-menu {
     position: absolute;
     top: 65px;
     left: 0px;
     width: 100%;
-    height: 200px;
+    height: 15rem;
     transition: all 0.4s ease;
     box-sizing: border-box;
     background-image: $ln-bg;
@@ -221,26 +217,22 @@ img {
   }
 }
 .footer {
-    &-container{
-        background-image: $ln-bg;
-        display: flex;
-    }
-    width: 1265px;
-    height: 50px;
-    display: flex;
-    margin: 1em auto;
-    font-family: "Righteous";
-    justify-content: space-between;
-    box-sizing: border-box;
-    &-link {
-      font-weight: 500;
-      font-size: 20px;
-      color: white;
-      text-decoration: none;
-    }
-    &-link:hover {
-      color: white;
-    }
+  width: 1265px;
+  height: 1.5em;
+  display: flex;
+  margin: 1em auto;
+  font-family: "Righteous";
+  justify-content: space-between;
+  box-sizing: border-box;
+  &-link {
+    font-weight: 500;
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+  }
+  &-link:hover {
+    color: white;
+  }
 }
 .landing {
   font-family: "Righteous";

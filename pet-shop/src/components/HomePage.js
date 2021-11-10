@@ -13,7 +13,7 @@ import Policies from './policies/Policies';
 
 function HomePage(){
     return(
-        <div>
+        <div className="bg-homepage">
             <Headerwhite/>    
             <Slider/>    
             <Banner/> 

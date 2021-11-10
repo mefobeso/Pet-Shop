@@ -7,17 +7,18 @@
   height: 170px;
   width: 100%;
   position: absolute;
+  transition: 1s ease-in;
 }
 .profile-container {
-  height: 570px;
+  height: 27em;
   width: 1265px;
-  margin: 70px auto 0px;
+  margin: 3.5em auto 3em;
   position: relative;
   font-family: "Open Sans";
   font-size: 20px;
 }
 .profile-info {
-  height: 530px;
+  height: 27em;
   background-color: #fff;
   width: 300px;
   text-align: center;
@@ -40,7 +41,7 @@
   color: green;
 }
 .profile-content {
-  height: 530px;
+  height: 27em;
   background-color: #fff;
   border: 0.1px outset rgba(0, 0, 0, 0.336);
 }
@@ -48,7 +49,7 @@
   height: 110px;
   display: grid;
   grid-template-columns: 300px 300px 300px;
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid black;
 }
 .profile-content-tabs-item {
   cursor: pointer;
@@ -58,6 +59,7 @@
 }
 .profile-content-tabs-item.active {
   box-shadow: -2px 5px 6px 2px #000000a1;
+  transition: 0.5s;
 }
 
 /*# sourceMappingURL=profile.css.map */

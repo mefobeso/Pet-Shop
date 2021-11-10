@@ -7,17 +7,18 @@ $t-color:rgba(0, 0, 0, 0.5);
         height: 170px;
         width: 100%;
         position: absolute;
+        transition: 1s ease-in;
     }
     &-container{
-        height: 570px;
+        height: 27em;
         width: 1265px;
-        margin: 70px auto 0px;
+        margin: 3.5em auto 3em;
         position: relative;
         font-family: 'Open Sans';
         font-size: 20px;
     }
     &-info{
-        height: 530px;
+        height: 27em;
         background-color: #fff;
         width: 300px;
         text-align: center;
@@ -32,9 +33,6 @@ $t-color:rgba(0, 0, 0, 0.5);
         &-text{
             margin-top : 50px;
         }
-        // &-name{
-        //     margin-left: 60px;
-        // }
         &-dog{
             color: rgba(168, 124, 41, 0.863);
         }
@@ -43,14 +41,14 @@ $t-color:rgba(0, 0, 0, 0.5);
         }
     }
     &-content{
-        height: 530px;
+        height: 27em;
         background-color: #fff;
         border: 0.1px outset rgba(0, 0, 0, 0.336);
         &-tabs{
             height: 110px;
             display: grid;
             grid-template-columns: 300px 300px 300px;
-            border-bottom: 1px solid black;
+            border-bottom: 2px solid black;
             &-item{
                 cursor: pointer;
                 display: flex;
@@ -58,7 +56,8 @@ $t-color:rgba(0, 0, 0, 0.5);
                 justify-content: center;
             }
             &-item.active{
-                box-shadow: -2px 5px 6px 2px #000000a1
+                box-shadow: -2px 5px 6px 2px #000000a1;
+                transition: 0.5s;
             }
         }
     } 
