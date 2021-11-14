@@ -25,10 +25,19 @@ export default function OrderItem(props) {
               <p>
                 {day} {month} {year}
               </p>
-              <OrderProducts dataProduct={data[index].products}/>
-              <hr/>
-              <p>x3 items</p>
-              <p>$800</p>
+              <OrderProducts dataProduct={data[index].products} />
+              <hr />
+              <div className="bottom">
+                <div className="total" style={{fontSize: "14px",}}>
+                  {/* total data here */}
+                  <p style={{  opacity: 0.5 }}>x3 items</p>
+                  <p>$800</p>
+                </div>
+                <div className="cc-buttons">
+                  <button className="cancle">☓</button>
+                  <button className="confirm">✓</button>
+                </div>
+              </div>
             </div>
           );
         })}

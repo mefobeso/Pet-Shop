@@ -67,6 +67,27 @@ $t-color: rgba(0, 0, 0, 0.5);
       display: flex;
       width: 42em;
       height: 19em;
+      line-height: 1.2em;
+    }
+    &-order .bottom {
+      display: flex;
+      justify-content: space-between;
+    }
+    &-order button {
+      height: 40px;
+      min-width: 40px;
+      margin: 5px;
+      border-radius: 4px;
+      background-color: transparent;
+      border-width: 0.5px;
+    }
+    &-order .cancle {
+      border-color: #ff0000;
+      color: #ff0000;
+    }
+    &-order .confirm {
+      border-color: #5fdf4a;
+      color: #5fdf4a;
     }
     &-order {
       border: 0.1px outset rgba(0, 0, 0, 0.336);
@@ -99,6 +120,10 @@ $t-color: rgba(0, 0, 0, 0.5);
         justify-content: space-between;
         width: 100%;
         height: min-content;
+      }
+      &-product .info-vertical {
+        margin-top: 11px;
+        line-height: 0px;
       }
     }
   }

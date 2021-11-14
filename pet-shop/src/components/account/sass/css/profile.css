@@ -68,6 +68,27 @@
   display: flex;
   width: 42em;
   height: 19em;
+  line-height: 1.2em;
+}
+.profile-content-order .bottom {
+  display: flex;
+  justify-content: space-between;
+}
+.profile-content-order button {
+  height: 40px;
+  min-width: 40px;
+  margin: 5px;
+  border-radius: 4px;
+  background-color: transparent;
+  border-width: 0.5px;
+}
+.profile-content-order .cancle {
+  border-color: #ff0000;
+  color: #ff0000;
+}
+.profile-content-order .confirm {
+  border-color: #5fdf4a;
+  color: #5fdf4a;
 }
 .profile-content-order {
   border: 0.1px outset rgba(0, 0, 0, 0.336);
@@ -100,6 +121,10 @@
   justify-content: space-between;
   width: 100%;
   height: min-content;
+}
+.profile-content-order-product .info-vertical {
+  margin-top: 11px;
+  line-height: 0px;
 }
 
 .scroll__container {
