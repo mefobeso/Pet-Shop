@@ -30,7 +30,7 @@ export default function Login(props) {
           <button type="submit">Log in</button>
           <br />
           <br />
-          <a href="/forgot-password" className="login-link">
+          <a href="/reset" className="login-link">
             CAN'T SIGN IN ?
           </a>
           <a href="/register" className="login-link">

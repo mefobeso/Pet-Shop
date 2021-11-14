@@ -7,6 +7,9 @@ import LandingPage from "./components/LandingPage";
 import Login from "./components/login-page/Login";
 import Register from "./components/login-page/Register";
 import Reset from "./components/login-page/Reset";
+import ResetCode from "./components/login-page/Reset-code";
+import ResetForm from "./components/login-page/Reset-form";
+import ResetDone from "./components/login-page/Reset-done";
 import Profile from "./components/account/Profile";
 import ProductDetail from "./pages/ProductDetails";
 function App(props) {
@@ -22,7 +25,7 @@ function App(props) {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 0);
+    }, 2000);
   }, []);
   return loading ? (
     <div className="loader">
@@ -39,7 +42,10 @@ function App(props) {
           component={() => <Login logInHandler={logInHandler} />}
         />
         <Route exact path="/register" component={Register} />
-        <Route exact path="/forgot-password" component={Reset} />
+        <Route exact path="/reset" component={Reset} />
+        <Route exact path="/reset-code" component={ResetCode} />
+        <Route exact path="/reset-form" component={ResetForm} />
+        <Route exact path="/reset-done" component={ResetDone} />
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/productdetails" component={ProductDetail} />
       </Switch>
