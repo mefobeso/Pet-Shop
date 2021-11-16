@@ -23,21 +23,11 @@ img {
 }
 
 .bg {
-  height: 100vh;
-}
-.bg-landing {
-  height: 650px;
-  background-image: url("https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1169&q=80");
-  background-position: center;
-  background-size: cover;
+  min-height: 100vh;
+  overflow: hidden;
 }
 .bg-ln {
   background-image: linear-gradient(to right, #179fd1, #05465e);
-}
-
-.head-container {
-  height: 5em;
-  padding: 15px 135px;
 }
 
 .white-header {
@@ -142,26 +132,25 @@ img {
 }
 
 .header {
-  height: 2.5em;
+  height: 50px;
+  width: 1265px;
+  margin: 0px auto 10px;
+  padding-top: 5px;
 }
 .header-menu {
   position: absolute;
-  top: 65px;
+  z-index: 11;
+  top: 60px;
   left: 0px;
   width: 100%;
   height: 15rem;
   transition: all 0.4s ease;
   box-sizing: border-box;
-  background-image: linear-gradient(to right, #179fd1, #05465e);
   visibility: hidden;
-  z-index: 110;
 }
-.header-menu-inner {
+.header-menu-inner:not(first-child) {
   float: left;
-  margin-right: 1%;
-}
-.header-menu-inner:last-child {
-  margin-right: 0%;
+  margin-right: 31px;
 }
 .header-menu-inner p {
   padding: 10px 50px;
@@ -174,34 +163,27 @@ img {
   position: absolute;
 }
 .header-logo img {
-  max-height: 50px;
+  height: 50px;
+  width: 130px;
 }
 .header-navbar ul {
-  padding-left: 200px;
+  padding-left: 400px;
   width: 100%;
   list-style: none;
-  margin: 0 auto;
   height: 100%;
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 2px;
   position: relative;
+  display: flex;
+  justify-content: space-between;
 }
 .header-navbar ul li {
   float: left;
-  padding: 12px 0;
+  padding-top: 12px;
   color: #fff;
-  padding-left: 90px;
-  transition: all 0.4s ease;
+  transition: all 0.2s ease;
   cursor: pointer;
-}
-.header-navbar ul li:hover .header-menu {
-  visibility: visible;
-  opacity: 1;
-  color: #fff;
-}
-.header-navbar ul li .header-menu p:hover {
-  color: #18bc9c;
 }
 .header-navbar ul li a {
   color: #fff;
@@ -209,12 +191,28 @@ img {
 }
 .header-navbar ul li a:hover {
   color: #18bc9c;
+  transition: 1s;
+}
+.header-navbar ul li:hover .header-menu {
+  visibility: visible;
+  opacity: 1;
+  color: linear-gradient(to right, #179fd1, #05465e);
+  background-color: #05465e;
+}
+.header-navbar ul li .header-menu p:hover {
+  color: #18bc9c;
 }
 .header-navbar ul li:nth-child(4) {
-  margin-left: 130px;
+  margin-left: 300px;
 }
 .header-navbar ul li img {
   max-height: 50px;
+}
+.header-login {
+  color: #05465e;
+}
+.header-login:hover {
+  color: #18bc9c;
 }
 
 .footer {
@@ -237,6 +235,11 @@ img {
 }
 
 .landing {
+  max-height: 650px;
+  min-height: 640px;
+  background-image: url("https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1169&q=80");
+  background-position: center;
+  background-size: 100vw;
   font-family: "Righteous";
   color: #fff;
   display: grid;
@@ -285,6 +288,9 @@ img {
   color: #fff;
   justify-content: center;
   align-items: center;
+}
+.landing-btn:hover {
+  color: #fff;
 }
 
 .home {
