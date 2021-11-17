@@ -5,7 +5,7 @@
 .login button {
   border-radius: 20px;
   border: 1px solid #f8f8f8;
-  min-width: 10em;
+  width: 10em;
   height: 2em;
   background: rgba(53, 52, 52, 0.2);
   color: #f8f8f8;
@@ -19,7 +19,6 @@
 
 .login {
   border-radius: 20px;
-  padding-top: 45px;
   font-family: "Roboto";
   background: rgba(53, 52, 52, 0.2);
   position: absolute;
@@ -80,10 +79,15 @@
   color: rgba(0, 0, 0, 0.8);
   transition: 1s;
 }
+.login-FB {
+  margin-bottom: 10px;
+}
 
 .login .back {
+  font-family: "Roboto", sans-serif;
   align-self: flex-start;
   justify-self: flex-start;
+  width: 2em;
 }
 
 /*# sourceMappingURL=login.css.map */

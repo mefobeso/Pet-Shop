@@ -8,7 +8,7 @@ function Headerwhite(props) {
   return (
     <div className="white-header">
       <nav className="white-header-navbar">
-        <a href="/" className="white-header-logo">
+        <a href="/home" className="white-header-logo">
           <img
             src={process.env.PUBLIC_URL + "/logo-white.png"}
             alt="logo"

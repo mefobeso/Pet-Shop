@@ -22,13 +22,7 @@ img {
   top: 50%;
   left: 50%;
 }
-.bg {
-  min-height: 100vh;
-  overflow: hidden;
-  &-ln {
-    background-image: $ln-bg;
-  }
-}
+
 .white {
   &-header {
     height: 50px;
@@ -234,35 +228,40 @@ img {
     color: white;
   }
 }
+
 .landing {
-  max-height: 650px;
-  min-height: 640px;
-  background-image: url("https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1169&q=80");
-  background-position: center;
-  background-size: 100vw;
+  min-height: 80vh;
   font-family: "Righteous";
   color: #fff;
   display: grid;
   grid-template-columns: 33.33% 33.33% 33.33%;
+  &-bg{
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-image: $ln-bg;
+    background-image: url("https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1169&q=80");
+    background-position: center;
+    background-size: 100vw;
+  }
   &-slogan {
     width: 300px;
-    margin-top: 40px;
-    margin-left: 60px;
+    margin-top: 2em;
+    margin-left: 2em;
     font-size: 40px;
   }
   &-slogan2 {
+
+    margin-left: 5em;
+    height: 80px;
+    width: 290px;
+    border: 1px solid #fff;
+    border-radius: 8px;
     &-img {
       display: inline;
       height: 100%;
       border-radius: 8px;
       width: 100px;
     }
-    margin-top: 30px;
-    margin-left: 40px;
-    height: 80px;
-    width: 290px;
-    border: 1px solid #fff;
-    border-radius: 8px;
     &-text {
       margin-top: -65px;
       margin-left: 120px;
@@ -274,10 +273,9 @@ img {
   }
   &-btn {
     display: flex;
-    margin-top: 90px;
-    margin-left: 40px;
+    margin-left: 5em;
     height: 50px;
-    width: 160px;
+    width: 8em;
     text-align: center;
     border: 1px solid #6184c7;
     border-radius: 40px;
@@ -287,6 +285,7 @@ img {
     color: #fff;
     justify-content: center;
     align-items: center;
+    text-decoration: none;
   }
   &-btn:hover {
     color: #fff;

@@ -4,14 +4,14 @@ import Header from "./layouts/Header";
 import Footer from "./layouts/Footer";
 function LandingPage() {
   return (
-    <div className="bg bg-ln">
-      <Header />
+    <div className="landing-bg">
+      {/* <Header /> */}
       <div className="landing">
         <span className="landing-slogan">Best things for your boss</span>
-        <span></span>
-        <span></span>
+        <span> </span>
+        <span ></span>
         <a href="/home" className="landing-btn">
-          Let's explore !{" "}
+          Let's explore !{""}
         </a>
         <span></span>
         <span className="landing-slogan3">
@@ -28,7 +28,7 @@ function LandingPage() {
           </span>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

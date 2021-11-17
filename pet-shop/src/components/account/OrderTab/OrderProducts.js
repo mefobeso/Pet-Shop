@@ -1,12 +1,11 @@
 import React from "react";
 
 export default function OrderProducts(props) {
-  console.log(props);
   return (
     <div className="profile-content-order-products">
       {props.dataProduct.slice(0, 3).map((product, index) => {
         return (
-          <div className="profile-content-order-product">
+          <div className="profile-content-order-product" key={index}>
             {/* data here */}
             <img src={product.img}></img>
             <div className="info">

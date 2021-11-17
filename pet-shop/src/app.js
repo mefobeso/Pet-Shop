@@ -4,12 +4,16 @@ import FadeLoader from "react-spinners/FadeLoader";
 // Pages
 import HomePage from "./components/HomePage";
 import LandingPage from "./components/LandingPage";
+// Login
 import Login from "./components/login-page/Login";
 import Register from "./components/login-page/Register";
 import Reset from "./components/login-page/Reset";
 import ResetCode from "./components/login-page/Reset-code";
 import ResetForm from "./components/login-page/Reset-form";
 import ResetDone from "./components/login-page/Reset-done";
+import RegisterCode from "./components/login-page/Register-code";
+import RegisterDone from "./components/login-page/Register-done";
+// Profile
 import Profile from "./components/account/Profile";
 import ProductDetail from "./pages/ProductDetails";
 function App(props) {
@@ -36,6 +40,8 @@ function App(props) {
       <Switch>
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/home" component={() => <HomePage />} />
+
+        {/* Login */}
         <Route
           exact
           path="/login"
@@ -46,6 +52,9 @@ function App(props) {
         <Route exact path="/reset-code" component={ResetCode} />
         <Route exact path="/reset-form" component={ResetForm} />
         <Route exact path="/reset-done" component={ResetDone} />
+        <Route exact path="/register-code" component={RegisterCode} />
+        <Route exact path="/register-done" component={RegisterDone} />
+        {/* Profile */}
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/productdetails" component={ProductDetail} />
       </Switch>

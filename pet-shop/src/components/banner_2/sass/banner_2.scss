@@ -27,11 +27,14 @@
         border-radius: 5px;
         display:flex;
         justify-content: center;
-        align-items: center;
         cursor: pointer;
     }
     &-btn p{
         font-size: 18px;
+    }
+    &-btn p:hover{
+        color: white;
+        transition: 1s;
     }
 }
 .banner2 img{

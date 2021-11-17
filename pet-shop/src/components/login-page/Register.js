@@ -1,6 +1,9 @@
 import React from "react";
 import "./sass/css/login.css";
+import { useHistory } from "react-router-dom";
 export default function Register() {
+  const history = useHistory();
+  const navigateTo = () => history.push("/register-code");
   return (
     <div className="login-container">
       <div className="login-background"></div>
@@ -30,15 +33,18 @@ export default function Register() {
           placeholder="Email"
         />
         <br />
-        <br />
-        <button>Next</button>
-        <br />
-        <br />
+        <button onClick={navigateTo}>Next</button>
+        <p>______________________________</p>
+        <button onClick={navigateTo} className="login-FB">Facebook</button>
+
+        <button onClick={navigateTo} className="login-GG">Google</button>
+        <p>______________________________</p>
+
         <a href="/login" className="login-link">
           ALREADY HAVE AN ACCOUNT ?
         </a>
         <br />
-        <br />
+
       </form>
     </div>
   );

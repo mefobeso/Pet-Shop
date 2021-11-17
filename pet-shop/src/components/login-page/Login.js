@@ -1,7 +1,9 @@
 import React from "react";
 import "./sass/css/login.css";
-import BackButton from "../button/BackButton";
+import { useHistory } from "react-router-dom";
 export default function Login(props) {
+  const history = useHistory();
+  const navigateTo = () => history.push("/home");
   const submitHandler = (event) => {
     event.preventDefault();
     props.logInHandler();
@@ -10,7 +12,11 @@ export default function Login(props) {
     <div className="bg">
       <div className="login-container">
         <div className="login-background"></div>
+
         <form className="login" onSubmit={submitHandler}>
+          <button className="back" onClick={navigateTo}>
+            {"X"}
+          </button>
           <h2>LOGIN</h2>
           <br />
           <br />
