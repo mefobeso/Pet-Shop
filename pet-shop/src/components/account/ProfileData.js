@@ -74,7 +74,7 @@ const dataOrder = [
         quantity: 1,
       },
     ],
-    status: "Delivered",
+    status: "Wait for confirm",
     totalPrice: 1800,
     account_id: 1,
     date: new Date(2021, 10, 2),

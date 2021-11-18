@@ -1,15 +1,21 @@
 import React, { useState } from "react";
-import { dataOrder } from "../ProfileData";
 import OrderProducts from "./OrderProducts";
+import CancleButton from "./Button/CancleButton";
+import { useHistory } from "react-router-dom";
 export default function OrderItem(props) {
   const data = props.dataOrder;
-  console.log(data[0].status);
-  const [orderStatus, setOrderStatus] = useState(props.status);
+
+  console.log(data);
+  const history = useHistory();
   return (
     <div className="profile-content-orders">
       <div className="scroll__container">
         {data.map((obj, index) => {
           // declarative
+          const navigateTo = () => {
+            history.push(`/order_detail/id=${data[index].id}`);
+          };
+          console.log(`/order_detail/id=${data[index].id}`);
           // date format
           const day = data[index].date.toLocaleString("en-US", {
             day: "numeric",
@@ -27,7 +33,10 @@ export default function OrderItem(props) {
               <p>
                 {day} {month} {year}
               </p>
-              <OrderProducts dataProduct={data[index].products} />
+              <OrderProducts
+                dataProduct={data[index].products}
+                onClick={navigateTo}
+              />
               <hr />
               <div className="bottom">
                 <div className="total" style={{ fontSize: "14px" }}>
@@ -35,15 +44,7 @@ export default function OrderItem(props) {
                   <p style={{ opacity: 0.5 }}>x3 items</p>
                   <p>$800</p>
                 </div>
-                {data[index].status === "Wait for confirm" && (
-                  <div className="cc-buttons">
-                    <button className="cancle">☓</button>
-                    <button className="confirm">✓</button>
-                  </div>
-                )}
-                {data[index].status !== "Wait for confirm" && (
-                  <p>{data[index].status}</p>
-                )}
+                <CancleButton index={index} data={data} />
               </div>
             </div>
           );

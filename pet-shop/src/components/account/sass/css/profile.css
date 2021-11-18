@@ -86,9 +86,12 @@
   border-color: #ff0000;
   color: #ff0000;
 }
-.profile-content-order .confirm {
-  border-color: #5fdf4a;
-  color: #5fdf4a;
+.profile-content-order .cancle-confirm {
+  font-size: 14px;
+  padding: 0 5px;
+  border-color: #ff0000;
+  color: #fff;
+  background-color: #ff0505;
 }
 .profile-content-order {
   border: 0.1px outset rgba(0, 0, 0, 0.336);
@@ -105,6 +108,7 @@
   width: 100%;
   display: flex;
   font-size: 13px;
+  cursor: pointer;
 }
 .profile-content-order-product .price {
   justify-self: flex-end;
@@ -129,7 +133,11 @@
 
 .scroll__container {
   display: flex;
-  overflow-ya: hidden;
+  overflow-y: hidden;
+}
+
+.hidden {
+  display: none;
 }
 
 /*# sourceMappingURL=profile.css.map */

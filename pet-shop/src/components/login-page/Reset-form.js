@@ -9,6 +9,7 @@ export default function ResetForm() {
     <div className="login-container">
       <div className="login-background"></div>
       <form className="login">
+      <br />
         <p className="login-title">RESET PASSWORD</p>
         <br />
         <input
@@ -31,7 +32,7 @@ export default function ResetForm() {
           ALREADY HAVE AN ACCOUNT ?
         </a>
         <br />
-        <br />
+
       </form>
     </div>
   );
