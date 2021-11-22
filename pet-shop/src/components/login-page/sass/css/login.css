@@ -25,7 +25,6 @@
   z-index: 1;
   min-width: 20rem;
   display: flex;
-  text-align: center;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -85,9 +84,33 @@
 
 .login .back {
   font-family: "Roboto", sans-serif;
-  align-self: flex-start;
+  align-self: flex-end;
   justify-self: flex-start;
   width: 2em;
+}
+
+.login :disabled {
+  background: #ccc;
+  color: #dddddd;
+  border: none;
+}
+
+.login :disabled:hover {
+  background: #ccc;
+  color: #dddddd;
+}
+
+.login .invalid {
+  border-color: rgba(255, 0, 0, 0.329);
+  background: rgba(255, 0, 0, 0.329);
+}
+
+.login .error {
+  color: rgba(255, 0, 0, 0.979);
+  font-size: 18px;
+  align-self: flex-start;
+  margin-left: 25px;
+  margin-top: 5px;
 }
 
 /*# sourceMappingURL=login.css.map */

@@ -4,11 +4,20 @@ import Footerwhite from "../layouts/Footer_white";
 import ProfileTab from "./ProfileTab";
 import ProfileInfo from "./ProfileInfo";
 import ProfileBody from "./ProfileBody";
+import { useHistory } from "react-router-dom";
 import "./sass/css/profile.css";
 import "../FontAwesome";
 import { dataInfo, dataOrder } from "./ProfileData";
 
-export default function Profile() {
+export default function Profile(props) {
+  const history = useHistory();
+  const navigateTo = () => {
+    history.goBack();
+  };
+  const logOutHandler = () => {
+    props.onLogout();
+    navigateTo();
+  };
   const [tab, setTab] = useState(0);
   const tabChange = (tab) => {
     setTab(tab);
@@ -32,6 +41,7 @@ export default function Profile() {
           <div className="profile-content">
             <ProfileTab tab={tab} tabHandler={tabChange} />
             <ProfileBody tab={tab} dataInfo={dataInfo} dataOrder={dataOrder} />
+            <button onClick={logOutHandler}>Log out</button>
           </div>
         </div>
       </div>

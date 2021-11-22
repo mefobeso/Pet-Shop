@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 // Font Awesome
 import "../FontAwesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Headerwhite(props) {
+ 
   const [login, setLogin] = useState(false);
+  useEffect(() => {
+    const loginInfor = localStorage.getItem("isLoggedIn");
+    if (loginInfor === "1") {
+      setLogin(true);
+    }
+  }, []);
+  console.log(props);
   return (
     <div className="white-header">
       <nav className="white-header-navbar">

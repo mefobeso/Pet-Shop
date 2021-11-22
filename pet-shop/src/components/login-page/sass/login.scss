@@ -2,8 +2,6 @@ $t-color: rgb(248, 248, 248);
 * input {
   border: none;
 }
-.back {
-}
 .login button {
   border-radius: 20px;
   border: 1px solid $t-color;
@@ -20,14 +18,12 @@ $t-color: rgb(248, 248, 248);
 
 .login {
   border-radius: 20px;
-
   font-family: "Roboto";
   background: rgba(53, 52, 52, 0.2);
   position: absolute;
   z-index: 1;
   min-width: 20rem;
   display: flex;
-  text-align: center;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -71,6 +67,7 @@ $t-color: rgb(248, 248, 248);
   &-input:focus::placeholder {
     color: transparent;
   }
+
   &-link {
     color: $t-color;
     text-decoration: none;
@@ -80,15 +77,33 @@ $t-color: rgb(248, 248, 248);
     color: rgba(0, 0, 0, 0.8);
     transition: 1s;
   }
-  &-FB{
+  &-FB {
     margin-bottom: 10px;
   }
-
 }
 .login .back {
-  font-family: 'Roboto',sans-serif;
-
-  align-self: flex-start;
+  font-family: "Roboto", sans-serif;
+  align-self: flex-end;
   justify-self: flex-start;
   width: 2em;
+}
+.login :disabled {
+  background: #ccc;
+  color: #dddddd;
+  border: none;
+}
+.login :disabled:hover {
+  background: #ccc;
+  color: #dddddd;
+}
+.login .invalid {
+  border-color: rgba(255, 0, 0, 0.329);
+  background: rgba(255, 0, 0, 0.329);
+}
+.login .error {
+  color: rgba(255, 0, 0, 0.979);
+  font-size: 18px;
+  align-self: flex-start;
+  margin-left:25px;
+  margin-top: 5px;
 }

@@ -13,15 +13,38 @@ import ResetForm from "./components/login-page/Reset-form";
 import ResetDone from "./components/login-page/Reset-done";
 import RegisterCode from "./components/login-page/Register-code";
 import RegisterDone from "./components/login-page/Register-done";
+// user data
+import userData from "./database/user";
 // Profile
 import Profile from "./components/account/Profile";
 import ProductDetail from "./pages/ProductDetails";
 function App(props) {
   // Login State
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const logInHandler = () => {
-    setIsLoggedIn(!isLoggedIn);
-    console.log(isLoggedIn);
+
+  useEffect(() => {
+    const loginInfor = localStorage.getItem("isLoggedIn");
+    if (loginInfor === "1") {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  const loginHandler = (username, password) => {
+    userData.map((user, index) => {
+      console.log(password);
+      if (
+        user.username === username.trim() &&
+        user.password === password.trim()
+      ) {
+        localStorage.setItem("isLoggedIn", "1");
+        setIsLoggedIn(true);
+        return;
+      }
+    });
+  };
+  const logoutHandler = () => {
+    localStorage.setItem("isLoggedIn", "0");
+    setIsLoggedIn(false);
   };
   //loader
   const [loading, setLoading] = useState(false);
@@ -39,13 +62,17 @@ function App(props) {
     <Router>
       <Switch>
         <Route exact path="/" component={LandingPage} />
-        <Route exact path="/home" component={() => <HomePage />} />
+        <Route
+          exact
+          path="/home"
+          component={() => <HomePage isLoggedIn={isLoggedIn} />}
+        />
 
         {/* Login */}
         <Route
           exact
           path="/login"
-          component={() => <Login logInHandler={logInHandler} />}
+          component={() => <Login onLogin={loginHandler} />}
         />
         <Route exact path="/register" component={Register} />
         <Route exact path="/reset" component={Reset} />
@@ -55,7 +82,11 @@ function App(props) {
         <Route exact path="/register-code" component={RegisterCode} />
         <Route exact path="/register-done" component={RegisterDone} />
         {/* Profile */}
-        <Route exact path="/profile" component={Profile} />
+        <Route
+          exact
+          path="/profile"
+          component={() => <Profile onLogout={logoutHandler} />}
+        />
         <Route exact path="/productdetails" component={ProductDetail} />
       </Switch>
     </Router>

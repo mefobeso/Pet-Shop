@@ -1,12 +1,62 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import "./sass/css/login.css";
 import { useHistory } from "react-router-dom";
+import userData from "../../database/user";
 export default function Login(props) {
+  // Variable
+
   const history = useHistory();
-  const navigateTo = () => history.push("/home");
+  const navigateTo = () => history.goBack();
+  const [enteredUsername, setEnteredUsername] = useState("");
+  const [enteredPassword, setEnteredPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [userAvailable, setUserAvailable] = useState(true);
+  const [formIsValid, setFormIsValid] = useState(true);
+  const [usernameValid, setUsernameValid] = useState(true);
+  const [passwordValid, setPasswordValid] = useState(true);
+  useEffect(() => {
+    setFormIsValid(
+      enteredUsername.trim().length > 7 && enteredPassword.trim().length > 6
+    );
+  }, [enteredUsername, enteredPassword]);
+  useEffect(() => {
+    userData.map((user) => {
+      setUserAvailable(user.username === enteredUsername);
+    });
+  }, [enteredUsername]);
+  // Function
+
+  const usernameChangeHanlder = (event) => {
+    setEnteredUsername(event.target.value);
+  };
+  const passwordChangeHandler = (event) => {
+    setEnteredPassword(event.target.value);
+  };
+
   const submitHandler = (event) => {
     event.preventDefault();
-    props.logInHandler();
+    setEnteredUsername("");
+    setEnteredPassword("");
+    if (!userAvailable) {
+      setErrorMessage("User not available !");
+    }
+    if (!usernameValid) {
+      setErrorMessage("Username is invalid !");
+    }
+    if (formIsValid && userAvailable) {
+      navigateTo();
+    }
+
+    props.onLogin(enteredUsername, enteredPassword);
+  };
+
+  // Validation
+
+  const validateUsername = () => {
+    setUsernameValid(enteredUsername.trim().length > 7);
+  };
+  const validatePassword = () => {
+    setPasswordValid(enteredPassword.trim().length > 6);
   };
   return (
     <div className="bg">
@@ -19,22 +69,28 @@ export default function Login(props) {
           </button>
           <h2>LOGIN</h2>
           <br />
-          <br />
           <input
             type="text"
-            className="login-input username"
+            className={usernameValid ? "login-input" : "login-input invalid"}
             placeholder="Username"
+            value={enteredUsername}
+            onChange={usernameChangeHanlder}
+            onBlur={validateUsername}
           />
-          <br />
+          {!userAvailable ? <p className="error">{errorMessage}</p> : <br />}
           <input
-            type="text"
-            className="login-input password"
+            type="password"
+            className={passwordValid ? "login-input" : "login-input invalid"}
             placeholder=" Password"
+            value={enteredPassword}
+            onChange={passwordChangeHandler}
+            onBlur={validatePassword}
           />
           <br />
-          <br />
-          <button type="submit">Log in</button>
-          <br />
+
+          <button type="submit" disabled={!formIsValid}>
+            Log in
+          </button>
           <br />
           <a href="/reset" className="login-link">
             CAN'T SIGN IN ?
@@ -42,7 +98,6 @@ export default function Login(props) {
           <a href="/register" className="login-link">
             CREATE ACCOUNT
           </a>
-          <br />
           <br />
         </form>
       </div>
