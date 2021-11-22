@@ -1,42 +1,39 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./sass/css/login.css";
 import { useHistory } from "react-router-dom";
-import userData from "../../database/user";
+import userData from "../../database/user.data";
 export default function Login(props) {
   // Variable
 
   const history = useHistory();
   const navigateTo = () => history.goBack();
-  const [enteredUsername, setEnteredUsername] = useState("");
-  const [enteredPassword, setEnteredPassword] = useState("");
+  // const [enteredUsername, setEnteredUsername] = useState("");
+  // const [enteredPassword, setEnteredPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [userAvailable, setUserAvailable] = useState(true);
   const [formIsValid, setFormIsValid] = useState(true);
   const [usernameValid, setUsernameValid] = useState(true);
   const [passwordValid, setPasswordValid] = useState(true);
+
+  const usernameInputRef = useRef("");
+  const passwordInputRef = useRef("");
+  // useEffect
   useEffect(() => {
     setFormIsValid(
-      enteredUsername.trim().length > 7 && enteredPassword.trim().length > 6
+      usernameInputRef.current.value.trim().length > 7 &&
+        passwordInputRef.current.value.trim().length > 6
     );
-  }, [enteredUsername, enteredPassword]);
+  }, [usernameInputRef.current.value, passwordInputRef.current.value]);
   useEffect(() => {
     userData.map((user) => {
-      setUserAvailable(user.username === enteredUsername);
+      setUserAvailable(user.username === usernameInputRef.current.value);
     });
-  }, [enteredUsername]);
-  // Function
-
-  const usernameChangeHanlder = (event) => {
-    setEnteredUsername(event.target.value);
-  };
-  const passwordChangeHandler = (event) => {
-    setEnteredPassword(event.target.value);
-  };
-
+  }, [usernameInputRef.current.value]);
   const submitHandler = (event) => {
     event.preventDefault();
-    setEnteredUsername("");
-    setEnteredPassword("");
+
+    // setEnteredUsername("");
+    // setEnteredPassword("");
     if (!userAvailable) {
       setErrorMessage("User not available !");
     }
@@ -46,17 +43,21 @@ export default function Login(props) {
     if (formIsValid && userAvailable) {
       navigateTo();
     }
-
-    props.onLogin(enteredUsername, enteredPassword);
+    props.onLogin(
+      usernameInputRef.current.value,
+      passwordInputRef.current.value
+    );
+    usernameInputRef.current.value = "";
+    passwordInputRef.current.value = "";
   };
 
   // Validation
 
   const validateUsername = () => {
-    setUsernameValid(enteredUsername.trim().length > 7);
+    setUsernameValid(usernameInputRef.current.value.trim().length > 7);
   };
   const validatePassword = () => {
-    setPasswordValid(enteredPassword.trim().length > 6);
+    setPasswordValid(passwordInputRef.current.value.trim().length > 6);
   };
   return (
     <div className="bg">
@@ -73,18 +74,16 @@ export default function Login(props) {
             type="text"
             className={usernameValid ? "login-input" : "login-input invalid"}
             placeholder="Username"
-            value={enteredUsername}
-            onChange={usernameChangeHanlder}
             onBlur={validateUsername}
+            ref={usernameInputRef}
           />
           {!userAvailable ? <p className="error">{errorMessage}</p> : <br />}
           <input
             type="password"
             className={passwordValid ? "login-input" : "login-input invalid"}
             placeholder=" Password"
-            value={enteredPassword}
-            onChange={passwordChangeHandler}
             onBlur={validatePassword}
+            ref={passwordInputRef}
           />
           <br />
 

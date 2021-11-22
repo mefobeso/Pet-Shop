@@ -1,6 +1,9 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useState, useEffect } from "react";
 import FadeLoader from "react-spinners/FadeLoader";
+
+// user data
+import userData from "./database/user.data";
 // Pages
 import HomePage from "./components/HomePage";
 import LandingPage from "./components/LandingPage";
@@ -13,11 +16,11 @@ import ResetForm from "./components/login-page/Reset-form";
 import ResetDone from "./components/login-page/Reset-done";
 import RegisterCode from "./components/login-page/Register-code";
 import RegisterDone from "./components/login-page/Register-done";
-// user data
-import userData from "./database/user";
 // Profile
 import Profile from "./components/account/Profile";
 import ProductDetail from "./pages/ProductDetails";
+// Product
+import Product from "./components/product/Product";
 function App(props) {
   // Login State
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -87,6 +90,8 @@ function App(props) {
           path="/profile"
           component={() => <Profile onLogout={logoutHandler} />}
         />
+        {/* Product */}
+        <Route exact path="/product" component={Product}></Route>
         <Route exact path="/productdetails" component={ProductDetail} />
       </Switch>
     </Router>

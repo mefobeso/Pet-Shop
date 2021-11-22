@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import catalogData from "./catalogData";
+import catalogData from "../../database/catalog.data";
 import "./sass/css/catalog.css";
 import CatalogItem from "./CatalogItem";
 import CatalogTab from "./CatalogTab";

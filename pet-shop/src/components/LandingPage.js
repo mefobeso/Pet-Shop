@@ -1,7 +1,5 @@
 import React from "react";
 // components
-import Header from "./layouts/Header";
-import Footer from "./layouts/Footer";
 function LandingPage() {
   return (
     <div className="landing-bg">
@@ -9,7 +7,7 @@ function LandingPage() {
       <div className="landing">
         <span className="landing-slogan">Best things for your boss</span>
         <span> </span>
-        <span ></span>
+        <span></span>
         <a href="/home" className="landing-btn">
           Let's explore !{""}
         </a>
