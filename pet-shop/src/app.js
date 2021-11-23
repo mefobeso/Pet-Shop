@@ -22,6 +22,7 @@ import ProductDetail from "./pages/ProductDetails";
 // Product
 import Categories from "./components/category/Categories";
 import Product from "./components/product/Product";
+import ProductList from "./components/product/ProductList";
 function App(props) {
   // Login State
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -93,6 +94,7 @@ function App(props) {
         />
         {/* Product */}
         <Route exact path="/home/category" component={Categories}></Route>
+        <Route exact path="/home/product" component={ProductList}></Route>
         <Route exact path="/productdetails" component={ProductDetail} />
       </Switch>
     </Router>

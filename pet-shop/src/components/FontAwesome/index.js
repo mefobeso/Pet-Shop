@@ -1,4 +1,5 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
+
 import {
   faLock,
   faAngleDown,
@@ -18,6 +19,12 @@ import {
   faGifts,
   faStar,
   faEnvelope,
+  faSlidersH,
+  faBorderAll,
+  faBars,
+  faChevronDown,
+  faHeart,
+  faCartPlus,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -38,5 +45,11 @@ library.add(
   faHistory,
   faGifts,
   faStar,
-  faEnvelope
+  faEnvelope,
+  faSlidersH,
+  faBorderAll,
+  faBars,
+  faChevronDown,
+  faHeart,
+  faCartPlus
 );

@@ -11,6 +11,13 @@
     box-sizing: border-box;
   }
 }
+.categories {
+  margin-top: 100px;
+  text-align: center;
+}
+.categories h6 {
+  color: #ddd;
+}
 .category {
   padding: 10px;
   font-family: "Roboto", sans-serif;
@@ -56,11 +63,4 @@
 .category:nth-child(8) {
   grid-column: 4/8;
   grid-row: 6/9;
-}
-.categories {
-  margin-top: 100px;
-  text-align: center;
-}
-.categories h6 {
-  color: #ddd;
 }
