@@ -20,6 +20,7 @@ import RegisterDone from "./components/login-page/Register-done";
 import Profile from "./components/account/Profile";
 import ProductDetail from "./pages/ProductDetails";
 // Product
+import Categories from "./components/category/Categories";
 import Product from "./components/product/Product";
 function App(props) {
   // Login State
@@ -91,7 +92,7 @@ function App(props) {
           component={() => <Profile onLogout={logoutHandler} />}
         />
         {/* Product */}
-        <Route exact path="/product" component={Product}></Route>
+        <Route exact path="/home/category" component={Categories}></Route>
         <Route exact path="/productdetails" component={ProductDetail} />
       </Switch>
     </Router>

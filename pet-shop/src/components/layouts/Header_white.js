@@ -1,10 +1,9 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 // Font Awesome
 import "../FontAwesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Headerwhite(props) {
- 
   const [login, setLogin] = useState(false);
   useEffect(() => {
     const loginInfor = localStorage.getItem("isLoggedIn");
@@ -27,7 +26,7 @@ function Headerwhite(props) {
             <a href="/home">Home</a>
           </li>
           <li>
-            <a href="/product" className="">
+            <a href="/home/category" className="">
               Item <FontAwesomeIcon icon="angle-down" />
             </a>
             <div className="white-header-menu">
@@ -67,40 +66,23 @@ function Headerwhite(props) {
             </div>
           </li>
           <li>
-            Pet <FontAwesomeIcon icon="angle-down" />
+            <a href="">
+              Pet <FontAwesomeIcon icon="angle-down" />
+            </a>
             <div className="white-header-menu">
-              <div className="white-header-menu-inner">
-                <p>Dresses</p>
-                <p>Outdoor</p>
-                <p>Indoor</p>
-                <p>Sport</p>
+              <div className="white-header-menu-inner-2">
+                <p>Dog</p>
+                <hr />
+                <p style={{float:"left"}}>Husky</p>
+                <p style={{float:"left"}}>Husky</p>
+                <p style={{float:"left"}}>Husky</p>
               </div>
-              <div className="white-header-menu-inner">
-                <p>Food</p>
-                <p>Royal</p>
-                <p>Hill's</p>
-                <p>Purina</p>
-              </div>
-              <div className="white-header-menu-inner">
-                <p>Accessories</p>
-                <p>Groom</p>
-                <p>Nail Cutter</p>
-              </div>
-              <div className="white-header-menu-inner">
-                <p>Colar Belt</p>
-                <p>Leather</p>
-                <p>Fabrics</p>
-              </div>
-              <div className="white-header-menu-inner">
-                <p>Leashes</p>
-                <p>Chain</p>
-                <p>Rubber</p>
-                <p>Leather</p>
-              </div>
-              <div className="white-header-menu-inner">
-                <p>Bowl</p>
-                <p>Steel</p>
-                <p>Plastic</p>
+              <div className="white-header-menu-inner-2">
+                <p>Cat</p>
+                <hr />
+                <p style={{float:"left"}}>Husky</p>
+                <p style={{float:"left"}}>Husky</p>
+                <p style={{float:"left"}}>Husky</p>
               </div>
             </div>
           </li>
@@ -114,7 +96,9 @@ function Headerwhite(props) {
             </a>
           </li>
           <li>
-            <FontAwesomeIcon icon="shopping-cart" />
+            <a href="">
+              <FontAwesomeIcon icon="shopping-cart" />
+            </a>
           </li>
         </ul>
       </nav>
