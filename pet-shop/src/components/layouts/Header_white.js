@@ -73,16 +73,16 @@ function Headerwhite(props) {
               <div className="white-header-menu-inner-2">
                 <p>Dog</p>
                 <hr />
-                <p style={{float:"left"}}>Husky</p>
-                <p style={{float:"left"}}>Husky</p>
-                <p style={{float:"left"}}>Husky</p>
+                <p style={{ float: "left" }}>Husky</p>
+                <p style={{ float: "left" }}>Husky</p>
+                <p style={{ float: "left" }}>Husky</p>
               </div>
               <div className="white-header-menu-inner-2">
                 <p>Cat</p>
                 <hr />
-                <p style={{float:"left"}}>Husky</p>
-                <p style={{float:"left"}}>Husky</p>
-                <p style={{float:"left"}}>Husky</p>
+                <p style={{ float: "left" }}>Husky</p>
+                <p style={{ float: "left" }}>Husky</p>
+                <p style={{ float: "left" }}>Husky</p>
               </div>
             </div>
           </li>
@@ -96,7 +96,10 @@ function Headerwhite(props) {
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="/home/favorite">
+              <FontAwesomeIcon icon="heart" style={{ marginRight: "10px" }} />
+            </a>
+            <a href="/home/cart">
               <FontAwesomeIcon icon="shopping-cart" />
             </a>
           </li>

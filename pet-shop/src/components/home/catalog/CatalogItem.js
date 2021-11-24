@@ -1,5 +1,5 @@
 import React from "react";
-import catalogData from "../../database/catalog.data";
+import catalogData from "../../../database/catalog.data";
 import "./sass/css/catalog.css";
 export default function CatalogItem(props) {
   return (

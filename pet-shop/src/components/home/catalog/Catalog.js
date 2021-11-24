@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import catalogData from "../../database/catalog.data";
 import "./sass/css/catalog.css";
 import CatalogItem from "./CatalogItem";
 import CatalogTab from "./CatalogTab";
@@ -10,7 +9,7 @@ export default function Catalog() {
   };
   return (
     <div className="catalog-container">
-      <CatalogTab tabIndex={tabIndex} tabChange={tabChange}/>
+      <CatalogTab tabIndex={tabIndex} tabChange={tabChange} />
       <CatalogItem tabIndex={tabIndex} />
     </div>
   );

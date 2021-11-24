@@ -24,6 +24,7 @@ import {
   faBars,
   faChevronDown,
   faHeart,
+  faTrash,
   faCartPlus,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -51,5 +52,6 @@ library.add(
   faBars,
   faChevronDown,
   faHeart,
+  faTrash,
   faCartPlus
 );

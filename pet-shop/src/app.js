@@ -5,7 +5,7 @@ import FadeLoader from "react-spinners/FadeLoader";
 // user data
 import userData from "./database/user.data";
 // Pages
-import HomePage from "./components/HomePage";
+import HomePage from "./components/home/HomePage";
 import LandingPage from "./components/LandingPage";
 // Login
 import Login from "./components/login-page/Login";
@@ -17,12 +17,13 @@ import ResetDone from "./components/login-page/Reset-done";
 import RegisterCode from "./components/login-page/Register-code";
 import RegisterDone from "./components/login-page/Register-done";
 // Profile
-import Profile from "./components/account/Profile";
+import Profile from "./components/profile/Profile";
 import ProductDetail from "./pages/ProductDetails";
 // Product
 import Categories from "./components/category/Categories";
 import Product from "./components/product/Product";
 import ProductList from "./components/product/ProductList";
+import Cart from "./components/cart/Cart";
 function App(props) {
   // Login State
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -93,9 +94,10 @@ function App(props) {
           component={() => <Profile onLogout={logoutHandler} />}
         />
         {/* Product */}
-        <Route exact path="/home/category" component={Categories}></Route>
-        <Route exact path="/home/product" component={ProductList}></Route>
+        <Route exact path="/home/category" component={Categories} />
+        <Route exact path="/home/product" component={ProductList} />
         <Route exact path="/productdetails" component={ProductDetail} />
+        <Route exact path="/home/cart" component={Cart} />
       </Switch>
     </Router>
   );

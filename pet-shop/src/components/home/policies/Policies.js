@@ -1,6 +1,6 @@
 import React from 'react';
 import './sass/css/policies.css';
-import '../FontAwesome';
+import '../../FontAwesome';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 export default function Policies() {
     return (
