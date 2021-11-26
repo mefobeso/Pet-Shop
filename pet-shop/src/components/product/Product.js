@@ -4,18 +4,29 @@ import "../FontAwesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function Product() {
   const [addedProduct, setAddedProduct] = useState([]);
+  const [favoriteProduct, setFavoriteProduct] = useState([]);
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(addedProduct));
-  }, [addedProduct]);
+    localStorage.setItem("favorite", JSON.stringify(favoriteProduct));
+  }, [addedProduct, favoriteProduct]);
   return (
     <>
       {dataProducts.map((product, index) => {
+        // addedProduct.map((added) => {
+        //   if (added.id === product.id) setIsDuplicate(true);
+        // });
         const addItemHandler = () => {
           setAddedProduct((prevProductList) => {
+            if (addedProduct != null) {
+              const duplicate = addedProduct.find((p) => p.id === product.id);
+              if (duplicate) {
+                console.log("dup");
+                return prevProductList;
+              }
+            }
             return [
               ...prevProductList,
               {
-                
                 id: product.id,
                 name: product.name,
                 price: product.price,
@@ -24,11 +35,29 @@ export default function Product() {
               },
             ];
           });
-          // document.cookie = `name=${product.name}`;
-          // document.cookie = `price=${product.price}`;
-          // document.cookie = `img=${product.img}`;
-          // document.cookie = `quantity=${product.quantity}`;
-          // console.log(document.cookie);
+        };
+        const favoriteItemHandler = () => {
+          setFavoriteProduct((prevProductList) => {
+            if (favoriteProduct != null) {
+              const duplicate = favoriteProduct.find(
+                (p) => p.id === product.id
+              );
+              if (duplicate) {
+                console.log("dup");
+                return prevProductList;
+              }
+            }
+            return [
+              ...prevProductList,
+              {
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                quantity: product.quantity,
+                img: product.img,
+              },
+            ];
+          });
         };
         return (
           <div className="product" key={index}>
@@ -39,7 +68,7 @@ export default function Product() {
                 <p style={{ fontWeight: "600" }}>${product.price}</p>
               </div>
               <div>
-                <button>
+                <button onClick={favoriteItemHandler}>
                   <FontAwesomeIcon
                     icon="heart"
                     className="icon"

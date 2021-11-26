@@ -1,0 +1,39 @@
+.favorite-container {
+  width: 1265px;
+  margin: 10px auto;
+  text-align: center;
+  margin-top: 50px;
+  height: 100vh;
+}
+.favorite-item-info {
+  display: flex;
+}
+.favorite-item-info input {
+  height: 24px;
+  width: 30px;
+  text-align: center;
+}
+.favorite-item-info input::-webkit-outer-spin-button,
+.favorite-item input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.favorite-item-info input:focus {
+  outline: none;
+}
+.favorite-item-name {
+  width: 400px;
+}
+.favorite-item-info h5 {
+  line-height: 18px;
+  text-align: start;
+}
+.favorite-item img {
+  height: 200px;
+  width: 160px;
+  margin-bottom: 10px;
+  box-shadow: 2px 2px 5px 1px;
+  margin-right: 10px;
+}
+
+/*# sourceMappingURL=favorite.css.map */

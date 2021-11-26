@@ -15,9 +15,10 @@ export default function CartQuantity(props) {
     return;
   };
   const plusHandler = () => {
-    setSelectedQuantity(selectedQuantity + 1);
+    if (selectedQuantity < props.maxQuantity) {
+      setSelectedQuantity(selectedQuantity + 1);
+    }
   };
-
   return (
     <div className="input-group">
       <input

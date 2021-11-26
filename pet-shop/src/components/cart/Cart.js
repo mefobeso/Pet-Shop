@@ -8,15 +8,17 @@ import Cookies from "js-cookie";
 import "./sass/css/cart.css";
 export default function Cart() {
   const cart = JSON.parse(localStorage.getItem("cart"));
-  const [addedProduct, setAddedProduct] = useState([]);
+  const [cartProduct, setCartProduct] = useState([]);
   useEffect(() => {
-    setAddedProduct(cart);
+    setCartProduct(cart);
   }, []);
   const onDeleteHandler = (id) => {
-    setAddedProduct((prevList) => {
+    setCartProduct((prevList) => {
       const updatedList = prevList.filter((product) => product.id !== id);
+      localStorage.setItem("cart", JSON.stringify(updatedList));
       return updatedList;
     });
+    console.log(cartProduct);
   };
   return (
     <>
@@ -24,7 +26,8 @@ export default function Cart() {
       <div className="cart-container">
         <h2>SHOPPING CART</h2>
         <h6 style={{ color: "#ddd", marginBottom: "50px" }}>
-          {addedProduct === null ? "0" : addedProduct.length} items in your cart
+          {cartProduct.length === 0 ? "0" : cartProduct.length} items in your
+          cart
         </h6>
         <div className="cart-body">
           <div className="cart-list">
@@ -33,13 +36,12 @@ export default function Cart() {
             <CartSimilar />
           </div>
           <div className="card-items">
-            {addedProduct === null ? (
-              <div>Nothing here</div>
+            {cartProduct.length === 0 ? (
+              <a href="/home/product">Back to Shopping</a>
             ) : (
-              addedProduct.map((product, index) => {
+              cartProduct.map((product, index) => {
                 return (
                   <CartItem
-                    addedProduct={addedProduct}
                     onDeleteHandler={onDeleteHandler}
                     product={product}
                   />

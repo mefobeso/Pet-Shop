@@ -40,6 +40,10 @@
 .product-info button {
   border: none;
 }
+.product-info button:hover {
+  color: green;
+  transition: 1s;
+}
 .product-info .icon {
   font-size: 20px;
 }
