@@ -11,10 +11,15 @@ import { set } from "js-cookie";
 export default function Cart() {
   const cart = JSON.parse(localStorage.getItem("cart"));
   const [cartProduct, setCartProduct] = useState([]);
+  const [key, setKey] = useState();
+
   useEffect(() => {
     setCartProduct(cart);
   }, []);
-  
+
+  const randomKey = () => {
+    setKey(Math.random());
+  };
   const onDeleteHandler = (id) => {
     setCartProduct((prevList) => {
       const updatedList = prevList.filter((product) => product.id !== id);
@@ -30,13 +35,13 @@ export default function Cart() {
       <div className="cart-container">
         <h2>SHOPPING CART</h2>
         <h6 style={{ color: "#ddd" }}>
-          {cartProduct.length === 0 ? "0" : cartProduct.length} items in
-          yourcart
+          {cartProduct.length === 0 ? "0" : cartProduct.length} items in your
+          cart
         </h6>
         <hr />
         <div className="cart-body">
           <div className="cart-list">
-            <CartInfo totalCost={0} cart={cart} />
+            <CartInfo cart={cartProduct} key={key} />
             <br />
             <CartSimilar />
           </div>
@@ -45,7 +50,6 @@ export default function Cart() {
               <CartEmpty />
             ) : (
               cartProduct.map((product, index) => {
-
                 const onAmountChange = (value) => {
                   setCartProduct(() => {
                     const duplicate = cartProduct.find(
@@ -57,8 +61,7 @@ export default function Cart() {
                       );
                       cartProduct[index].amount = value;
                       localStorage.setItem("cart", JSON.stringify(cartProduct));
-                      console.log(cartProduct[index]);
-                      console.log(cartProduct);
+                      randomKey();
                       return cartProduct;
                     }
                   });

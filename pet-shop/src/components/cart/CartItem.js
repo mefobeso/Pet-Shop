@@ -8,10 +8,11 @@ export default function CartItem(props) {
 
   const deleteItem = () => {
     props.onDeleteHandler(product.id);
+    
   };
 
   return (
-    <div className="cart-item">
+    <div className="cart-item" key={props.id}>
       <img src={product.img} alt="" className="" />
       <div className="cart-item-info">
         <h5 className="cart-item-name">{product.name}</h5>

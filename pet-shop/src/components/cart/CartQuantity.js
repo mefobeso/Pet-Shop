@@ -21,18 +21,14 @@ export default function CartQuantity(props) {
     return;
   };
   const minusHandler = () => {
-    setSelectedQuantity(() => onMinus());
+    if (selectedQuantity > 0) {
+      setSelectedQuantity(selectedQuantity - 1);
+    }
+    return;
   };
   const plusHandler = () => {
     if (selectedQuantity < props.maxQuantity) {
       setSelectedQuantity(selectedQuantity + 1);
-    } else {
-      return;
-    }
-  };
-  const onMinus = () => {
-    if (selectedQuantity > 0) {
-      setSelectedQuantity(selectedQuantity - 1);
     } else {
       return;
     }
