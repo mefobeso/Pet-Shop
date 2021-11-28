@@ -5,6 +5,9 @@
   margin-top: 50px;
   height: 100vh;
 }
+.favorite-item {
+  display: flex;
+}
 .favorite-item-info {
   display: flex;
 }
@@ -21,9 +24,6 @@
 .favorite-item-info input:focus {
   outline: none;
 }
-.favorite-item-name {
-  width: 400px;
-}
 .favorite-item-info h5 {
   line-height: 18px;
   text-align: start;
@@ -34,6 +34,17 @@
   margin-bottom: 10px;
   box-shadow: 2px 2px 5px 1px;
   margin-right: 10px;
+}
+.favorite-back {
+  border-radius: 5px;
+  height: 3rem;
+  width: 14rem;
+  color: rgba(255, 255, 255, 0.377);
+  background: black;
+}
+.favorite-back:hover {
+  color: #fff;
+  transition: 1s;
 }
 
 /*# sourceMappingURL=favorite.css.map */

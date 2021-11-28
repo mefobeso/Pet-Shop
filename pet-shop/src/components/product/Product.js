@@ -6,23 +6,38 @@ export default function Product() {
   const [addedProduct, setAddedProduct] = useState([]);
   const [favoriteProduct, setFavoriteProduct] = useState([]);
   useEffect(() => {
+    console.log("effect");
     localStorage.setItem("cart", JSON.stringify(addedProduct));
     localStorage.setItem("favorite", JSON.stringify(favoriteProduct));
-  }, [addedProduct, favoriteProduct]);
+  }, [addedProduct,favoriteProduct]);
   return (
     <>
       {dataProducts.map((product, index) => {
-        // addedProduct.map((added) => {
-        //   if (added.id === product.id) setIsDuplicate(true);
-        // });
         const addItemHandler = () => {
           setAddedProduct((prevProductList) => {
             if (addedProduct != null) {
               const duplicate = addedProduct.find((p) => p.id === product.id);
               if (duplicate) {
-                console.log("dup");
-                return prevProductList;
+                const index = addedProduct.findIndex(
+                  (p) => p.id === product.id
+                );
+                addedProduct[index].amount += 1;
+                localStorage.setItem("cart", JSON.stringify(addedProduct));
+                console.log(addedProduct[index]);
+                console.log(addedProduct);
+                return addedProduct;
               }
+              return [
+                ...prevProductList,
+                {
+                  id: product.id,
+                  name: product.name,
+                  price: product.price,
+                  quantity: product.quantity,
+                  img: product.img,
+                  amount: +1,
+                },
+              ];
             }
             return [
               ...prevProductList,
@@ -32,6 +47,7 @@ export default function Product() {
                 price: product.price,
                 quantity: product.quantity,
                 img: product.img,
+                amount: +1,
               },
             ];
           });

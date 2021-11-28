@@ -4,14 +4,17 @@ import Headerwhite from "../layouts/Header_white";
 import CartInfo from "./CartInfo";
 import CartItem from "./CartItem";
 import CartSimilar from "./CartSimilar";
-import Cookies from "js-cookie";
+
 import "./sass/css/cart.css";
+import CartEmpty from "./CartEmpty";
+import { set } from "js-cookie";
 export default function Cart() {
   const cart = JSON.parse(localStorage.getItem("cart"));
   const [cartProduct, setCartProduct] = useState([]);
   useEffect(() => {
     setCartProduct(cart);
   }, []);
+  
   const onDeleteHandler = (id) => {
     setCartProduct((prevList) => {
       const updatedList = prevList.filter((product) => product.id !== id);
@@ -20,30 +23,52 @@ export default function Cart() {
     });
     console.log(cartProduct);
   };
+
   return (
     <>
       <Headerwhite />
       <div className="cart-container">
         <h2>SHOPPING CART</h2>
-        <h6 style={{ color: "#ddd", marginBottom: "50px" }}>
-          {cartProduct.length === 0 ? "0" : cartProduct.length} items in your
-          cart
+        <h6 style={{ color: "#ddd" }}>
+          {cartProduct.length === 0 ? "0" : cartProduct.length} items in
+          yourcart
         </h6>
+        <hr />
         <div className="cart-body">
           <div className="cart-list">
-            <CartInfo totalPrice={+59.15} />
+            <CartInfo totalCost={0} cart={cart} />
             <br />
             <CartSimilar />
           </div>
           <div className="card-items">
             {cartProduct.length === 0 ? (
-              <a href="/home/product">Back to Shopping</a>
+              <CartEmpty />
             ) : (
               cartProduct.map((product, index) => {
+
+                const onAmountChange = (value) => {
+                  setCartProduct(() => {
+                    const duplicate = cartProduct.find(
+                      (p) => p.id === product.id
+                    );
+                    if (duplicate) {
+                      const index = cartProduct.findIndex(
+                        (p) => p.id === product.id
+                      );
+                      cartProduct[index].amount = value;
+                      localStorage.setItem("cart", JSON.stringify(cartProduct));
+                      console.log(cartProduct[index]);
+                      console.log(cartProduct);
+                      return cartProduct;
+                    }
+                  });
+                };
+
                 return (
                   <CartItem
                     onDeleteHandler={onDeleteHandler}
                     product={product}
+                    onAmountChange={onAmountChange}
                   />
                 );
               })

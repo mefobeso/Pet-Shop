@@ -7,18 +7,16 @@ export default function FavoriteItem(props) {
     props.onDeleteHandler(product.id);
   };
   return (
-    <div className="cart-item">
+    <div className="favorite-item">
       <img src={product.img} alt="" className="" />
-      <div className="cart-item-info">
-        <h5 className="cart-item-name">{product.name}</h5>
+      <div className="favorite-item-info">
+        <h5 className="favorite-item-name">{product.name}</h5>
         <h5>${product.price}</h5>
-        {/* <button onClick={deleteItem}> */}
         <FontAwesomeIcon
           icon="trash"
           style={{ marginLeft: "50px", cursor: "pointer" }}
           onClick={deleteItem}
         />
-        {/* </button> */}
       </div>
     </div>
   );

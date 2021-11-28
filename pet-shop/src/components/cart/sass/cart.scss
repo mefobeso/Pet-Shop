@@ -1,4 +1,18 @@
 .cart {
+  &-empty {
+    margin-left: 15rem;
+  }
+  &-back {
+    border-radius: 5px;
+    height: 3rem;
+    width: 14rem;
+    color: rgba(255, 255, 255, 0.377);
+    background: black;
+  }
+  &-back:hover {
+    color: #fff;
+    transition: 1s;
+  }
   &-container {
     width: 1265px;
     margin: 10px auto;
@@ -9,7 +23,6 @@
     text-align: start;
   }
   &-similar {
-    margin-right: 300px;
     display: flex;
     &-info h6 {
       line-height: 12px;
@@ -19,13 +32,20 @@
     display: flex;
   }
   &-item {
+    display: flex;
+    margin-left: 10em;
+    
     &-info {
+      width: 40em;
       display: flex;
+      justify-content: space-between;
     }
     &-info input {
-      height: 24px;
-      width: 30px;
+      height: 1.6em;
+      width: 2em;
       text-align: center;
+      outline: none;
+      background-color: white;
     }
     &-info input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
@@ -35,21 +55,22 @@
     &-info input:focus {
       outline: none;
     }
-    &-name {
-      width: 400px;
-    }
     &-info h5 {
-      line-height: 18px;
+      line-height: 1em;
       text-align: start;
+    }
+    &-name{
+      width: 10em;
     }
   }
   &-item img {
-    height: 200px;
-    width: 160px;
+    height: 10em;
+    width: 9em;
     margin-bottom: 10px;
     box-shadow: 2px 2px 5px 1px;
     margin-right: 10px;
   }
+
   &-similar img {
     height: 100px;
     width: 80px;

@@ -7,6 +7,7 @@
     height: 100vh;
   }
   &-item {
+    display: flex;
     &-info {
       display: flex;
     }
@@ -23,9 +24,7 @@
     &-info input:focus {
       outline: none;
     }
-    &-name {
-      width: 400px;
-    }
+
     &-info h5 {
       line-height: 18px;
       text-align: start;
@@ -37,5 +36,16 @@
     margin-bottom: 10px;
     box-shadow: 2px 2px 5px 1px;
     margin-right: 10px;
+  }
+  &-back {
+    border-radius: 5px;
+    height: 3rem;
+    width: 14rem;
+    color: rgba(255, 255, 255, 0.377);
+    background: black;
+  }
+  &-back:hover{
+    color: #fff;
+      transition: 1s;
   }
 }

@@ -4,8 +4,8 @@ import "../FontAwesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function CartSimilar() {
   return (
-    <div>
-      <h6>Looking for something ?</h6>
+    <div style={{width:"20em"}}>
+      <h6 style={{marginTop:"-2em"}}>Looking for something ?</h6>
       {dataProducts.slice(0, 3).map((product, index) => {
         return (
           <div key={index} className="cart-similar">
