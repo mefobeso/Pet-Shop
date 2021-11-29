@@ -7,33 +7,36 @@ export default function Login(props) {
 
   const history = useHistory();
   const navigateTo = () => history.goBack();
-  // const [enteredUsername, setEnteredUsername] = useState("");
-  // const [enteredPassword, setEnteredPassword] = useState("");
+
+  // State
   const [errorMessage, setErrorMessage] = useState("");
   const [userAvailable, setUserAvailable] = useState(true);
-  const [formIsValid, setFormIsValid] = useState(true);
+  const [formIsValid, setFormIsValid] = useState(false);
   const [usernameValid, setUsernameValid] = useState(true);
   const [passwordValid, setPasswordValid] = useState(true);
 
+  // Ref
   const usernameInputRef = useRef("");
   const passwordInputRef = useRef("");
+
   // useEffect
+
   useEffect(() => {
     setFormIsValid(
       usernameInputRef.current.value.trim().length > 7 &&
         passwordInputRef.current.value.trim().length > 6
     );
   }, [usernameInputRef.current.value, passwordInputRef.current.value]);
+
   useEffect(() => {
     userData.map((user) => {
       setUserAvailable(user.username === usernameInputRef.current.value);
     });
   }, [usernameInputRef.current.value]);
+
   const submitHandler = (event) => {
     event.preventDefault();
 
-    // setEnteredUsername("");
-    // setEnteredPassword("");
     if (!userAvailable) {
       setErrorMessage("User not available !");
     }
@@ -74,7 +77,7 @@ export default function Login(props) {
             type="text"
             className={usernameValid ? "login-input" : "login-input invalid"}
             placeholder="Username"
-            onBlur={validateUsername}
+            onChange={validateUsername}
             ref={usernameInputRef}
           />
           {!userAvailable ? <p className="error">{errorMessage}</p> : <br />}
@@ -82,7 +85,7 @@ export default function Login(props) {
             type="password"
             className={passwordValid ? "login-input" : "login-input invalid"}
             placeholder=" Password"
-            onBlur={validatePassword}
+            onChange={validatePassword}
             ref={passwordInputRef}
           />
           <br />

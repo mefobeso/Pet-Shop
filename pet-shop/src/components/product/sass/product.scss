@@ -39,9 +39,14 @@
   }
   &-info button {
     border: none;
+    background-color: white;
   }
-  &-info button:hover {
+  &-info .cart:hover {
     color: green;
+    transition: 1s;
+  }
+  &-info .favorite:hover {
+    color: red;
     transition: 1s;
   }
   &-info .icon {

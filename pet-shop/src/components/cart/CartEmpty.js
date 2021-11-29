@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function CartEmpty() {
   const history = useHistory();
   const navigateTo = () => {
@@ -12,7 +12,11 @@ export default function CartEmpty() {
       <button
         onClick={navigateTo}
         className="cart-back"
-      >{`< BACK TO SHOPPING`}</button>
+        style={{ fontWeight: "bold" }}
+      >
+        <FontAwesomeIcon icon="chevron-left" />
+        {` BACK TO SHOPPING`}
+      </button>
     </div>
   );
 }

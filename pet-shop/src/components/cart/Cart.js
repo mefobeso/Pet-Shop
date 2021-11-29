@@ -1,17 +1,27 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+
+// Components
 import Footerwhite from "../layouts/Footer_white";
 import Headerwhite from "../layouts/Header_white";
 import CartInfo from "./CartInfo";
 import CartItem from "./CartItem";
 import CartSimilar from "./CartSimilar";
 
-import "./sass/css/cart.css";
 import CartEmpty from "./CartEmpty";
-import { set } from "js-cookie";
+// css
+import "./sass/css/cart.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+
 export default function Cart() {
   const cart = JSON.parse(localStorage.getItem("cart"));
   const [cartProduct, setCartProduct] = useState([]);
   const [key, setKey] = useState();
+  const history = useHistory();
+  const navigateTo = () => {
+    history.push("/home/product");
+  };
 
   useEffect(() => {
     setCartProduct(cart);
@@ -33,7 +43,7 @@ export default function Cart() {
     <>
       <Headerwhite />
       <div className="cart-container">
-        <h2>SHOPPING CART</h2>
+        <h2>Shopping Cart</h2>
         <h6 style={{ color: "#ddd" }}>
           {cartProduct.length === 0 ? "0" : cartProduct.length} items in your
           cart
@@ -78,6 +88,19 @@ export default function Cart() {
             )}
           </div>
         </div>
+        <hr />
+        {cartProduct.length === 0 ? (
+          <div></div>
+        ) : (
+          <div className="cart-navigate">
+            <button onClick={navigateTo}>
+              {" "}
+              <FontAwesomeIcon icon="chevron-left" />
+              {` BACK TO SHOPPING`}
+            </button>
+            <button className="checkout">{`CHECK OUT`}</button>
+          </div>
+        )}
       </div>
       <Footerwhite />
     </>

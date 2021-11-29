@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+
+// Components
 import FavoriteItem from "./FavoriteItem";
 import Headerwhite from "../layouts/Header_white";
 import Footerwhite from "../layouts/Footer_white";
-import { useHistory } from "react-router-dom";
+// css
 import "./sass/css/favorite.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 export default function Favorite(props) {
   const favorite = JSON.parse(localStorage.getItem("favorite"));
   const [favoriteProduct, setFavoriteProduct] = useState([{}]);
+
   const history = useHistory();
   const navigateTo = () => {
     history.push("/home/product");
@@ -29,21 +35,21 @@ export default function Favorite(props) {
       <Headerwhite />
       <div className="favorite-container">
         <h2>FAVORITE LIST</h2>
-        <h6 style={{ color: "#ddd"}}>
-          {favoriteProduct === null || favoriteProduct.length
+        <h6 style={{ color: "#ddd" }}>
+          {favoriteProduct === null || favoriteProduct.length === 0
             ? "0"
             : favoriteProduct.length}{" "}
           items
         </h6>
-        <hr/>
+        <hr />
         <div className="favorite-items">
           {favoriteProduct === null || favoriteProduct.length === 0 ? (
-            <div style={{marginTop:"10em"}}>
+            <div style={{ marginTop: "5em" }}>
               <p>NOTHING HERE</p>
-              <button
-                onClick={navigateTo}
-                className="favorite-back"
-              >{`< BACK TO SHOPPING`}</button>
+              <button onClick={navigateTo} className="favorite-back">
+                <FontAwesomeIcon icon="chevron-left" />
+                {` BACK TO SHOPPING`}
+              </button>
             </div>
           ) : (
             favoriteProduct.map((product, index) => {
@@ -57,6 +63,22 @@ export default function Favorite(props) {
             })
           )}
         </div>
+        
+        {favoriteProduct.length === 0 ? (
+          <div></div>
+        ) : (
+          <>
+          <hr />
+          <div className="favorite-navigate">
+            
+            <button onClick={navigateTo}>
+              {" "}
+              <FontAwesomeIcon icon="chevron-left" />
+              {` BACK TO SHOPPING`}
+            </button>
+          </div>
+          </>
+        )}
       </div>
       <Footerwhite />
     </>

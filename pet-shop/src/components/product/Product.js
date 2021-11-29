@@ -9,7 +9,7 @@ export default function Product() {
     console.log("effect");
     localStorage.setItem("cart", JSON.stringify(addedProduct));
     localStorage.setItem("favorite", JSON.stringify(favoriteProduct));
-  }, [addedProduct,favoriteProduct]);
+  }, [addedProduct, favoriteProduct]);
   return (
     <>
       {dataProducts.map((product, index) => {
@@ -75,6 +75,7 @@ export default function Product() {
             ];
           });
         };
+
         return (
           <div className="product" key={index}>
             <img src={product.img} alt="" />
@@ -84,15 +85,11 @@ export default function Product() {
                 <p style={{ fontWeight: "600" }}>${product.price}</p>
               </div>
               <div>
-                <button onClick={favoriteItemHandler}>
-                  <FontAwesomeIcon
-                    icon="heart"
-                    className="icon"
-                    style={{ color: "red" }}
-                  />
+                <button onClick={favoriteItemHandler} className="favorite">
+                  <FontAwesomeIcon icon="heart" className="icon" />
                 </button>
                 &nbsp;
-                <button onClick={addItemHandler}>
+                <button onClick={addItemHandler} className="cart">
                   <FontAwesomeIcon icon="cart-plus" className="icon" />
                 </button>
               </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./sass/css/login.css";
 import { useHistory } from "react-router-dom";
 export default function ResetCode() {

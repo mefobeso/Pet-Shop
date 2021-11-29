@@ -21,7 +21,6 @@ import Profile from "./components/profile/Profile";
 import ProductDetail from "./pages/ProductDetails";
 // Product
 import Categories from "./components/category/Categories";
-import Product from "./components/product/Product";
 import ProductList from "./components/product/ProductList";
 import Cart from "./components/cart/Cart";
 import Favorite from "./components/favorite/Favorite";

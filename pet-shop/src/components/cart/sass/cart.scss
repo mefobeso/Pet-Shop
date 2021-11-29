@@ -19,13 +19,22 @@
     text-align: center;
     margin-top: 50px;
   }
+  &-container button {
+    border: none;
+    background-color: white;
+    color: rgb(190, 190, 190);
+  }
+  &-container button:hover {
+    color: black;
+    transition: 1s;
+  }
   &-list {
     text-align: start;
   }
   &-similar {
     display: flex;
     &-info h6 {
-      line-height: 12px;
+      line-height: 1em;
     }
   }
   &-body {
@@ -34,7 +43,6 @@
   &-item {
     display: flex;
     margin-left: 10em;
-    
     &-info {
       width: 40em;
       display: flex;
@@ -59,23 +67,45 @@
       line-height: 1em;
       text-align: start;
     }
-    &-name{
+    &-name {
       width: 10em;
     }
   }
   &-item img {
     height: 10em;
     width: 9em;
-    margin-bottom: 10px;
+    margin-bottom: 1em;
     box-shadow: 2px 2px 5px 1px;
-    margin-right: 10px;
+    margin-right: 1em;
   }
-
+  &-item button {
+    height: min-content;
+  }
+  &-item .icon {
+    color: "#ddd";
+  }
   &-similar img {
-    height: 100px;
-    width: 80px;
-    margin-bottom: 10px;
+    height: 5em;
+    width: 5em;
+    margin-bottom: 1em;
     box-shadow: 2px 2px 5px 1px;
-    margin-right: 10px;
+    margin-right: 1em;
+  }
+  &-navigate {
+    display: flex;
+    justify-content: flex-end;
+    margin: 2em 0;
+  }
+  &-navigate button {
+    font-weight: bold;
+  }
+  &-navigate .checkout {
+    background-color: black;
+    margin-left: 8em;
+    height: 4em;
+    width: 8em;
+  }
+  &-navigate .checkout:hover {
+    color: white;
   }
 }

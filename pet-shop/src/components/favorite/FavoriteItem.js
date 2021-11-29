@@ -8,15 +8,13 @@ export default function FavoriteItem(props) {
   };
   return (
     <div className="favorite-item">
-      <img src={product.img} alt="" className="" />
+      <img src={product.img} alt={product.id} className="" />
       <div className="favorite-item-info">
         <h5 className="favorite-item-name">{product.name}</h5>
         <h5>${product.price}</h5>
-        <FontAwesomeIcon
-          icon="trash"
-          style={{ marginLeft: "50px", cursor: "pointer" }}
-          onClick={deleteItem}
-        />
+        <button onClick={deleteItem}>
+          <FontAwesomeIcon icon="trash" />
+        </button>
       </div>
     </div>
   );

@@ -39,9 +39,14 @@
 }
 .product-info button {
   border: none;
+  background-color: white;
 }
-.product-info button:hover {
+.product-info .cart:hover {
   color: green;
+  transition: 1s;
+}
+.product-info .favorite:hover {
+  color: red;
   transition: 1s;
 }
 .product-info .icon {

@@ -28,7 +28,9 @@ export default function Profile(props) {
         ? "https://i.ibb.co/jWRP1PC/profile-bg.png"
         : "https://i.ibb.co/FsTFVSw/profile-bg2.png";
 
-    return <img className="profile-bg" src={profilebg} key={index}></img>;
+    return (
+      <img className="profile-bg" src={profilebg} key={index} alt={index}></img>
+    );
   });
 
   return (

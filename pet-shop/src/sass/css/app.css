@@ -84,7 +84,7 @@ img {
   float: left;
   padding-top: 12px;
   color: #05465e;
-  transition: all 0.2s ease;
+  transition: all 0.4s ease;
   cursor: pointer;
 }
 .white-header-navbar ul li a {
@@ -93,7 +93,7 @@ img {
 }
 .white-header-navbar ul li a:hover {
   color: #18bc9c;
-  transition: 1s;
+  transition: 0.5s;
 }
 .white-header-navbar ul li:hover .white-header-menu {
   visibility: visible;

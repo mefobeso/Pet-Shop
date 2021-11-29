@@ -70,13 +70,13 @@
   color: transparent;
 }
 .login-link {
-  color: #f8f8f8;
+  color: #313131;
   text-decoration: none;
   font-size: 18px;
 }
 .login-link:hover {
-  color: rgba(0, 0, 0, 0.8);
-  transition: 1s;
+  color: #f8f8f8;
+  transition: 0.8s ease;
 }
 .login-FB {
   margin-bottom: 10px;
