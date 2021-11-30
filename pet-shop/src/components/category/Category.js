@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import dataCate from "../../database/category.data";
-export default function Category() {
+export default function Category(props) {
   return (
     <>
       {dataCate.map((cate, index) => {
@@ -11,7 +12,8 @@ export default function Category() {
             key={index}
             style={{ backgroundImage: `url(${Background})` }}
           >
-            <p>{cate.name}</p>
+            {" "}
+            <a href={`/home/product/${cate.name.toLowerCase()}`}>{cate.name}</a>
           </div>
         );
       })}

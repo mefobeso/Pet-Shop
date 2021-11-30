@@ -22,6 +22,7 @@ import ProductDetail from "./pages/ProductDetails";
 // Product
 import Categories from "./components/category/Categories";
 import ProductList from "./components/product/ProductList";
+import ProductByCategory from "./components/test/ProductByCategory";
 import Cart from "./components/cart/Cart";
 import Favorite from "./components/favorite/Favorite";
 function App(props) {
@@ -95,8 +96,10 @@ function App(props) {
         />
         {/* Product */}
         <Route exact path="/home/category" component={Categories} />
-        <Route exact path="/home/product" component={ProductList} />
         <Route exact path="/productdetails" component={ProductDetail} />
+        <Route path="/home/product/:category" exact>
+          <ProductList />
+        </Route>
         <Route exact path="/home/cart" component={Cart} />
         <Route exact path="/home/favorite" component={Favorite} />
       </Switch>

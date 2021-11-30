@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Headerwhite from "../layouts/Header_white";
 import Footerwhite from "../layouts/Footer_white";
-
+import { useHistory } from "react-router-dom";
 import Category from "./Category";
 import "./sass/css/category.css";
 export default function Categories() {

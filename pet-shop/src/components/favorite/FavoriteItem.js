@@ -10,11 +10,16 @@ export default function FavoriteItem(props) {
     <div className="favorite-item">
       <img src={product.img} alt={product.id} className="" />
       <div className="favorite-item-info">
-        <h5 className="favorite-item-name">{product.name}</h5>
-        <h5>${product.price}</h5>
-        <button onClick={deleteItem}>
-          <FontAwesomeIcon icon="trash" />
-        </button>
+        <div className="" style={{ display: "flex",width:"100%",justifyContent:"space-between" }}>
+          <h5 className="favorite-item-name">{product.name}</h5>
+          <button onClick={deleteItem}>
+            <FontAwesomeIcon icon="trash" />
+          </button>
+        </div>
+        <div className="" style={{ width: "6em" }}>
+          <h5>${product.price}</h5>
+          <button>Add to Cart <FontAwesomeIcon icon="cart-plus"/></button>
+        </div>
       </div>
     </div>
   );

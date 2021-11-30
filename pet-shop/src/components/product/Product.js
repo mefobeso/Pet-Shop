@@ -1,18 +1,36 @@
 import React, { useEffect, useState } from "react";
-import dataProducts from "../../database/product.data";
+import { useParams } from "react-router-dom";
+import { dataProducts } from "../../database/product.data";
 import "../FontAwesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-export default function Product() {
+export default function Product(props) {
+  // State
+  const [data, setData] = useState([]);
   const [addedProduct, setAddedProduct] = useState([]);
   const [favoriteProduct, setFavoriteProduct] = useState([]);
+
+  // params
+  const params = useParams();
+  // useEffect
   useEffect(() => {
-    console.log("effect");
+    if (params.category === "all product") {
+      setData(dataProducts);
+    } else {
+      const cateFilter = dataProducts.filter(
+        (p) => p.category === params.category
+      );
+      setData(cateFilter);
+    }
+  }, [params]);
+
+  useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(addedProduct));
     localStorage.setItem("favorite", JSON.stringify(favoriteProduct));
   }, [addedProduct, favoriteProduct]);
+
   return (
     <>
-      {dataProducts.map((product, index) => {
+      {data.map((product, index) => {
         const addItemHandler = () => {
           setAddedProduct((prevProductList) => {
             if (addedProduct != null) {
@@ -77,23 +95,48 @@ export default function Product() {
         };
 
         return (
-          <div className="product" key={index}>
+          <div className={`product ${props.isGrid ? "" : "list"}`} key={index}>
             <img src={product.img} alt="" />
-            <div className="product-info">
-              <div className="">
-                <h5>{product.name}</h5>
+            {props.isGrid && (
+              <div className={`product-info`}>
+                <div className={`product-info-text `}>
+                  <h5>{product.name}</h5>
+                  <p style={{ fontWeight: "600" }}>${product.price}</p>
+                </div>
+
+                <div>
+                  <button onClick={favoriteItemHandler} className="favorite">
+                    <FontAwesomeIcon icon="heart" className="icon" />
+                  </button>
+                  &nbsp;
+                  <button onClick={addItemHandler} className="cart">
+                    <FontAwesomeIcon icon="cart-plus" className="icon" />
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {!props.isGrid && (
+              <div className="product-info list">
+                <h5 style={{ width: "8em" }}>{product.name}</h5>
                 <p style={{ fontWeight: "600" }}>${product.price}</p>
+                <p style={{ width: "30em" }}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+                <div className="">
+                  <button onClick={favoriteItemHandler} className="favorite">
+                    <FontAwesomeIcon icon="heart" className="icon" />
+                  </button>
+                  &nbsp;
+                  <button onClick={addItemHandler} className="cart">
+                    <FontAwesomeIcon icon="cart-plus" className="icon" />
+                  </button>
+                </div>
               </div>
-              <div>
-                <button onClick={favoriteItemHandler} className="favorite">
-                  <FontAwesomeIcon icon="heart" className="icon" />
-                </button>
-                &nbsp;
-                <button onClick={addItemHandler} className="cart">
-                  <FontAwesomeIcon icon="cart-plus" className="icon" />
-                </button>
-              </div>
-            </div>
+            )}
           </div>
         );
       })}

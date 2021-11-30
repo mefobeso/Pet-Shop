@@ -22,6 +22,7 @@ import {
   faSlidersH,
   faBorderAll,
   faBars,
+  faSearch,
   faChevronDown,
   faChevronLeft,
   faHeart,
@@ -51,7 +52,7 @@ library.add(
   faSlidersH,
   faBorderAll,
   faBars,
-
+  faSearch,
   faChevronDown,
   faChevronLeft,
   faHeart,

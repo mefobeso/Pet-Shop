@@ -1,5 +1,5 @@
 import React from "react";
-import dataProducts from "../../database/product.data";
+import {dataProducts} from "../../database/product.data";
 import "../FontAwesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function CartSimilar() {

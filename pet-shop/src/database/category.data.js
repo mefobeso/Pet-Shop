@@ -1,5 +1,9 @@
 const dataCate = [
   {
+    name: "All Product",
+    thumbnail: "https://i.ibb.co/5nK0XTB/unsplash-0-F7-GRXNOG7g.png",
+  },
+  {
     name: "Food",
     thumbnail: "https://i.ibb.co/wwXc0sp/category-1.png",
   },

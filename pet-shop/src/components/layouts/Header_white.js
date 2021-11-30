@@ -2,16 +2,32 @@ import React, { useState, useEffect } from "react";
 // Font Awesome
 import "../FontAwesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRef } from "react/cjs/react.development";
 
 function Headerwhite(props) {
   const [login, setLogin] = useState(false);
+  const [searching, setSearching] = useState(false);
+
+  // Ref
+  const searchInputRef = useRef();
+  // useEffect
+
   useEffect(() => {
     const loginInfor = localStorage.getItem("isLoggedIn");
     if (loginInfor === "1") {
       setLogin(true);
     }
   }, []);
-  console.log(props);
+
+  const searchHandler = () => {
+    setSearching(!searching);
+    console.log(searching);
+  };
+  const onSearching = () => {
+    
+    setSearching(!searching);
+  };
+
   return (
     <div className="white-header">
       <nav className="white-header-navbar">
@@ -74,17 +90,27 @@ function Headerwhite(props) {
                 <p>Dog</p>
                 <hr />
                 <p style={{ float: "left" }}>Husky</p>
-                <p style={{ float: "left" }}>Husky</p>
-                <p style={{ float: "left" }}>Husky</p>
+                <p style={{ float: "left" }}>Alaska</p>
+                <p style={{ float: "left" }}>Retriver</p>
               </div>
               <div className="white-header-menu-inner-2">
                 <p>Cat</p>
                 <hr />
-                <p style={{ float: "left" }}>Husky</p>
-                <p style={{ float: "left" }}>Husky</p>
+                <p style={{ float: "left" }}>Brishtish</p>
+                <p style={{ float: "left" }}>Sphynx</p>
                 <p style={{ float: "left" }}>Husky</p>
               </div>
             </div>
+          </li>
+          <li>
+            {!searching && (
+              <FontAwesomeIcon icon="search" onClick={searchHandler} />
+            )}
+            {searching && (
+              <form onSubmit={onSearching}>
+                <input type="text" placeholder="Search" ref={searchInputRef} />
+              </form>
+            )}
           </li>
           <li>
             <a
