@@ -1,0 +1,52 @@
+POST http://localhost:5000/auth/register
+Content-Type: application/json
+
+{
+    "username" : "dotu",
+    "password" : "dothanhtu"
+}
+
+###
+
+POST http://localhost:5000/auth/login
+Content-Type: application/json
+
+{
+    "username" : "dotu",
+    "password" : "dothanhtu"
+}
+
+###
+
+POST http://localhost:5000/posts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE0N2JkNWFkMTU1ZjZhNGFhMTk3MzEiLCJpYXQiOjE2MzgxODI3OTF9.xMyJeU2KSB3v-Et3T_Mbr_w_TpRkRTt06KT3r3F6S10
+
+{
+    "title" : "React",
+    "description" : "react",
+    "url" : "react.com",
+    "status" : "LEARNED"
+}
+
+### 
+
+GET http://localhost:5000/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE0N2JkNWFkMTU1ZjZhNGFhMTk3MzEiLCJpYXQiOjE2MzgxODI3OTF9.xMyJeU2KSB3v-Et3T_Mbr_w_TpRkRTt06KT3r3F6S10
+
+###
+
+PUT http://localhost:5000/posts/61a492a8d39279ff209fad17
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE0N2JkNWFkMTU1ZjZhNGFhMTk3MzEiLCJpYXQiOjE2MzgxNzUzODd9.iyxLRBUkleFK_cMNL56VxrzbVdRCvv-BlHtdmeDdHdo
+
+{
+    "title": "Vueeeeeee",
+    "description": "VUEEE",
+    "url": "vue.org",
+    "status": "LEARNING"
+}
+
+###
+DELETE  http://localhost:5000/posts/61a492a8d39279ff209fad17
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE0N2JkNWFkMTU1ZjZhNGFhMTk3MzEiLCJpYXQiOjE2MzgxNzUzODd9.iyxLRBUkleFK_cMNL56VxrzbVdRCvv-BlHtdmeDdHdo
