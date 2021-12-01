@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 // Font Awesome
 import "../FontAwesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,6 +9,10 @@ function Headerwhite(props) {
   const [login, setLogin] = useState(false);
   const [searching, setSearching] = useState(false);
 
+  const history = useHistory();
+  const navigateTo = (search) => {
+    history.push(`/home/search/keyword=${search}`);
+  };
   // Ref
   const searchInputRef = useRef();
   // useEffect
@@ -21,11 +26,10 @@ function Headerwhite(props) {
 
   const searchHandler = () => {
     setSearching(!searching);
-    console.log(searching);
   };
   const onSearching = () => {
-    
     setSearching(!searching);
+    navigateTo(searchInputRef.current.value);
   };
 
   return (
@@ -108,7 +112,13 @@ function Headerwhite(props) {
             )}
             {searching && (
               <form onSubmit={onSearching}>
-                <input type="text" placeholder="Search" ref={searchInputRef} />
+                <input
+                  type="text"
+                  placeholder="Search"
+                  ref={searchInputRef}
+                  className="white-header-search"
+                />
+                <button type="submit"><FontAwesomeIcon icon="search"/></button>
               </form>
             )}
           </li>

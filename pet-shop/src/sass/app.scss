@@ -28,6 +28,17 @@ img {
     height: 50px;
     width: 1265px;
     margin: 10px auto;
+    &-search {
+      width: 9em;
+      border: 0.2px solid black;
+      outline: none;
+      border-radius: 4px;
+      padding-left:0.1em;
+    }
+    &-search:focus::placeholder {
+      visibility: hidden;
+      background-color: white;
+    }
     &-menu {
       position: absolute;
       z-index: 11;

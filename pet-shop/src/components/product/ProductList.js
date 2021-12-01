@@ -10,8 +10,10 @@ export default function ProductList() {
   const params = useParams();
   const title = params.category.toUpperCase();
 
+  const [key, setKey] = useState();
   const [isGrid, setIsGrid] = useState(true);
   const [isFilter, setIsFilter] = useState(false);
+  const [filter, setFilter] = useState();
 
   const viewGrid = () => {
     setIsGrid(true);
@@ -19,8 +21,12 @@ export default function ProductList() {
   const viewList = () => {
     setIsGrid(false);
   };
-  const onFilter = () => {
+  const onIconClick = () => {
     setIsFilter(!isFilter);
+  };
+  const onFilterSubmit = (filter) => {
+    setFilter(filter);
+    setKey(Math.random());
   };
   return (
     <>
@@ -33,17 +39,18 @@ export default function ProductList() {
           viewList={viewList}
           isGrid={isGrid}
           isFilter={isFilter}
-          onFilter={onFilter}
+          onIconClick={onIconClick}
+          onFilterSubmit={onFilterSubmit}
         ></ProductButton>
-        {/* <div
+        <div
           className={`product-container
            ${isGrid ? " grid" : "list"}`}
         >
-          <Product isGrid={isGrid}></Product>
+          <Product isGrid={isGrid} filterPrice={filter} key={key}></Product>
         </div>
-        <ProductPage /> */}
+        <ProductPage />
       </div>
-      {/* <Footerwhite /> */}
+      <Footerwhite />
     </>
   );
 }

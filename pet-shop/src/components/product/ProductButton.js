@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "../FontAwesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { toInteger } from "lodash";
 export default function ProductButton(props) {
+  const [filterPrice, setFilterPrice] = useState({});
   const gridHandler = () => {
     props.viewGrid();
   };
@@ -9,9 +11,21 @@ export default function ProductButton(props) {
     props.viewList();
   };
   const filterHandler = () => {
-    props.onFilter();
+    props.onIconClick();
   };
-
+  const onReset = () => {
+    props.onFilterSubmit(50);
+    props.onIconClick();
+  };
+  const onSubmit = (e) => {
+    e.preventDefault();
+    props.onFilterSubmit(filterPrice);
+    props.onIconClick();
+  };
+  const onFilterChange = (e) => {
+    const checkedValue = toInteger(e.target.value);
+    setFilterPrice(checkedValue);
+  };
   return (
     <div className="product-button">
       <div className={`filter ${props.isFilter && "active"}`}>
@@ -23,65 +37,94 @@ export default function ProductButton(props) {
         <p>&nbsp;</p>
         <p className={`${props.isFilter && "active"}`}>FILTER</p>
         {props.isFilter && (
-          <div className="filter-menu">
+          <form className="filter-menu" onSubmit={onSubmit} onReset={onReset}>
             <div className="filter-inner">
-              <h5>Price</h5>
+              <h5>Filter</h5>
               <div>
-                <input type="checkbox" name="50+" id="50" />
-                <p>$50+</p>
+                <input type="checkbox" name="50+" id="50" value="50+" />
+                <p>+</p>
               </div>
               <div>
-                <input type="checkbox" name="50+" id="50" />
-                <p>$30-$49.99</p>
+                <input type="checkbox" name="50+" id="50" value="50+" />
+                <p></p>
               </div>
               <div>
-                <input type="checkbox" name="50+" id="50" />
-                <p>$10-$29.99</p>
+                <input type="checkbox" name="50+" id="50" value="50+" />
+                <p></p>
               </div>
               <div>
-                <input type="checkbox" name="50+" id="50" />
-                <p>$1-$9.99</p>
+                <input type="checkbox" name="50+" id="50" value="50+" />
+                <p></p>
               </div>
             </div>
             <div className="filter-inner">
-              <h5>Price</h5>
+              <h5>Filter</h5>
               <div>
-                <input type="checkbox" name="50+" id="50" />
-                <p>$50+</p>
+                <input type="checkbox" name="50+" id="50" value="50+" />
+                <p></p>
               </div>
               <div>
-                <input type="checkbox" name="50+" id="50" />
-                <p>$30-$49.99</p>
+                <input type="checkbox" name="50+" id="50" value="50+" />
+                <p></p>
               </div>
               <div>
-                <input type="checkbox" name="50+" id="50" />
-                <p>$10-$29.99</p>
+                <input type="checkbox" name="50+" id="50" value="50+" />
+                <p></p>
               </div>
               <div>
-                <input type="checkbox" name="50+" id="50" />
-                <p>$1-$9.99</p>
+                <input type="checkbox" name="50+" id="50" value="50+" />
+                <p></p>
               </div>
             </div>
+            {/* Price */}
             <div className="filter-inner">
               <h5>Price</h5>
               <div>
-                <input type="checkbox" name="50+" id="50" />
+                <input
+                  type="checkbox"
+                  name="50+"
+                  id="50"
+                  value="50"
+                  onChange={onFilterChange}
+                />
                 <p>$50+</p>
               </div>
               <div>
-                <input type="checkbox" name="50+" id="50" />
+                <input
+                  type="checkbox"
+                  name="50+"
+                  id="50"
+                  value="30"
+                  onChange={onFilterChange}
+                />
                 <p>$30-$49.99</p>
               </div>
               <div>
-                <input type="checkbox" name="50+" id="50" />
+                <input
+                  type="checkbox"
+                  name="50+"
+                  id="50"
+                  value="10"
+                  onChange={onFilterChange}
+                />
                 <p>$10-$29.99</p>
               </div>
               <div>
-                <input type="checkbox" name="50+" id="50" />
+                <input
+                  type="checkbox"
+                  name="50+"
+                  id="50"
+                  value="1"
+                  onChange={onFilterChange}
+                />
                 <p>$1-$9.99</p>
               </div>
             </div>
-          </div>
+            <div className="filter-button">
+              <button type="reset">Reset</button>
+              <button type="submit">Submit</button>
+            </div>
+          </form>
         )}
       </div>
       <div>

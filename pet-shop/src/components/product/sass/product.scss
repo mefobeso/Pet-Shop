@@ -44,15 +44,7 @@
   &-info {
     padding-left: 0.5em;
   }
-  &-info button {
-    border: none;
-    background-color: white;
-  }
-  &-info .cart:hover {
-    color: green;
-    transition: 1s;
-  }
-  &-info .favorite:hover {
+  .favorite:hover {
     color: red;
     transition: 1s;
   }
@@ -103,10 +95,15 @@
 }
 .filter {
   &-menu {
+    box-shadow: 4px 4px 9px 0px;
+    z-index: 11;
+    padding: 1em;
     width: 50%;
     display: flex;
     justify-content: space-between;
     position: absolute;
+    margin-top: 1.2em;
+    background-color: white;
   }
   &-inner {
     display: flex;
@@ -123,8 +120,22 @@
   &-inner div {
     height: 0.1em;
   }
+  &-button {
+    flex-direction: column;
+    z-index: 12;
+  }
 }
 .filter .active {
   color: #18bc9c;
   transition: 0.5s;
+}
+.filter-menu button {
+  background-color: white;
+  border: none;
+  box-shadow: 1px 1px 4px 0px;
+  padding: 0px 0.2em;
+  height: 2em;
+
+  margin-top: 2em;
+  cursor: pointer;
 }

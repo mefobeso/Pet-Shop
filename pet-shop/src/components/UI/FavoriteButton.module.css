@@ -1,0 +1,8 @@
+.favorite {
+  border: none;
+  background-color: white;
+}
+.favorite:hover {
+  color: red;
+  transition: 1s;
+}

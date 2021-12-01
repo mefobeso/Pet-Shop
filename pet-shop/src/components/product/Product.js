@@ -1,8 +1,10 @@
+import { isUndefined, toInteger } from "lodash";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { dataProducts } from "../../database/product.data";
 import "../FontAwesome";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import CartButton from "../UI/CartButton";
+import FavoriteButton from "../UI/FavoriteButton";
 export default function Product(props) {
   // State
   const [data, setData] = useState([]);
@@ -12,88 +14,43 @@ export default function Product(props) {
   // params
   const params = useParams();
   // useEffect
-  useEffect(() => {
-    if (params.category === "all product") {
-      setData(dataProducts);
-    } else {
-      const cateFilter = dataProducts.filter(
-        (p) => p.category === params.category
-      );
-      setData(cateFilter);
-    }
-  }, [params]);
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(addedProduct));
     localStorage.setItem("favorite", JSON.stringify(favoriteProduct));
   }, [addedProduct, favoriteProduct]);
 
+  useEffect(() => {
+    if (params.category === "all product") {
+      const cateFilter = dataProducts;
+      setData(cateFilter);
+      if (props.filterPrice === 50) {
+        setData(cateFilter);
+      }
+      if (props.filterPrice === 30) {
+        setData(cateFilter.filter((p) => p.price >= 30 && p.price < 50));
+        console.log(data);
+      }
+      if (props.filterPrice === 10) {
+        setData(cateFilter.filter((p) => p.price > 10 && p.price < 30));
+        console.log(data);
+      }
+      if (props.filterPrice === 1) {
+        setData(cateFilter.filter((p) => p.price > 0 && p.price < 10));
+        console.log(data);
+      }
+    } else {
+      const cateFilter = dataProducts.filter(
+        (p) => p.category === params.category
+      );
+      setData(cateFilter);
+    }
+  }, [params, props.filterPrice]);
+  
+
   return (
     <>
       {data.map((product, index) => {
-        const addItemHandler = () => {
-          setAddedProduct((prevProductList) => {
-            if (addedProduct != null) {
-              const duplicate = addedProduct.find((p) => p.id === product.id);
-              if (duplicate) {
-                const index = addedProduct.findIndex(
-                  (p) => p.id === product.id
-                );
-                addedProduct[index].amount += 1;
-                localStorage.setItem("cart", JSON.stringify(addedProduct));
-                console.log(addedProduct[index]);
-                console.log(addedProduct);
-                return addedProduct;
-              }
-              return [
-                ...prevProductList,
-                {
-                  id: product.id,
-                  name: product.name,
-                  price: product.price,
-                  quantity: product.quantity,
-                  img: product.img,
-                  amount: +1,
-                },
-              ];
-            }
-            return [
-              ...prevProductList,
-              {
-                id: product.id,
-                name: product.name,
-                price: product.price,
-                quantity: product.quantity,
-                img: product.img,
-                amount: +1,
-              },
-            ];
-          });
-        };
-        const favoriteItemHandler = () => {
-          setFavoriteProduct((prevProductList) => {
-            if (favoriteProduct != null) {
-              const duplicate = favoriteProduct.find(
-                (p) => p.id === product.id
-              );
-              if (duplicate) {
-                console.log("dup");
-                return prevProductList;
-              }
-            }
-            return [
-              ...prevProductList,
-              {
-                id: product.id,
-                name: product.name,
-                price: product.price,
-                quantity: product.quantity,
-                img: product.img,
-              },
-            ];
-          });
-        };
-
         return (
           <div className={`product ${props.isGrid ? "" : "list"}`} key={index}>
             <img src={product.img} alt="" />
@@ -105,13 +62,20 @@ export default function Product(props) {
                 </div>
 
                 <div>
-                  <button onClick={favoriteItemHandler} className="favorite">
+                  {/* <button onClick={favoriteItemHandler} className="favorite">
                     <FontAwesomeIcon icon="heart" className="icon" />
-                  </button>
+                  </button> */}
+                  <FavoriteButton
+                    favoriteProduct={favoriteProduct}
+                    product={product}
+                    setFavoriteProduct={setFavoriteProduct}
+                  />
                   &nbsp;
-                  <button onClick={addItemHandler} className="cart">
-                    <FontAwesomeIcon icon="cart-plus" className="icon" />
-                  </button>
+                  <CartButton
+                    addedProduct={addedProduct}
+                    product={product}
+                    setAddedProduct={setAddedProduct}
+                  />
                 </div>
               </div>
             )}
@@ -127,13 +91,17 @@ export default function Product(props) {
                   laboris nisi ut aliquip ex ea commodo consequat.
                 </p>
                 <div className="">
-                  <button onClick={favoriteItemHandler} className="favorite">
-                    <FontAwesomeIcon icon="heart" className="icon" />
-                  </button>
+                  <FavoriteButton
+                    favoriteProduct={favoriteProduct}
+                    product={product}
+                    setFavoriteProduct={setFavoriteProduct}
+                  />
                   &nbsp;
-                  <button onClick={addItemHandler} className="cart">
-                    <FontAwesomeIcon icon="cart-plus" className="icon" />
-                  </button>
+                  <CartButton
+                    addedProduct={props.addedProduct}
+                    product={product}
+                    setAddedProduct={setAddedProduct}
+                  />
                 </div>
               </div>
             )}

@@ -22,9 +22,9 @@ import ProductDetail from "./pages/ProductDetails";
 // Product
 import Categories from "./components/category/Categories";
 import ProductList from "./components/product/ProductList";
-import ProductByCategory from "./components/test/ProductByCategory";
 import Cart from "./components/cart/Cart";
 import Favorite from "./components/favorite/Favorite";
+import Search from "./components/search/Search";
 function App(props) {
   // Login State
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -53,6 +53,7 @@ function App(props) {
     localStorage.setItem("isLoggedIn", "0");
     setIsLoggedIn(false);
   };
+  
   //loader
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -99,6 +100,9 @@ function App(props) {
         <Route exact path="/productdetails" component={ProductDetail} />
         <Route path="/home/product/:category" exact>
           <ProductList />
+        </Route>
+        <Route path="/home/search/keyword=:search" exact>
+          <Search />
         </Route>
         <Route exact path="/home/cart" component={Cart} />
         <Route exact path="/home/favorite" component={Favorite} />
