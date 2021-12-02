@@ -1,4 +1,4 @@
-POST http://localhost:5000/auth/register
+POST http://localhost:5000/admin/auth/register
 Content-Type: application/json
 
 {
@@ -8,7 +8,7 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:5000/auth/login
+POST http://localhost:5000/admin/auth/login
 Content-Type: application/json
 
 {
@@ -18,25 +18,25 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:5000/posts
+POST http://localhost:5000/admin/posts
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE0N2JkNWFkMTU1ZjZhNGFhMTk3MzEiLCJpYXQiOjE2MzgxODI3OTF9.xMyJeU2KSB3v-Et3T_Mbr_w_TpRkRTt06KT3r3F6S10
 
 {
     "title" : "React",
     "description" : "react",
-    "url" : "react.com",
-    "status" : "LEARNED"
+    "text" : "Chó vàng Việt Nam là giống chó vàng đặc biệt xịn chỉ xuất hiện duy nhất ở Việt Nam",
+    "status" : "Chó"
 }
 
 ### 
 
-GET http://localhost:5000/posts
+GET http://localhost:5000/admin/posts
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE0N2JkNWFkMTU1ZjZhNGFhMTk3MzEiLCJpYXQiOjE2MzgxODI3OTF9.xMyJeU2KSB3v-Et3T_Mbr_w_TpRkRTt06KT3r3F6S10
 
 ###
 
-PUT http://localhost:5000/posts/61a492a8d39279ff209fad17
+PUT http://localhost:5000/admin/posts/61a492a8d39279ff209fad17
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE0N2JkNWFkMTU1ZjZhNGFhMTk3MzEiLCJpYXQiOjE2MzgxNzUzODd9.iyxLRBUkleFK_cMNL56VxrzbVdRCvv-BlHtdmeDdHdo
 
@@ -48,5 +48,18 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE0N
 }
 
 ###
-DELETE  http://localhost:5000/posts/61a492a8d39279ff209fad17
+DELETE  http://localhost:5000/admin/posts/61a492a8d39279ff209fad17
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE0N2JkNWFkMTU1ZjZhNGFhMTk3MzEiLCJpYXQiOjE2MzgxNzUzODd9.iyxLRBUkleFK_cMNL56VxrzbVdRCvv-BlHtdmeDdHdo
+
+###############################
+GET http://localhost:5000/admin/auth/Account
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE0N2JkNWFkMTU1ZjZhNGFhMTk3MzEiLCJpYXQiOjE2MzgxODI3OTF9.xMyJeU2KSB3v-Et3T_Mbr_w_TpRkRTt06KT3r3F6S10
+
+################################
+PUT http://localhost:5000/admin/auth/61a47bd5ad155f6a4aa19731
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE0N2JkNWFkMTU1ZjZhNGFhMTk3MzEiLCJpYXQiOjE2MzgyNjYzNzF9.s-ddrip2IRPQmcu7SL5CfGlPkPp9pHOpxxqkAeV5rWw
+
+{
+    "status": "Khóa"
+}

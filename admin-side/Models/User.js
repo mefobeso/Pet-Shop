@@ -11,6 +11,22 @@ const UserSchema = new Schema({
         type: String,
         required: true,
     },
+    name:{
+        type: String,
+        required: true,
+    },
+    address: {
+        type: String,
+        required: true,
+    },
+    phone:{
+        type: String,
+        required: true,
+    },
+    status: {
+        type: String,
+        enum: ['Khóa','Hoạt động']
+    },
     createdAt: {
         type: Date, 
         default: Date.now()

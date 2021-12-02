@@ -26,9 +26,9 @@ connectDB();
 const app = express();
 app.use(express.json());
 const authRouter = require('./Routes/auth')
-app.use('/auth',authRouter);
+app.use('/admin/auth',authRouter);
 const postRouter = require('./Routes/post')
-app.use('/posts',postRouter);
+app.use('/admin/posts',postRouter);
 const PORT = 5000;
 
 app.listen(PORT,() => console.log(`Server started on port ${PORT}`));

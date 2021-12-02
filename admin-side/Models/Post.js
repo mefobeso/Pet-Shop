@@ -9,12 +9,16 @@ const PostSchema = new Schema({
     description: {
         type: String,
     },
-    url: {
+    text: {
         type: String,
+    },
+    UploadDate: {
+        type: Date, 
+        default: Date.now()
     },
     status: {
         type: String,
-        enum: ['TO LEARN','LEARNING','LEARNED']
+        enum: ['Chó','Mèo','Hamster']
     },
     user: {
         type: Schema.Types.ObjectId,
