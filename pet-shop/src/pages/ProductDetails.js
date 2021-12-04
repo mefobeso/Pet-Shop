@@ -1,30 +1,31 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./css/style.css";
 import Headerwhite from "../components/layouts/Header_white";
 import Footerwhite from "../components/layouts/Footer_white";
+import CartButton from "../components/UI/CartButton"
+import FavoriteButton from "../components/UI/FavoriteButton"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../components/FontAwesome/index";
+import {dataProducts} from "../database/product.data"
 
 import { Container, Row, Col, Button } from "reactstrap";
+import {useParams} from "react-router-dom";
 
-const product = {
-  name: "Samoyed",
-  price: 500,
-  des: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-  img: [
-    "https://images.unsplash.com/photo-1529429617124-95b109e86bb8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=735&q=80",
-    "https://images.unsplash.com/photo-1554692918-08fa0fdc9db3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1470&q=80",
-  ],
-  quantity: 55,
-};
+
 
 export default function ProductDetail() {
-  const [isClicked, setIsClicked] = useState(false);
-  var MainImg = product.img[0];
-  function onClick(index) {
-    MainImg = product.img[index];
-    setIsClicked(!isClicked);
-  }
+  const [mainImg, setMainImg] = useState(0);
+  let {id} = useParams();
+  
+  const product =  dataProducts.find(product => product.id == id);
+  const [addedProduct, setAddedProduct] = useState([]);
+  const [favoriteProduct, setFavoriteProduct] = useState([]);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(addedProduct));
+    localStorage.setItem("favorite", JSON.stringify(favoriteProduct));
+  }, [addedProduct, favoriteProduct]);
+  
   return (
     <div>
       <Headerwhite />
@@ -33,15 +34,14 @@ export default function ProductDetail() {
           <Row>
             <Col width="25%" className="ImgProduct">
               <div className="ImgDetail">
-                <img src={MainImg} alt="" />
+                <img src={product.img[mainImg]} alt="" />
               </div>
               <div className="sub-img">
                 {product.img.map((src, index) => (
                   <img
                     src={src}
-                    alt=""
-                    isClicked={isClicked}
-                    onClick={onClick}
+                    onClick={() => setMainImg(index)}
+                    alt=""                   
                   />
                 ))}
               </div>
@@ -58,8 +58,17 @@ export default function ProductDetail() {
               <div className="product-price">${product.price}</div>
               <div className="product-des">{product.des}</div>
               <div className="product-buy">
-                <input type="number" min="1" max={product.quantity} />
-                <Button color="primary">Add to Cart</Button>
+                <input type="number" value="1" min="1" max={product.quantity} />
+                <FavoriteButton
+                    favoriteProduct={favoriteProduct}
+                    product={product}
+                    setFavoriteProduct={setFavoriteProduct}
+                  />
+                <CartButton 
+                addedProduct={addedProduct}
+                product={product}
+                setAddedProduct={setAddedProduct}
+                />
               </div>
             </Col>
           </Row>

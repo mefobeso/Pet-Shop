@@ -5,6 +5,9 @@ import { dataProducts } from "../../database/product.data";
 import "../FontAwesome";
 import CartButton from "../UI/CartButton";
 import FavoriteButton from "../UI/FavoriteButton";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
+
 export default function Product(props) {
   // State
   const [data, setData] = useState([]);
@@ -53,11 +56,15 @@ export default function Product(props) {
       {data.map((product, index) => {
         return (
           <div className={`product ${props.isGrid ? "" : "list"}`} key={index}>
+            <Link to={`/product/${product.id}`}>
             <img src={product.img} alt="" />
+            </Link>
             {props.isGrid && (
               <div className={`product-info`}>
                 <div className={`product-info-text `}>
+                <Link to={`/product/${product.id}`}>
                   <h5>{product.name}</h5>
+                </Link>
                   <p style={{ fontWeight: "600" }}>${product.price}</p>
                 </div>
 

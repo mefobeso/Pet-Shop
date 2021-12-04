@@ -7,14 +7,14 @@ export default function Category(props) {
       {dataCate.map((cate, index) => {
         const Background = cate.thumbnail;
         return (
-          <div
+          <a href={`/home/product/${cate.name.toLowerCase()}`}
             className="category"
             key={index}
             style={{ backgroundImage: `url(${Background})` }}
           >
             {" "}
             <a href={`/home/product/${cate.name.toLowerCase()}`}>{cate.name}</a>
-          </div>
+          </a>
         );
       })}
     </>

@@ -97,7 +97,7 @@ function App(props) {
         />
         {/* Product */}
         <Route exact path="/home/category" component={Categories} />
-        <Route exact path="/productdetails" component={ProductDetail} />
+        <Route exact path="/product/:id" component={ProductDetail} />
         <Route path="/home/product/:category" exact>
           <ProductList />
         </Route>
