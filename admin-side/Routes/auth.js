@@ -64,4 +64,54 @@ router.post('/Login', async(req, res) => {
     }
 })
 
+// xem danh sách tài khoản
+router.get("/Account", verifyToken, async (req, res) => {
+    try {
+        const accounts = await User.find()
+        res.json({ success: true, accounts: accounts })
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ success: false, message: 'lỗi server' })
+    }
+})
+
+// cấp quyền hoạt động hoặc khóa tài khoản
+router.put('/:id', verifyToken, async (req, res) => {
+    const { status } = req.body
+    try {
+        let EditAccount = {
+            status: status || 'Hoạt động'
+        }
+        const AccountEdit = {
+            _id: req.params.id, user: req.userId
+        }
+        updatedAccount = await User.findOneAndUpdate(AccountEdit, EditAccount, { new: true })
+        // người dùng không được phép cập nhật bài đăng
+        if (!updatedAccount) {
+            return res.status(401).json({ success: false, message: 'Tài khoản không tồn tại hoặc người dùng không được ủy quyền' })
+        } else {
+            res.json({ success: true, message: 'Thay đổi thành công', post: updatedAccount })
+        }
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ success: false, message: 'lỗi server' })
+    }
+})
+
+// xóa post
+router.delete('/:id', verifyToken, async (req, res) => {
+    try {
+        const AccountDeleteConditions = { _id: req.params.id, user: req.userId }
+        const deletedAccount = await User.findOneAndDelete(AccountDeleteConditions)
+        if (!deletedAccount) {
+            return res.status(401).json({ success: false, message: 'Bài đăng không tồn tại hoặc người dùng không được ủy quyền' })
+        } else {
+            res.json({ success: true, message: 'Oke', post: deletedAccount })
+        }
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ success: false, message: 'lỗi server' })
+    }
+})
+
 module.exports = router
