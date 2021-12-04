@@ -20,7 +20,7 @@ export default function Cart() {
   const [key, setKey] = useState();
   const history = useHistory();
   const navigateTo = () => {
-    history.push("/home/product");
+    history.push("/home/product/");
   };
 
   useEffect(() => {

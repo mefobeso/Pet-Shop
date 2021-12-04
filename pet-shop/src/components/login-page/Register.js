@@ -1,18 +1,19 @@
 import React, { useRef, useState, useEffect } from "react";
-import "./sass/css/login.css";
-import { useHistory } from "react-router-dom";
-import userData from "../../database/user.data";
-import ErrorModal from "../UI/ErrorModal";
 import { Fragment } from "react";
+import { useHistory } from "react-router-dom";
+import ErrorModal from "../UI/ErrorModal";
 import { isUndefined } from "lodash";
-export default function Register(props) {
+import emailjs from "emailjs-com";
+// database
+import userData from "../../database/user.data";
+// css
+import "./sass/css/login.css";
+export default function Register() {
   // Function
-  var hasNumber = /\d/;
-
   // useHistory
   const history = useHistory();
   const navigateTo = () => history.push("./register-code");
-
+  var num = Math.floor(Math.random() * 90000) + 10000;
   // State
 
   const [error, setError] = useState();
@@ -43,6 +44,7 @@ export default function Register(props) {
     );
   }, [usernameInputRef.current.value]);
 
+  // submit
   const submitHandler = (event) => {
     console.log(userAvailable);
     event.preventDefault();
@@ -70,6 +72,31 @@ export default function Register(props) {
       });
       return;
     }
+    if (
+      passwordInputRef.current.value !== confirmPasswordInputRef.current.value
+    ) {
+      setError({
+        title: "Confirm password not math !",
+        message: "Confirm password not math password !",
+      });
+    }
+    if (formIsValid && isUndefined(userAvailable)) {
+      navigateTo();
+      localStorage.setItem("confirm-code", num);
+      emailjs
+        .sendForm(
+          "service_1eeuc2n",
+          "template_os13rfb",
+          event.target,
+          "user_2pSkLWGAoy0gctE4e09sW"
+        )
+        .then(
+          (result) => {},
+          (error) => {
+            console.log(error.text);
+          }
+        );
+    }
 
     usernameInputRef.current.value = "";
     passwordInputRef.current.value = "";
@@ -87,7 +114,6 @@ export default function Register(props) {
   const okayButtonHandler = () => {
     setError(null);
     setUserAvailable();
-    console.log(userAvailable);
   };
   return (
     <Fragment>
@@ -108,6 +134,7 @@ export default function Register(props) {
             placeholder="Username"
             onChange={validateUsername}
             ref={usernameInputRef}
+            name="to_name"
           />
           <br />
           <input
@@ -129,6 +156,14 @@ export default function Register(props) {
             type="email"
             className="login-input confirmpassword"
             placeholder="Email"
+            name="to_email"
+          />
+          <input
+            type="text"
+            name="confirm_code"
+            style={{ display: "none" }}
+            value={num}
+            readOnly
           />
           <br />
           <button>Next</button>

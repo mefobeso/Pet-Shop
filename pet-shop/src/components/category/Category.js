@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import dataCate from "../../database/category.data";
-export default function Category(props) {
+export default function Category() {
   return (
     <>
       {dataCate.map((cate, index) => {
