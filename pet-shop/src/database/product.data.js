@@ -96,6 +96,14 @@ const dataProducts = [
     category: "food",
     img: ["https://images.unsplash.com/photo-1521673461164-de300ebcfb17?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjl8fGRvZ3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"],
   },
+  {
+    id: 13,
+    name: "France Bull",
+    price: +20,
+    quantity: 87,
+    category: "food",
+    img: "https://images.unsplash.com/photo-1521673461164-de300ebcfb17?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjl8fGRvZ3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+  },
 ];
 const productByCategory = (category) => {
   dataProducts.filter((p) => p.category === category);

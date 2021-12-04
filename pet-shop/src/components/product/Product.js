@@ -1,4 +1,3 @@
-import { isUndefined, toInteger } from "lodash";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { dataProducts } from "../../database/product.data";
@@ -32,15 +31,12 @@ export default function Product(props) {
       }
       if (props.filterPrice === 30) {
         setData(cateFilter.filter((p) => p.price >= 30 && p.price < 50));
-        console.log(data);
       }
       if (props.filterPrice === 10) {
         setData(cateFilter.filter((p) => p.price > 10 && p.price < 30));
-        console.log(data);
       }
       if (props.filterPrice === 1) {
         setData(cateFilter.filter((p) => p.price > 0 && p.price < 10));
-        console.log(data);
       }
     } else {
       const cateFilter = dataProducts.filter(

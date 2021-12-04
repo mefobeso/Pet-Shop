@@ -118,7 +118,7 @@ function Headerwhite(props) {
                   ref={searchInputRef}
                   className="white-header-search"
                 />
-                <button type="submit"><FontAwesomeIcon icon="search"/></button>
+                <FontAwesomeIcon icon="search" onClick={searchHandler} />
               </form>
             )}
           </li>
