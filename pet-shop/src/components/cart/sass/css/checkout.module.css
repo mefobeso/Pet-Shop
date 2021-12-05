@@ -1,0 +1,23 @@
+.heading{
+    color: #333;
+    text-align: center;
+}
+.heading h4 {
+    color: #0074ff;
+}
+.totalForm{
+   float:right;
+   margin-right: 20px;
+}
+.bank img{
+    padding: 10px;
+    margin:1px;
+    min-width: 87px;
+    max-width:56px;
+    cursor: pointer;
+}
+.bank{
+   display: flex;
+   flex-wrap: wrap;
+   
+}

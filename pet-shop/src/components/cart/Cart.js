@@ -7,6 +7,7 @@ import Headerwhite from "../layouts/Header_white";
 import CartInfo from "./CartInfo";
 import CartItem from "./CartItem";
 import CartSimilar from "./CartSimilar";
+import {Link} from "react-router-dom"
 
 import CartEmpty from "./CartEmpty";
 // css
@@ -98,7 +99,9 @@ export default function Cart() {
               <FontAwesomeIcon icon="chevron-left" />
               {` BACK TO SHOPPING`}
             </button>
+            <Link to="/home/cart/checkout">
             <button className="checkout">{`CHECK OUT`}</button>
+            </Link>
           </div>
         )}
       </div>

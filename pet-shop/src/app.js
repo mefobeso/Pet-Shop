@@ -25,6 +25,9 @@ import ProductList from "./components/product/ProductList";
 import Cart from "./components/cart/Cart";
 import Favorite from "./components/favorite/Favorite";
 import Search from "./components/search/Search";
+import CheckOutCart from "./components/cart/CheckOutCart";
+
+
 function App(props) {
   // Login State
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -106,6 +109,7 @@ function App(props) {
         </Route>
         <Route exact path="/home/cart" component={Cart} />
         <Route exact path="/home/favorite" component={Favorite} />
+        <Route exact path="/home/cart/checkout" component={CheckOutCart} />
       </Switch>
     </Router>
   );
