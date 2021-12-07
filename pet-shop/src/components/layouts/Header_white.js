@@ -13,6 +13,9 @@ function Headerwhite(props) {
   const navigateTo = (search) => {
     history.push(`/home/search/keyword=${search}`);
   };
+  const navigateHome = () => {
+    history.push("/home");
+  };
   // Ref
   const searchInputRef = useRef();
   // useEffect
@@ -31,7 +34,11 @@ function Headerwhite(props) {
     setSearching(!searching);
     navigateTo(searchInputRef.current.value);
   };
-
+  const logOutHandler = () => {
+    localStorage.setItem("isLoggedIn", "0");
+    setLogin(false);
+    navigateHome();
+  };
   return (
     <div className="white-header">
       <nav className="white-header-navbar">
@@ -122,14 +129,23 @@ function Headerwhite(props) {
               </form>
             )}
           </li>
-          <li>
-            <a
-              href={login ? "/profile" : "/login"}
-              className="white-header-login"
-            >
-              <FontAwesomeIcon icon="user-circle" />{" "}
-              {login ? "My Account" : "Login/Register"}
-            </a>
+          <li className="loggedin">
+            {login && (
+              <>
+                <a href={"/profile"} className="white-header-login ">
+                  <FontAwesomeIcon icon="user-circle" /> {"My Account"}
+                </a>
+                <div className="white-header-logout" onClick={logOutHandler}>
+                  <FontAwesomeIcon icon="sign-out-alt" />
+                  {" log out"}
+                </div>
+              </>
+            )}
+            {!login && (
+              <a href="/login" className="white-header-login">
+                <FontAwesomeIcon icon="user-circle" /> Login/Register
+              </a>
+            )}
           </li>
           <li>
             <a href="/home/favorite">

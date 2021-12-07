@@ -76,7 +76,7 @@ function App(props) {
         <Route
           exact
           path="/home"
-          component={() => <HomePage isLoggedIn={isLoggedIn} />}
+          component={() => <HomePage isLoggedIn={isLoggedIn} onLogout={logoutHandler}/>}
         />
 
         {/* Login */}
@@ -96,7 +96,7 @@ function App(props) {
         <Route
           exact
           path="/profile"
-          component={() => <Profile onLogout={logoutHandler} />}
+          component={() => <Profile  />}
         />
         {/* Product */}
         <Route exact path="/home/category" component={Categories} />

@@ -28,6 +28,18 @@ img {
     height: 50px;
     width: 1265px;
     margin: 10px auto;
+    &-logout{
+      background-color: white;
+      width: 12em; 
+      visibility: hidden;
+      padding:1em;
+      z-index: 12;
+      position: absolute;
+    }
+    &-logout:hover{
+      color: #18bc9c;
+      transition: 0.5s;
+    }
     &-search {
       width: 9em;
       border: 0.2px solid black;
@@ -140,7 +152,10 @@ img {
     }
   }
 }
-
+.loggedin:hover .white-header-logout{
+  visibility: visible;
+  transition: 1s;
+}
 .landing {
   min-height: 80vh;
   font-family: "Righteous";

@@ -14,7 +14,7 @@ import Policies from "./policies/Policies";
 function HomePage(props) {
   return (
     <div className="bg-homepage">
-      <Headerwhite isLogin={props.isLoggedIn} />
+      <Headerwhite isLogin={props.isLoggedIn} onLogout={props.onLogout} />
       <Slider />
       <Banner />
       <Catalog />

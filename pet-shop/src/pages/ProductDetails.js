@@ -17,7 +17,7 @@ export default function ProductDetail() {
   const [mainImg, setMainImg] = useState(0);
   let {id} = useParams();
   
-  const product =  dataProducts.find(product => product.id == id);
+  const product =  dataProducts.find(product => product.id === id);
   const [addedProduct, setAddedProduct] = useState([]);
   const [favoriteProduct, setFavoriteProduct] = useState([]);
 

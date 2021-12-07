@@ -14,10 +14,7 @@ export default function Profile(props) {
   const navigateTo = () => {
     history.goBack();
   };
-  const logOutHandler = () => {
-    props.onLogout();
-    navigateTo();
-  };
+  
   const [tab, setTab] = useState(0);
   const tabChange = (tab) => {
     setTab(tab);
@@ -43,7 +40,6 @@ export default function Profile(props) {
           <div className="profile-content">
             <ProfileTab tab={tab} tabHandler={tabChange} />
             <ProfileBody tab={tab} dataInfo={dataInfo} dataOrder={dataOrder} />
-            <button onClick={logOutHandler}>Log out</button>
           </div>
         </div>
       </div>

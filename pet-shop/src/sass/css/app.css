@@ -27,6 +27,18 @@ img {
   width: 1265px;
   margin: 10px auto;
 }
+.white-header-logout {
+  background-color: white;
+  width: 12em;
+  visibility: hidden;
+  padding: 1em;
+  z-index: 12;
+  position: absolute;
+}
+.white-header-logout:hover {
+  color: #18bc9c;
+  transition: 0.5s;
+}
 .white-header-search {
   width: 9em;
   border: 0.2px solid black;
@@ -135,6 +147,11 @@ img {
 }
 .white-footer-link:hover {
   color: black;
+}
+
+.loggedin:hover .white-header-logout {
+  visibility: visible;
+  transition: 1s;
 }
 
 .landing {
