@@ -4,17 +4,11 @@ import Footerwhite from "../layouts/Footer_white";
 import ProfileTab from "./ProfileTab";
 import ProfileInfo from "./ProfileInfo";
 import ProfileBody from "./ProfileBody";
-import { useHistory } from "react-router-dom";
 import "./sass/css/profile.css";
 import "../FontAwesome";
 import { dataInfo, dataOrder } from "./ProfileData";
 
-export default function Profile(props) {
-  const history = useHistory();
-  const navigateTo = () => {
-    history.goBack();
-  };
-  
+export default function Profile() {
   const [tab, setTab] = useState(0);
   const tabChange = (tab) => {
     setTab(tab);

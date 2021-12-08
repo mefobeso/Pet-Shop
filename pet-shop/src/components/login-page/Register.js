@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useReducer } from "react";
 import { Fragment } from "react";
 import { useHistory } from "react-router-dom";
 import ErrorModal from "../UI/ErrorModal";
@@ -8,6 +8,31 @@ import emailjs from "emailjs-com";
 import userData from "../../database/user.data";
 // css
 import "./sass/css/login.css";
+
+const usernameReducer = (state, action) => {
+  if (action.type === "USER_INPUT") {
+    return {
+      value: action.val,
+      isValid: action.val.trim().length > 7,
+    };
+  }
+  if (action.type === "INPUT_BLUR") {
+    return {
+      value: state.value,
+      isValid: state.value.trim().length > 7,
+    };
+  }
+  return { value: "", isValid: false };
+};
+const passwordReducer = (state, action) => {
+  if (action.type === "USER_INPUT") {
+    return { value: action.val, isValid: action.val.trim().length > 6 };
+  }
+  if (action.type === "INPUT_BLUR") {
+    return { value: state.value, isValid: state.value.trim().length > 6 };
+  }
+  return { value: "", isValid: false };
+};
 export default function Register() {
   // Function
   // useHistory
@@ -19,32 +44,44 @@ export default function Register() {
   const [error, setError] = useState();
   const [userAvailable, setUserAvailable] = useState("@");
   const [formIsValid, setFormIsValid] = useState(false);
-  const [usernameValid, setUsernameValid] = useState(true);
-  const [passwordValid, setPasswordValid] = useState(true);
 
+  // Reducer
+  const [usernameState, dispatchUsername] = useReducer(usernameReducer, {
+    value: "",
+    isValid: null,
+  });
+  const [passwordState, dispatchPassword] = useReducer(passwordReducer, {
+    value: "",
+    isValid: null,
+  });
   // Ref
   const usernameInputRef = useRef("");
   const passwordInputRef = useRef("");
   const confirmPasswordInputRef = useRef("");
-
-  const enteredName = usernameInputRef.current.value;
-  const enteredPassword = passwordInputRef.current.value;
   // useEffect
+  const { isValid: usernameValid } = usernameState;
+  const { isValid: passwordValid } = passwordState;
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      setFormIsValid(usernameValid && passwordValid);
+    }, 1000);
+    return () => {
+      clearTimeout(identifier);
+    };
+  }, [usernameValid, passwordValid]);
 
   useEffect(() => {
-    setFormIsValid(
-      usernameInputRef.current.value.trim().length > 7 &&
-        passwordInputRef.current.value.trim().length > 6
-    );
-  }, [usernameInputRef.current.value, passwordInputRef.current.value]);
+    const identifier = setTimeout(() => {
+      setUserAvailable(
+        userData.find((user) => user.username === usernameState.value)
+      );
+    }, 1000);
+    return () => {
+      clearTimeout(identifier);
+    };
+  }, [usernameState.value]);
 
-  useEffect(() => {
-    setUserAvailable(
-      userData.find((user) => user.username === usernameInputRef.current.value)
-    );
-  }, [usernameInputRef.current.value]);
-
-  // submit
+  // Submit
   const submitHandler = (event) => {
     console.log(userAvailable);
     event.preventDefault();
@@ -55,17 +92,7 @@ export default function Register() {
       });
       return;
     }
-    if (
-      enteredName.trim().length === 0 ||
-      enteredPassword.trim().length === 0
-    ) {
-      setError({
-        title: "Invalid input !",
-        message: "Please enter a valid name and password (non empty-value)",
-      });
-      return;
-    }
-    if (!usernameValid) {
+    if (!usernameState.isValid) {
       setError({
         title: "User invalid !",
         message: "Username must have at least 6 characters",
@@ -79,6 +106,7 @@ export default function Register() {
         title: "Confirm password not math !",
         message: "Confirm password not math password !",
       });
+      return;
     }
     if (formIsValid && isUndefined(userAvailable)) {
       navigateTo();
@@ -97,7 +125,6 @@ export default function Register() {
           }
         );
     }
-
     usernameInputRef.current.value = "";
     passwordInputRef.current.value = "";
     confirmPasswordInputRef.current.value = "";
@@ -106,15 +133,32 @@ export default function Register() {
   // Validation
 
   const validateUsername = () => {
-    setUsernameValid(usernameInputRef.current.value.trim().length > 7);
+    dispatchUsername({
+      type: "INPUT_BLUR",
+    });
   };
   const validatePassword = () => {
-    setPasswordValid(passwordInputRef.current.value.trim().length > 6);
+    dispatchPassword({
+      type: "INPUT_BLUR",
+    });
+  };
+  const usernameChangeHandler = () => {
+    dispatchUsername({
+      type: "USER_INPUT",
+      val: usernameInputRef.current.value,
+    });
+  };
+  const passwordChangeHandler = () => {
+    dispatchPassword({
+      type: "USER_INPUT",
+      val: passwordInputRef.current.value,
+    });
   };
   const okayButtonHandler = () => {
     setError(null);
     setUserAvailable();
   };
+
   return (
     <Fragment>
       {error && (
@@ -130,18 +174,28 @@ export default function Register() {
           <p className="login-title">REGISTER</p>
           <input
             type="text"
-            className={usernameValid ? "login-input" : "login-input invalid"}
+            className={
+              usernameState.isValid === false
+                ? "login-input invalid"
+                : "login-input"
+            }
             placeholder="Username"
-            onChange={validateUsername}
+            onChange={usernameChangeHandler}
+            onBlur={validateUsername}
             ref={usernameInputRef}
             name="to_name"
           />
           <br />
           <input
             type="password"
-            className={passwordValid ? "login-input" : "login-input invalid"}
+            className={
+              passwordState.isValid === false
+                ? "login-input invalid"
+                : "login-input"
+            }
             placeholder="Password"
-            onChange={validatePassword}
+            onChange={passwordChangeHandler}
+            onBlur={validatePassword}
             ref={passwordInputRef}
           />
           <br />
@@ -166,7 +220,7 @@ export default function Register() {
             readOnly
           />
           <br />
-          <button>Next</button>
+          <button disabled={!formIsValid}>Next</button>
           <p>______________________________</p>
           <button onClick={navigateTo} className="login-FB">
             Facebook

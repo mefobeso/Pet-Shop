@@ -18,15 +18,21 @@ export default function Login(props) {
   // Ref
   const usernameInputRef = useRef("");
   const passwordInputRef = useRef("");
-
+  const enteredUserName = usernameInputRef.current.value;
+  const enteredPassword = passwordInputRef.current.value;
   // useEffect
 
+ 
   useEffect(() => {
-    setFormIsValid(
-      usernameInputRef.current.value.trim().length > 7 &&
-        passwordInputRef.current.value.trim().length > 6
-    );
-  }, [usernameInputRef.current.value, passwordInputRef.current.value]);
+    const identifier = setTimeout(() => {
+      setFormIsValid(
+        enteredUserName.trim().length > 7 && enteredPassword.trim().length > 6
+      );
+    }, 500);
+    return () => {
+      clearTimeout(identifier);
+    };
+  }, [enteredUserName, enteredPassword]);
 
   useEffect(() => {
     userData.map((user) => {

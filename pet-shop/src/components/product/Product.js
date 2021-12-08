@@ -4,7 +4,7 @@ import { dataProducts } from "../../database/product.data";
 import "../FontAwesome";
 import CartButton from "../UI/CartButton";
 import FavoriteButton from "../UI/FavoriteButton";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Link } from "react-router-dom";
 
 
 export default function Product(props) {
