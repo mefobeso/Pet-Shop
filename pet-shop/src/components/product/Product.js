@@ -4,9 +4,8 @@ import { dataProducts } from "../../database/product.data";
 import "../FontAwesome";
 import CartButton from "../UI/CartButton";
 import FavoriteButton from "../UI/FavoriteButton";
-import { BrowserRouter as Link } from "react-router-dom";
-
-
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 export default function Product(props) {
   // State
   const [data, setData] = useState([]);
@@ -15,6 +14,8 @@ export default function Product(props) {
 
   // params
   const params = useParams();
+
+  const history = useHistory();
   // useEffect
 
   useEffect(() => {
@@ -45,25 +46,23 @@ export default function Product(props) {
       setData(cateFilter);
     }
   }, [params, props.filterPrice]);
-  
 
   return (
     <>
       {data.map((product, index) => {
         return (
           <div className={`product ${props.isGrid ? "" : "list"}`} key={index}>
-            <Link to={`/product/${product.id}`}>
-            <img src={product.img} alt="" />
-            </Link>
+            <a href={`/product/${product.id}`}>
+              <img src={product.img} alt="" />
+            </a>
             {props.isGrid && (
               <div className={`product-info`}>
                 <div className={`product-info-text `}>
-                <Link to={`/product/${product.id}`}>
-                  <h5>{product.name}</h5>
-                </Link>
+                  <Link to={`/product/${product.id}`}>
+                    <h5>{product.name}</h5>
+                  </Link>
                   <p style={{ fontWeight: "600" }}>${product.price}</p>
                 </div>
-
                 <div>
                   {/* <button onClick={favoriteItemHandler} className="favorite">
                     <FontAwesomeIcon icon="heart" className="icon" />

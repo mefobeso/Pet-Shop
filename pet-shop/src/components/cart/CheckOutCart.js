@@ -37,7 +37,11 @@ function CheckOutCart (){
             <PaymentMethod/>
             
             </Col>
-            <Col></Col>
+            <Col>
+            <Col><h3>Delivery method </h3>
+            
+            </Col>
+            </Col>
             <Col>
             <div>
                 <h3>Information</h3>

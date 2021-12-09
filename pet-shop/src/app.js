@@ -26,8 +26,8 @@ import Cart from "./components/cart/Cart";
 import Favorite from "./components/favorite/Favorite";
 import Search from "./components/search/Search";
 import CheckOutCart from "./components/cart/CheckOutCart";
-
-
+// Admin
+// import AdminLayout from "./components/admin/layouts/Admin";
 function App(props) {
   // Login State
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -56,7 +56,7 @@ function App(props) {
     localStorage.setItem("isLoggedIn", "0");
     setIsLoggedIn(false);
   };
-  
+
   //loader
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -76,7 +76,9 @@ function App(props) {
         <Route
           exact
           path="/home"
-          component={() => <HomePage isLoggedIn={isLoggedIn} onLogout={logoutHandler}/>}
+          component={() => (
+            <HomePage isLoggedIn={isLoggedIn} onLogout={logoutHandler} />
+          )}
         />
 
         {/* Login */}
@@ -93,11 +95,7 @@ function App(props) {
         <Route exact path="/register-code" component={RegisterCode} />
         <Route exact path="/register-done" component={RegisterDone} />
         {/* Profile */}
-        <Route
-          exact
-          path="/profile"
-          component={() => <Profile  />}
-        />
+        <Route exact path="/profile" component={() => <Profile />} />
         {/* Product */}
         <Route exact path="/home/category" component={Categories} />
         <Route exact path="/product/:id" component={ProductDetail} />
@@ -110,6 +108,8 @@ function App(props) {
         <Route exact path="/home/cart" component={Cart} />
         <Route exact path="/home/favorite" component={Favorite} />
         <Route exact path="/home/cart/checkout" component={CheckOutCart} />
+        {/* <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
+        <Redirect from="/" to="/admin/dashboard" /> */}
       </Switch>
     </Router>
   );
