@@ -1,64 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { dataProducts } from "../../database/product.data";
 import "../FontAwesome";
 import CartButton from "../UI/CartButton";
 import FavoriteButton from "../UI/FavoriteButton";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
 export default function Product(props) {
-  // State
+  // // State
   const [data, setData] = useState([]);
   const [addedProduct, setAddedProduct] = useState([]);
   const [favoriteProduct, setFavoriteProduct] = useState([]);
-
-  // params
-  const params = useParams();
-
-  const history = useHistory();
-  // useEffect
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(addedProduct));
     localStorage.setItem("favorite", JSON.stringify(favoriteProduct));
   }, [addedProduct, favoriteProduct]);
 
-  useEffect(() => {
-    if (params.category === "all product") {
-      const cateFilter = dataProducts;
-      setData(cateFilter);
-      if (props.filterPrice === 50) {
-        setData(cateFilter);
-      }
-      if (props.filterPrice === 30) {
-        setData(cateFilter.filter((p) => p.price >= 30 && p.price < 50));
-      }
-      if (props.filterPrice === 10) {
-        setData(cateFilter.filter((p) => p.price > 10 && p.price < 30));
-      }
-      if (props.filterPrice === 1) {
-        setData(cateFilter.filter((p) => p.price > 0 && p.price < 10));
-      }
-    } else {
-      const cateFilter = dataProducts.filter(
-        (p) => p.category === params.category
-      );
-      setData(cateFilter);
-    }
-  }, [params, props.filterPrice]);
-
   return (
     <>
-      {data.map((product, index) => {
+      {props.data.slice(0+(props.currentPage-1)*8, 8+(props.currentPage-1)*8).map((product, index) => {
         return (
           <div className={`product ${props.isGrid ? "" : "list"}`} key={index}>
-            <a href={`/product/${product.id}`}>
-              <img src={product.img} alt="" />
-            </a>
             {props.isGrid && (
               <div className={`product-info`}>
+                <Link to={`/product/${product.id}`}>
+                  <img src={product.img} alt="" />
+                </Link>
                 <div className={`product-info-text `}>
-                  <Link to={`/product/${product.id}`}>
+                  <Link to={`/product/${product.id}`} className="product-link">
                     <h5>{product.name}</h5>
                   </Link>
                   <p style={{ fontWeight: "600" }}>${product.price}</p>
@@ -84,7 +51,15 @@ export default function Product(props) {
 
             {!props.isGrid && (
               <div className="product-info list">
-                <h5 style={{ width: "8em" }}>{product.name}</h5>
+                <img src={product.img} alt="" />
+                <Link
+                  to={`/product/${product.id}`}
+                  style={{ width: "9em" }}
+                  className="product-link"
+                >
+                  <h5>{product.name}</h5>
+                </Link>
+                {/* <h5 >{product.name}</h5> */}
                 <p style={{ fontWeight: "600" }}>${product.price}</p>
                 <p style={{ width: "30em" }}>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed

@@ -99,7 +99,7 @@ function App(props) {
         {/* Product */}
         <Route exact path="/home/category" component={Categories} />
         <Route exact path="/product/:id" component={ProductDetail} />
-        <Route path="/home/product/:category" exact>
+        <Route path="/home/product/category=:category page=:page" exact>
           <ProductList />
         </Route>
         <Route path="/home/search/keyword=:search" exact>
@@ -108,8 +108,6 @@ function App(props) {
         <Route exact path="/home/cart" component={Cart} />
         <Route exact path="/home/favorite" component={Favorite} />
         <Route exact path="/home/cart/checkout" component={CheckOutCart} />
-        {/* <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-        <Redirect from="/" to="/admin/dashboard" /> */}
       </Switch>
     </Router>
   );

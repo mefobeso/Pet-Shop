@@ -1,9 +1,25 @@
+import { toInteger } from "lodash";
 import React from "react";
 
-export default function ProductPage() {
+export default function ProductPage(props) {
   return (
     <div>
-      <p>1 2 3</p>
+      {Array.from({ length: props.pageCount }).map((page, index) => {
+        const pageChangeHandler = () => {
+          props.pageChanger(index + 1);
+        };
+        return (
+          <button
+            key={index}
+            className={`${
+              toInteger(props.currentPage) === index + 1 ? "current" : ""
+            }`}
+            onClick={pageChangeHandler}
+          >
+            {index + 1}
+          </button>
+        );
+      })}
     </div>
   );
 }

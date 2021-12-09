@@ -42,15 +42,12 @@
   line-height: 20px;
   font-size: 20px;
 }
-.product-info {
-  padding-left: 0.5em;
-}
-.product .favorite:hover {
-  color: red;
-  transition: 1s;
+.product-info .product-link {
+  text-decoration: none;
+  color: black;
 }
 
-.product img {
+.product-info img {
   height: 18em;
   width: 100%;
 }
@@ -74,9 +71,8 @@
 .list.product-info {
   display: flex;
   justify-content: space-between;
-  width: 90%;
+  width: 100%;
   overflow-y: hidden;
-  padding: 0 0.5em;
 }
 .list.product-info button {
   height: min-content;
@@ -84,10 +80,14 @@
 
 .product.list img {
   height: 9em;
-  width: 10%;
+  width: 9em;
 }
 
-.icon.active {
+.product-button .icon {
+  cursor: pointer;
+}
+
+.product-button .icon.active {
   color: #18bc9c;
   transition: 0.5s;
 }
@@ -99,6 +99,9 @@
   background-color: #fff;
 }
 
+.filter {
+  cursor: pointer;
+}
 .filter-menu {
   box-shadow: 4px 4px 9px 0px;
   z-index: 11;

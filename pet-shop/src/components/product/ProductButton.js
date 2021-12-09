@@ -28,7 +28,7 @@ export default function ProductButton(props) {
   };
   return (
     <div className="product-button">
-      <div className={`filter ${props.isFilter && "active"}`}>
+      <div className={`filter ${props.isFilter && "active"} `}>
         <FontAwesomeIcon
           icon="sliders-h"
           className={`${props.isFilter && "active"}`}

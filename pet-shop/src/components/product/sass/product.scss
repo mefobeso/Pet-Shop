@@ -1,3 +1,4 @@
+// Product List
 .productlist {
   margin-top: 100px;
   text-align: center;
@@ -19,15 +20,19 @@
     text-align: start;
     display: grid;
   }
+
+  // grid view
   &-container.grid {
     grid-template-columns: 23% 23% 23% 23%;
     grid-template-rows: 400px 400px;
     grid-gap: 0px 30px;
   }
+  // List view
   &-container.list {
     grid-row-gap: 0.5em;
   }
 
+  // ProductButton.js
   &-button {
     max-width: 1265px;
     height: 15px;
@@ -41,15 +46,14 @@
     line-height: 20px;
     font-size: 20px;
   }
-  &-info {
-    padding-left: 0.5em;
-  }
-  .favorite:hover {
-    color: red;
-    transition: 1s;
+
+  // product-info
+  &-info .product-link {
+    text-decoration: none;
+    color: black;
   }
 }
-.product img {
+.product-info img {
   height: 18em;
   width: 100%;
 }
@@ -63,6 +67,8 @@
     font-size: 20px;
   }
 }
+
+// List view
 .list.product {
   display: flex;
 }
@@ -71,9 +77,8 @@
   &-info {
     display: flex;
     justify-content: space-between;
-    width: 90%;
+    width: 100%;
     overflow-y: hidden;
-    padding: 0 0.5em;
   }
   &-info button {
     height: min-content;
@@ -81,9 +86,15 @@
 }
 .product.list img {
   height: 9em;
-  width: 10%;
+  width: 9em;
 }
-.icon.active {
+
+// Product Button
+
+.product-button .icon {
+  cursor: pointer;
+}
+.product-button .icon.active {
   color: #18bc9c;
   transition: 0.5s;
 }
@@ -94,6 +105,7 @@
   background-color: #fff;
 }
 .filter {
+  cursor: pointer;
   &-menu {
     box-shadow: 4px 4px 9px 0px;
     z-index: 11;
