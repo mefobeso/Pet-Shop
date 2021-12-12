@@ -5,7 +5,6 @@ import FavoriteButton from "../UI/FavoriteButton";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 export default function Product(props) {
   // // State
-  const [data, setData] = useState([]);
   const [addedProduct, setAddedProduct] = useState([]);
   const [favoriteProduct, setFavoriteProduct] = useState([]);
 
@@ -31,9 +30,6 @@ export default function Product(props) {
                   <p style={{ fontWeight: "600" }}>${product.price}</p>
                 </div>
                 <div>
-                  {/* <button onClick={favoriteItemHandler} className="favorite">
-                    <FontAwesomeIcon icon="heart" className="icon" />
-                  </button> */}
                   <FavoriteButton
                     favoriteProduct={favoriteProduct}
                     product={product}

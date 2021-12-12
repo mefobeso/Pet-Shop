@@ -18,7 +18,7 @@ export default function ProductList() {
   const [isGrid, setIsGrid] = useState(true);
   const [isFilter, setIsFilter] = useState(false);
   const [filter, setFilter] = useState();
-
+  const [sort, setSort] = useState("");
   // Data
   // State
   const [data, setData] = useState([]);
@@ -30,7 +30,6 @@ export default function ProductList() {
 
   useEffect(() => {
     var cateFilter = dataProducts;
-
     if (params.category === "all product") {
       setData(cateFilter);
     } else {
@@ -49,7 +48,37 @@ export default function ProductList() {
     if (filter === 1) {
       setData(cateFilter.filter((p) => p.price > 0 && p.price < 10));
     }
-  }, [params.category, filter]);
+
+    if (sort === "az") {
+      cateFilter.sort(function (a, b) {
+        var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+        var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        // names must be equal
+        return 0;
+      });
+      setKey(Math.random());
+    }
+    if (sort === "low") {
+      cateFilter.sort(function (a, b) {
+        return a.price - b.price;
+      });
+      setKey(Math.random());
+    }
+    if (sort === "high") {
+      cateFilter.sort(function (a, b) {
+        return b.price - a.price;
+      });
+      setKey(Math.random());
+    }
+  }, [params.category, filter, sort]);
+
+  // Funtion
   const pageChanger = (page) => {
     history.replace(`/home/product/category=${params.category} page=${page}`);
   };
@@ -66,6 +95,10 @@ export default function ProductList() {
     setFilter(filter);
     setKey(Math.random());
   };
+  const onSortSelected = (sort) => {
+    setSort(sort);
+  };
+
   return (
     <>
       <Headerwhite />
@@ -78,6 +111,7 @@ export default function ProductList() {
           isGrid={isGrid}
           isFilter={isFilter}
           onIconClick={onIconClick}
+          onSortSelected={onSortSelected}
           onFilterSubmit={onFilterSubmit}
         ></ProductButton>
         <div

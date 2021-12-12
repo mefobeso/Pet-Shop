@@ -46,7 +46,14 @@
     line-height: 20px;
     font-size: 20px;
   }
-
+  &-button .menu {
+    box-shadow: 4px 4px 9px 0px;
+    z-index: 11;
+    padding: 1em;
+    display: flex;
+    position: absolute;
+    background-color: white;
+  }
   // product-info
   &-info .product-link {
     text-decoration: none;
@@ -62,6 +69,7 @@
     margin-top: 10px;
     display: flex;
     justify-content: space-between;
+    
   }
   &-info .icon {
     font-size: 20px;
@@ -105,17 +113,11 @@
   background-color: #fff;
 }
 .filter {
-  cursor: pointer;
   &-menu {
-    box-shadow: 4px 4px 9px 0px;
-    z-index: 11;
-    padding: 1em;
     width: 50%;
-    display: flex;
+    margin-top: 1.3em;
     justify-content: space-between;
-    position: absolute;
-    margin-top: 1.2em;
-    background-color: white;
+
   }
   &-inner {
     display: flex;
@@ -147,7 +149,20 @@
   box-shadow: 1px 1px 4px 0px;
   padding: 0px 0.2em;
   height: 2em;
-
   margin-top: 2em;
-  cursor: pointer;
+}
+.sort{
+  &-menu{
+    margin-top: 3em ;
+    right: 6em;
+    width: 8em;
+    flex-direction: column;
+  }
+  &-menu p{
+    cursor: pointer;
+  }
+  &-menu p:hover{
+    color: #18bc9c;
+  transition: 0.5s;
+  }
 }

@@ -1,15 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../FontAwesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { toInteger } from "lodash";
 export default function ProductButton(props) {
   const [filterPrice, setFilterPrice] = useState({});
+  const [isSorting, setIsSorting] = useState(false);
+  const [sortSelected, setSortSelected] = useState({
+    key: "default",
+    value: "SORT BY",
+  });
+  // View function
   const gridHandler = () => {
     props.viewGrid();
   };
   const listHandler = () => {
     props.viewList();
   };
+
+  // Filter Handler
   const filterHandler = () => {
     props.onIconClick();
   };
@@ -26,18 +34,43 @@ export default function ProductButton(props) {
     const checkedValue = toInteger(e.target.value);
     setFilterPrice(checkedValue);
   };
+
+  // Sort Handler
+  const onSortClick = () => {
+    setIsSorting(!isSorting);
+  };
+  const azHandler = () => {
+    setSortSelected({ key: "az", value: "A-Z" });
+    setIsSorting(!isSorting);
+  };
+  const lowToHight = () => {
+    setSortSelected({ key: "low", value: "Low to High" });
+    setIsSorting(!isSorting);
+  };
+  const highToLow = () => {
+    setSortSelected({ key: "high", value: "High to Low" });
+    setIsSorting(!isSorting);
+  };
+  useEffect(() => {
+    props.onSortSelected(sortSelected.key);
+  }, [sortSelected.key]);
+
   return (
     <div className="product-button">
-      <div className={`filter ${props.isFilter && "active"} `}>
+      <div className={`filter icon ${props.isFilter ? "active" : ""} `}>
         <FontAwesomeIcon
           icon="sliders-h"
-          className={`${props.isFilter && "active"}`}
+          className={`${props.isFilter ? "active" : ""}`}
           onClick={filterHandler}
         />
         <p>&nbsp;</p>
-        <p className={`${props.isFilter && "active"}`}>FILTER</p>
+        <p className={`${props.isFilter ? "active" : ""}`}>FILTER</p>
         {props.isFilter && (
-          <form className="filter-menu" onSubmit={onSubmit} onReset={onReset}>
+          <form
+            className="filter-menu menu"
+            onSubmit={onSubmit}
+            onReset={onReset}
+          >
             <div className="filter-inner">
               <h5>Filter</h5>
               <div>
@@ -129,24 +162,46 @@ export default function ProductButton(props) {
       </div>
       <div>
         <FontAwesomeIcon
-          className={`icon ${!props.isGrid && "active"}`}
+          className={`icon ${!props.isGrid ? "active" : ""}`}
           icon="bars"
           onClick={listHandler}
           style={{ cursor: "pointer" }}
         />
         <p>&nbsp;</p>
         <FontAwesomeIcon
-          className={`icon ${props.isGrid && "active"}`}
+          className={`icon ${props.isGrid ? "active" : ""}`}
           icon="border-all"
           onClick={gridHandler}
           style={{ cursor: "pointer" }}
         />
       </div>
-      <div>
-        <p>BEST SELLER</p>
+      <div className={`icon ${isSorting ? "active" : ""}`}>
+        <p>{sortSelected.value}</p>
         <p>&nbsp;</p>
-        <FontAwesomeIcon icon="chevron-down" />
+        <FontAwesomeIcon icon="chevron-down" onClick={onSortClick} />
       </div>
+      {isSorting && (
+        <form className="menu sort-menu">
+          <p
+            onClick={azHandler}
+            className={sortSelected.key === "az" ? "icon active" : ""}
+          >
+            A-Z
+          </p>
+          <p
+            onClick={lowToHight}
+            className={sortSelected.key === "low" ? "icon active" : ""}
+          >
+            Low to High
+          </p>
+          <p
+            onClick={highToLow}
+            className={sortSelected.key === "high" ? "icon active" : ""}
+          >
+            High to Low
+          </p>
+        </form>
+      )}
     </div>
   );
 }
