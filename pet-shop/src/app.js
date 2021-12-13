@@ -28,7 +28,7 @@ import Search from "./components/search/Search";
 import CheckOutCart from "./components/cart/CheckOutCart";
 // Admin
 // import AdminLayout from "./components/admin/layouts/Admin";
-function App(props) {
+function App() {
   // Login State
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -52,6 +52,9 @@ function App(props) {
       }
     });
   };
+  const onGGLogin =()=>{
+    localStorage.setItem("isLoggedIn", "1");
+  }
   const logoutHandler = () => {
     localStorage.setItem("isLoggedIn", "0");
     setIsLoggedIn(false);
@@ -85,7 +88,7 @@ function App(props) {
         <Route
           exact
           path="/login"
-          component={() => <Login onLogin={loginHandler} />}
+          component={() => <Login onLogin={loginHandler} onGGLogin={onGGLogin}/>}
         />
         <Route exact path="/register" component={Register} />
         <Route exact path="/reset" component={Reset} />

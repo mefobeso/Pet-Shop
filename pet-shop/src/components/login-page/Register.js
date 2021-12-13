@@ -221,15 +221,7 @@ export default function Register() {
           />
           <br />
           <button disabled={!formIsValid}>Next</button>
-          <p>______________________________</p>
-          <button onClick={navigateTo} className="login-FB">
-            Facebook
-          </button>
-
-          <button onClick={navigateTo} className="login-GG">
-            Google
-          </button>
-          <p>______________________________</p>
+         
 
           <a href="/login" className="login-link">
             ALREADY HAVE AN ACCOUNT ?

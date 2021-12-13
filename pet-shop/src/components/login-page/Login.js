@@ -2,11 +2,18 @@ import React, { useRef, useState, useEffect } from "react";
 import "./sass/css/login.css";
 import { useHistory } from "react-router-dom";
 import userData from "../../database/user.data";
+
+import GoogleLogin from "react-google-login";
 export default function Login(props) {
   // Variable
 
   const history = useHistory();
   const navigateTo = () => history.goBack();
+  const navigateHome = () => {
+    history.push("/home");
+  };
+  const clientId =
+    "881544965186-ps5l0kdtqg35ifsbhm8gii58pbr8mlbn.apps.googleusercontent.com";
 
   // State
   const [errorMessage, setErrorMessage] = useState("");
@@ -20,9 +27,8 @@ export default function Login(props) {
   const passwordInputRef = useRef("");
   const enteredUserName = usernameInputRef.current.value;
   const enteredPassword = passwordInputRef.current.value;
-  // useEffect
 
- 
+  // useEffect
   useEffect(() => {
     const identifier = setTimeout(() => {
       setFormIsValid(
@@ -60,14 +66,24 @@ export default function Login(props) {
     passwordInputRef.current.value = "";
   };
 
-  // Validation
+  // Google Login
+  const onSuccessGG = (res) => {
+    console.log("Login success", res);
+    navigateHome();
+    props.onGGLogin();
+  };
+  const onFailGG = (res) => {
+    console.log("Login fail", res);
+  };
 
+  // Validation
   const validateUsername = () => {
     setUsernameValid(usernameInputRef.current.value.trim().length > 7);
   };
   const validatePassword = () => {
     setPasswordValid(passwordInputRef.current.value.trim().length > 6);
   };
+
   return (
     <div className="bg">
       <div className="login-container">
@@ -95,11 +111,24 @@ export default function Login(props) {
             ref={passwordInputRef}
           />
           <br />
-
           <button type="submit" disabled={!formIsValid}>
             Log in
           </button>
           <br />
+          <p>______________________________</p>
+          <button onClick={navigateTo} className="login-FB">
+            Facebook
+          </button>
+          <GoogleLogin
+            onClick={navigateTo}
+            clientId={clientId}
+            className="login-GG"
+            buttonText="Login"
+            onSuccess={onSuccessGG}
+            onFailure={onFailGG}
+            cookiePolicy={"single_host_origin"}
+          />
+          <p>______________________________</p>
           <a href="/reset" className="login-link">
             CAN'T SIGN IN ?
           </a>
