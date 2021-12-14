@@ -2,7 +2,8 @@ import React, { useRef, useState, useEffect } from "react";
 import "./sass/css/login.css";
 import { useHistory } from "react-router-dom";
 import userData from "../../database/user.data";
-
+// Facebook and Google Login
+import FacebookLogin from "react-facebook-login";
 import GoogleLogin from "react-google-login";
 export default function Login(props) {
   // Variable
@@ -14,7 +15,7 @@ export default function Login(props) {
   };
   const clientId =
     "881544965186-ps5l0kdtqg35ifsbhm8gii58pbr8mlbn.apps.googleusercontent.com";
-
+  const appId = "1821016354755986";
   // State
   const [errorMessage, setErrorMessage] = useState("");
   const [userAvailable, setUserAvailable] = useState(true);
@@ -66,7 +67,7 @@ export default function Login(props) {
     passwordInputRef.current.value = "";
   };
 
-  // Google Login
+  // Facebook and Google Login
   const onSuccessGG = (res) => {
     console.log("Login success", res);
     navigateHome();
@@ -74,6 +75,11 @@ export default function Login(props) {
   };
   const onFailGG = (res) => {
     console.log("Login fail", res);
+  };
+  const responseFacebook = (res) => {
+    console.log("Login success", res);
+    navigateHome();
+    props.onGGLogin();
   };
 
   // Validation
@@ -116,9 +122,12 @@ export default function Login(props) {
           </button>
           <br />
           <p>______________________________</p>
-          <button onClick={navigateTo} className="login-FB">
-            Facebook
-          </button>
+          <FacebookLogin
+            appId={appId}
+            autoLoad={true}
+            fields="name,email,picture"
+            callback={responseFacebook}
+          />
           <GoogleLogin
             onClick={navigateTo}
             clientId={clientId}
