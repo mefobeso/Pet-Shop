@@ -127,12 +127,16 @@ export default function Login(props) {
             autoLoad={true}
             fields="name,email,picture"
             callback={responseFacebook}
+            cssClass="button"
+            textButton="Facebook"
           />
+
+          <br />
           <GoogleLogin
+          className="gg"
             onClick={navigateTo}
             clientId={clientId}
-            className="login-GG"
-            buttonText="Login"
+            buttonText="Google"
             onSuccess={onSuccessGG}
             onFailure={onFailGG}
             cookiePolicy={"single_host_origin"}
