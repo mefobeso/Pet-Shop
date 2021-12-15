@@ -29,6 +29,8 @@ const authRouter = require('./Routes/auth')
 app.use('/admin/auth',authRouter);
 const postRouter = require('./Routes/post')
 app.use('/admin/posts',postRouter);
+const productRouter = require('./Routes/product')
+app.use('/admin/products',productRouter);
 const PORT = 5000;
 
 app.listen(PORT,() => console.log(`Server started on port ${PORT}`));
