@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../components/FontAwesome/index";
 import {dataProducts} from "../database/product.data"
 
-import { Container, Row, Col, Button } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 import {useParams} from "react-router-dom";
 
 

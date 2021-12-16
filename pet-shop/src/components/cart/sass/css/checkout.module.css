@@ -21,3 +21,54 @@
    flex-wrap: wrap;
    
 }
+.detail{
+    text-align: center;
+    margin-top:16px;
+}
+.infor{
+    flex-wrap: wrap;
+    float: left;
+    text-align:start;
+}
+.infor div {
+    font-size: 24px;
+}
+.product {
+border: 1px solid #ccc;
+border-right: none;
+display: flex;
+}
+.product img{
+    width: 120px;
+    height:110px;
+}
+.product .inforPro{
+   width:100%;
+   display:block
+}
+.product .namePro {
+    margin-left: 16px;
+    font-size: 24px;
+    float: left;
+}
+.product .quantityPro{
+    
+    font-size:24px;
+    float:right;
+    margin-right: 8px;
+}
+.product .pricePro{
+    margin-left: 16px;
+    margin-top: 60px; 
+    display: flex;
+    font-size:24px;
+    bottom: 0;
+}
+.btnBack {
+    text-align: center;
+    margin-top:64px;
+    margin-bottom:64px;
+}
+.inforicon{
+    width:16px !important;
+}
