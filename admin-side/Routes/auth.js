@@ -76,7 +76,7 @@ router.get("/Account", verifyToken, async (req, res) => {
 })
 
 // cấp quyền hoạt động hoặc khóa tài khoản
-router.put('/:id', verifyToken, async (req, res) => {
+router.put('/Account/:id', verifyToken, async (req, res) => {
     const { status } = req.body
     try {
         let EditAccount = {
@@ -98,8 +98,8 @@ router.put('/:id', verifyToken, async (req, res) => {
     }
 })
 
-// xóa post
-router.delete('/:id', verifyToken, async (req, res) => {
+// xóa tài khoản
+router.delete('/Account/:id', verifyToken, async (req, res) => {
     try {
         const AccountDeleteConditions = { _id: req.params.id, user: req.userId }
         const deletedAccount = await User.findOneAndDelete(AccountDeleteConditions)
