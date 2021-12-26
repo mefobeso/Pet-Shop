@@ -75,6 +75,20 @@ router.get("/Account", verifyToken, async (req, res) => {
     }
 })
 
+//xem tài khoản
+router.get("/Account/:id", verifyToken, async (req, res) => {
+    try {
+        const account = await User.findById(req.params.id)
+        res.json({ success: true, account: account })
+        if(account == null){
+            return res.status(404).json({message:'Không thể tìm thấy tài khoản này'})
+        }
+    } catch (err) {
+        res.status(500).json({message: err.message})
+    }
+})
+
+
 // cấp quyền hoạt động hoặc khóa tài khoản
 router.put('/Account/:id', verifyToken, async (req, res) => {
     const { status } = req.body
