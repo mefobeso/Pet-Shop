@@ -6,7 +6,7 @@ import ProfileInfo from "./ProfileInfo";
 import ProfileBody from "./ProfileBody";
 import "./sass/css/profile.css";
 import "../FontAwesome";
-import { dataInfo, dataOrder } from "./ProfileData";
+import { dataInfo, dataOrder } from "../../database/profile.data";
 
 export default function Profile() {
   const [tab, setTab] = useState(0);

@@ -88,9 +88,19 @@ $t-color: rgba(0, 0, 0, 0.5);
         font-size: 14px;
         padding: 0 5px;
         border-color: #ff0000;
-        color:#fff;
-        background-color: rgb(255, 5, 5);
+        color:#ff0000;
       }
+      &-confirm:hover{
+        background-color: #ff0000;
+        transition:0.5s;
+        color: white;
+      }
+    }
+    &-order .red{
+      color:red;
+    }
+    &-order .green{
+      color:green;
     }
     &-order {
       border: 0.1px outset rgba(0, 0, 0, 0.336);
@@ -129,6 +139,27 @@ $t-color: rgba(0, 0, 0, 0.5);
         margin-top: 11px;
         line-height: 0px;
       }
+      &-details{
+        padding: 5em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      &-details .init{
+        display: flex;
+        width: 25em;
+        padding-bottom: 0.5em;
+        justify-content: space-between;
+      }
+      &-details .red{
+        color: red;
+      }
+      &-details img{
+        height: 4.5em;
+        width: 4.5em;
+        border:1px solid black;
+      }
     }
   }
 }
@@ -138,5 +169,5 @@ $t-color: rgba(0, 0, 0, 0.5);
 }
 .hidden{
   display: none;
-
+  transition: 1s;
 }

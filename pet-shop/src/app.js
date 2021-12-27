@@ -18,10 +18,11 @@ import RegisterCode from "./components/login-page/Register-code";
 import RegisterDone from "./components/login-page/Register-done";
 // Profile
 import Profile from "./components/profile/Profile";
-import ProductDetail from "./pages/ProductDetails";
+import OrderDetails from "./components/profile/OrderTab/OrderDetails";
 // Product
 import Categories from "./components/category/Categories";
 import ProductList from "./components/product/ProductList";
+import ProductDetail from "./pages/ProductDetails";
 import Cart from "./components/cart/Cart";
 import Favorite from "./components/favorite/Favorite";
 import Search from "./components/search/Search";
@@ -52,9 +53,9 @@ function App() {
       }
     });
   };
-  const onGGLogin =()=>{
+  const onGGLogin = () => {
     localStorage.setItem("isLoggedIn", "1");
-  }
+  };
   const logoutHandler = () => {
     localStorage.setItem("isLoggedIn", "0");
     setIsLoggedIn(false);
@@ -88,7 +89,9 @@ function App() {
         <Route
           exact
           path="/login"
-          component={() => <Login onLogin={loginHandler} onGGLogin={onGGLogin}/>}
+          component={() => (
+            <Login onLogin={loginHandler} onGGLogin={onGGLogin} />
+          )}
         />
         <Route exact path="/register" component={Register} />
         <Route exact path="/reset" component={Reset} />
@@ -99,6 +102,9 @@ function App() {
         <Route exact path="/register-done" component={RegisterDone} />
         {/* Profile */}
         <Route exact path="/profile" component={() => <Profile />} />
+        <Route path="/profile/order/id=:orderid" exact>
+          <OrderDetails></OrderDetails>
+        </Route>
         {/* Product */}
         <Route exact path="/home/category" component={Categories} />
         <Route exact path="/product/:id" component={ProductDetail} />

@@ -4,8 +4,9 @@ export default function CancleButton(props) {
   const history = useHistory();
   const index = props.index;
   const data = props.data;
+ 
   const navigateTo = () => {
-    history.push(`/cancle/id=${data[index].id}`);
+    history.push(`/profile/order/id=${data[index].id}`);
   };
 
   const [cancleStatus, setCancleStatus] = useState(false);
@@ -13,7 +14,7 @@ export default function CancleButton(props) {
     setCancleStatus(!cancleStatus);
   };
   return (
-    <div>
+    <div onClick={cancleBtnHandler}>
       {data[index].status === "Wait for confirm" && (
         <div className="cc-buttons" key={index}>
           <button
