@@ -27,6 +27,7 @@ import Cart from "./components/cart/Cart";
 import Favorite from "./components/favorite/Favorite";
 import Search from "./components/search/Search";
 import CheckOutCart from "./components/cart/CheckOutCart";
+import OrderedCart from "./components/cart/OrderedCart"
 // Admin
 // import AdminLayout from "./components/admin/layouts/Admin";
 function App() {
@@ -116,7 +117,8 @@ function App() {
         </Route>
         <Route exact path="/home/cart" component={Cart} />
         <Route exact path="/home/favorite" component={Favorite} />
-        <Route exact path="/home/cart/checkout" component={CheckOutCart} />
+        <Route exact path="/home/cart/confirm" component={CheckOutCart} />
+        <Route exact path="/home/cart/checkout" component={OrderedCart} />
       </Switch>
     </Router>
   );

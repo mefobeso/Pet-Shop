@@ -2,7 +2,7 @@ POST http://localhost:5000/admin/auth/register
 Content-Type: application/json
 
 {
-    "username" : "dotu",
+    "username" : "dotu123",
     "password" : "dothanhtu"
 }
 
@@ -63,3 +63,24 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE0N
 {
     "status": "Khóa"
 }
+
+################################
+GET http://localhost:5000/admin/products
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWI3NTAwYTgxNjYxNWE3OGVmMDA2ZDYiLCJpYXQiOjE2Mzk0MTIxNDZ9.0_93r6uqfufLiHrXTWrSDAbr8UrO_ExlNDFvqxWHZxU
+
+################################
+POST http://localhost:5000/admin/product
+Content-Type: application/json
+
+{
+    "nameProduct" : "Cho vang",
+    "cateName" : "Cho",
+    "price" : "3000000",
+    "description" : "cho nay la cho dac biet hang viet nam chat luong cao",
+    "img" : "https://cdn.tgdd.vn/Products/Images/42/220833/samsung-galaxy-s21-tim-600x600.jpg",
+    "rating" : "5",
+    "amount" : "5",
+    "status" : "Hoạt động"
+} 
+
+

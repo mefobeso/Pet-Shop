@@ -42,7 +42,10 @@ function PaymentMethod() {
 ]
     const methods = ['Momo','Online banking']
     const [method, setMethod] = useState(methods[0])
-    console.log(method)
+    const [choose, setChoose] = useState(banks[0]);
+    const [cardNum, setCardNum] = useState()
+    
+    
     return (
         <div>
             <Input type='select' onChange={(e) => setMethod(e.target.value)} >
@@ -51,9 +54,14 @@ function PaymentMethod() {
             <div>
                 { method === methods[1] && 
                 (<div className={styles.bank}>
-                    {banks.map(bank => <img src={bank.img
-                    } className={styles.bankItem}  alt={bank.name}/>)}
-                    <Input placeholder="Enter your card number"/>
+                    {banks.map(bank => <img
+                     src={bank.img} 
+                     className={styles.bankItem}  
+                     alt={bank.name}
+                     style = {choose.name === bank.name ? {outline:'1px solid blue',padding:'1px'}: {} }
+                     onClick = {() => setChoose(bank)}
+                     />)}
+                    <Input onChange={(e) => setCardNum(e.target.value)} placeholder="Enter your card number"/>
                     
                 </div>)} 
             </div>

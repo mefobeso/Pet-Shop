@@ -99,7 +99,7 @@ export default function Cart() {
               <FontAwesomeIcon icon="chevron-left" />
               {` BACK TO SHOPPING`}
             </button>
-            <Link to="/home/cart/checkout">
+            <Link to="/home/cart/confirm">
             <button className="checkout">{`CHECK OUT`}</button>
             </Link>
           </div>

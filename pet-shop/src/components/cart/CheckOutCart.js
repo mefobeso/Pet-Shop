@@ -1,5 +1,6 @@
-import { Container, Row, Col, Button, Input,Label} from "reactstrap"
-import {useMemo} from "react"
+import {Form,FormGroup, Container, Row, Col, Button, Input,Label} from "reactstrap"
+import {useMemo, useState} from "react"
+import {Link} from "react-router-dom"
 
 import Headerwhite from "../layouts/Header_white";
 import Footerwhite from "../layouts/Footer_white";
@@ -9,13 +10,8 @@ import  PaymentMethod from "./PaymentMethod"
 
 
 
-function CheckOutCart (){
-
-
-    
+function CheckOutCart (){   
     const cart =  JSON.parse(localStorage.getItem('cart'))
-
-
     const total = useMemo(()=>{
         return (cart.reduce((cost,curr) => {
             return cost + curr.price * curr.amount
@@ -23,7 +19,16 @@ function CheckOutCart (){
     },[cart])
     
     const shipFee = total > 200 ? 0: 2;
+    const cost = shipFee + total
+    const [receiver,setReceiver] =  useState("")
+    const [address,setAddress] = useState("")
+    const [phone,setPhone] = useState("")
     
+    const handleSubmit = (e) =>{
+        console.log(receiver,address,phone)
+        e.preventDefault()
+    }
+
     return (
         <div>
             <Headerwhite/>
@@ -35,25 +40,27 @@ function CheckOutCart (){
             <Row xs="2" sm="3" >
             <Col><h3>Payment method </h3>
             <PaymentMethod/>
-            
+            </Col>
+            <Col>    
             </Col>
             <Col>
-            <Col><h3>Delivery method </h3>
             
-            </Col>
-            </Col>
-            <Col>
-            <div>
-                <h3>Information</h3>
+                <Form onSubmit={handleSubmit}>
+                    <FormGroup>
+                    <h3>Information</h3>
                 <div>
-                    <Label> Bank account name</Label>
-                    <Input onChange={() => ('')} value="Nguyễn Văn A"/>
+                    <Label> Reciever</Label>
+                    <Input required onChange={(e) => setReceiver(e.target.value)} value ={receiver} placeholder="Enter name" />
                 </div>
                 <div>
-                    <Label> Account Balance</Label>
-                    <Input onChange={() => ('')} value="$4000.0"/>
+                    <Label> Address</Label>
+                    <Input required onChange={(e) => setAddress(e.target.value)} value={address} placeholder="Enter address" />
                 </div>
-            </div>
+                <div>
+                    <Label> Phone Number</Label>
+                    <Input required  type="tel" onChange={(e) => setPhone(e.target.value)} value={phone} placeholder="Enter phone number" />
+                </div>
+                    </FormGroup>
             <br/>
             <br/>
             <br/>
@@ -62,10 +69,15 @@ function CheckOutCart (){
                 <div><strong>Price:</strong>    ${total} </div>
                 <div><strong>Ship fee:</strong>    ${shipFee} </div>
                 <hr/>
-                <div><strong>Total:</strong>    ${total + shipFee} </div>
-                <Button >Confirm</Button>
+                <div><strong>Total:</strong>    ${cost} </div>
+                <Link to={{
+                    pathname:"/home/cart/checkout",
+                    state: {receiver,address,phone, cost}
+                    }} >
+                        <Button >Confirm</Button>
+                </Link>
             </div>
-            
+            </Form>
             </Col>
 
             </Row>

@@ -29,8 +29,17 @@ const authRouter = require('./Routes/auth')
 app.use('/admin/auth',authRouter);
 const postRouter = require('./Routes/post')
 app.use('/admin/posts',postRouter);
-const productRouter = require('./Routes/product')
-app.use('/admin/products',productRouter);
+const petRouter = require('./Routes/pet')
+app.use('/admin/pet',petRouter);
+const voucherRouter = require('./Routes/voucher')
+app.use('/admin/voucher',voucherRouter);
+const cateRouter = require('./Routes/cate')
+app.use('/admin/category',cateRouter);
+const billRouter = require('./Routes/bill')
+app.use('/admin/bill',billRouter);
+const cartRouter = require('./Routes/cart')
+app.use('/admin/cart',cartRouter);
+
 const PORT = 5000;
 
 app.listen(PORT,() => console.log(`Server started on port ${PORT}`));

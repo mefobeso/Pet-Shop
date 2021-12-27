@@ -12,6 +12,9 @@ const PostSchema = new Schema({
     text: {
         type: String,
     },
+    img:{
+        type: String,
+    },
     UploadDate: {
         type: Date, 
         default: Date.now()
