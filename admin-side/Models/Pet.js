@@ -18,7 +18,7 @@ const petSchema = new Schema({
         type: String,
     },
     img: {
-        type: String,
+        type: Array,
     },
     cloudinary_id: {
         type: String,

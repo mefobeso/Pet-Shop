@@ -3,7 +3,6 @@ const router = express.Router();
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 const verifyToken =require('../Middleware/Auth')
-
 const User = require('../Models/User')
 
 // Đăng ký tài khoản

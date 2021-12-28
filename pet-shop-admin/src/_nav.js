@@ -15,21 +15,17 @@ import {
   cilCart,
   cilCash,
   cilChart,
+  cilStorage,
+  cilTruck,
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
 const _nav = [
   {
     component: CNavItem,
-    name: 'Orders',
+    name: 'Dashboard',
     to: '/dashboard',
     icon: <CIcon icon={cilCart} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Vouchers',
-    to: '/theme/colors',
-    icon: <CIcon icon={cilCash} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
@@ -39,14 +35,26 @@ const _nav = [
   },
   {
     component: CNavItem,
+    name: 'Vouchers',
+    to: '/icons/coreui-icons',
+    icon: <CIcon icon={cilCash} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
     name: 'Stocks',
-    to: '/theme/typography',
+    to: '/notifications',
+    icon: <CIcon icon={cilTruck} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Icon Flags',
+    to: '/icons/flags',
     icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Analytics',
-    to: '/theme/typography',
+    to: '/base/tables',
     icon: <CIcon icon={cilChart} customClassName="nav-icon" />,
   },
 ]
