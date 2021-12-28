@@ -6,7 +6,7 @@ const upload = require("../Utils/multer");
 const pet = require("../Models/pet");
 
 // xem danh sách thú cưng
-router.get("/", verifyToken, async (req, res) => {
+router.get("/", async (req, res) => {
     try {
         const pets = await pet.find()
         res.json({ success: true, pets: pets })

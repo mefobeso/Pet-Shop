@@ -1,7 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-
+const route = require('./Routes/index');
+const bodyParser = require('body-parser');
 
 const connectDB = async () => {
     try{
@@ -19,26 +20,15 @@ const connectDB = async () => {
         process.exit(1);
     }
 }
-
 connectDB();
-
 
 const app = express();
 app.use(express.json());
-const authRouter = require('./Routes/auth')
-app.use('/admin/auth',authRouter);
-const postRouter = require('./Routes/post')
-app.use('/admin/posts',postRouter);
-const petRouter = require('./Routes/pet')
-app.use('/admin/pet',petRouter);
-const voucherRouter = require('./Routes/voucher')
-app.use('/admin/voucher',voucherRouter);
-const cateRouter = require('./Routes/cate')
-app.use('/admin/category',cateRouter);
-const billRouter = require('./Routes/bill')
-app.use('/admin/bill',billRouter);
-const cartRouter = require('./Routes/cart')
-app.use('/admin/cart',cartRouter);
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+route(app)
+
 
 const PORT = 5000;
 
