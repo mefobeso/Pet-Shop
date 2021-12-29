@@ -5,8 +5,11 @@ const ProductController = require("../Controllers/ProductsController")
 
 const Product = require("../Models/Product");
 
-// xem danh sách bài viết
+// xem danh sách sản phẩm
 router.get("/",  ProductController.GetProducts)
+
+// Xem Chi tiết sản phẩm
+router.get("/:id", ProductController.GetDetailProduct)
 
 // thêm sản phẩm
 router.Product('/', verifyToken, ProductController.AddProduct);

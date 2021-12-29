@@ -7,9 +7,10 @@ const ProductSchema = new Schema({
         required: true,
         unique: true,
     },
-    cateName:{
+    cate_id:{
         type: String,
         required: true,
+        ref: 'category'
     },
     price:{
         type: String,
@@ -23,7 +24,7 @@ const ProductSchema = new Schema({
         required: true,
     },
     rating:{
-        type: Double,
+        type: Number,
     },
     amount:{
         type: Number,
@@ -31,7 +32,7 @@ const ProductSchema = new Schema({
     },
     status:{
         type: String,
-        enum: ['ẩn','hoạt động'],
+        enum: ['Còn hàng','Hết hàng'],
     }
 })
 

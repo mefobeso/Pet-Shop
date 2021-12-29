@@ -3,7 +3,7 @@ const router = express.Router();
 const verifyToken = require("../Middleware/Auth");
 const cloudinary = require("../Utils/Cloudinary");
 const upload = require("../Utils/multer");
-const cate = require("../Models/Cate");
+
 const CatesController = require("../Controllers/CatesController")
 
 // xem danh sách loại thú cưng

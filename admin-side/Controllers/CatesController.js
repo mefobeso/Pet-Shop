@@ -1,4 +1,5 @@
 const cate = require("../Models/Cate");
+const express = require("express");
 module.exports.GetCates =  async (req, res) => {
     try {
         const cates = await cate.find()
@@ -8,7 +9,7 @@ module.exports.GetCates =  async (req, res) => {
         res.status(500).json({ success: false, message: 'lỗi server' })
     }
 }
-module.exports.AddCate = verifyToken, upload.single("image"), async (req, res) => {
+module.exports.AddCate = async (req, res) => {
     try {
         let newcate = new cate({
             cateName: req.body.cateName,

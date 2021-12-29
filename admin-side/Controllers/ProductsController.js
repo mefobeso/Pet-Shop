@@ -9,6 +9,17 @@ module.exports.GetProducts = async (req, res) => {
         res.status(500).json({ success: false, message: 'lỗi server' })
     }
 }
+module.exports.GetDetailProduct = async (req, res) =>{
+    try{
+        const {product_id} = req.params
+        const product = await Product.findById(product_id)
+        res.status(200).json(product)
+    }
+    catch (err){
+        console.log(err)
+        res.status(500).json({ success: false, message: 'lỗi server' })
+    }
+}
 module.exports.AddProduct = async (req, res) => {
     const { nameProduct, cateName, price, description, img, rating, amount, status } = req.body;
     if (!nameProduct)

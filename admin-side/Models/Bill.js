@@ -2,9 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const BillSchema = new Schema({
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: 'users',
+    user_id: {
+        type: String,
+        ref: 'user',
+        required: true
     },
     date:{
         type: Date,
@@ -12,20 +13,26 @@ const BillSchema = new Schema({
     },
     details: [
         {
-            pet: {
-                type: Schema.Types.ObjectId,
-                ref: 'pet',
+            product_id:{
+                type:String,
+                ref:"Product",
+                required:true
             },
-            category_name : String,
-			pet_name : String,
-			price : Number,
-            amount: Number,
+            amount:{
+                default:1,
+                type:Number
+            },
+            price:{
+                type:Number,
+                required:true
+            }
         }
     ],
     total: Number,
     phone: Number,
     address: String,
     name: String,
+    note?: String
 });
 
 module.exports = mongoose.model('bill', BillSchema);
