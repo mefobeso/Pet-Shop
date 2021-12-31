@@ -7,6 +7,7 @@ import userData from "./database/user.data";
 // Pages
 import HomePage from "./components/home/HomePage";
 import LandingPage from "./components/LandingPage";
+import News from "./components/news/News";
 // Login
 import Login from "./components/login-page/Login";
 import Register from "./components/login-page/Register";
@@ -27,7 +28,7 @@ import Cart from "./components/cart/Cart";
 import Favorite from "./components/favorite/Favorite";
 import Search from "./components/search/Search";
 import CheckOutCart from "./components/cart/CheckOutCart";
-import OrderedCart from "./components/cart/OrderedCart"
+import OrderedCart from "./components/cart/OrderedCart";
 // Admin
 // import AdminLayout from "./components/admin/layouts/Admin";
 function App() {
@@ -85,6 +86,7 @@ function App() {
             <HomePage isLoggedIn={isLoggedIn} onLogout={logoutHandler} />
           )}
         />
+        <Route exact path="/news" component={News} />
 
         {/* Login */}
         <Route

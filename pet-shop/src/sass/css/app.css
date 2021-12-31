@@ -1,3 +1,9 @@
+:focus {
+  outline: none;
+  border-bottom: 3px solid #18bc9c;
+  transition: 0.5s;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -127,7 +133,7 @@ img {
 .white-header-navbar ul li .white-header-menu p:hover {
   color: #18bc9c;
 }
-.white-header-navbar ul li:nth-child(4) {
+.white-header-navbar ul li:nth-child(5) {
   margin-left: 300px;
 }
 .white-footer {

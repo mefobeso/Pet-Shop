@@ -1,5 +1,9 @@
 // variables
-
+:focus{
+  outline: none;
+  border-bottom: 3px solid #18bc9c;
+  transition:0.5s;
+}
 $ln-bg: linear-gradient(to right, #179fd1, #05465e);
 * {
   box-sizing: border-box;
@@ -129,7 +133,7 @@ img {
     &-navbar ul li .white-header-menu p:hover {
       color: #18bc9c;
     }
-    &-navbar ul li:nth-child(4) {
+    &-navbar ul li:nth-child(5) {
       margin-left: 300px;
     }
   }
