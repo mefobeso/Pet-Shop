@@ -6,19 +6,19 @@ const upload = require("../Utils/multer");
 const VoucherController = require("../Controllers/VoucherController")
 
 // xem danh sách voucher
-router.get("/", verifyToken, VoucherController.GetVouchers )
+router.get("/",  VoucherController.GetVouchers )
 
 //xem voucher
-router.get("/:id", verifyToken,VoucherController.GetDetailVoucher )
+router.get("/:id", VoucherController.GetDetailVoucher )
 
 // thêm voucher
-router.post('/', verifyToken, upload.single("image"), VoucherController.AddVoucher);
+router.post('/', VoucherController.AddVoucher);
 
 //sửa voucher theo id
-router.put('/:id', verifyToken, upload.single("image"),VoucherController.UpdateVoucher )
+router.put('/:id', VoucherController.UpdateVoucher )
 
 // xóa voucher
-router.delete('/:id', verifyToken, VoucherController.DeleteVoucher )
+router.delete('/:id', VoucherController.DeleteVoucher )
 
 
 module.exports = router

@@ -19,13 +19,10 @@ const PostSchema = new Schema({
         type: Date, 
         default: Date.now()
     },
-    status: {
+    user_id: {
         type: String,
-        enum: ['Chó','Mèo','Hamster']
-    },
-    user: {
-        type: Schema.Types.ObjectId,
         ref: 'users',
+        default:"61ceeba7524d7641f2801706"
     }
 })
 

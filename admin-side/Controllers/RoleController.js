@@ -32,18 +32,10 @@ module.exports.AddRole = async (req,res) =>{
 }
 module.exports.UpdateRole = async (req,res) =>{
     try {
-        const {role_id} = req.params
-        const role = await Role.findById(role_id)
-        const data = {
-            name:req.body.name
-        }
-        updatedRole = await Role.findByIdAndUpdate(role_id, data,{new : true})
-        // người dùng không được phép cập nhật sản phẩm
-        if (!updatedRole) {
-            return res.status(401).json({ success: false, message: 'loại thú cưng không tồn tại hoặc người dùng không được ủy quyền' })
-        } else {
-            res.json({ success: true, message: 'sửa loại thú cưng thành công', role: updatedRole })
-        }
+        const role = await Role.findById(req.params.id)
+        lodash.extend(role,req.body)           
+           role && role.save();
+            res.status(200).json({ success: true, message: 'Thay đổi thành công'})
     } catch (err) {
         console.log(err)
         res.status(500).json({ success: false, message: err })

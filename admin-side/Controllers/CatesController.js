@@ -1,8 +1,8 @@
-const cate = require("../Models/Cate");
+const CateModel = require("../Models/Cate");
 const express = require("express");
 module.exports.GetCates =  async (req, res) => {
     try {
-        const cates = await cate.find()
+        const cates = await CateModel.find()
         res.json({ success: true, cates: cates })
     } catch (err) {
         console.log(err)
@@ -11,7 +11,7 @@ module.exports.GetCates =  async (req, res) => {
 }
 module.exports.AddCate = async (req, res) => {
     try {
-        let newcate = new cate({
+        let newcate = new CateModel({
             cateName: req.body.cateName,
         });
         await newcate.save()
@@ -23,11 +23,11 @@ module.exports.AddCate = async (req, res) => {
 }
 module.exports.UpdateCate = async (req, res) => {
     try {
-        let cate = await cate.findById(req.params.id);
+        let cate = await CateModel.findById(req.params.id);
         const data = {
             cateName: req.body.cateName || cate.cateName,
         }
-        updatedcate = await cate.findByIdAndUpdate(req.params.id, data,{new : true})
+        updatedcate = await CateModel.findByIdAndUpdate(req.params.id, data,{new : true})
         // người dùng không được phép cập nhật sản phẩm
         if (!updatedcate) {
             return res.status(401).json({ success: false, message: 'loại thú cưng không tồn tại hoặc người dùng không được ủy quyền' })
@@ -41,7 +41,7 @@ module.exports.UpdateCate = async (req, res) => {
 }
 module.exports.DeleteCate = async (req, res) => {
     try {
-        let deletedcate = await cate.findById(req.params.id);
+        let deletedcate = await CateModel.findById(req.params.id);
         await deletedcate.remove();
         if (!deletedcate) {
             return res.status(401).json({ success: false, message: 'loại thú cưng không tồn tại hoặc người dùng không được ủy quyền' })

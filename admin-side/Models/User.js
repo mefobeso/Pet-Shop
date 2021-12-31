@@ -25,11 +25,16 @@ const UserSchema = new Schema({
     },
     status: {
         type: String,
-        enum: ['Khóa','Hoạt động']
+        enum: ['Khóa','Hoạt động'],
+        default:'Hoạt động'
     },
     createdAt: {
         type: Date, 
         default: Date.now()
+    },
+    role_id:{
+        type: String,
+        default: '61cea5e5d6d3f5dae84b4406'
     }
 });
 

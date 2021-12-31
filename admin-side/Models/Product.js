@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ProductSchema = new Schema({
-    nameProduct:{
+    name:{
         type: String,
         required: true,
         unique: true,
@@ -33,6 +33,7 @@ const ProductSchema = new Schema({
     status:{
         type: String,
         enum: ['Còn hàng','Hết hàng'],
+        default:"Còn hàng"
     }
 })
 

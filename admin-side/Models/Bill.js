@@ -28,11 +28,13 @@ const BillSchema = new Schema({
             }
         }
     ],
-    total: Number,
     phone: Number,
     address: String,
     name: String,
-    note?: String
+    note: {
+        type:String,
+        required:false
+    }
 });
 
 module.exports = mongoose.model('bill', BillSchema);

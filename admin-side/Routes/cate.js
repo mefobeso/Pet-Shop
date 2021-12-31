@@ -13,7 +13,7 @@ router.get("/", CatesController.GetCates)
 router.post('/', CatesController.AddCate);
 
 //sửa sản phẩm theo id
-router.put('/:id', verifyToken, upload.single("image"), CatesController.UpdateCate)
+router.put('/:id',  CatesController.UpdateCate)
 
 // xóa cate
 router.delete('/:id', verifyToken, CatesController.DeleteCate)

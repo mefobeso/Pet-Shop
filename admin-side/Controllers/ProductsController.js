@@ -1,4 +1,5 @@
 const Product = require("../Models/Product");
+const lodash = require("lodash");
 
 module.exports.GetProducts = async (req, res) => {
     try {
@@ -11,8 +12,7 @@ module.exports.GetProducts = async (req, res) => {
 }
 module.exports.GetDetailProduct = async (req, res) =>{
     try{
-        const {product_id} = req.params
-        const product = await Product.findById(product_id)
+        const product = await Product.findById(req.params.id)
         res.status(200).json(product)
     }
     catch (err){
@@ -21,11 +21,9 @@ module.exports.GetDetailProduct = async (req, res) =>{
     }
 }
 module.exports.AddProduct = async (req, res) => {
-    const { nameProduct, cateName, price, description, img, rating, amount, status } = req.body;
-    if (!nameProduct)
+    const { name, cateName, price, description, img, rating, amount, status } = req.body;
+    if (!name)
         return res.status(400).json({ success: false, message: "Thiếu tên sản phẩm" });
-    if (!cateName)
-        return res.status(400).json({ success: false, message: "Thiếu tên thể loại sản phẩm" });
     if (!price)
         return res.status(400).json({ success: false, message: "Thiếu giá" });
     if (!img)
@@ -35,11 +33,8 @@ module.exports.AddProduct = async (req, res) => {
     if (!amount)
         return res.status(400).json({ success: false, message: "Thiếu số lượng" });
     try {
-        const newProduct = new Product({
-            nameProduct, cateName, price, description, img, rating, amount, status
-        });
-        await newProduct.save()
-        res.json({ success: true, message: 'thêm sản phẩm thành công', Product: newProduct });
+        await Product.create(req.body)
+        res.json({ success: true, message: 'Add Product Successfully' });
     } catch (err) {
         console.log(err)
         res.status(500).json({ success: false, message: 'lỗi server' })
@@ -47,40 +42,12 @@ module.exports.AddProduct = async (req, res) => {
 }
 
 module.exports.UpdateProduct =  async (req, res) => {
-    const { nameProduct, cateName, price, description, img, rating, amount, status } = req.body
-    if (!nameProduct)
-        return res.status(400).json({ success: false, message: "Thiếu tên sản phẩm" });
-    if (!cateName)
-        return res.status(400).json({ success: false, message: "Thiếu tên thể loại sản phẩm" });
-    if (!price)
-        return res.status(400).json({ success: false, message: "Thiếu giá" });
-    if (!img)
-        return res.status(400).json({ success: false, message: "Thiếu hình ảnh" });
-    if (!description)
-        return res.status(400).json({ success: false, message: "Thiếu description" });
-    if (!amount)
-        return res.status(400).json({ success: false, message: "Thiếu số lượng" });
+    
     try {
-        let updatedProduct = {
-            nameProduct,
-            cateName,
-            price,
-            description: description || '',
-            img,
-            rating,
-            amount,
-            status: status
-        }
-        const ProductUpdateCondition = {
-            _id: req.params.id, user: req.userId
-        }
-        updatedProduct = await Product.findOneAndUpdate(ProductUpdateCondition, updatedProduct, { new: true })
-        // người dùng không được phép cập nhật sản phẩm
-        if (!updatedProduct) {
-            return res.status(401).json({ success: false, message: 'sản phẩm không tồn tại hoặc người dùng không được ủy quyền' })
-        } else {
-            res.json({ success: true, message: 'sửa thông tin sản phẩm thành công', Product: updatedProduct })
-        }
+        const product = await Product.findById(req.params.id)
+        lodash.extend(product,req.body)           
+           product && product.save();
+            res.status(200).json({ success: true, message: 'Thay đổi thành công'})
     } catch (err) {
         console.log(err)
         res.status(500).json({ success: false, message: 'lỗi server' })
@@ -92,9 +59,9 @@ module.exports.DeleteProduct = async (req, res) => {
         const ProductDeleteConditions = { _id: req.params.id, user: req.userId }
         const deletedProduct = await Product.findOneAndDelete(ProductDeleteConditions)
         if (!deletedProduct) {
-            return res.status(401).json({ success: false, message: 'sản phẩm không tồn tại hoặc người dùng không được ủy quyền' })
+            return res.status(401).json({ success: false, message: 'Product is not available' })
         } else {
-            res.json({ success: true, message: 'xóa sản phẩm thành công', Product: deletedProduct })
+            res.json({ success: true, message: 'Delete Product Successfully'})
         }
     } catch (err) {
         console.log(err)

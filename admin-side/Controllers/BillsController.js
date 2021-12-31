@@ -1,9 +1,10 @@
-const bill = require("../Models/Bill");
+const Bill = require("../Models/Bill");
+const lodash = require("lodash")
 
 
 module.exports.GetBills = async (req, res) => {
     try {
-        const bills = await bill.find()
+        const bills = await Bill.find()
         res.json({ success: true, bills: bills })
     } catch (err) {
         console.log(err)
@@ -11,34 +12,34 @@ module.exports.GetBills = async (req, res) => {
     }
 }
 module.exports.AddBill = async (req, res) => {
-    console.log(req.body);
-    let bill = await  bill.push(req.body)
-    res.json({ success: true, bill: bill})
+    try{
+        
+        await Bill.create(req.body)
+        res.status(200).json({ success: true,message:"Create Successfully"})
+    }
+    catch(err){{
+        console.log(err)
+        res.status(500).json({ success: false, message: err })
+    }}
 }
 module.exports.UpdateBill = async (req, res) => {
     try {
-        let bill = await bill.findById(req.params.id);
-        const data = {
-            billName: req.body.billName || bill.billName,
-        }
-        updatedbill = await bill.findByIdAndUpdate(req.params.id, data, { new: true })
-        // người dùng không được phép cập nhật sản phẩm
-        if (!updatedbill) {
-            return res.status(401).json({ success: false, message: 'hóa đơn không tồn tại hoặc người dùng không được ủy quyền' })
-        } else {
-            res.json({ success: true, message: 'sửa loại hóa đơn thành công', bill: updatedbill })
-        }
+        let bill = await Bill.findById(req.params.id);
+       
+        lodash.extend(bill,req.body)           
+           bill && bill.save();
+            res.status(200).json({ success: true, message: 'Thay đổi thành công'})
     } catch (err) {
         console.log(err)
         res.status(500).json({ success: false, message: 'lỗi server' })
     }
 }
-module.exports.DeleBill = async (req, res) => {
+module.exports.DeleteBill = async (req, res) => {
     try {
-        let deletedbill = await bill.findById(req.params.id);
+        let deletedbill = await Bill.findById(req.params.id);
         await deletedbill.remove();
         if (!deletedbill) {
-            return res.status(401).json({ success: false, message: 'hóa đơn không tồn tại hoặc người dùng không được ủy quyền' })
+            return res.status(401).json({ success: false, message: 'Bill is not available ' })
         } else {
             res.json({ success: true, message: 'xóa hóa đơn thành công', bill: deletedbill })
         }

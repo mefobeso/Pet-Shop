@@ -2,20 +2,20 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const VoucherSchema = new Schema({
-    VoucherName: {
+    voucherName: {
         type: String,
         required: true
     },
     description: {
         type: String,
     },
-    Value: {
+    value: {
         type: String,
     },
     img:{
         type: String,
     },
-    OutDate:{
+    outDate:{
         type: String,
     },
 })

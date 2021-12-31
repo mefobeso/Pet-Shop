@@ -1,6 +1,7 @@
 const User = require('../Models/User')
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
+const lodash = require('lodash')
 
 module.exports.Login = async(req, res) => {
     const { username, password } = req.body
@@ -42,13 +43,13 @@ module.exports.Register = async (req, res) => {
 
 
         // chạy oke hết
-        const hashedPassword = await argon2.hash(password)
-        const newUser = new User({username, password: hashedPassword})
-        await newUser.save()
+        const hashedPassword = argon2.hash(password)
+        await  User.create(req.body)
+        
 
         // trả token
-        const accessToken = jwt.sign({userId: newUser._id}, process.env.ACCESS_TOKEN_SECRET)
-        res.json({success: true, message: 'Đăng ký thành công', accessToken})
+        
+        res.json({success: true, message: 'Đăng ký thành công'})
     }
     catch(err){
         console.log(err)
@@ -76,21 +77,12 @@ module.exports.GetDetailAccount = async (req, res) => {
     }
 }
 module.exports.UpdateAccount = async (req, res) => {
-    const { status } = req.body
+   
     try {
-        let EditAccount = {
-            status: status || 'Hoạt động'
-        }
-        const AccountEdit = {
-            _id: req.params.id, user: req.userId
-        }
-        updatedAccount = await User.findOneAndUpdate(AccountEdit, EditAccount, { new: true })
-        // người dùng không được phép cập nhật bài đăng
-        if (!updatedAccount) {
-            return res.status(401).json({ success: false, message: 'Tài khoản không tồn tại hoặc người dùng không được ủy quyền' })
-        } else {
-            res.json({ success: true, message: 'Thay đổi thành công', post: updatedAccount })
-        }
+        const user = await User.findById(req.params.id)
+        lodash.extend(user,req.body)           
+           user && user.save();
+            res.status(200).json({ success: true, message: 'Thay đổi thành công'})               
     } catch (err) {
         console.log(err)
         res.status(500).json({ success: false, message: 'lỗi server' })
@@ -101,9 +93,9 @@ module.exports.DeleteAccount = async (req, res) => {
         const AccountDeleteConditions = { _id: req.params.id, user: req.userId }
         const deletedAccount = await User.findOneAndDelete(AccountDeleteConditions)
         if (!deletedAccount) {
-            return res.status(401).json({ success: false, message: 'Bài đăng không tồn tại hoặc người dùng không được ủy quyền' })
+            return res.status(401).json({ success: false, message: 'Người dùng không tồn tại' })
         } else {
-            res.json({ success: true, message: 'Oke', post: deletedAccount })
+            res.json({ success: true, message: 'Delete Successfully' })
         }
     } catch (err) {
         console.log(err)
