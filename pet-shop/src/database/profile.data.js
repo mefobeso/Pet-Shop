@@ -50,7 +50,6 @@ const dataOrder = [
     totalPrice: 1800,
     payment_method: "Momo",
     delivery_method: "Ninja Van",
-
     account_id: 1,
     date: new Date(2021, 8, 12),
     rating: 0,

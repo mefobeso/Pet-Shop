@@ -114,6 +114,11 @@ function Headerwhite(props) {
             </div>
           </li>
           <li>
+            <a href="/news">
+              News
+            </a>
+          </li>
+          <li>
             {!searching && (
               <FontAwesomeIcon icon="search" onClick={searchHandler} />
             )}
