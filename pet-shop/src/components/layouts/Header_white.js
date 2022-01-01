@@ -114,7 +114,7 @@ function Headerwhite(props) {
             </div>
           </li>
           <li>
-            <a href="/news">
+            <a href="/news/page=1">
               News
             </a>
           </li>

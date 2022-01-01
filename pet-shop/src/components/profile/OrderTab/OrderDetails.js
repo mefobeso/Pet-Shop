@@ -27,7 +27,7 @@ export default function OrderDetails() {
         }
       >{`${data.status}`}</h6>
       <p>{day}</p>
-      {data.products.map((obj, index) => {
+      {data.slice(0,8).products.map((obj, index) => {
         return (
           <div className="init" style={{ display: "flex" }}>
             <img src={obj.img}></img>

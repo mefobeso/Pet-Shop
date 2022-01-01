@@ -86,7 +86,8 @@ function App() {
             <HomePage isLoggedIn={isLoggedIn} onLogout={logoutHandler} />
           )}
         />
-        <Route exact path="/news" component={News} />
+        <Route exact path="/news/page=:page" component={News} />
+        <Route exact path="/news/id=:newsid " component={News} />
 
         {/* Login */}
         <Route
