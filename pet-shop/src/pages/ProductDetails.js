@@ -1,23 +1,21 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./css/style.css";
 import Headerwhite from "../components/layouts/Header_white";
 import Footerwhite from "../components/layouts/Footer_white";
-import CartButton from "../components/UI/CartButton"
-import FavoriteButton from "../components/UI/FavoriteButton"
+import CartButton from "../components/UI/CartButton";
+import FavoriteButton from "../components/UI/FavoriteButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../components/FontAwesome/index";
-import {dataProducts} from "../database/product.data"
+import { dataProducts } from "../database/product.data";
 
 import { Container, Row, Col } from "reactstrap";
-import {useParams} from "react-router-dom";
-
-
+import { useParams } from "react-router-dom";
 
 export default function ProductDetail() {
   const [mainImg, setMainImg] = useState(0);
-  let {id} = useParams();
-  
-  const product =  dataProducts.find(product => product.id == id);
+  let { id } = useParams();
+
+  const product = dataProducts.find((product) => product._id == id);
   const [addedProduct, setAddedProduct] = useState([]);
   const [favoriteProduct, setFavoriteProduct] = useState([]);
 
@@ -25,7 +23,7 @@ export default function ProductDetail() {
     localStorage.setItem("cart", JSON.stringify(addedProduct));
     localStorage.setItem("favorite", JSON.stringify(favoriteProduct));
   }, [addedProduct, favoriteProduct]);
-  
+
   return (
     <div>
       <Headerwhite />
@@ -38,11 +36,7 @@ export default function ProductDetail() {
               </div>
               <div className="sub-img">
                 {product.img.map((src, index) => (
-                  <img
-                    src={src}
-                    onClick={() => setMainImg(index)}
-                    alt=""                   
-                  />
+                  <img src={src} onClick={() => setMainImg(index)} alt="" />
                 ))}
               </div>
             </Col>
@@ -60,14 +54,14 @@ export default function ProductDetail() {
               <div className="product-buy">
                 <input type="number" value="1" min="1" max={product.quantity} />
                 <FavoriteButton
-                    favoriteProduct={favoriteProduct}
-                    product={product}
-                    setFavoriteProduct={setFavoriteProduct}
-                  />
-                <CartButton 
-                addedProduct={addedProduct}
-                product={product}
-                setAddedProduct={setAddedProduct}
+                  favoriteProduct={favoriteProduct}
+                  product={product}
+                  setFavoriteProduct={setFavoriteProduct}
+                />
+                <CartButton
+                  addedProduct={addedProduct}
+                  product={product}
+                  setAddedProduct={setAddedProduct}
                 />
               </div>
             </Col>
