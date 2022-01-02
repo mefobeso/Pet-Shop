@@ -7,6 +7,7 @@ import ProductButton from "./ProductButton";
 import ProductPage from "./ProductPage";
 import "./sass/css/product.css";
 import { dataProducts } from "../../database/product.data";
+import axios from "axios";
 import { useHistory } from "react-router-dom";
 export default function ProductList() {
   // Variable
@@ -19,17 +20,20 @@ export default function ProductList() {
   const [isFilter, setIsFilter] = useState(false);
   const [filter, setFilter] = useState();
   const [sort, setSort] = useState("");
-  // Data
+
   // State
   const [data, setData] = useState([]);
+  const [data1, setData1] = useState([]);
   const [pageCount, setPageCount] = useState();
+  // Data
   // useEffect
   useEffect(() => {
     setPageCount(Math.round(data.length / 8));
   }, [data.length]);
 
-  useEffect(() => {
-    var cateFilter = dataProducts;
+  useEffect(async() => {
+    const dataProducts = await axios.get("http://localhost:5000/products");
+    var cateFilter = dataProducts.data.Products;
     if (params.category === "all product") {
       setData(cateFilter);
     } else {

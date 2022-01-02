@@ -5,13 +5,14 @@ export default function CartButton(props) {
   const addedProduct = props.addedProduct;
   const product = props.product;
   const setAddedProduct = props.setAddedProduct;
+  console.log(product);
   const addItemHandler = () => {
     setAddedProduct((prevProductList) => {
       console.log(props.addedProduct);
       if (addedProduct != null) {
-        const duplicate = addedProduct.find((p) => p.id === product.id);
+        const duplicate = addedProduct.find((p) => p._id === product._id);
         if (duplicate) {
-          const index = addedProduct.findIndex((p) => p.id === product.id);
+          const index = addedProduct.findIndex((p) => p._id === product._id);
           addedProduct[index].amount += 1;
           localStorage.setItem("cart", JSON.stringify(addedProduct));
           return addedProduct;

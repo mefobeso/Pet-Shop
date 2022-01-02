@@ -5,6 +5,7 @@ export default function FavoriteButton(props) {
   const favoriteProduct = props.favoriteProduct;
   const product = props.product;
   const setFavoriteProduct = props.setFavoriteProduct;
+  console.log(product);
   const favoriteItemHandler = () => {
     setFavoriteProduct((prevProductList) => {
       if (favoriteProduct != null) {
@@ -17,7 +18,7 @@ export default function FavoriteButton(props) {
       return [
         ...prevProductList,
         {
-          id: product.id,
+          id: product._id,
           name: product.name,
           price: product.price,
           quantity: product.quantity,
