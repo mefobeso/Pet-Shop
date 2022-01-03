@@ -5,7 +5,6 @@ import "react-dropdown-now/style.css";
 import Headerwhite from "../layouts/Header_white";
 import Footerwhite from "../layouts/Footer_white";
 import "./sass/css/news.css";
-import dataNews from "../../database/news.data";
 import NewsPage from "./NewsPage";
 import axios from "axios";
 
@@ -30,11 +29,11 @@ export default function News() {
     history.replace(`/home/news/page=${page}`);
   };
 
-  useEffect(async () => {
+  useEffect(() => {
     setLoading(true);
     let unmounted = false;
     let source = axios.CancelToken.source();
-    const data = await axios
+    axios
       .get("http://localhost:5000/posts", {
         cancelToken: source.token,
         timeout: timeout,
@@ -112,10 +111,10 @@ export default function News() {
     };
   }, [filter.value, timeout]);
 
-  useEffect(() => {
-    console.log(pageCount);
-    console.log(filter);
-  }, [filter, pageCount]);
+  // useEffect(() => {
+  //   console.log(pageCount);
+  //   console.log(filter);
+  // }, [filter, pageCount]);
   return (
     <div>
       <Headerwhite />
@@ -138,7 +137,7 @@ export default function News() {
                       <h4 style={{ lineHeight: "0.6em" }}>
                         <Link
                           style={{ textDecoration: "none", color: "black" }}
-                          to={`/news/id=${obj._id}`}
+                          to={`/news/details/id=${obj._id}`}
                           className="news-link"
                         >
                           {obj.title}

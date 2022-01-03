@@ -2,12 +2,12 @@
   display: grid;
   grid-template-columns: 80% 20%;
   padding-top: 2em;
-
+  &-details{
+    text-align: center;
+  }
   &-container {
     width: 1265px;
     margin: 3em auto 2em;
-  }
-  &-list {
   }
   &-thumb {
     width: 10em;

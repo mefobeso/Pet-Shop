@@ -3,6 +3,9 @@
   grid-template-columns: 80% 20%;
   padding-top: 2em;
 }
+.news-details {
+  text-align: center;
+}
 .news-container {
   width: 1265px;
   margin: 3em auto 2em;

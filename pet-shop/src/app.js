@@ -29,6 +29,7 @@ import Favorite from "./components/favorite/Favorite";
 import Search from "./components/search/Search";
 import CheckOutCart from "./components/cart/CheckOutCart";
 import OrderedCart from "./components/cart/OrderedCart";
+import NewsDetails from "./components/news/NewsDetails";
 // Admin
 // import AdminLayout from "./components/admin/layouts/Admin";
 function App() {
@@ -87,8 +88,9 @@ function App() {
           )}
         />
         <Route exact path="/news/page=:page" component={News} />
-        <Route exact path="/news/id=:newsid " component={News} />
-
+        <Route path="/news/details/id=:id" exact>
+          <NewsDetails />
+        </Route>
         {/* Login */}
         <Route
           exact
