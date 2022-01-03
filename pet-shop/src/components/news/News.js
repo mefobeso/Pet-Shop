@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import { Dropdown, Selection } from "react-dropdown-now";
 import "react-dropdown-now/style.css";
@@ -7,77 +7,115 @@ import Footerwhite from "../layouts/Footer_white";
 import "./sass/css/news.css";
 import dataNews from "../../database/news.data";
 import NewsPage from "./NewsPage";
+import axios from "axios";
 
 export default function News() {
   const history = useHistory();
   const params = useParams();
+  const timeout = 10000;
+
   const currentPage = params.page;
   const [pageCount, setPageCount] = useState();
   const [filter, setFilter] = useState("");
   const [data, setData] = useState([]);
   const [key, setKey] = useState();
 
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    setPageCount(Math.round(dataNews.length / 8));
-  }, [dataNews.length]);
+    setPageCount(Math.round(data.length / 8));
+  }, [data.length]);
   const pageChanger = (page) => {
     history.replace(`/home/news/page=${page}`);
   };
-  useEffect(() => {
-    var dataFilter = dataNews;
-    setData(dataFilter);
-    if (filter.value === "Lastest News") {
-      dataFilter.sort(function (a, b) {
-        var dateA = a.uploadDate.toLocaleString("en-US", {
-          month: "short",
-          year: "numeric",
-          day: "numeric",
-        }); // ignore upper and lowercase
-        var dateB = b.uploadDate.toLocaleString("en-US", {
-          month: "short",
-          year: "numeric",
-          day: "numeric",
-        });
-        if (dateA < dateB) {
-          return -1;
+
+  useEffect(async () => {
+    setLoading(true);
+    let unmounted = false;
+    let source = axios.CancelToken.source();
+    const data = await axios
+      .get("http://localhost:5000/posts", {
+        cancelToken: source.token,
+        timeout: timeout,
+      })
+      .then((a) => {
+        if (!unmounted) {
+          // @ts-ignore
+          var dataFilter = a.data.posts;
+          setData(dataFilter);
+          if (filter.value === "Lastest News") {
+            dataFilter.sort(function (a, b) {
+              var dateA = a.UploadDate.toLocaleString("en-US", {
+                month: "short",
+                year: "numeric",
+                day: "numeric",
+              }); // ignore upper and lowercase
+              var dateB = b.UploadDate.toLocaleString("en-US", {
+                month: "short",
+                year: "numeric",
+                day: "numeric",
+              });
+              if (dateA < dateB) {
+                return -1;
+              }
+              if (dateA > dateB) {
+                return 1;
+              }
+              // names must be equal
+              return 0;
+            });
+            setKey(Math.random());
+          }
+          if (filter.value === "Oldest News") {
+            dataFilter.sort(function (a, b) {
+              var dateA = a.UploadDate.toLocaleString("en-US", {
+                month: "short",
+                year: "numeric",
+                day: "numeric",
+              }); // ignore upper and lowercase
+              var dateB = b.UploadDate.toLocaleString("en-US", {
+                month: "short",
+                year: "numeric",
+                day: "numeric",
+              });
+              if (dateA < dateB) {
+                return 1;
+              }
+              if (dateA > dateB) {
+                return -1;
+              }
+              // names must be equal
+              return 0;
+            });
+            setKey(Math.random());
+          }
+          setLoading(false);
         }
-        if (dateA > dateB) {
-          return 1;
+      })
+      .catch(function (e) {
+        if (!unmounted) {
+          setError(true);
+          setErrorMessage(e.message);
+          setLoading(false);
+          if (axios.isCancel(e)) {
+            console.log(`request cancelled:${e.message}`);
+          } else {
+            console.log("another error happened:" + e.message);
+          }
         }
-        // names must be equal
-        return 0;
       });
-      setKey(Math.random());
-    }
-    if (filter.value === "Oldest News") {
-      dataFilter.sort(function (a, b) {
-        var dateA = a.uploadDate.toLocaleString("en-US", {
-          month: "short",
-          year: "numeric",
-          day: "numeric",
-        }); // ignore upper and lowercase
-        var dateB = b.uploadDate.toLocaleString("en-US", {
-          month: "short",
-          year: "numeric",
-          day: "numeric",
-        });
-        if (dateA < dateB) {
-          return 1;
-        }
-        if (dateA > dateB) {
-          return -1;
-        }
-        // names must be equal
-        return 0;
-      });
-      setKey(Math.random());
-    }
-    console.log(dataFilter);
-    return;
-  }, [filter.value]);
+
+    return () => {
+      unmounted = true;
+      source.cancel("Cancelling");
+    };
+  }, [filter.value, timeout]);
+
   useEffect(() => {
+    console.log(pageCount);
     console.log(filter);
-  }, [filter]);
+  }, [filter, pageCount]);
   return (
     <div>
       <Headerwhite />
@@ -85,10 +123,10 @@ export default function News() {
         <h2 style={{ textAlign: "center" }}>News</h2>
         <div className="news">
           <div className="news-list" key={key}>
-            {dataNews
+            {data
               .slice(0 + (currentPage - 1) * 8, 8 + (currentPage - 1) * 8)
               .map((obj, index) => {
-                const day = obj.uploadDate.toLocaleString("en-US", {
+                const day = obj.UploadDate.toLocaleString("en-US", {
                   month: "short",
                   year: "numeric",
                   day: "numeric",
@@ -100,7 +138,7 @@ export default function News() {
                       <h4 style={{ lineHeight: "0.6em" }}>
                         <Link
                           style={{ textDecoration: "none", color: "black" }}
-                          to={`/news/id=${obj.id}`}
+                          to={`/news/id=${obj._id}`}
                           className="news-link"
                         >
                           {obj.title}
