@@ -54,7 +54,7 @@ function Headerwhite(props) {
           </li>
           <li>
             <a href="/home/category" className="">
-              Item <FontAwesomeIcon icon="angle-down" />
+              Product <FontAwesomeIcon icon="angle-down" />
             </a>
             <div className="white-header-menu">
               <div className="white-header-menu-inner">
@@ -93,9 +93,7 @@ function Headerwhite(props) {
             </div>
           </li>
           <li>
-            <a href="">
-              Pet <FontAwesomeIcon icon="angle-down" />
-            </a>
+    
             <div className="white-header-menu">
               <div className="white-header-menu-inner-2">
                 <p>Dog</p>

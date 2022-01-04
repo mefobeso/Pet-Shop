@@ -6,7 +6,6 @@ import Product from "./Product";
 import ProductButton from "./ProductButton";
 import ProductPage from "./ProductPage";
 import "./sass/css/product.css";
-import { dataProducts } from "../../database/product.data";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 export default function ProductList() {

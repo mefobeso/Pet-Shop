@@ -22,6 +22,7 @@ export default function News() {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(true);
+  
   useEffect(() => {
     setPageCount(Math.round(data.length / 8));
   }, [data.length]);
