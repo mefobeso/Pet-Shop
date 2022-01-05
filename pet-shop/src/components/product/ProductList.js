@@ -30,17 +30,16 @@ export default function ProductList() {
     setPageCount(Math.round(data.length / 8));
   }, [data.length]);
 
-  useEffect(()=>{
-    axios.get("http://localhost:5000/products")
-    .then(res=>setDataProducts(res.data.Products))
-    .catch(err=>console.log(err))
-  },[])
   useEffect(() => {
-    
+    axios
+      .get("http://localhost:5000/products")
+      .then((res) => setDataProducts(res.data.Products))
+      .catch((err) => console.log(err));
+  }, []);
+  useEffect(() => {
     if (params.category === "all product") {
       setData(dataProducts);
     } else {
-       
       setData(dataProducts.filter((p) => p.cate_id === params.category));
     }
     if (filter === 50) {
@@ -87,7 +86,7 @@ export default function ProductList() {
 
   // Funtion
   const pageChanger = (page) => {
-    history.replace(`/home/product/category=${params.category} page=${page}`);
+    history.replace(`/home/product/page=${page}`);
   };
   const viewGrid = () => {
     setIsGrid(true);
