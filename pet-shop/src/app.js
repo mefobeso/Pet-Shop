@@ -1,9 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useState, useEffect } from "react";
-import FadeLoader from "react-spinners/FadeLoader";
-
 // user data
-import userData from "./database/user.data";
 // Pages
 import HomePage from "./components/home/HomePage";
 import LandingPage from "./components/LandingPage";
@@ -34,28 +31,29 @@ import NewsDetails from "./components/news/NewsDetails";
 // import AdminLayout from "./components/admin/layouts/Admin";
 function App() {
   // Login State
+  const [token, setToken] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    const loginInfor = localStorage.getItem("isLoggedIn");
-    if (loginInfor === "1") {
-      setIsLoggedIn(true);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const loginInfor = localStorage.getItem("isLoggedIn");
+  //   if (loginInfor === "1") {
+  //     setIsLoggedIn(true);
+  //   }
+  // }, []);
+  // const loginHandler = (username, password) => {
+  //   userData.map((user, index) => {
+  //     console.log(password);
+  //     if (
+  //       user.username === username.trim() &&
+  //       user.password === password.trim()
+  //     ) {
+  //       localStorage.setItem("isLoggedIn", "1");
+  //       setIsLoggedIn(true);
+  //       return;
+  //     }
+  //   });
+  // };
 
-  const loginHandler = (username, password) => {
-    userData.map((user, index) => {
-      console.log(password);
-      if (
-        user.username === username.trim() &&
-        user.password === password.trim()
-      ) {
-        localStorage.setItem("isLoggedIn", "1");
-        setIsLoggedIn(true);
-        return;
-      }
-    });
-  };
   const onGGLogin = () => {
     localStorage.setItem("isLoggedIn", "1");
   };
@@ -63,70 +61,68 @@ function App() {
     localStorage.setItem("isLoggedIn", "0");
     setIsLoggedIn(false);
   };
+  return (
+    <div className="">
+      <Router>
+        <Switch>
+          <Route exact path="/" component={LandingPage} />
+          <Route
+            exact
+            path="/home"
+            component={() => (
+              <HomePage isLoggedIn={isLoggedIn} onLogout={logoutHandler} />
+            )}
+          />
+          <Route exact path="/news/page=:page" component={News} />
+          <Route path="/news/details/id=:id" exact>
+            <NewsDetails />
+          </Route>
+          {/* Login */}
 
-  //loader
-  const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, []);
-  return loading ? (
-    <div className="loader">
-      <FadeLoader size={30} color={"#123abc"} loading={loading} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/reset" component={Reset} />
+          <Route exact path="/reset-code" component={ResetCode} />
+          <Route exact path="/reset-form" component={ResetForm} />
+          <Route exact path="/reset-done" component={ResetDone} />
+          <Route exact path="/register-code" component={RegisterCode} />
+          <Route exact path="/register-done" component={RegisterDone} />
+          {/* Profile */}
+          <Routes/>
+          <Route path="/profile/order/id=:orderid" exact>
+            <OrderDetails></OrderDetails>
+          </Route>
+          {/* Product */}
+          <Route exact path="/home/category" component={Categories} />
+          <Route exact path="/product/:id" component={ProductDetail} />
+          <Route path="/home/product/page=:page" exact>
+            <ProductList />
+          </Route>
+          <Route path="/home/search/keyword=:search" exact>
+            <Search />
+          </Route>
+          <Route exact path="/home/cart" component={Cart} />
+          <Route exact path="/home/favorite" component={Favorite} />
+          <Route exact path="/home/cart/confirm" component={CheckOutCart} />
+          <Route exact path="/home/cart/checkout" component={OrderedCart} />
+        </Switch>
+      </Router>
     </div>
-  ) : (
-    <Router>
-      <Switch>
-        <Route exact path="/" component={LandingPage} />
-        <Route
-          exact
-          path="/home"
-          component={() => (
-            <HomePage isLoggedIn={isLoggedIn} onLogout={logoutHandler} />
-          )}
-        />
-        <Route exact path="/news/page=:page" component={News} />
-        <Route path="/news/details/id=:id" exact>
-          <NewsDetails />
-        </Route>
-        {/* Login */}
-        <Route
-          exact
-          path="/login"
-          component={() => (
-            <Login onLogin={loginHandler} onGGLogin={onGGLogin} />
-          )}
-        />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/reset" component={Reset} />
-        <Route exact path="/reset-code" component={ResetCode} />
-        <Route exact path="/reset-form" component={ResetForm} />
-        <Route exact path="/reset-done" component={ResetDone} />
-        <Route exact path="/register-code" component={RegisterCode} />
-        <Route exact path="/register-done" component={RegisterDone} />
-        {/* Profile */}
-        <Route exact path="/profile" component={() => <Profile />} />
-        <Route path="/profile/order/id=:orderid" exact>
-          <OrderDetails></OrderDetails>
-        </Route>
-        {/* Product */}
-        <Route exact path="/home/category" component={Categories} />
-        <Route exact path="/product/:id" component={ProductDetail} />
-        <Route path="/home/product/page=:page" exact>
-          <ProductList />
-        </Route>
-        <Route path="/home/search/keyword=:search" exact>
-          <Search />
-        </Route>
-        <Route exact path="/home/cart" component={Cart} />
-        <Route exact path="/home/favorite" component={Favorite} />
-        <Route exact path="/home/cart/confirm" component={CheckOutCart} />
-        <Route exact path="/home/cart/checkout" component={OrderedCart} />
-      </Switch>
-    </Router>
-  );
+  )
+}
+
+const Routes =() =>{
+  return(
+    <Switch>
+      <Route path="/login" component={Login}/>
+      <ProtectedRoute path="/profile" component={Profile}/>
+    </Switch>
+  )
+}
+const ProtectedRoute =({component:Component,...rest})=>{
+  return(<Route
+  {...rest}
+  render={()=><Component/>}
+  />)
 }
 
 export default App;
