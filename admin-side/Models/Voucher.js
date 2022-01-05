@@ -16,7 +16,7 @@ const VoucherSchema = new Schema({
         type: String,
     },
     outDate:{
-        type: String,
+        type: Date,
     },
 })
 

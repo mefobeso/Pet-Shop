@@ -15,7 +15,6 @@ export default function Product(props) {
   return (
     <>
       {props.data
-        .slice(0 + (props.currentPage - 1) * 8, 8 + (props.currentPage - 1) * 8)
         .map((product, index) => {
           return (
             <div

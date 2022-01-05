@@ -36,12 +36,12 @@ export default function ProductList() {
     .catch(err=>console.log(err))
   },[])
   useEffect(() => {
-    
+    setData(dataProducts)
     if (params.category === "all product") {
       setData(dataProducts);
     } else {
        
-      setData(dataProducts.filter((p) => p.cate_id === params.category));
+      setData(dataProducts);
     }
     if (filter === 50) {
       setData(dataProducts);
