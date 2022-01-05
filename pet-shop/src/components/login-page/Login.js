@@ -21,18 +21,36 @@ export default function Login(props) {
 
   // State
   const [errorMessage, setErrorMessage] = useState("");
-
+  const [username, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   // Ref
   const usernameInputRef = useRef("");
   const passwordInputRef = useRef("");
   const enteredUserName = usernameInputRef.current.value;
   const enteredPassword = passwordInputRef.current.value;
 
-  const submitHandler = (event) => {
+  const onUserNameChange = (e) => {
+    setUserName(e.target.value);
+  };
+  const onPasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+  const submitHandler = async (event) => {
     event.preventDefault();
-
-    usernameInputRef.current.value = "";
-    passwordInputRef.current.value = "";
+    await axios
+      .post("http://localhost:5000/auth/login", {
+        username: username,
+        password: password,
+      })
+      .then((response) => {
+        //handle success
+        console.log(response);
+      })
+      .catch((error) => {
+        //handle error
+        console.log(error.response);
+      });
   };
 
   // Facebook and Google Login
@@ -55,7 +73,7 @@ export default function Login(props) {
       <div className="login-container">
         <div className="login-background"></div>
 
-        <form className="login" onSubmit={submitHandler}>
+        <form className="login">
           <button className="back" onClick={navigateTo}>
             {"X"}
           </button>
@@ -65,17 +83,23 @@ export default function Login(props) {
             type="text"
             className={"login-input"}
             placeholder="Username"
-            ref={usernameInputRef}
+            value={username}
+            onChange={onUserNameChange}
+            // ref={usernameInputRef}
           />
           <br />
           <input
             type="password"
             className={"login-input"}
             placeholder=" Password"
-            ref={passwordInputRef}
+            value={password}
+            onChange={onPasswordChange}
+            // ref={passwordInputRef}
           />
           <br />
-          <button type="submit">Log in</button>
+          <button type="button" onClick={submitHandler}>
+            Log in
+          </button>
           <p>______________________________</p>
           <FacebookLogin
             appId={appId}
