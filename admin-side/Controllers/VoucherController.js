@@ -27,7 +27,7 @@ module.exports.AddVoucher= async (req, res) => {
     try {
         
         await Voucher.create(req.body)
-        res.json({ success: true, message: 'thêm voucher thành công', voucher: newvoucher });
+        res.json({ success: true, message: 'thêm voucher thành công' });
     } catch (err) {
         console.log(err)
         res.status(500).json({ success: false, message: 'lỗi server' })
