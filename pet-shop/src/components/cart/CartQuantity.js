@@ -45,7 +45,7 @@ export default function CartQuantity(props) {
         type="number"
         step="1"
         max={props.maxQuantity}
-        min="0"
+        min="1"
         value={selectedQuantity}
         onChange={quantityChangeHandler}
         name="quantity"

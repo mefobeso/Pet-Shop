@@ -11,7 +11,6 @@ import { useHistory } from "react-router-dom";
 export default function ProductList() {
   // Variable
   const params = useParams();
-  const title = params.category.toUpperCase();
   const history = useHistory();
   // State
   const [key, setKey] = useState();
@@ -22,6 +21,7 @@ export default function ProductList() {
 
   // State
   const [data, setData] = useState([]);
+  const [dataProducts, setDataProducts] = useState([]);
   const [data1, setData1] = useState([]);
   const [pageCount, setPageCount] = useState();
   // Data
@@ -30,30 +30,34 @@ export default function ProductList() {
     setPageCount(Math.round(data.length / 8));
   }, [data.length]);
 
-  useEffect(async() => {
-    const dataProducts = await axios.get("http://localhost:5000/products");
-    var cateFilter = dataProducts.data.Products;
+  useEffect(()=>{
+    axios.get("http://localhost:5000/products")
+    .then(res=>setDataProducts(res.data.Products))
+    .catch(err=>console.log(err))
+  },[])
+  useEffect(() => {
+    
     if (params.category === "all product") {
-      setData(cateFilter);
+      setData(dataProducts);
     } else {
-      cateFilter = dataProducts.filter((p) => p.category === params.category);
-      setData(cateFilter);
+       
+      setData(dataProducts.filter((p) => p.cate_id === params.category));
     }
     if (filter === 50) {
-      setData(cateFilter);
+      setData(dataProducts);
     }
     if (filter === 30) {
-      setData(cateFilter.filter((p) => p.price >= 30 && p.price < 50));
+      setData(dataProducts.filter((p) => p.price >= 30 && p.price < 50));
     }
     if (filter === 10) {
-      setData(cateFilter.filter((p) => p.price > 10 && p.price < 30));
+      setData(dataProducts.filter((p) => p.price > 10 && p.price < 30));
     }
     if (filter === 1) {
-      setData(cateFilter.filter((p) => p.price > 0 && p.price < 10));
+      setData(dataProducts.filter((p) => p.price > 0 && p.price < 10));
     }
 
     if (sort === "az") {
-      cateFilter.sort(function (a, b) {
+      dataProducts.sort(function (a, b) {
         var nameA = a.name.toUpperCase(); // ignore upper and lowercase
         var nameB = b.name.toUpperCase(); // ignore upper and lowercase
         if (nameA < nameB) {
@@ -68,13 +72,13 @@ export default function ProductList() {
       setKey(Math.random());
     }
     if (sort === "low") {
-      cateFilter.sort(function (a, b) {
+      dataProducts.sort(function (a, b) {
         return a.price - b.price;
       });
       setKey(Math.random());
     }
     if (sort === "high") {
-      cateFilter.sort(function (a, b) {
+      dataProducts.sort(function (a, b) {
         return b.price - a.price;
       });
       setKey(Math.random());
@@ -106,7 +110,7 @@ export default function ProductList() {
     <>
       <Headerwhite />
       <div className="productlist">
-        <h2>{title}</h2>
+        <h2>Shop</h2>
         <h6>What are you looking for ?</h6>
         <ProductButton
           viewGrid={viewGrid}

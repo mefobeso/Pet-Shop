@@ -7,12 +7,12 @@ export default function Category() {
         const Background = cate.thumbnail;
         return (
           <a
-            href={`/home/product/${cate.name.toLowerCase()}`}
+            href={`/home/product/grid`}
             className="category"
             key={index}
             style={{ backgroundImage: `url(${Background})` }}
           >
-            {" "}
+           
             <a href={`/home/product/category=${cate.name.toLowerCase()} page=1`}>
               {cate.name}
             </a>
