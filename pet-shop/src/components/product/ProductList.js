@@ -11,18 +11,17 @@ import { useHistory } from "react-router-dom";
 export default function ProductList() {
   // Variable
   const params = useParams();
-  const title = params.category.toUpperCase();
   const history = useHistory();
   // State
   const [key, setKey] = useState();
   const [isGrid, setIsGrid] = useState(true);
   const [isFilter, setIsFilter] = useState(false);
   const [filter, setFilter] = useState();
+  const [cate, setCate] = useState();
   const [sort, setSort] = useState("");
 
   // State
   const [data, setData] = useState([]);
-  const [data1, setData1] = useState([]);
   const [pageCount, setPageCount] = useState();
   // Data
   // useEffect
@@ -30,14 +29,13 @@ export default function ProductList() {
     setPageCount(Math.round(data.length / 8));
   }, [data.length]);
 
-  useEffect(async() => {
+  useEffect(async () => {
     const dataProducts = await axios.get("http://localhost:5000/products");
     var cateFilter = dataProducts.data.Products;
-    if (params.category === "all product") {
-      setData(cateFilter);
-    } else {
-      cateFilter = dataProducts.filter((p) => p.category === params.category);
-      setData(cateFilter);
+    setData(cateFilter);
+    if (cate) {
+      setData(cateFilter.filter((p) => p.cate_id === cate));
+      setKey(Math.random());
     }
     if (filter === 50) {
       setData(cateFilter);
@@ -79,11 +77,11 @@ export default function ProductList() {
       });
       setKey(Math.random());
     }
-  }, [params.category, filter, sort]);
+  }, [filter, sort, cate]);
 
   // Funtion
   const pageChanger = (page) => {
-    history.replace(`/home/product/category=${params.category} page=${page}`);
+    history.replace(`/home/product/page=${page}`);
   };
   const viewGrid = () => {
     setIsGrid(true);
@@ -94,8 +92,9 @@ export default function ProductList() {
   const onIconClick = () => {
     setIsFilter(!isFilter);
   };
-  const onFilterSubmit = (filter) => {
+  const onFilterSubmit = (filter, cate) => {
     setFilter(filter);
+    setCate(cate);
     setKey(Math.random());
   };
   const onSortSelected = (sort) => {
@@ -106,7 +105,7 @@ export default function ProductList() {
     <>
       <Headerwhite />
       <div className="productlist">
-        <h2>{title}</h2>
+        <h2>Products</h2>
         <h6>What are you looking for ?</h6>
         <ProductButton
           viewGrid={viewGrid}

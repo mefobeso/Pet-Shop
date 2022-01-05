@@ -25,7 +25,7 @@ export default function Product(props) {
               {props.isGrid && (
                 <div className={`product-info`}>
                   <Link to={`/product/${product._id}`}>
-                    <img src={product.img} alt="" />
+                    <img src={product.img[0]} alt="" />
                   </Link>
                   <div className={`product-info-text `}>
                     <Link

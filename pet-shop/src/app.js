@@ -114,7 +114,7 @@ function App() {
         {/* Product */}
         <Route exact path="/home/category" component={Categories} />
         <Route exact path="/product/:id" component={ProductDetail} />
-        <Route path="/home/product/category=:category page=:page" exact>
+        <Route path="/home/product/page=:page" exact>
           <ProductList />
         </Route>
         <Route path="/home/search/keyword=:search" exact>
