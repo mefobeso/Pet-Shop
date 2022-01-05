@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { dataProducts } from "../../database/product.data";
+import { products } from "../../database/product.data";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 // Components
@@ -22,7 +22,7 @@ export default function Search() {
 
   // useEffect
   useEffect(() => {
-    const searched = dataProducts.filter((p) =>
+    const searched = products.filter((p) =>
       p.name.toLowerCase().includes(params.search)
     );
     setSearchResult(searched);

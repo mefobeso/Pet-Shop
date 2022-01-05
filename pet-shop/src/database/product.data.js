@@ -1,3 +1,5 @@
+
+import axios from "axios"
 const dataProducts = [
   {
     id: 1,
@@ -105,8 +107,11 @@ const dataProducts = [
     img: "https://images.unsplash.com/photo-1521673461164-de300ebcfb17?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjl8fGRvZ3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
   },
 ];
+const products = []
+axios.get("http://localhost:5000/products")
+.then(res => res.data.Products.map(item=>products.push(item)))
 
 const productByCategory = (category) => {
-  dataProducts.filter((p) => p.category === category);
+  products.filter((p) => p.cate_id === category);
 };
-export { dataProducts, productByCategory };
+export { dataProducts ,products, productByCategory };

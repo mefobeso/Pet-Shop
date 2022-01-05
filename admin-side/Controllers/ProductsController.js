@@ -5,7 +5,6 @@ module.exports.GetProducts = async (req, res) => {
   try {
     const Products = await Product.find();
     res.json({ success: true, Products: Products });
-    res.header("Access-Control-Allow-Origin", "*");
   } catch (err) {
     console.log(err);
     res.status(500).json({ success: false, message: "lỗi server" });
@@ -21,7 +20,7 @@ module.exports.GetDetailProduct = async (req, res) => {
   }
 };
 module.exports.AddProduct = async (req, res) => {
-  const { name, cateName, price, description, img, rating, amount, status } =
+  const { name, cateName, price, description, img, rating,  status } =
     req.body;
   if (!name)
     return res
@@ -35,8 +34,6 @@ module.exports.AddProduct = async (req, res) => {
     return res
       .status(400)
       .json({ success: false, message: "Thiếu description" });
-  if (!amount)
-    return res.status(400).json({ success: false, message: "Thiếu số lượng" });
   try {
     await Product.create(req.body);
     res.json({ success: true, message: "Add Product Successfully" });
