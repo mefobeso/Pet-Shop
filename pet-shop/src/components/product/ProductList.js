@@ -18,7 +18,7 @@ export default function ProductList() {
   const [isFilter, setIsFilter] = useState(false);
   const [filter, setFilter] = useState();
   const [sort, setSort] = useState("");
-
+  const [cate, setCate] = useState();
   // State
   const [data, setData] = useState([]);
   const [dataProducts, setDataProducts] = useState([]);
@@ -30,33 +30,29 @@ export default function ProductList() {
     setPageCount(Math.round(data.length / 8));
   }, [data.length]);
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/products")
-      .then((res) => setDataProducts(res.data.Products))
-      .catch((err) => console.log(err));
-  }, []);
-  useEffect(() => {
-    if (params.category === "all product") {
-      setData(dataProducts);
-    } else {
-      setData(dataProducts.filter((p) => p.cate_id === params.category));
+  useEffect(async () => {
+    const dataProducts = await axios.get("http://localhost:5000/products");
+    var cateFilter = dataProducts.data.Products;
+    setData(cateFilter);
+    if (cate) {
+      setData(cateFilter.filter((p) => p.cate_id === cate));
+      setKey(Math.random());
     }
     if (filter === 50) {
-      setData(dataProducts);
+      setData(cateFilter);
     }
     if (filter === 30) {
-      setData(dataProducts.filter((p) => p.price >= 30 && p.price < 50));
+      setData(cateFilter.filter((p) => p.price >= 30 && p.price < 50));
     }
     if (filter === 10) {
-      setData(dataProducts.filter((p) => p.price > 10 && p.price < 30));
+      setData(cateFilter.filter((p) => p.price > 10 && p.price < 30));
     }
     if (filter === 1) {
-      setData(dataProducts.filter((p) => p.price > 0 && p.price < 10));
+      setData(cateFilter.filter((p) => p.price > 0 && p.price < 10));
     }
 
     if (sort === "az") {
-      dataProducts.sort(function (a, b) {
+      cateFilter.sort(function (a, b) {
         var nameA = a.name.toUpperCase(); // ignore upper and lowercase
         var nameB = b.name.toUpperCase(); // ignore upper and lowercase
         if (nameA < nameB) {
@@ -71,18 +67,18 @@ export default function ProductList() {
       setKey(Math.random());
     }
     if (sort === "low") {
-      dataProducts.sort(function (a, b) {
+      cateFilter.sort(function (a, b) {
         return a.price - b.price;
       });
       setKey(Math.random());
     }
     if (sort === "high") {
-      dataProducts.sort(function (a, b) {
+      cateFilter.sort(function (a, b) {
         return b.price - a.price;
       });
       setKey(Math.random());
     }
-  }, [params.category, filter, sort]);
+  }, [cate, filter, sort]);
 
   // Funtion
   const pageChanger = (page) => {
@@ -97,8 +93,9 @@ export default function ProductList() {
   const onIconClick = () => {
     setIsFilter(!isFilter);
   };
-  const onFilterSubmit = (filter) => {
+  const onFilterSubmit = (filter,cate) => {
     setFilter(filter);
+    setCate(cate);
     setKey(Math.random());
   };
   const onSortSelected = (sort) => {
