@@ -5,7 +5,6 @@ export default function CartButton(props) {
   const addedProduct = props.addedProduct;
   const product = props.product;
   const setAddedProduct = props.setAddedProduct;
-  console.log(product);
   const addItemHandler = () => {
     setAddedProduct((prevProductList) => {
       console.log(props.addedProduct);

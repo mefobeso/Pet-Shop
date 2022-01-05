@@ -2,13 +2,22 @@ import React, { useState, useEffect } from "react";
 import "../FontAwesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { toInteger } from "lodash";
+import axios from "axios";
 export default function ProductButton(props) {
+  const timeout = 10000;
+  const [dataCate, setDataCate] = useState([]);
   const [filterPrice, setFilterPrice] = useState({});
+  const [filterCate, setFilterCate] = useState({});
   const [isSorting, setIsSorting] = useState(false);
   const [sortSelected, setSortSelected] = useState({
     key: "default",
     value: "SORT BY",
   });
+
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   // View function
   const gridHandler = () => {
     props.viewGrid();
@@ -25,16 +34,21 @@ export default function ProductButton(props) {
     props.onFilterSubmit(50);
     props.onIconClick();
   };
-  const onSubmit = (e) => {
-    e.preventDefault();
-    props.onFilterSubmit(filterPrice);
-    props.onIconClick();
-  };
   const onFilterChange = (e) => {
     const checkedValue = toInteger(e.target.value);
     setFilterPrice(checkedValue);
   };
+  const onCateChange = (e) => {
+    const cateValue = e.target.value;
+    setFilterCate(cateValue);
+  };
 
+  // Filter Submit
+  const onSubmit = (e) => {
+    e.preventDefault();
+    props.onFilterSubmit(filterPrice, filterCate);
+    props.onIconClick();
+  };
   // Sort Handler
   const onSortClick = () => {
     setIsSorting(!isSorting);
@@ -51,9 +65,45 @@ export default function ProductButton(props) {
     setSortSelected({ key: "high", value: "High to Low" });
     setIsSorting(!isSorting);
   };
+
   useEffect(() => {
     props.onSortSelected(sortSelected.key);
   }, [sortSelected.key]);
+
+  useEffect(() => {
+    setLoading(true);
+    let unmounted = false;
+    let source = axios.CancelToken.source();
+    axios
+      .get("http://localhost:5000/category", {
+        cancelToken: source.token,
+        timeout: timeout,
+      })
+      .then((a) => {
+        if (!unmounted) {
+          // @ts-ignore
+          setDataCate(a.data.cates);
+          setLoading(false);
+        }
+      })
+      .catch(function (e) {
+        if (!unmounted) {
+          setError(true);
+          setErrorMessage(e.message);
+          setLoading(false);
+          if (axios.isCancel(e)) {
+            console.log(`request cancelled:${e.message}`);
+          } else {
+            console.log("another error happened:" + e.message);
+          }
+        }
+      });
+
+    return () => {
+      unmounted = true;
+      source.cancel("Cancelling");
+    };
+  }, [timeout]);
 
   return (
     <div className="product-button">
@@ -72,41 +122,38 @@ export default function ProductButton(props) {
             onReset={onReset}
           >
             <div className="filter-inner">
-              <h5>Filter</h5>
-              <div>
-                <input type="checkbox" name="50+" id="50" value="50+" />
-                <p>+</p>
-              </div>
-              <div>
-                <input type="checkbox" name="50+" id="50" value="50+" />
-                <p></p>
-              </div>
-              <div>
-                <input type="checkbox" name="50+" id="50" value="50+" />
-                <p></p>
-              </div>
-              <div>
-                <input type="checkbox" name="50+" id="50" value="50+" />
-                <p></p>
-              </div>
-            </div>
-            <div className="filter-inner">
-              <h5>Filter</h5>
-              <div>
-                <input type="checkbox" name="50+" id="50" value="50+" />
-                <p></p>
-              </div>
-              <div>
-                <input type="checkbox" name="50+" id="50" value="50+" />
-                <p></p>
-              </div>
-              <div>
-                <input type="checkbox" name="50+" id="50" value="50+" />
-                <p></p>
-              </div>
-              <div>
-                <input type="checkbox" name="50+" id="50" value="50+" />
-                <p></p>
+              <h5>Category</h5>
+              <div className="filter-inn">
+                <div className="filter-in">
+                  {dataCate.slice(0, 4).map((cate, index) => {
+                    return (
+                      <div key={index}>
+                        <input
+                          type="checkbox"
+                          value={cate._id}
+                          onChange={onCateChange}
+                          key={cate._id}
+                        />
+                        <p>{cate.cateName}</p>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="filter-in">
+                  {dataCate.slice(4, 8).map((cate, index) => {
+                    return (
+                      <div key={index}>
+                        <input
+                          type="checkbox"
+                          value={cate._id}
+                          onChange={onCateChange}
+                          key={cate._id}
+                        />
+                        <p>{cate.cateName}</p>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
             {/* Price */}

@@ -101,7 +101,7 @@ export default function ProductDetail() {
               <div className="product-price">${product.price}</div>
               <div className="product-des">{product.des}</div>
               <div className="product-buy">
-                <input type="number" value="1" min="1" max={product.quantity} />
+                <input type="number"  min="1" max={product.quantity} />
                 <FavoriteButton
                   favoriteProduct={favoriteProduct}
                   product={product}
