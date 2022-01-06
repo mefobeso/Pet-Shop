@@ -126,11 +126,9 @@ export default function News() {
             {data
               .slice(0 + (currentPage - 1) * 8, 8 + (currentPage - 1) * 8)
               .map((obj, index) => {
-                const day = obj.UploadDate.toLocaleString("en-US", {
-                  month: "short",
-                  year: "numeric",
-                  day: "numeric",
-                });
+                const day = obj.UploadDate.slice(8,10)
+                const month = obj.UploadDate.slice(5,7)
+                const year = obj.UploadDate.slice(0,4)
                 return (
                   <div className="news-item" key={index}>
                     <img src={obj.thumbnail} alt="" className="news-thumb" />
@@ -144,7 +142,7 @@ export default function News() {
                           {obj.title}
                         </Link>
                       </h4>
-                      <p>{day}</p>
+                      <p>Đăng ngày {day} tháng {month} năm {year}</p>
                       <p>{obj.description}</p>
                     </div>
                   </div>

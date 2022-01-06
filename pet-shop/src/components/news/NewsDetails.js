@@ -1,8 +1,9 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Headerwhite from "../layouts/Header_white";
 import Footerwhite from "../layouts/Footer_white";
 import axios from "axios";
+import FadeLoader from "react-spinners/FadeLoader";
 
 export default function NewsDetails() {
   const timeout = 5000;
@@ -12,8 +13,8 @@ export default function NewsDetails() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(true);
   const params = useParams();
- 
-  useEffect( () => {
+
+  useEffect(() => {
     setLoading(true);
     let unmounted = false;
     let source = axios.CancelToken.source();
@@ -25,7 +26,7 @@ export default function NewsDetails() {
       .then((a) => {
         if (!unmounted) {
           // @ts-ignore
-          var dataFilter = a.data.posts.filter(p=>p._id===params.id);
+          var dataFilter = a.data.posts.filter((p) => p._id === params.id);
           setData(dataFilter[0]);
           console.log("setData");
           setLoading(false);
@@ -45,18 +46,37 @@ export default function NewsDetails() {
       });
     return () => {
       unmounted = true;
-      source.cancel("Cancelling"); 
+      source.cancel("Cancelling");
     };
-  }, [ timeout]);
-  useEffect(()=>{console.log(data)},[data])
+  }, [timeout]);
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
   console.log(params);
-  return (
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
+  return loading ? (
+    <div className="loader">
+      <FadeLoader size={30} color={"#123abc"} loading={loading} />
+    </div>
+  ) : (
     <div>
       <Headerwhite />
       <div className="news-details news-container">
+        <div className="news-contents">
           <h4>{data.title}</h4>
+          <h6>{data.UploadDate.slice(0, 10)}</h6>
           <h6>{data.description}</h6>
+          <img src={data.img[0]} alt="" className="news-details-img" />
           <p>{data.text}</p>
+          <img src={data.img[1]} alt="" />
+          <img src={data.img[2]} alt="" />
+          <img src={data.img[3]} alt="" />
+        </div>
       </div>
       <Footerwhite />
     </div>

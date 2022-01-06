@@ -3,12 +3,16 @@
   grid-template-columns: 80% 20%;
   padding-top: 2em;
 }
-.news-details {
-  text-align: center;
+.news-details-img {
+  width: 100% !important;
+  height: 40em;
 }
 .news-container {
   width: 1265px;
   margin: 3em auto 2em;
+}
+.news-contents {
+  padding: 0 10em;
 }
 .news-thumb {
   width: 10em;
@@ -31,6 +35,16 @@
   margin-left: 2em;
   height: 20em;
   padding: 1em;
+}
+.news-details h4 {
+  text-align: center;
+}
+.news-details h6 {
+  text-align: center;
+}
+.news-details img {
+  width: 30em;
+  margin: 0 auto;
 }
 
 /*# sourceMappingURL=news.css.map */
