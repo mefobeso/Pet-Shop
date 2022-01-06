@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory,Link } from "react-router-dom";
 // Font Awesome
 import "../FontAwesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -84,11 +84,6 @@ function Headerwhite(props) {
                 <p>Chain</p>
                 <p>Rubber</p>
                 <p>Leather</p>
-              </div>
-              <div className="white-header-menu-inner">
-                <p>Bowl</p>
-                <p>Steel</p>
-                <p>Plastic</p>
               </div>
             </div>
           </li>
