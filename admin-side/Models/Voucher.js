@@ -4,15 +4,13 @@ const Schema = mongoose.Schema;
 const VoucherSchema = new Schema({
     voucherName: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     description: {
         type: String,
     },
     value: {
-        type: String,
-    },
-    img:{
         type: String,
     },
     outDate:{
