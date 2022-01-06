@@ -39,25 +39,41 @@ export default function Login(props) {
     setPassword(e.target.value);
   };
   const submitHandler = async (event) => {
+    setLoading(true);
+    // let unmounted = false;
+    // const source = axios.Cancel.source();
     event.preventDefault();
     await axios
-      .post("http://localhost:5000/auth/login", {
-        username: username,
-        password: password,
-      })
+      .post(
+        "http://localhost:5000/auth/login",
+        {
+          username: username,
+          password: password,
+        }
+        // {
+        //   cancelToken: source.token,
+        //   timeout: 10000,
+        // }
+      )
       .then((response) => {
         //handle success
         console.log(response.data);
         localStorage.setItem(
           "user",
-          JSON.stringify({id:response.data.userId})
+          JSON.stringify({ id: response.data.userId })
         );
         history.replace("/home");
+
+        setLoading(false);
       })
       .catch((error) => {
         //handle error
         setError({ title: "Error", message: error.response.data.message });
       });
+    return () => {
+      // unmounted = true;
+      // source.cancel("Cancelling");
+    };
   };
 
   // Facebook and Google Login
@@ -114,9 +130,7 @@ export default function Login(props) {
               // ref={passwordInputRef}
             />
             <br />
-            <button type="submit" >
-              Log in
-            </button>
+            <button type="submit">Log in</button>
             <p>______________________________</p>
             <FacebookLogin
               appId={appId}
