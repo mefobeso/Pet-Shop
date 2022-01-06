@@ -1,11 +1,12 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./sass/css/login.css";
 import { useHistory } from "react-router-dom";
-import userData from "../../database/user.data";
+import ErrorModal from "../UI/ErrorModal";
 // Facebook and Google Login
 import FacebookLogin from "react-facebook-login";
 import GoogleLogin from "react-google-login";
 import axios from "axios";
+import { Fragment } from "react/cjs/react.development";
 
 export default function Login(props) {
   // Variable
@@ -20,6 +21,7 @@ export default function Login(props) {
   };
 
   // State
+  const [error, setError] = useState();
   const [errorMessage, setErrorMessage] = useState("");
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -49,7 +51,7 @@ export default function Login(props) {
       })
       .catch((error) => {
         //handle error
-        console.log(error.response);
+        setError({ title: "Error", message: error.response.data.message });
       });
   };
 
@@ -67,69 +69,80 @@ export default function Login(props) {
     navigateHome();
     props.onGGLogin();
   };
-
+  const okayButtonHandler = () => {
+    setError(null);
+  };
   return (
-    <div className="bg">
-      <div className="login-container">
-        <div className="login-background"></div>
+    <Fragment>
+      {error && (
+        <ErrorModal
+          title={error.title}
+          message={error.message}
+          onConfirm={okayButtonHandler}
+        />
+      )}
+      <div className="bg">
+        <div className="login-container">
+          <div className="login-background"></div>
 
-        <form className="login">
-          <button className="back" onClick={navigateTo}>
-            {"X"}
-          </button>
-          <h2>LOGIN</h2>
-          <br />
-          <input
-            type="text"
-            className={"login-input"}
-            placeholder="Username"
-            value={username}
-            onChange={onUserNameChange}
-            // ref={usernameInputRef}
-          />
-          <br />
-          <input
-            type="password"
-            className={"login-input"}
-            placeholder=" Password"
-            value={password}
-            onChange={onPasswordChange}
-            // ref={passwordInputRef}
-          />
-          <br />
-          <button type="button" onClick={submitHandler}>
-            Log in
-          </button>
-          <p>______________________________</p>
-          <FacebookLogin
-            appId={appId}
-            autoLoad={true}
-            fields="name,email,picture"
-            callback={responseFacebook}
-            cssClass="button"
-            textButton="Facebook"
-          />
+          <form className="login">
+            <button className="back" onClick={navigateTo}>
+              {"X"}
+            </button>
+            <h2>LOGIN</h2>
+            <br />
+            <input
+              type="text"
+              className={"login-input"}
+              placeholder="Username"
+              value={username}
+              onChange={onUserNameChange}
+              // ref={usernameInputRef}
+            />
+            <br />
+            <input
+              type="password"
+              className={"login-input"}
+              placeholder=" Password"
+              value={password}
+              onChange={onPasswordChange}
+              // ref={passwordInputRef}
+            />
+            <br />
+            <button type="button" onClick={submitHandler}>
+              Log in
+            </button>
+            <p>______________________________</p>
+            <FacebookLogin
+              appId={appId}
+              autoLoad={true}
+              fields="name,email,picture"
+              callback={responseFacebook}
+              cssClass="button"
+              textButton="Facebook"
+            />
 
-          <br />
-          <GoogleLogin
-            className="gg"
-            onClick={navigateTo}
-            clientId={clientId}
-            buttonText="Google"
-            onSuccess={onSuccessGG}
-            onFailure={onFailGG}
-            cookiePolicy={"single_host_origin"}
-          />
-          <p>______________________________</p>
-          <a href="/reset" className="login-link">
-            CAN'T SIGN IN ?
-          </a>
-          <a href="/register" className="login-link">
-            CREATE ACCOUNT
-          </a>
-          <br />
-        </form>
+            <br />
+            <GoogleLogin
+              className="gg"
+              onClick={navigateTo}
+              clientId={clientId}
+              buttonText="Google"
+              onSuccess={onSuccessGG}
+              onFailure={onFailGG}
+              cookiePolicy={"single_host_origin"}
+            />
+            <p>______________________________</p>
+            <a href="/reset" className="login-link">
+              CAN'T SIGN IN ?
+            </a>
+            <a href="/register" className="login-link">
+              CREATE ACCOUNT
+            </a>
+            <br />
+          </form>
+        </div>
       </div>
-    </div>
+    </Fragment>
   );
 }
