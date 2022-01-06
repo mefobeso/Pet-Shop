@@ -53,7 +53,7 @@ export default function Search() {
             {searchResult.map((product) => {
               return (
                 <SearchItem
-                  key={product.id}
+                  key={product._id}
                   name={product.name}
                   price={product.price}
                   img={product.img}

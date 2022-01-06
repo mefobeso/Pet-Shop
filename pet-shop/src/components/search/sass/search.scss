@@ -33,10 +33,14 @@
       justify-content: space-between;
     }
   }
-
-  &-item img {
-    height: 7em;
+  &-item a{
     width: 10%;
+    text-decoration: none;
+    color: black;
+  }
+  &-item a img {
+    height: 7em;
+    width: 100%;
   }
   &-item button {
     height: min-content;

@@ -54,36 +54,28 @@ function Headerwhite(props) {
           </li>
           <li>
             <a href="/home/category" className="">
-              Product <FontAwesomeIcon icon="angle-down" />
+              Category <FontAwesomeIcon icon="angle-down" />
             </a>
             <div className="white-header-menu">
               <div className="white-header-menu-inner">
                 <p>Dresses</p>
-                <p>Outdoor</p>
-                <p>Indoor</p>
-                <p>Sport</p>
+        
               </div>
               <div className="white-header-menu-inner">
                 <p>Food</p>
-                <p>Royal</p>
-                <p>Hill's</p>
-                <p>Purina</p>
+         
               </div>
               <div className="white-header-menu-inner">
                 <p>Accessories</p>
-                <p>Groom</p>
-                <p>Nail Cutter</p>
+            
               </div>
               <div className="white-header-menu-inner">
                 <p>Colar Belt</p>
-                <p>Leather</p>
-                <p>Fabrics</p>
+             
               </div>
               <div className="white-header-menu-inner">
                 <p>Leashes</p>
-                <p>Chain</p>
-                <p>Rubber</p>
-                <p>Leather</p>
+                
               </div>
             </div>
           </li>

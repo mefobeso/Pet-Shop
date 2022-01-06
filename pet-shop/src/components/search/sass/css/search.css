@@ -32,9 +32,14 @@
   display: flex;
   justify-content: space-between;
 }
-.search-item img {
-  height: 7em;
+.search-item a {
   width: 10%;
+  text-decoration: none;
+  color: black;
+}
+.search-item a img {
+  height: 7em;
+  width: 100%;
 }
 .search-item button {
   height: min-content;

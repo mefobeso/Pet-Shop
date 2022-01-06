@@ -15,16 +15,15 @@ export default function SearchItem(props) {
   }, [addedProduct, favoriteProduct]);
   return (
     <div className="search-item">
-      <img src={props.img} alt="" />
+      <a href={`/product/${props.product._id}`}>
+        <img src={props.img} alt="" />
+      </a>
       <div className="search-item-info">
-        <h5 className="name">{props.name}</h5>
+        <h5 className="name">
+          <a href={`/product/${props.product._id}`}>{props.name}</a>
+        </h5>
         <p className="price">${props.price}</p>
-        <p style={{ width: "30em" }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
-        </p>
+        <p style={{ width: "30em" }}>{props.product.description}</p>
         <div className="">
           <FavoriteButton
             className="heart"
