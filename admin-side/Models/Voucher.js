@@ -11,11 +11,17 @@ const VoucherSchema = new Schema({
         type: String,
     },
     value: {
-        type: String,
+        type: Number,
+        required: true
     },
     outDate:{
         type: Date,
+        required: true
     },
+    countUse:{
+        type: Number,
+        required: true
+    }
 })
 
 module.exports = mongoose.model('voucher',VoucherSchema);
