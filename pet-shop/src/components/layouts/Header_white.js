@@ -21,8 +21,8 @@ function Headerwhite(props) {
   // useEffect
 
   useEffect(() => {
-    const loginInfor = localStorage.getItem("isLoggedIn");
-    if (loginInfor === "1") {
+    const loginInfor = localStorage.getItem("user");
+    if (loginInfor !== null) {
       setLogin(true);
     }
   }, []);
@@ -35,7 +35,7 @@ function Headerwhite(props) {
     navigateTo(searchInputRef.current.value);
   };
   const logOutHandler = () => {
-    localStorage.setItem("isLoggedIn", "0");
+    localStorage.removeItem("user");
     setLogin(false);
     navigateHome();
   };
@@ -93,7 +93,6 @@ function Headerwhite(props) {
             </div>
           </li>
           <li>
-    
             <div className="white-header-menu">
               <div className="white-header-menu-inner-2">
                 <p>Dog</p>
@@ -112,9 +111,7 @@ function Headerwhite(props) {
             </div>
           </li>
           <li>
-            <a href="/news/page=1">
-              News
-            </a>
+            <a href="/news/page=1">News</a>
           </li>
           <li>
             {!searching && (

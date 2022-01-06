@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./sass/css/login.css";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import ErrorModal from "../UI/ErrorModal";
 // Facebook and Google Login
 import FacebookLogin from "react-facebook-login";
@@ -47,7 +47,12 @@ export default function Login(props) {
       })
       .then((response) => {
         //handle success
-        console.log(response);
+        console.log(response.data);
+        localStorage.setItem(
+          "user",
+          JSON.stringify({id:response.data.userId})
+        );
+        history.replace("/home");
       })
       .catch((error) => {
         //handle error
@@ -85,7 +90,7 @@ export default function Login(props) {
         <div className="login-container">
           <div className="login-background"></div>
 
-          <form className="login">
+          <form className="login" onSubmit={submitHandler}>
             <button className="back" onClick={navigateTo}>
               {"X"}
             </button>
@@ -109,7 +114,7 @@ export default function Login(props) {
               // ref={passwordInputRef}
             />
             <br />
-            <button type="button" onClick={submitHandler}>
+            <button type="submit" >
               Log in
             </button>
             <p>______________________________</p>

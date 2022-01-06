@@ -21,7 +21,7 @@ module.exports.Login = async(req, res) => {
         // }
         if(password === user.password){
             const accessToken = jwt.sign({ userId: user._id }, process.env.ACCESS_TOKEN_SECRET)
-            res.json({success: true, message: 'Đăng nhập thành công', accessToken})
+            res.json({success: true, message: 'Đăng nhập thành công', accessToken,userId:user._id})
         }
         else {
             // const accessToken = jwt.sign({ userId: user._id }, process.env.ACCESS_TOKEN_SECRET)
@@ -37,7 +37,7 @@ module.exports.Login = async(req, res) => {
     }
 }
 module.exports.Register = async (req, res) => {
-    const { username, password } = req.body
+    const { username, password,email } = req.body
     // kiểm tra xem tên đăng nhập và password có không
     if (!username || !password) {
         return res.status(400).json({ success: false, message: 'Thiếu tên đăng nhập hoặc mật khẩu' });

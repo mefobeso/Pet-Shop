@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useState, useEffect } from "react";
-import FadeLoader from "react-spinners/FadeLoader";
 
 // user data
 import userData from "./database/user.data";
@@ -34,59 +33,16 @@ import NewsDetails from "./components/news/NewsDetails";
 // import AdminLayout from "./components/admin/layouts/Admin";
 function App() {
   // Login State
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    const loginInfor = localStorage.getItem("isLoggedIn");
-    if (loginInfor === "1") {
-      setIsLoggedIn(true);
-    }
-  }, []);
-
-  const loginHandler = (username, password) => {
-    userData.map((user, index) => {
-      console.log(password);
-      if (
-        user.username === username.trim() &&
-        user.password === password.trim()
-      ) {
-        localStorage.setItem("isLoggedIn", "1");
-        setIsLoggedIn(true);
-        return;
-      }
-    });
-  };
   const onGGLogin = () => {
     localStorage.setItem("isLoggedIn", "1");
   };
-  const logoutHandler = () => {
-    localStorage.setItem("isLoggedIn", "0");
-    setIsLoggedIn(false);
-  };
 
-  //loader
-  const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, []);
-  return loading ? (
-    <div className="loader">
-      <FadeLoader size={30} color={"#123abc"} loading={loading} />
-    </div>
-  ) : (
+  return (
     <Router>
       <Switch>
         <Route exact path="/" component={LandingPage} />
-        <Route
-          exact
-          path="/home"
-          component={() => (
-            <HomePage isLoggedIn={isLoggedIn} onLogout={logoutHandler} />
-          )}
-        />
+        <Route exact path="/home" component={() => <HomePage />} />
         <Route exact path="/news/page=:page" component={News} />
         <Route path="/news/details/id=:id" exact>
           <NewsDetails />
@@ -95,9 +51,7 @@ function App() {
         <Route
           exact
           path="/login"
-          component={() => (
-            <Login onLogin={loginHandler} onGGLogin={onGGLogin} />
-          )}
+          component={() => <Login onGGLogin={onGGLogin} />}
         />
         <Route exact path="/register" component={Register} />
         <Route exact path="/reset" component={Reset} />

@@ -1,4 +1,6 @@
 import { v4 as uuid } from "uuid";
+import { useEffect } from "react";
+import axios from "axios";
 
 const dataSlider = [
   {
