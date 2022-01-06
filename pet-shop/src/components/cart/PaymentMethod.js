@@ -64,6 +64,12 @@ function PaymentMethod() {
                     <Input onChange={(e) => setCardNum(e.target.value)} placeholder="Enter your card number"/>
                     
                 </div>)} 
+                {
+                    method === methods[0] && 
+                    (<div className={styles.Momo}>
+                        <img alt="logoMomo" src= {process.env.PUBLIC_URL + "/MoMo_Logo.png"}/>
+                    </div>)
+                }
             </div>
         </div>
     )

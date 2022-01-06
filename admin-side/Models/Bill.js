@@ -31,6 +31,10 @@ const BillSchema = new Schema({
     phone: Number,
     address: String,
     name: String,
+    status:{
+        type:String,
+        default:"Pending"
+    },
     note: {
         type:String,
         required:false
