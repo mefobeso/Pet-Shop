@@ -78,7 +78,13 @@ function App() {
         <Route exact path="/home/favorite" component={Favorite} />
         <Route exact path="/home/cart/confirm" component={CheckOutCart} />
         <Route exact path="/home/cart/checkout" component={OrderedCart} />
+
+
+          {/* ADMIN SITE */}
+
+          
       </Switch>
+    
     </Router>
   );
 }

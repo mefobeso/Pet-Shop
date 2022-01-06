@@ -13,6 +13,7 @@ const BillSchema = new Schema({
     },
     details: [
         {
+            _id:false,
             product_id:{
                 type:String,
                 ref:"Product",

@@ -19,7 +19,7 @@
 .bank{
    display: flex;
    flex-wrap: wrap;
-   
+   justify-content:space-around;
 }
 .detail{
     text-align: center;
@@ -72,7 +72,4 @@ display: flex;
 .inforicon{
     width:16px !important;
 }
-.Momo{
-    width: 180px;
-    height: 180px;
-}
+.paypal{}

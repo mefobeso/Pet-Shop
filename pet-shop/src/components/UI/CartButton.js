@@ -19,7 +19,7 @@ export default function CartButton(props) {
         return [
           ...prevProductList,
           {
-            id: product.id,
+            id: product._id,
             name: product.name,
             price: product.price,
             quantity: product.quantity,
@@ -31,7 +31,7 @@ export default function CartButton(props) {
       return [
         ...prevProductList,
         {
-          id: product.id,
+          id: product._id,
           name: product.name,
           price: product.price,
           quantity: product.quantity,
