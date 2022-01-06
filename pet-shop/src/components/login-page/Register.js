@@ -2,37 +2,11 @@ import React, { useRef, useState, useEffect, useReducer } from "react";
 import { Fragment } from "react";
 import { useHistory } from "react-router-dom";
 import ErrorModal from "../UI/ErrorModal";
-import { isUndefined } from "lodash";
 import emailjs from "emailjs-com";
-// database
-import userData from "../../database/user.data";
+import axios from "axios";
 // css
 import "./sass/css/login.css";
 
-const usernameReducer = (state, action) => {
-  if (action.type === "USER_INPUT") {
-    return {
-      value: action.val,
-      isValid: action.val.trim().length > 7,
-    };
-  }
-  if (action.type === "INPUT_BLUR") {
-    return {
-      value: state.value,
-      isValid: state.value.trim().length > 7,
-    };
-  }
-  return { value: "", isValid: false };
-};
-const passwordReducer = (state, action) => {
-  if (action.type === "USER_INPUT") {
-    return { value: action.val, isValid: action.val.trim().length > 6 };
-  }
-  if (action.type === "INPUT_BLUR") {
-    return { value: state.value, isValid: state.value.trim().length > 6 };
-  }
-  return { value: "", isValid: false };
-};
 export default function Register() {
   // Function
   // useHistory
@@ -42,121 +16,65 @@ export default function Register() {
   // State
 
   const [error, setError] = useState();
-  const [userAvailable, setUserAvailable] = useState("@");
-  const [formIsValid, setFormIsValid] = useState(false);
-
-  // Reducer
-  const [usernameState, dispatchUsername] = useReducer(usernameReducer, {
-    value: "",
-    isValid: null,
-  });
-  const [passwordState, dispatchPassword] = useReducer(passwordReducer, {
-    value: "",
-    isValid: null,
-  });
-  // Ref
-  const usernameInputRef = useRef("");
-  const passwordInputRef = useRef("");
-  const confirmPasswordInputRef = useRef("");
-  // useEffect
-  const { isValid: usernameValid } = usernameState;
-  const { isValid: passwordValid } = passwordState;
-  useEffect(() => {
-    const identifier = setTimeout(() => {
-      setFormIsValid(usernameValid && passwordValid);
-    }, 1000);
-    return () => {
-      clearTimeout(identifier);
-    };
-  }, [usernameValid, passwordValid]);
-
-  useEffect(() => {
-    const identifier = setTimeout(() => {
-      setUserAvailable(
-        userData.find((user) => user.username === usernameState.value)
-      );
-    }, 1000);
-    return () => {
-      clearTimeout(identifier);
-    };
-  }, [usernameState.value]);
-
+  const [errorMessage, setErrorMessage] = useState();
+  const [loading, setLoading] = useState();
+  const [username, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   // Submit
-  const submitHandler = (event) => {
-    console.log(userAvailable);
+  const submitHandler = async (event) => {
     event.preventDefault();
-    if (isUndefined(userAvailable) === false) {
-      setError({
-        title: "User available !",
-        message: "Username already exist",
+    await axios
+      .post("http://localhost:5000/auth/register", {
+        username: username,
+        password: password,
+      })
+      .then((response) => {
+        //handle success
+        console.log(response.data);
+        emailjs
+          .sendForm(
+            "service_1eeuc2n",
+            "template_os13rfb",
+            event.target,
+            "user_2pSkLWGAoy0gctE4e09sW"
+          )
+          .then(
+            (result) => {},
+            (error) => {
+              console.log(error.text);
+            }
+          );
+        history.replace("/register-code");
+      })
+      .catch((error) => {
+        //handle error
+        setError({ title: "Error", message: error.response.data.message });
       });
-      return;
-    }
-    if (!usernameState.isValid) {
-      setError({
-        title: "User invalid !",
-        message: "Username must have at least 6 characters",
-      });
-      return;
-    }
-    if (
-      passwordInputRef.current.value !== confirmPasswordInputRef.current.value
-    ) {
-      setError({
-        title: "Confirm password not math !",
-        message: "Confirm password not math password !",
-      });
-      return;
-    }
-    if (formIsValid && isUndefined(userAvailable)) {
-      navigateTo();
-      localStorage.setItem("confirm-code", num);
-      emailjs
-        .sendForm(
-          "service_1eeuc2n",
-          "template_os13rfb",
-          event.target,
-          "user_2pSkLWGAoy0gctE4e09sW"
-        )
-        .then(
-          (result) => {},
-          (error) => {
-            console.log(error.text);
-          }
-        );
-    }
-    usernameInputRef.current.value = "";
-    passwordInputRef.current.value = "";
-    confirmPasswordInputRef.current.value = "";
+    localStorage.setItem("confirm-code", num);
   };
 
   // Validation
 
-  const validateUsername = () => {
-    dispatchUsername({
-      type: "INPUT_BLUR",
-    });
+  const usernameChangeHandler = (e) => {
+    setUserName(e.target.value);
   };
-  const validatePassword = () => {
-    dispatchPassword({
-      type: "INPUT_BLUR",
-    });
+  const passwordChangeHandler = (e) => {
+    setPassword(e.target.value);
   };
-  const usernameChangeHandler = () => {
-    dispatchUsername({
-      type: "USER_INPUT",
-      val: usernameInputRef.current.value,
-    });
+  const confirmPasswordChangeHandler = (e) => {
+    setConfirmPassword(e.target.value);
   };
-  const passwordChangeHandler = () => {
-    dispatchPassword({
-      type: "USER_INPUT",
-      val: passwordInputRef.current.value,
-    });
+  const emailChangeHandler = (e) => {
+    setEmail(e.target.value);
+  };
+  const phoneChangeHandler = (e) => {
+    setPhone(e.target.value);
   };
   const okayButtonHandler = () => {
     setError(null);
-    setUserAvailable();
   };
 
   return (
@@ -174,36 +92,24 @@ export default function Register() {
           <p className="login-title">REGISTER</p>
           <input
             type="text"
-            className={
-              usernameState.isValid === false
-                ? "login-input invalid"
-                : "login-input"
-            }
+            className="login-input"
             placeholder="Username"
             onChange={usernameChangeHandler}
-            onBlur={validateUsername}
-            ref={usernameInputRef}
             name="to_name"
           />
           <br />
           <input
             type="password"
-            className={
-              passwordState.isValid === false
-                ? "login-input invalid"
-                : "login-input"
-            }
+            className="login-input"
             placeholder="Password"
             onChange={passwordChangeHandler}
-            onBlur={validatePassword}
-            ref={passwordInputRef}
           />
           <br />
           <input
             type="password"
             className="login-input confirmpassword"
             placeholder="Confirm Password"
-            ref={confirmPasswordInputRef}
+            onChange={confirmPasswordChangeHandler}
           />
           <br />
           <input
@@ -211,6 +117,15 @@ export default function Register() {
             className="login-input confirmpassword"
             placeholder="Email"
             name="to_email"
+            onChange={emailChangeHandler}
+          />
+          <br />
+          <input
+            type="text"
+            className="login-input confirmpassword"
+            placeholder="Phone"
+            name="to_phone"
+            onChange={phoneChangeHandler}
           />
           <input
             type="text"
@@ -220,8 +135,8 @@ export default function Register() {
             readOnly
           />
           <br />
-          <button disabled={!formIsValid}>Next</button>
-         
+          <button>Next</button>
+          <br />
 
           <a href="/login" className="login-link">
             ALREADY HAVE AN ACCOUNT ?
