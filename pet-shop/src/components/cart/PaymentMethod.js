@@ -1,9 +1,10 @@
 import { Container, Row, Col, Button, Input,Label} from "reactstrap"
 import {useState} from "react"
 import styles from "./sass/css/checkout.module.css";
+import Paypal from "./PayPal"
 
 
-function PaymentMethod() {
+function PaymentMethod({getMethod,}) {
     const banks = [
     {
         name: 'Vietcombank',
@@ -40,20 +41,24 @@ function PaymentMethod() {
 
 
 ]
-    const methods = ['Momo','Online banking']
+    const methods = ['Paypal','Online banking', 'Cash on Delivery']
     const [method, setMethod] = useState(methods[0])
     const [choose, setChoose] = useState(banks[0]);
     const [cardNum, setCardNum] = useState()
-    
+    const chooseMethod=(e)=>{
+        setMethod(e.target.value)
+        getMethod(e.target.value)
+    }
     
     return (
         <div>
-            <Input type='select' onChange={(e) => setMethod(e.target.value)} >
-                {methods.map(method => <option>{method}</option>)}
+            <Input type='select' onChange={(e) => chooseMethod(e)} >
+                {methods.map((method,key) => <option key={key}>{method}</option>)}
             </Input>
             <div>
                 { method === methods[1] && 
-                (<div className={styles.bank}>
+                (
+                <div className={styles.bank}>
                     {banks.map(bank => <img
                      src={bank.img} 
                      className={styles.bankItem}  
@@ -63,12 +68,11 @@ function PaymentMethod() {
                      />)}
                     <Input onChange={(e) => setCardNum(e.target.value)} placeholder="Enter your card number"/>
                     
-                </div>)} 
+                </div>
+                )} 
                 {
                     method === methods[0] && 
-                    (<div className={styles.Momo}>
-                        <img alt="logoMomo" src= {process.env.PUBLIC_URL + "/MoMo_Logo.png"}/>
-                    </div>)
+                    <Paypal className={styles.paypal}/>
                 }
             </div>
         </div>

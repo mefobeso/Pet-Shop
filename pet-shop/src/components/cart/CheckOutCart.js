@@ -1,6 +1,7 @@
 import {Form,FormGroup, Container, Row, Col, Button, Input,Label} from "reactstrap"
 import {useMemo, useState} from "react"
 import {Link} from "react-router-dom"
+import axios from "axios"
 
 import Headerwhite from "../layouts/Header_white";
 import Footerwhite from "../layouts/Footer_white";
@@ -18,11 +19,55 @@ function CheckOutCart (){
         },0))
     },[cart])
     
+    
     const shipFee = total > 200 ? 0: 2;
     const cost = shipFee + total
     const [receiver,setReceiver] =  useState("")
     const [address,setAddress] = useState("")
     const [phone,setPhone] = useState("")
+    const [payMethod,setPayMethod] = useState("")
+
+    const checkOut = ()=>{
+        var method = payMethod.toLowerCase()
+
+        
+        if(method === "paypal"){
+            
+        }
+        else if (method === "cash on delivery"){
+            axios.post("http://localhost:5000/bill",{
+                details:cart.map(item=>{
+                    return {
+                        product_id:item.id,
+                        amount:item.amount,
+                        price:item.price
+                    }
+                }),
+                phone,
+                address,
+                name:receiver,
+                user_id:""
+            })
+        }
+        else if (method === "online banking"){
+            axios.post("http://localhost:5000/bill",{
+                details:cart.map(item=>{
+                    return {
+                        product_id:item.id,
+                        amount:item.amount,
+                        price:item.price
+                    }
+                }),
+                phone,
+                address,
+                name:receiver
+            })
+        }
+    }
+
+    const getMethod = (method)=>{
+        setPayMethod(method)
+    }
     
     const handleSubmit = (e) =>{
         console.log(receiver,address,phone)
@@ -39,7 +84,7 @@ function CheckOutCart (){
             </div>
             <Row xs="2" sm="3" >
             <Col><h3>Payment method </h3>
-            <PaymentMethod/>
+            <PaymentMethod getMethod={getMethod} total={cost} />
             </Col>
             <Col>    
             </Col>
@@ -70,12 +115,12 @@ function CheckOutCart (){
                 <div><strong>Ship fee:</strong>    ${shipFee} </div>
                 <hr/>
                 <div><strong>Total:</strong>    ${cost} </div>
-                <Link to={{
+                {/* <Link to={{
                     pathname:"/home/cart/checkout",
                     state: {receiver,address,phone, cost}
                     }} >
-                        <Button >Confirm</Button>
-                </Link>
+                </Link> */}
+                        <Button onClick={checkOut} >Confirm</Button>
             </div>
             </Form>
             </Col>
