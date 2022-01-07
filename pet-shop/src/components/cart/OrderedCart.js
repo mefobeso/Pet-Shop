@@ -21,18 +21,18 @@ return (<div>
     <Row>
         <Col className={styles.heading}>
             <h2>Thanks for your order</h2>
-            <h4>Order #1</h4>
+            <h4>Your delivery will come as soon as possible</h4>
         </Col>
     </Row>
     <Row className={styles.detail}>
         <Col><h4>Products</h4>
         <div>
-            {carts.map(cart =>(<div className={styles.product}>
-                <img src={cart.img}  alt="" />
+            {data.cart.map(item =>(<div className={styles.product}>
+                <img src={item.img}  alt="" />
                 <div className={styles.inforPro}>
-                    <div className={styles.namePro}>{cart.name}</div>
-                    <div className={styles.quantityPro}> x{cart.amount}</div>
-                    <div className={styles.pricePro}>${cart.price} </div>
+                    <div className={styles.namePro}>{item.name}</div>
+                    <div className={styles.quantityPro}> x{item.amount}</div>
+                    <div className={styles.pricePro}>${item.price} </div>
                 </div>
                 
             </div>))}

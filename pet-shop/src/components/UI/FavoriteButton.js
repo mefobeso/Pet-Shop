@@ -8,7 +8,7 @@ export default function FavoriteButton(props) {
   const favoriteItemHandler = () => {
     setFavoriteProduct((prevProductList) => {
       if (favoriteProduct != null) {
-        const duplicate = favoriteProduct.find((p) => p.id === product.id);
+        const duplicate = favoriteProduct.find((p) => p.id === product._id);
         if (duplicate) {
           console.log("dup");
           return prevProductList;

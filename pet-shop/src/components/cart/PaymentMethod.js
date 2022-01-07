@@ -1,10 +1,10 @@
-import { Container, Row, Col, Button, Input,Label} from "reactstrap"
+import {  Input} from "reactstrap"
 import {useState} from "react"
 import styles from "./sass/css/checkout.module.css";
 import Paypal from "./PayPal"
 
 
-function PaymentMethod({getMethod,}) {
+function PaymentMethod({getMethod,phone,address,receiver,paySuccess}) {
     const banks = [
     {
         name: 'Vietcombank',
@@ -59,20 +59,21 @@ function PaymentMethod({getMethod,}) {
                 { method === methods[1] && 
                 (
                 <div className={styles.bank}>
-                    {banks.map(bank => <img
+                    {banks.map((bank,key) => <img
+                     key={key}
                      src={bank.img} 
                      className={styles.bankItem}  
                      alt={bank.name}
                      style = {choose.name === bank.name ? {outline:'1px solid blue',padding:'1px'}: {} }
                      onClick = {() => setChoose(bank)}
                      />)}
-                    <Input onChange={(e) => setCardNum(e.target.value)} placeholder="Enter your card number"/>
+                    <Input onChange={(e) => setCardNum(e.target.value)} required placeholder="Enter your card number"/>
                     
                 </div>
                 )} 
                 {
                     method === methods[0] && 
-                    <Paypal className={styles.paypal}/>
+                    <Paypal paySuccess={paySuccess}  phone={phone} address={address} receiver={receiver} className={styles.paypal}/>
                 }
             </div>
         </div>
