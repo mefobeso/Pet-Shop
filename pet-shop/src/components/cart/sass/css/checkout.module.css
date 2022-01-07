@@ -72,4 +72,18 @@ display: flex;
 .inforicon{
     width:16px !important;
 }
-.paypal{}
+.inforItem{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.inforItem>label{
+    font-weight: 600;
+    font-size: 18px;
+}
+.inforItem>input{
+    margin-top: 5px;
+    border: 1px solid gray;
+    padding: 10px;
+    border-radius:5px;
+}

@@ -1,6 +1,6 @@
 import {Form,FormGroup, Container, Row, Col, Button, Input,Label} from "reactstrap"
-import {useMemo, useState} from "react"
-import {Link} from "react-router-dom"
+import {useMemo, useState,useEffect} from "react"
+import {Link,useHistory} from "react-router-dom"
 import axios from "axios"
 
 import Headerwhite from "../layouts/Header_white";
@@ -12,7 +12,9 @@ import  PaymentMethod from "./PaymentMethod"
 
 
 function CheckOutCart (){   
+    const history = useHistory();
     const cart =  JSON.parse(localStorage.getItem('cart'))
+    const user_id = JSON.parse(localStorage.getItem('user'))
     const total = useMemo(()=>{
         return (cart.reduce((cost,curr) => {
             return cost + curr.price * curr.amount
@@ -26,43 +28,65 @@ function CheckOutCart (){
     const [address,setAddress] = useState("")
     const [phone,setPhone] = useState("")
     const [payMethod,setPayMethod] = useState("")
+    const [products,setProducts] = useState([])
+    const [paySuccess, setPaySuccess] = useState(false)
+
+    const getPaySuccess = (flag)=>{
+        setPaySuccess(flag)
+    }
+    
+    useEffect(() =>{
+        console.log(cart)
+        cart.map(item=>{
+            setProducts(pre=>[
+                ...pre,{
+                        product_id:item.id,
+                        amount:item.amount,
+                        price:item.price
+                }
+            ])
+        })
+    },[])
 
     const checkOut = ()=>{
         var method = payMethod.toLowerCase()
 
         
         if(method === "paypal"){
-            
+            if(paySuccess===true){
+                history.push({
+                    pathname:'/home/cart/checkout',
+                    state: {receiver,address,phone, cost,cart}
+                })
+            }
         }
         else if (method === "cash on delivery"){
             axios.post("http://localhost:5000/bill",{
-                details:cart.map(item=>{
-                    return {
-                        product_id:item.id,
-                        amount:item.amount,
-                        price:item.price
-                    }
-                }),
+                details:products,
                 phone,
                 address,
                 name:receiver,
-                user_id:""
+                user_id:user_id.id
+            })
+            history.push({
+                pathname:'/home/cart/checkout',
+                state: {receiver,address,phone, cost,cart}
             })
         }
         else if (method === "online banking"){
             axios.post("http://localhost:5000/bill",{
-                details:cart.map(item=>{
-                    return {
-                        product_id:item.id,
-                        amount:item.amount,
-                        price:item.price
-                    }
-                }),
+                details:products,
                 phone,
                 address,
-                name:receiver
+                name:receiver,
+                user_id:user_id.id
+            })
+            history.push({
+                pathname:'/home/cart/checkout',
+                state: {receiver,address,phone, cost,cart}
             })
         }
+
     }
 
     const getMethod = (method)=>{
@@ -84,26 +108,26 @@ function CheckOutCart (){
             </div>
             <Row xs="2" sm="3" >
             <Col><h3>Payment method </h3>
-            <PaymentMethod getMethod={getMethod} total={cost} />
+            <PaymentMethod getMethod={getMethod} phone={phone} address={address} receiver={receiver} paySuccess={getPaySuccess} />
             </Col>
             <Col>    
             </Col>
             <Col>
             
-                <Form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                     <FormGroup>
                     <h3>Information</h3>
-                <div>
-                    <Label> Reciever</Label>
-                    <Input required onChange={(e) => setReceiver(e.target.value)} value ={receiver} placeholder="Enter name" />
+                <div className={styles.inforItem}>
+                    <label> Reciever </label>
+                    <input required onChange={(e) => setReceiver(e.target.value)}  value ={receiver} placeholder="Enter name" />
                 </div>
-                <div>
-                    <Label> Address</Label>
-                    <Input required onChange={(e) => setAddress(e.target.value)} value={address} placeholder="Enter address" />
+                <div className={styles.inforItem}>
+                    <label> Address </label>
+                    <input required onChange={(e) => setAddress(e.target.value)}  value={address} placeholder="Enter address" />
                 </div>
-                <div>
-                    <Label> Phone Number</Label>
-                    <Input required  type="tel" onChange={(e) => setPhone(e.target.value)} value={phone} placeholder="Enter phone number" />
+                <div className={styles.inforItem}>
+                    <label> Phone Number </label>
+                    <input required  type="tel" onChange={(e) => setPhone(e.target.value)}  value={phone} placeholder="Enter phone number" />
                 </div>
                     </FormGroup>
             <br/>
@@ -122,7 +146,7 @@ function CheckOutCart (){
                 </Link> */}
                         <Button onClick={checkOut} >Confirm</Button>
             </div>
-            </Form>
+            </form>
             </Col>
 
             </Row>
