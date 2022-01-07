@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import catalogData from "../../../database/catalog.data";
 import CartButton from "../..//UI/CartButton";
+
 import FavoriteButton from "../../UI/FavoriteButton";
 import "./sass/css/catalog.css";
 export default function CatalogItem(props) {
@@ -26,25 +28,28 @@ export default function CatalogItem(props) {
             >
               {data.slice(0, 8).map((product, index) => {
                 return (
-                  <div className="catalog-item">
-                    <img src={product.img[0]} alt="" />
-                    {/* Data here */}
-                    <h1 className="catalog-item-name">{product.name}</h1>
-                    <h2 className="catalog-item-price">{product.price}$</h2>
-                    <div>
-                      <FavoriteButton
-                        favoriteProduct={favoriteProduct}
-                        product={product}
-                        setFavoriteProduct={setFavoriteProduct}
-                      />
-                      &nbsp;
-                      <CartButton
-                        addedProduct={addedProduct}
-                        product={product}
-                        setAddedProduct={setAddedProduct}
-                      />
+                  <Link to={`/product/${product._id}`}>
+                    <div className="catalog-item">
+                      <img src={product.img[0]} alt="" />
+                      {/* Data here */}
+                      <h1 className="catalog-item-name">{product.name}</h1>
+                      <h2 className="catalog-item-price">{product.price}$</h2>
+                      <div>
+                        <FavoriteButton
+                          favoriteProduct={favoriteProduct}
+                          product={product}
+                          setFavoriteProduct={setFavoriteProduct}
+                        />
+                        &nbsp;
+                        <CartButton
+                          addedProduct={addedProduct}
+                          product={product}
+                          setAddedProduct={setAddedProduct}
+                        />
+                      </div>
                     </div>
-                  </div>
+                  </Link>
+                  
                 );
               })}
             </div>

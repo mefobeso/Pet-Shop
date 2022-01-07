@@ -1,4 +1,4 @@
-const cloudinary = require("../Utils/Cloudinary");
+const cloudinary = require("../Utils/cloudinary");
 const upload = require("../Utils/multer");
 const Voucher = require("../Models/Voucher");
 const lodash = require("lodash")

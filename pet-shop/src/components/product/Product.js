@@ -61,10 +61,7 @@ export default function Product(props) {
                 {/* <h5 >{product.name}</h5> */}
                 <p style={{ fontWeight: "600" }}>${product.price}</p>
                 <p style={{ width: "30em" }}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
+                 {product.description}
                 </p>
                 <div className="">
                   <FavoriteButton

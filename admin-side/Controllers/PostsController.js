@@ -1,5 +1,5 @@
 const Post = require("../Models/Post");
-const cloudinary = require("../Utils/Cloudinary");
+const cloudinary = require("../Utils/cloudinary");
 const lodash = require("lodash")
 
 module.exports.GetPosts = async (req, res) => {

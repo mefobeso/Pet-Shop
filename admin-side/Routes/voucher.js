@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const verifyToken = require("../Middleware/Auth");
-const cloudinary = require("../Utils/Cloudinary");
+const cloudinary = require("../Utils/cloudinary");
 const upload = require("../Utils/multer");
 const VoucherController = require("../Controllers/VoucherController")
 
