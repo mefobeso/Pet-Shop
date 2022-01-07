@@ -21,8 +21,6 @@ export default function ProductList() {
   const [cate, setCate] = useState();
   // State
   const [data, setData] = useState([]);
-  const [dataProducts, setDataProducts] = useState([]);
-  const [data1, setData1] = useState([]);
   const [pageCount, setPageCount] = useState();
   // Data
   // useEffect
