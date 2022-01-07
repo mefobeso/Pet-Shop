@@ -49,10 +49,7 @@ export default function NewsDetails() {
       source.cancel("Cancelling");
     };
   }, [timeout]);
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-  console.log(params);
+  
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {

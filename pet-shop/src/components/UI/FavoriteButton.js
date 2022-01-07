@@ -28,7 +28,7 @@ export default function FavoriteButton(props) {
   };
   return (
     <button onClick={favoriteItemHandler} className={classes.favorite}>
-      <FontAwesomeIcon icon="heart"/>
+      <FontAwesomeIcon icon="heart" />
     </button>
   );
 }

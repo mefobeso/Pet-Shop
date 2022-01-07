@@ -7,13 +7,12 @@ import Headerwhite from "../layouts/Header_white";
 import CartInfo from "./CartInfo";
 import CartItem from "./CartItem";
 import CartSimilar from "./CartSimilar";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
 import CartEmpty from "./CartEmpty";
 // css
 import "./sass/css/cart.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 
 export default function Cart() {
   const cart = JSON.parse(localStorage.getItem("cart"));
@@ -21,7 +20,7 @@ export default function Cart() {
   const [key, setKey] = useState();
   const history = useHistory();
   const navigateTo = () => {
-    history.push("/home/product/");
+    history.push("/home/product/page=1");
   };
 
   useEffect(() => {
@@ -100,7 +99,7 @@ export default function Cart() {
               {` BACK TO SHOPPING`}
             </button>
             <Link to="/home/cart/confirm">
-            <button className="checkout">{`CHECK OUT`}</button>
+              <button className="checkout">{`CHECK OUT`}</button>
             </Link>
           </div>
         )}

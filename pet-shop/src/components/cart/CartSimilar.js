@@ -1,5 +1,5 @@
 import React from "react";
-import {products} from "../../database/product.data";
+import { products } from "../../database/product.data";
 import "../FontAwesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function CartSimilar() {
@@ -11,7 +11,7 @@ export default function CartSimilar() {
       {products.slice(0, 3).map((product, index) => {
         return (
           <div key={index} className="cart-similar">
-            <img src={product.img} alt="" className="" />
+            <img src={product.img[0]} alt="" className="" />
             <div className="cart-similar-info">
               <h6 style={{ fontWeight: "bold" }}>{product.name}</h6>
               <div style={{ display: "flex" }}>

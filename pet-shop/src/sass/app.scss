@@ -1,8 +1,8 @@
 // variables
-:focus{
+:focus {
   outline: none;
   border-bottom: 3px solid #18bc9c;
-  transition:0.5s;
+  transition: 0.5s;
 }
 $ln-bg: linear-gradient(to right, #179fd1, #05465e);
 * {
@@ -32,15 +32,15 @@ img {
     height: 50px;
     width: 1265px;
     margin: 10px auto;
-    &-logout{
+    &-logout {
       background-color: white;
-      width: 12em; 
+      width: 12em;
       visibility: hidden;
-      padding:1em;
+      padding: 1em;
       z-index: 12;
       position: absolute;
     }
-    &-logout:hover{
+    &-logout:hover {
       color: #18bc9c;
       transition: 0.5s;
     }
@@ -49,7 +49,7 @@ img {
       border: 0.2px solid black;
       outline: none;
       border-radius: 4px;
-      padding-left:0.1em;
+      padding-left: 0.1em;
     }
     &-search:focus::placeholder {
       visibility: hidden;
@@ -156,7 +156,7 @@ img {
     }
   }
 }
-.loggedin:hover .white-header-logout{
+.loggedin:hover .white-header-logout {
   visibility: visible;
   transition: 1s;
 }
@@ -230,4 +230,57 @@ img {
 
 a {
   text-decoration: none;
+}
+.popupImg {
+  height: 3em;
+  width: 3em;
+  margin-bottom: 0.3em;
+  box-shadow: 2px 2px 5px 1px;
+}
+.popupItem {
+  display: flex;
+  justify-content: space-between;
+}
+.popup {
+}
+.popup {
+  position: absolute;
+  right: 5em;
+  min-height: 4em;
+  max-height: 30em;
+  width: 15em;
+  padding: 0.8em;
+  box-shadow: 4px 4px 9px 0px;
+  background-color: white;
+  z-index: -1;
+
+  opacity: 0;
+  transition: 0.5s;
+  &-checkout {
+    color: white;
+    background-color: black;
+    border: none;
+    height: 2.2em;
+    padding: 0 0.5em;
+    width: 100%;
+    font-weight: 700;
+    color: #ddd;
+  }
+  &-checkout:hover {
+    color: white;
+  }
+  &-trash {
+    border: none;
+    color: #ddd;
+    background-color: white;
+  }
+  &-trash:hover {
+    color: black;
+    transition: 1s;
+  }
+}
+.appear {
+  z-index: 13;
+  opacity: 1;
+  transition: 1s;
 }

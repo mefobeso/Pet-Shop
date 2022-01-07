@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { useHistory,Link } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { useHistory, Link } from "react-router-dom";
 // Font Awesome
 import "../FontAwesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useRef } from "react/cjs/react.development";
+import CartPopup from "../UI/CartPopup";
 
 function Headerwhite(props) {
   const [login, setLogin] = useState(false);
@@ -39,6 +39,7 @@ function Headerwhite(props) {
     setLogin(false);
     navigateHome();
   };
+  const onCartHover = useRef(null);
   return (
     <div className="white-header">
       <nav className="white-header-navbar">
@@ -59,23 +60,18 @@ function Headerwhite(props) {
             <div className="white-header-menu">
               <div className="white-header-menu-inner">
                 <p>Dresses</p>
-        
               </div>
               <div className="white-header-menu-inner">
                 <p>Food</p>
-         
               </div>
               <div className="white-header-menu-inner">
                 <p>Accessories</p>
-            
               </div>
               <div className="white-header-menu-inner">
                 <p>Colar Belt</p>
-             
               </div>
               <div className="white-header-menu-inner">
                 <p>Leashes</p>
-                
               </div>
             </div>
           </li>
@@ -139,10 +135,14 @@ function Headerwhite(props) {
               <FontAwesomeIcon icon="heart" style={{ marginRight: "10px" }} />
             </a>
             <a href="/home/cart">
-              <FontAwesomeIcon icon="shopping-cart" />
+              <FontAwesomeIcon
+                icon="shopping-cart"
+                onMouseEnter={onCartHover.current}
+              />
             </a>
           </li>
         </ul>
+        <CartPopup onHover={onCartHover} />
       </nav>
     </div>
   );

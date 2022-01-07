@@ -12,7 +12,7 @@ export default function CartItem(props) {
 
   return (
     <div className="cart-item" key={props.id}>
-      <img src={product.img} alt="" className="" />
+      <img src={product.img[0]} alt="" className="" />
       <div className="cart-item-info">
         <h5 className="cart-item-name">{product.name}</h5>
         <CartQuantity

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function CartEmpty() {
   const history = useHistory();
   const navigateTo = () => {
-    history.push("/home/product");
+    history.push("/home/product/page=1");
   };
   return (
     <div className="cart-empty" style={{ marginTop: "5em" }}>
