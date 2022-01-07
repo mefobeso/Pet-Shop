@@ -1,0 +1,42 @@
+.productsList{
+    flex:4;
+    height:400px;
+    margin: 0 10px;
+}
+.productListImg{
+    width: 51px;
+    height: 51px;
+    border-radius: 5px;
+}
+.productsListEdit{
+    border:none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    background-color: #3bb077;
+    color:#fff;
+    cursor: pointer;
+    margin-right: 20px;
+    line-height:normal;
+    
+}
+.productsListDelete{
+    color:red;
+    cursor: pointer;
+}
+.productsTitle{
+    margin: 0 auto;
+    text-align: center;
+    margin: 16px 0;
+}
+.dupProduct{
+    border:none;
+    border-radius: 10px;
+    padding: 5px 5px;
+    font-size: 14px;
+    background-color: #ecea63;
+    color:#b6b307;
+    cursor: pointer;
+    margin-right: 5px;
+    margin-left: 5px;
+    line-height:normal;
+}

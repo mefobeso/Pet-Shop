@@ -31,6 +31,7 @@ import OrderedCart from "./components/cart/OrderedCart";
 import NewsDetails from "./components/news/NewsDetails";
 // Admin
 // import AdminLayout from "./components/admin/layouts/Admin";
+import AdminHome from "./pages/admin/index"
 function App() {
   // Login State
 
@@ -81,7 +82,10 @@ function App() {
 
 
           {/* ADMIN SITE */}
-
+          <Route
+                path={process.env.PUBLIC_URL + "/admin"}
+                component={AdminHome}
+          />
           
       </Switch>
     
