@@ -1,0 +1,11 @@
+.cart {
+  background-color: #05465e;
+  height: 39px;
+  width: 9em;
+  box-shadow: 1px 1px 3px 0px;
+  outline: none;
+}
+.cart:hover {
+  color: white;
+  transition: 1s;
+}

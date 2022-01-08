@@ -111,7 +111,7 @@ export default function Profile() {
           <ProfileInfo dataInfo={data} />
           <div className="profile-content">
             <ProfileTab tab={tab} tabHandler={tabChange} />
-            <ProfileBody tab={tab} dataInfo={data} dataOrder={dataOrder} />
+            <ProfileBody tab={tab} dataInfo={data} dataOrder={data} />
           </div>
         </div>
       </div>

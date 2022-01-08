@@ -2,19 +2,20 @@ const express = require("express");
 const router = express.Router();
 const verifyToken = require("../Middleware/Auth");
 const bill = require("../Models/Bill");
-const BillsController = require("../Controllers/BillsController")
+const BillsController = require("../Controllers/BillsController");
 
 // xem danh sách hóa đơn
-router.get("/", BillsController.GetBills )  
+router.get("/", BillsController.GetBills);
+// xem chi tiết hóa đơn
+router.get("/:id", BillsController.GetDetailBills);
 
 // thêm hóa đơn
-router.post('/',  BillsController.AddBill)
+router.post("/", BillsController.AddBill);
 
 //sửa hóa đơn theo id
-router.put('/:id',  BillsController.UpdateBill)
+router.put("/:id", BillsController.UpdateBill);
 
 // xóa bill
-router.delete('/:id',  BillsController.DeleteBill )
+router.delete("/:id", BillsController.DeleteBill);
 
-
-module.exports = router
+module.exports = router;

@@ -114,6 +114,9 @@
   height: 18em;
   margin-left: 5px;
 }
+.profile-content-order-products {
+  height: 9em;
+}
 .profile-content-order-product {
   width: 100%;
   display: flex;
@@ -124,10 +127,10 @@
   justify-self: flex-end;
 }
 .profile-content-order-product img {
-  height: 60px;
-  width: 80px;
-  object-fit: contain;
-  border-radius: 8px;
+  height: 4.5em;
+  width: 10em;
+  padding: 0.2em;
+  object-fit: fill;
 }
 .profile-content-order-product .info {
   margin-left: 5px;

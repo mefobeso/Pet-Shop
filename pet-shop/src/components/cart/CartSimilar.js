@@ -10,7 +10,7 @@ export default function CartSimilar() {
       </h6>
       {products.slice(0, 3).map((product, index) => {
         return (
-          <div key={index} className="cart-similar">
+          <div key={Math.random(10,20)} className="cart-similar">
             <img src={product.img[0]} alt="" className="" />
             <div className="cart-similar-info">
               <h6 style={{ fontWeight: "bold" }}>{product.name}</h6>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./css/style.css";
 import Headerwhite from "../components/layouts/Header_white";
 import Footerwhite from "../components/layouts/Footer_white";
-import CartButton from "../components/UI/CartButton";
+import CartButtonText from "../components/UI/CartButtonText";
 import FavoriteButton from "../components/UI/FavoriteButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../components/FontAwesome/index";
@@ -10,11 +10,13 @@ import axios from "axios";
 
 import { Container, Row, Col } from "reactstrap";
 import { useParams } from "react-router-dom";
+import CartSimilar from "../components/cart/CartSimilar";
 
 export default function ProductDetail() {
   const timeout = 0;
 
   const [product, setProduct] = useState([]);
+  const [cate, setCate] = useState([]);
   const [mainImg, setMainImg] = useState(0);
 
   const [error, setError] = useState(false);
@@ -42,6 +44,7 @@ export default function ProductDetail() {
           setError(true);
           setErrorMessage(e.message);
           setLoading(false);
+
           if (axios.isCancel(e)) {
             console.log(`request cancelled:${e.message}`);
           } else {
@@ -49,11 +52,13 @@ export default function ProductDetail() {
           }
         }
       });
+
     return () => {
       unmounted = true;
       source.cancel("Cancelling");
     };
   }, [timeout]);
+
   // useEffect(() => {
   //   console.log(product.img[1]);
   // }, [product.img]);
@@ -72,7 +77,6 @@ export default function ProductDetail() {
           <Row>
             {!loading && (
               <Col width="25%" className="ImgProduct">
-                {console.log(product.img[0])}
                 <div className="ImgDetail">
                   <img src={product.img[mainImg]} alt="mainImg" />
                 </div>
@@ -101,25 +105,36 @@ export default function ProductDetail() {
               <div className="product-price">${product.price}</div>
               <div className="product-des">{product.des}</div>
               <div className="product-buy">
-                <input type="number"  min="1" max={product.quantity} />
-                <FavoriteButton
-                  favoriteProduct={favoriteProduct}
-                  product={product}
-                  setFavoriteProduct={setFavoriteProduct}
-                />
-                <CartButton
+                <input type="number" min="1" max={product.quantity} />
+
+                <CartButtonText
+                  className="button"
                   addedProduct={addedProduct}
                   product={product}
                   setAddedProduct={setAddedProduct}
-                />
+                ></CartButtonText>
               </div>
             </Col>
           </Row>
         </div>
+        <hr />
+        <br />
         <div className="DescriptionDetail">
           <Row>
-            <h4>Description</h4>
-            <div>{product.description}</div>
+            <Col>
+              <h4>Description</h4>
+              <div>{product.description}</div>
+            </Col>
+            <Col>
+              <CartSimilar/>
+            </Col>
+          </Row>
+          <hr />
+          <Row>
+            <h4>Rating</h4>
+            <div className="">
+
+            </div>
           </Row>
         </div>
       </Container>
