@@ -1,14 +1,11 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { useState, useEffect } from "react";
-
-// user data
-import userData from "./database/user.data";
 // Pages
 import HomePage from "./components/home/HomePage";
 import LandingPage from "./components/LandingPage";
 import News from "./components/news/News";
 // Login
 import Login from "./components/login-page/Login";
+import LoginAdmin from"./components/login-page/LoginAdmin"
 import Register from "./components/login-page/Register";
 import Reset from "./components/login-page/Reset";
 import ResetCode from "./components/login-page/Reset-code";
@@ -54,6 +51,7 @@ function App() {
           path="/login"
           component={() => <Login onGGLogin={onGGLogin} />}
         />
+        <Route exact path="/adminLogin" component={LoginAdmin} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/reset" component={Reset} />
         <Route exact path="/reset-code" component={ResetCode} />
