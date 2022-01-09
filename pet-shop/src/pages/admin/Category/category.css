@@ -7,18 +7,15 @@
 .bcContainer{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    margin: 0 auto;
     margin-bottom: 64px;
 }
-.brandList{
-    padding:20px;
-    height:410px;
-    flex:1;
-}
+
 .categoryList{
     padding:20px;
     height:410px;
-    flex:1;
+ 
+    width: 500px;
 
 }
 .inputUpdate{
@@ -30,6 +27,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 20px;
+    margin: 0 auto;
 }
 .newItem{
     display: flex;
@@ -64,16 +62,4 @@
 .listDelete{
     color:red;
     cursor: pointer;
-}
-.dupBrand{
-    border:none;
-    border-radius: 10px;
-    padding: 5px 5px;
-    font-size: 14px;
-    background-color: #ecea63;
-    color:#b6b307;
-    cursor: pointer;
-    margin-right: 5px;
-    margin-left: 5px;
-    line-height:normal;
 }

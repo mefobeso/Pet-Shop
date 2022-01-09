@@ -66,7 +66,9 @@ function CheckOutCart (){
                 phone,
                 address,
                 name:receiver,
-                user_id:user_id.id
+                user_id:user_id.id,
+                paymentMethod:payMethod,
+                totalPrice:cost
             })
             history.push({
                 pathname:'/home/cart/checkout',
@@ -79,7 +81,9 @@ function CheckOutCart (){
                 phone,
                 address,
                 name:receiver,
-                user_id:user_id.id
+                user_id:user_id.id, 
+                paymentMethod:payMethod,
+                totalPrice:cost
             })
             history.push({
                 pathname:'/home/cart/checkout',
@@ -108,7 +112,7 @@ function CheckOutCart (){
             </div>
             <Row xs="2" sm="3" >
             <Col><h3>Payment method </h3>
-            <PaymentMethod getMethod={getMethod} phone={phone} address={address} receiver={receiver} paySuccess={getPaySuccess} />
+            <PaymentMethod getMethod={getMethod} phone={phone} address={address} receiver={receiver} paySuccess={getPaySuccess} total={cost} />
             </Col>
             <Col>    
             </Col>
@@ -139,11 +143,6 @@ function CheckOutCart (){
                 <div><strong>Ship fee:</strong>    ${shipFee} </div>
                 <hr/>
                 <div><strong>Total:</strong>    ${cost} </div>
-                {/* <Link to={{
-                    pathname:"/home/cart/checkout",
-                    state: {receiver,address,phone, cost}
-                    }} >
-                </Link> */}
                         <Button onClick={checkOut} >Confirm</Button>
             </div>
             </form>

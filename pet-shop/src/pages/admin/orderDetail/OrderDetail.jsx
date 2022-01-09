@@ -20,22 +20,21 @@ export default function OrderDetail() {
     const totalPerPro = (count,price)=> count * price
 
     const UpdateStatus = async () =>{
-        await axios.put(`https://design-pattern-project.herokuapp.com/orders/${id}`,{
+        await axios.put(`https://petshoptmdt.herokuapp.com/bill/${id}`,{
             status:status,
-            updatedAt: new Date()
         })
-        .then(res=>alert(res.data))
+        .then(res=>alert(res.data.message))
         .catch(err=>console.log(err))
-        await axios.get(`https://design-pattern-project.herokuapp.com/orders/${id}`)
+        await axios.get(`https://petshoptmdt.herokuapp.com/bill/${id}`)
         .then(res=>setOrder(res.data))
        
     }
 
     useEffect(()=>{
-        axios.get(`https://design-pattern-project.herokuapp.com/orders/${id}`)
+        axios.get(`https://petshoptmdt.herokuapp.com/bill/${id}`)
         .then(res=>setOrder(res.data))
-        axios.get(`https://design-pattern-project.herokuapp.com/products/`)
-        .then(res=>setProducts(res.data))
+        axios.get(`https://petshoptmdt.herokuapp.com/products`)
+        .then(res=>setProducts(res.data.Products))
     },[])
     return (
         <div className="orderDetail">
@@ -50,11 +49,6 @@ export default function OrderDetail() {
                         </div>
                     </div>
                     <div className="orderDetailLeftBottom">
-                        
-                        {/* <div className="inforItem">
-                            <span className="inforKey"><LocalAtm/> Total</span>
-                            <span className="inforValue">€200 </span>
-                        </div> */}
                         <div className="inforItem">
                             <span className="inforKey"><PhoneAndroid className="IconKey"/> Phone</span>
                             <span className="inforValue">{order.phone}</span>
@@ -65,24 +59,20 @@ export default function OrderDetail() {
                         </div>
                         <div className="inforItem">
                             <span className="inforKey"><CalendarToday className="IconKey" /> Create At</span>
-                            <span className="inforValue">{order.createdAt ? order.createdAt.slice(0,10) : ""}</span>
-                        </div>
-                        <div className="inforItem">
-                            <span className="inforKey"><CalendarToday className="IconKey" /> Update At</span>
-                            <span className="inforValue">{order.updatedAt ? order.updatedAt.slice(0,10) : "" }</span>
+                            <span className="inforValue">{order.date ? order.date.slice(0,10) : ""}</span>
                         </div>
                         <div className="inforItem">
                             <span className="inforKey"><LabelImportant className="IconKey" />Status</span>
                             <select name="status" id="status" onChange={e=>setStatus(e.target.value)} className={`selectorStatus statusSelect ${order.status}`}>
                                 <option className={`statusSelect ${order.status}`} value={order.status} hidden selected>{order.status}</option>
                                 <option className='statusSelect Pending' value="Pending">Pending</option>
-                                <option className='statusSelect Approved' value="Approved">Approved</option>
-                                <option className='statusSelect Declined' value="Declined">Declined</option>
+                                <option className='statusSelect Approved' value="Confirmed">Confirmed</option>
+                                <option className='statusSelect Declined' value="Canceled">Canceled</option>
                             </select>
                         </div>
                         <div className="inforItem">
                             <span className="inforKey"><Comment className="IconKey" />Notes</span>
-                            <textarea name="" id="" cols="3" rows="4" readOnly value={order.notes}/>
+                            <textarea name="" id="" cols="20" rows="4" readOnly value={order.notes}/>
                         </div>
                         <button className="updateOrder" onClick={()=>UpdateStatus()}>Update</button>
                     </div>
@@ -100,11 +90,11 @@ export default function OrderDetail() {
                                 <th className="DetailCartTh" >Price</th>
                                 <th className="DetailCartTh" >Total</th>
                             </tr>
-                            {order.products &&
-                             order.products.map((item,index)=>
+                            {order.details &&
+                             order.details.map((item,index)=>
                                 <tr key={index}>
                                 <td>
-                                    <img src={products.length !== 0 ? getProduct(item.product_id).image[0] : ""} alt="" className="proImg" />
+                                    <img src={products.length !== 0 ? getProduct(item.product_id).img[0] : ""} alt="" className="proImg" />
                                 </td>
                                 <td>
                                     <div className="proValueName">
@@ -113,24 +103,24 @@ export default function OrderDetail() {
                                 </td>
                                 <td>
                                     <div className="proValue">
-                                        x{item.count}
+                                        x{item.amount}
                                     </div>
                                 </td>
                                 <td>
                                     <div className="proValue">
-                                        €{item.price ? item.price : products.length !== 0 ? getProduct(item.product_id).price:"" }
+                                        ${item.price ? item.price : products.length !== 0 ? getProduct(item.product_id).price:"" }
                                     </div>
                                 </td>
                                 <td>
                                     <div className="proValue">
-                                    €{item.price ? totalPerPro(item.count, item.price)  : totalPerPro(item.count, products.length !== 0 ? getProduct(item.product_id).price : 1) }
+                                    ${item.price ? totalPerPro(item.count, item.price)  : totalPerPro(item.count, products.length !== 0 ? getProduct(item.product_id).price : 1) }
                                     </div>
                                 </td>
                             </tr>
                             )}
                             
                         </table>
-                        <div className="TotalCart">Total: €{order.totalPrice}</div>
+                        <div className="TotalCart"><LocalAtm className="IconKey"/>Total: ${order.totalPrice}</div>
                     </div>
                 </div>
             </div>

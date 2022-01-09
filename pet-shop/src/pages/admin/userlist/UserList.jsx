@@ -18,16 +18,9 @@ export default function UserList() {
           width: 150,
         },
         {
-          field: 'email',
-          headerName: 'Email',
+          field: 'status',
+          headerName: 'Status',
           width: 150,
-        },
-        {
-          field: 'age',
-          headerName: 'Age',
-          type: 'number',
-          width: 120,
-          
         },
         {
           field: 'address',
@@ -46,7 +39,7 @@ export default function UserList() {
         {
             field:"action",
             headerName:"Action",
-            width:150,
+            width:350,
             renderCell: (params)=>{
                 return(
                     <>
@@ -63,13 +56,13 @@ export default function UserList() {
     const [rowData,setRowData] = useState([])
     const handleDelete = (id) =>{
         setRowData(rowData.filter(item=>item._id !== id))
-        axios.delete(`https://design-pattern-project.herokuapp.com/users/${id}`)
+        axios.delete(`https://petshoptmdt.herokuapp.com/auth/${id}`)
     }
     useEffect(()=>{
-       axios.get('https://design-pattern-project.herokuapp.com/users')
+       axios.get('https://petshoptmdt.herokuapp.com/auth')
        .then(res=>{
-        setRowData(res.data
-        .filter(user=>user.role_id === '61bef16eea27063f1fdf595f')
+        setRowData(res.data.accounts
+        .filter(user=>user.role_id === '61cea5e5d6d3f5dae84b4406')
         .map((data,index)=> Object.defineProperty(data,'id',{value:index+1,writable:false}))
         )
         })

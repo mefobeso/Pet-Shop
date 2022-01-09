@@ -32,7 +32,7 @@ module.exports.AddBill = async (req, res) => {
 };
 module.exports.UpdateBill = async (req, res) => {
   try {
-    let bill = await Bill.findById(req.params.id);
+    const bill = await Bill.findById(req.params.id);
 
     lodash.extend(bill, req.body);
     bill && bill.save();

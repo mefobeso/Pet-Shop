@@ -10,9 +10,11 @@ import NewUser from './newuser/NewUser'
 import ProductsList from './products/ProductsList'
 import ProductDetail from './productdetail/ProductDetail'
 import NewProduct from './newproduct/NewProduct'
-import BrandCate from './brandcate/BrandCate'
+import Category from './Category/Category'
 import Orders from './orders/Orders'
 import OrderDetail from './orderDetail/OrderDetail'
+import Voucher from './voucher/Voucher'
+import VoucherDetail from './voucherdetail/VoucherDetail'
 
 export default function index() {
     return (
@@ -51,8 +53,8 @@ export default function index() {
                         component={NewProduct}
                     />
                     <Route exact
-                        path={process.env.PUBLIC_URL + "/admin/brandcate" }
-                        component={BrandCate}
+                        path={process.env.PUBLIC_URL + "/admin/category" }
+                        component={Category}
                     />
                     <Route exact
                         path={process.env.PUBLIC_URL + "/admin/orders" }
@@ -61,6 +63,14 @@ export default function index() {
                     <Route exact
                         path={process.env.PUBLIC_URL + "/admin/orders/:id" }
                         component={OrderDetail}
+                    />
+                    <Route exact
+                        path={process.env.PUBLIC_URL + "/admin/vouchers" }
+                        component={Voucher}
+                    />
+                    <Route exact
+                        path={process.env.PUBLIC_URL + "/admin/vouchers/:id" }
+                        component={VoucherDetail}
                     />
                 </Switch>
             </div>

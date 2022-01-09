@@ -15,10 +15,9 @@ export default function NewUser() {
     const [role,setRole]= useState();
     const [roles,setRoles]= useState([]);
     const CreateUser = () =>{
-        axios.post('https://design-pattern-project.herokuapp.com/users/register',{
+        axios.post('https://petshoptmdt.herokuapp.com/auth/register',{
             username:newUsername,
             name:newName,
-            age:newAge,
             password:newPassword,
             email:newEmail,
             phone:newPhone,
@@ -26,13 +25,13 @@ export default function NewUser() {
             role_id:role
         })
         .then(res=>{
-            alert(res.data)
+            alert(res.data.message)
             history.push('/admin/users')
         })
     }
 
     useEffect(()=>{
-        axios.get('https://design-pattern-project.herokuapp.com/roles')
+        axios.get('https://petshoptmdt.herokuapp.com/roles')
         .then(res=>setRoles(res.data))
     },[])
 
@@ -55,10 +54,6 @@ export default function NewUser() {
                 <div className="newUserItem">
                     <label>Phone</label>
                     <input type="text" onChange={e=>setNewPhone(e.target.value)}  placeholder="Enter phone"  />
-                </div>
-                <div className="newUserItem">
-                    <label>Age</label>
-                    <input type="number" onChange={e=>setNewAge(e.target.value)}  placeholder="Enter age"  />
                 </div>
                 <div className="newUserItem">
                     <label>Email</label>

@@ -4,7 +4,7 @@ import styles from "./sass/css/checkout.module.css";
 import Paypal from "./PayPal"
 
 
-function PaymentMethod({getMethod,phone,address,receiver,paySuccess}) {
+function PaymentMethod({getMethod,phone,address,receiver,paySuccess, total}) {
     const banks = [
     {
         name: 'Vietcombank',
@@ -73,7 +73,7 @@ function PaymentMethod({getMethod,phone,address,receiver,paySuccess}) {
                 )} 
                 {
                     method === methods[0] && 
-                    <Paypal paySuccess={paySuccess}  phone={phone} address={address} receiver={receiver} className={styles.paypal}/>
+                    <Paypal paySuccess={paySuccess} total={total} phone={phone} address={address} receiver={receiver} className={styles.paypal}/>
                 }
             </div>
         </div>

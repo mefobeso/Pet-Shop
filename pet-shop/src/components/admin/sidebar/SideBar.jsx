@@ -47,10 +47,10 @@ export default function SideBar() {
                                 Orders
                             </li>
                         </Link>
-                        <Link to="/admin/brandcate">
+                        <Link to="/admin/category">
                             <li onClick={()=>handleActive(6)} className={active == 6 ? `sidebarListItem active`: "sidebarListItem"}>
                                 <LocalOffer className="sidebarIcon"/>
-                                Brand &amp; Cate
+                                Category
                             </li>
                         </Link>
                         <Link to="/admin/users">

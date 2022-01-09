@@ -15,35 +15,34 @@ export default function User() {
     const [orderUser,setOrderUser]= useState([]);
 
     const UpdateUser = async () =>{
-       await axios.put(`https://design-pattern-project.herokuapp.com/users/${id}`,{
+       await axios.put(`https://petshoptmdt.herokuapp.com/auth/${id}`,{
         name:newName,
-        age:newAge,
+
         phone:newPhone,
         email:newEmail,
         address:newAddress
        })
-       .then(res=>alert(res.data))
-       await axios.get(`https://design-pattern-project.herokuapp.com/users/${id}`)
+       .then(res=>alert(res.data.message))
+       await axios.get(`https://petshoptmdt.herokuapp.com/auth/${id}`)
        .then(res=>{
-           setUser(res.data)
+           setUser(res.data.account)
        })
     }   
     const getOrderUser = (id) =>{
-        // getOrderUser().reduce((acc,order)=> acc + order.totalPrice,0)
              
-        return order.filter(item => item.user_id === id)      
+        return order.filter(item => item.user_id === id && item.status === "Confirmed")      
     } 
     const getUser = () =>{
-        return axios.get(`https://design-pattern-project.herokuapp.com/users/${id}`)   
+        return axios.get(`https://petshoptmdt.herokuapp.com/auth/${id}`)   
       }
     const getOrders = () =>{
-        return axios.get("https://design-pattern-project.herokuapp.com/orders")   
+        return axios.get("https://petshoptmdt.herokuapp.com/bill")   
       }
     useEffect( ()=>{
         axios.all([getUser(),getOrders()])
         .then(res=>{
-            setUser(res[0].data)
-            setOrder(res[1].data)
+            setUser(res[0].data.account)
+            setOrder(res[1].data.bills)
         })
         .catch(err=>console.log(err))
 
@@ -72,10 +71,6 @@ export default function User() {
                             <span className="userShowInforTitle">{user.phone}</span>
                         </div>
                         <div className="userShowInfor">
-                            <Cake className="userShowIcon"/>
-                            <span className="userShowInforTitle">{user.age}</span>
-                        </div>
-                        <div className="userShowInfor">
                             <EmailOutlined className="userShowIcon"/>
                             <span className="userShowInforTitle">{user.email}</span>
                         </div>
@@ -97,10 +92,6 @@ export default function User() {
                             <div className="userUpdateItem">
                                 <label>Phone</label>
                                 <input type="text" onChange={e=>setNewPhone(e.target.value)} placeholder={user.phone} className="userUpdateInput" />
-                            </div>
-                            <div className="userUpdateItem">
-                                <label>Age</label>
-                                <input type="text" onChange={e=>setNewAge(e.target.value)} placeholder={user.age} className="userUpdateInput" />
                             </div>                        
                             <div className="userUpdateItem">
                                 <label>Email</label>
@@ -121,7 +112,7 @@ export default function User() {
                                 <div className="userOrder">
                                     <AttachMoney className="orderIcon" />
                                     <span className="OrderCountTitle">Total paid: </span>
-                                    <span className="OrderCount">€{order.length !== 0 ? getOrderUser(user._id).reduce((acc,order)=> acc + order.totalPrice,0):0}</span>
+                                    <span className="OrderCount">€{order.length !== 0 ? getOrderUser(user._id).reduce((acc,order)=> acc + order.totalPrice ,0):0}</span>
                                 </div>
                             </div>
                             

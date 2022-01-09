@@ -7,12 +7,6 @@ import axios from 'axios'
 
 export default function Orders() {
     
-    const CloneProduct = async (id) =>{
-        // await axios.post(`https://design-pattern-project.herokuapp.com/brands/dup/${id}`)
-        // await axios.get('https://design-pattern-project.herokuapp.com/brands')
-        // .then(res=>{setBrand(res.data.map((item,index)=> Object.defineProperty(item,'id',{value:index+1,writable:false})))})
-    }
-
     const columns = [
         { field: 'id', headerName: 'STT', width: 110 },
         {
@@ -53,7 +47,7 @@ export default function Orders() {
                 return(
                     <>
                     <Link to={"/admin/orders/" + params.row._id}>
-                    <button className="ordersEdit">Edit</button>
+                    <button className="ordersEdit">View Details</button>
                     </Link>
                     
                     </>
@@ -64,9 +58,9 @@ export default function Orders() {
     const [rowData,setRowData] = useState([])
 
     useEffect(()=>{
-        axios.get('https://design-pattern-project.herokuapp.com/orders')
+        axios.get('https://petshoptmdt.herokuapp.com/bill')
         .then(res=>{
-         setRowData(res.data
+         setRowData(res.data.bills
          .map((data,index)=> Object.defineProperty(data,'id',{value:index+1,writable:false}))
          )
          })

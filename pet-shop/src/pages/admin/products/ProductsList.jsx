@@ -7,11 +7,6 @@ import axios from 'axios'
 
 export default function ProductsList() {
 
-    const CloneProduct = async (id) =>{
-        // await axios.post(`https://design-pattern-project.herokuapp.com/brands/dup/${id}`)
-        // await axios.get('https://design-pattern-project.herokuapp.com/brands')
-        // .then(res=>{setBrand(res.data.map((item,index)=> Object.defineProperty(item,'id',{value:index+1,writable:false})))})
-    }
     const columns = [
         { field: 'id', headerName: 'STT', width: 90,sortable: false, },
         
@@ -19,6 +14,7 @@ export default function ProductsList() {
             field: 'img',
             headerName: 'Image',
             width: 130,
+            height:80,
             renderCell:(params)=>{
                 return(
                     <div>
@@ -32,26 +28,14 @@ export default function ProductsList() {
         {
             field: 'name',
             headerName: 'Name',
-            width: 180,
+            width: 220,
           },
-          {
-            field: 'category_id',
-            headerName: 'Category',
-            width: 140,
-            renderCell:(params)=>{
-                return(
-                    <div>
-                        {params.row.category_id.name}
-                    </div>
-                )
-            }
-        },
         {
           field: 'price',
-          headerName: 'Price (€)',
+          headerName: 'Price ($)',
           sortable: true,
           type:'number',
-          width: 130,
+          width: 150,
           
         },
           {
@@ -60,10 +44,11 @@ export default function ProductsList() {
             type: 'number',
             width: 120,    
           },
+          
         {
             field:"action",
             headerName:"Action",
-            width:200,
+            width:300,
             renderCell: (params)=>{
                 return(
                     <>
@@ -71,7 +56,6 @@ export default function ProductsList() {
                     <button className="productsListEdit">Edit</button>
                     </Link>
                     <DeleteOutline className="productsListDelete" onClick={()=>handleDelete(params.row._id)}/>
-                    <button className="dupProduct" onClick={()=>CloneProduct(params.row._id)}><FileCopy /> Clone</button>
                     </>
                 )
             }
@@ -79,19 +63,17 @@ export default function ProductsList() {
       ];
       const handleDelete = (id) =>{
         setRowData(rowData.filter(item=>item._id !== id))
-        axios.delete(`https://design-pattern-project.herokuapp.com/products/${id}`)
+        axios.delete(`https://petshoptmdt.herokuapp.com/products/${id}`)
     }
       const [rowData,setRowData] = useState([])
       useEffect(()=>{
-        axios.get('https://design-pattern-project.herokuapp.com/products')
+        axios.get('https://petshoptmdt.herokuapp.com/products')
         .then(res=>{
-         setRowData(res.data
-         .map((data,index)=> { 
+         setRowData(res.data.Products.map((data,index)=> { 
              return (
                  Object.defineProperties(data,{
-                        id:{value:index+1,writable:false}
-                    ,
-                    img:{value:data.image[0], writable:false}
+                        id:{value:index+1,writable:false},
+                    img:{value:data.img[0], writable:false}
                 })
              )
 

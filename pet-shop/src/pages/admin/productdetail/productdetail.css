@@ -47,16 +47,32 @@
 .productInforItem{
     display: flex;
     align-items: center;
+    margin-bottom: 10px;
+}
+.formLeft{
+    display: flex;
+    flex-direction: column;
+}
+.formLeft>label{
+    font-weight: 600;
+    font-size: 20px;
+}
+.formLeft>input{
+    border: 1px solid #555;
+    padding: 5px;
+    border-radius:5px;
+    margin-bottom: 10px;
 }
 .inforKey{
     margin-right: 10px;
     width: 75px;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 20px;
 }
 .inforValue{
     margin-left: 32px;
     font-weight: 300;
+    font-size: 18px;
 }
 .detailImg{
     height: 120px;

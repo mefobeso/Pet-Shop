@@ -35,7 +35,7 @@ module.exports.AddVoucher= async (req, res) => {
 }
 module.exports.UpdateVoucher = async (req, res) => {
     try {
-        let voucher = await Voucher.findById(req.params.id);
+        const voucher = await Voucher.findById(req.params.id);
         
         lodash.extend(voucher,req.body)           
            voucher && voucher.save();
