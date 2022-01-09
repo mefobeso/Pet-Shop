@@ -13,7 +13,7 @@ export default function OrderItem(props) {
     let source = axios.CancelToken.source();
     let unmounted = false;
     axios
-      .get("http://localhost:5000/bill", {
+      .get("https://petshoptmdt.herokuapp.com/bill", {
         cancelToken: source.token,
         timeout: 10000,
       })

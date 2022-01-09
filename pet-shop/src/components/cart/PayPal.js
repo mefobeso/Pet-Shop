@@ -28,7 +28,7 @@ export default function PayPal({phone,address,receiver,paySuccess}) {
             //Khi chấp nhận thanh toán
             onApprove: async(data,actions)=>{
                 const order = await actions.order.capture()
-                axios.post("http://localhost:5000/bill",{
+                axios.post("https://petshoptmdt.herokuapp.com/bill",{
                     details:cart.map(item=>{
                         return ({
                             product_id:item.id, 

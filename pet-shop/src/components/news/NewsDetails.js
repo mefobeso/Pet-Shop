@@ -19,15 +19,14 @@ export default function NewsDetails() {
     let unmounted = false;
     let source = axios.CancelToken.source();
     axios
-      .get("http://localhost:5000/posts", {
+      .get(`https://petshoptmdt.herokuapp.com/posts/${params.id}`, {
         cancelToken: source.token,
         timeout: timeout,
       })
       .then((a) => {
         if (!unmounted) {
           // @ts-ignore
-          var dataFilter = a.data.posts.filter((p) => p._id === params.id);
-          setData(dataFilter[0]);
+          setData(a.data.post);
           console.log("setData");
           setLoading(false);
         }
@@ -49,13 +48,14 @@ export default function NewsDetails() {
       source.cancel("Cancelling");
     };
   }, [timeout]);
-  
+
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
     }, 1000);
   }, []);
+
   return loading ? (
     <div className="loader">
       <FadeLoader size={30} color={"#123abc"} loading={loading} />

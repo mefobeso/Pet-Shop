@@ -27,7 +27,7 @@ export default function Register() {
   const submitHandler = async (event) => {
     event.preventDefault();
     await axios
-      .post("http://localhost:5000/auth/register", {
+      .post("https://petshoptmdt.herokuapp.com/auth/register", {
         username: username,
         password: password,
       })

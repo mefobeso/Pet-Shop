@@ -75,7 +75,7 @@ export default function ProductButton(props) {
     let unmounted = false;
     let source = axios.CancelToken.source();
     axios
-      .get("http://localhost:5000/category", {
+      .get("https://petshoptmdt.herokuapp.com/category", {
         cancelToken: source.token,
         timeout: timeout,
       })

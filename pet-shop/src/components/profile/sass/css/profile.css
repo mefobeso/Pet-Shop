@@ -114,9 +114,6 @@
   height: 18em;
   margin-left: 5px;
 }
-.profile-content-order-products {
-  height: 9em;
-}
 .profile-content-order-product {
   width: 100%;
   display: flex;
@@ -127,10 +124,10 @@
   justify-self: flex-end;
 }
 .profile-content-order-product img {
-  height: 4.5em;
-  width: 10em;
-  padding: 0.2em;
-  object-fit: fill;
+  height: 60px;
+  width: 80px;
+  object-fit: contain;
+  border-radius: 8px;
 }
 .profile-content-order-product .info {
   margin-left: 5px;
@@ -173,6 +170,27 @@
 .hidden {
   display: none;
   transition: 1s;
+}
+
+.init-cancle {
+  width: 20em;
+  background-color: black;
+  color: #ddd;
+  height: 3em;
+}
+.init-cancle:hover {
+  color: white;
+  transition: 1s;
+}
+
+.profile-content-order-products {
+  height: 9em;
+}
+
+.profile-content-order-products img {
+  height: 6em;
+  width: 7em;
+  object-fit: fill;
 }
 
 /*# sourceMappingURL=profile.css.map */

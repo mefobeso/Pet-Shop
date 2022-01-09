@@ -24,7 +24,7 @@ export default function Profile() {
     let unmounted = false;
     let source = axios.CancelToken.source();
     axios
-      .get(`http://localhost:5000/auth/${id.id}`, {
+      .get(`https://petshoptmdt.herokuapp.com/auth/${id.id}`, {
         cancelToken: source.token,
         timeout: timeout,
       })

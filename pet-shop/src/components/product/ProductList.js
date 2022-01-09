@@ -29,7 +29,7 @@ export default function ProductList() {
   }, [data.length]);
 
   useEffect(async () => {
-    const dataProducts = await axios.get("http://localhost:5000/products");
+    const dataProducts = await axios.get("https://petshoptmdt.herokuapp.com/products");
     var cateFilter = dataProducts.data.Products;
     setData(cateFilter);
     if (cate) {

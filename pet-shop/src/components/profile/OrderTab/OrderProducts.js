@@ -12,7 +12,7 @@ export default function OrderProducts(props) {
     let unmounted = false;
 
     axios
-      .get("http://localhost:5000/products", {
+      .get("https://petshoptmdt.herokuapp.com/products", {
         cancelToken: source.token,
         timeout: 10000,
       })

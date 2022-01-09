@@ -35,7 +35,7 @@ export default function News() {
     let unmounted = false;
     let source = axios.CancelToken.source();
     axios
-      .get("http://localhost:5000/posts", {
+      .get("https://petshoptmdt.herokuapp.com/posts", {
         cancelToken: source.token,
         timeout: timeout,
       })

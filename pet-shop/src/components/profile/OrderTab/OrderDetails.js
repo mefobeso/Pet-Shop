@@ -1,24 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { dataOrder } from "../../../database/profile.data";
-import { a } from "../sass/css/profile.css";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 export default function OrderDetails() {
   const param = useParams();
-  // const data = dataOrder.find((p) => p.id === param.orderid);
+  const history = useHistory();
   const [data, setData] = useState();
   const [product, setProduct] = useState();
   const [totalPrice, setTotalPrice] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
   const [errorMessage, setErrorMessage] = useState();
-
+  const sum = (items, amount, price) => {
+    return items.reduce((a, b) => {
+      return a + b[amount] * b[price];
+    }, 0);
+  };
   useEffect(() => {
     setLoading(true);
     let source = axios.CancelToken.source();
     let unmounted = false;
     axios
-      .get(`http://localhost:5000/bill/${param.orderid}`, {
+      .get(`https://petshoptmdt.herokuapp.com/bill/${param.orderid}`, {
         cancelToken: source.token,
         timeout: 10000,
       })
@@ -29,12 +32,14 @@ export default function OrderDetails() {
       })
       .then(() => {
         if (!unmounted) {
-          axios.get("http://localhost:5000/products").then((res) => {
-            if (!unmounted) {
-              setProduct(res.data.Products);
-              setLoading(false);
-            }
-          });
+          axios
+            .get("https://petshoptmdt.herokuapp.com/products")
+            .then((res) => {
+              if (!unmounted) {
+                setProduct(res.data.Products);
+                setLoading(false);
+              }
+            });
         }
       })
       .catch(function (e) {
@@ -54,6 +59,26 @@ export default function OrderDetails() {
       source.cancel("cancelling");
     };
   }, []);
+  const cancleHandler = () => {
+    axios
+      .put(`https://petshoptmdt.herokuapp.com/bill/${param.orderid}`, {
+        status: "cancled",
+      })
+      .then((res) => {
+        console.log("cancled");
+      })
+      .catch(function (e) {
+        setError(true);
+        setErrorMessage(e.message);
+        setLoading(false);
+        if (axios.isCancel(e)) {
+          console.log(`request cancelled:${e.message}`);
+        } else {
+          console.log("another error happened:" + e.message);
+        }
+      });
+    history.push("/profile");
+  };
 
   return (
     !loading && (
@@ -92,9 +117,10 @@ export default function OrderDetails() {
             </div>
           );
         })}
+
         <div className="init">
           <h6>Tổng cộng:</h6>
-          <p>{`$${totalPrice}`}</p>
+          <p>{`$${sum(data.details, "amount", "price")}`}</p>
         </div>
         <div className="init">
           <h6>Hình thức thanh toán:</h6>
@@ -105,6 +131,13 @@ export default function OrderDetails() {
           <h6>Hình thức giao hàng:</h6>
           <p>{`${data.delivery_method}`}</p>
         </div>
+        {data.status === "Pending" ? (
+          <button className="init-cancle" onClick={cancleHandler}>
+            Hủy đơn hàng
+          </button>
+        ) : (
+          <div></div>
+        )}
       </div>
     )
   );
