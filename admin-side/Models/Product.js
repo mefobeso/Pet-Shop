@@ -35,6 +35,18 @@ const ProductSchema = new Schema({
     enum: ["Còn hàng", "Hết hàng"],
     default: "Còn hàng",
   },
+  comments:[
+    {
+    user_id:{
+      type:String,
+    },
+    rating:{
+      type:Number
+    },
+    comment:{
+      type:String,
+    }
+  }]
 });
 
 module.exports = mongoose.model("product", ProductSchema);
