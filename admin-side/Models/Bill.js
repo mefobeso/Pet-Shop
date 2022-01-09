@@ -29,15 +29,23 @@ const BillSchema = new Schema({
       },
     },
   ],
+  totalPrice:{
+    type:Number,
+    required: true,
+  },
   phone: Number,
   address: String,
   name: String,
+  paymentTMethod:{
+    type: String,
+    required: true,
+  },
   status: {
     type: String,
     default: "Pending",
   },
   note: {
-type: String,
+    type: String,
     required: false,
   },
 });
