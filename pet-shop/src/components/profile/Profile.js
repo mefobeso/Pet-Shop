@@ -6,7 +6,6 @@ import ProfileInfo from "./ProfileInfo";
 import ProfileBody from "./ProfileBody";
 import "./sass/css/profile.css";
 import "../FontAwesome";
-import { dataInfo, dataOrder } from "../../database/profile.data";
 import FadeLoader from "react-spinners/FadeLoader";
 
 import axios from "axios";

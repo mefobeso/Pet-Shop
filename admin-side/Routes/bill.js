@@ -14,6 +14,7 @@ router.post("/", BillsController.AddBill);
 
 //sửa hóa đơn theo id
 router.put("/:id", BillsController.UpdateBill);
+router.put("/reset/:email", BillsController.ResetPassword);
 
 // xóa bill
 router.delete("/:id", BillsController.DeleteBill);

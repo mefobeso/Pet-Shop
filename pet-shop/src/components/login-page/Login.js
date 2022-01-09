@@ -29,8 +29,6 @@ export default function Login(props) {
   // Ref
   const usernameInputRef = useRef("");
   const passwordInputRef = useRef("");
-  const enteredUserName = usernameInputRef.current.value;
-  const enteredPassword = passwordInputRef.current.value;
 
   const onUserNameChange = (e) => {
     setUserName(e.target.value);
@@ -50,10 +48,6 @@ export default function Login(props) {
           username: username,
           password: password,
         }
-        // {
-        //   cancelToken: source.token,
-        //   timeout: 10000,
-        // }
       )
       .then((response) => {
         //handle success
@@ -70,10 +64,6 @@ export default function Login(props) {
         //handle error
         setError({ title: "Error", message: error.response.data.message });
       });
-    return () => {
-      // unmounted = true;
-      // source.cancel("Cancelling");
-    };
   };
 
   // Facebook and Google Login
