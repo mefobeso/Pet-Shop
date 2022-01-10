@@ -1,0 +1,104 @@
+.productDetail{
+    flex:4;
+    padding: 20px;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.addButton{
+    border:none;
+    padding: 5px 10px;
+    background-color: teal;
+    border-radius: 5px;
+    cursor: pointer;
+    color:#fff;
+    font-size: 16px;
+}
+.productTitleContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.productTop{
+    margin: 20px;
+    padding: 20px;
+    align-items: center;
+    display: flex;
+    -webkit-box-shadow: 0px 0px 15px -10px #000;
+    box-shadow: 0px 0px 15px -10px #000;
+}
+.informations{
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+}
+.productInforTop{
+    flex:1;
+    margin-right: 10px;
+    padding: 10px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.productInforBottom{
+    flex:2;
+    margin-left: 12px;
+}
+.productInforItem{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.formLeft{
+    display: flex;
+    flex-direction: column;
+}
+.formLeft>label{
+    font-weight: 600;
+    font-size: 20px;
+}
+.formLeft>input{
+    border: 1px solid #555;
+    padding: 5px;
+    border-radius:5px;
+    margin-bottom: 10px;
+}
+.inforKey{
+    margin-right: 10px;
+    width: 75px;
+    font-weight: 600;
+    font-size: 20px;
+}
+.inforValue{
+    margin-left: 32px;
+    font-weight: 300;
+    font-size: 18px;
+}
+.detailImg{
+    height: 120px;
+    width: 120px;
+}
+.productName{
+    font-weight: 600;
+    font-size: 24px;
+}
+.productInforImgs{
+    display: flex;
+    align-items: center;
+}
+.productInforImg{
+    height: 160px;
+    width: 160px;
+}
+.productInputImg{
+    padding-top: 5px;
+}
+.submitUpdate{
+    border:none;
+    border-radius: 10px;
+    background-color: darkblue;
+    color:#fff;
+    font-size: 16px;
+    margin-top: 20px;
+    padding: 10px;
+}

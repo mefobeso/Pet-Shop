@@ -8,7 +8,7 @@ import CartInfo from "./CartInfo";
 import CartItem from "./CartItem";
 import CartSimilar from "./CartSimilar";
 import { Link } from "react-router-dom";
-import axios from "axios";
+
 import CartEmpty from "./CartEmpty";
 // css
 import "./sass/css/cart.css";
@@ -17,48 +17,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function Cart() {
   const cart = JSON.parse(localStorage.getItem("cart"));
   const [cartProduct, setCartProduct] = useState([]);
-  const [selectedVoucher, setSelectedVoucher] = useState();
-  const [voucherList, setVoucherList] = useState();
-  const [loading, setLoading] = useState();
-  const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState();
   const [key, setKey] = useState();
   const history = useHistory();
   const navigateTo = () => {
     history.push("/home/product/page=1");
   };
-  useEffect(() => {
-    setLoading(true);
-    let unmounted = false;
-    let source = axios.CancelToken.source();
-    axios
-      .get("https://petshoptmdt.herokuapp.com/voucher", {
-        cancelToken: source.token,
-        timeout: 10000,
-      })
-      .then((res) => {
-        if (!unmounted) {
-          setVoucherList(res.data.vouchers);
-          setLoading(false);
-        }
-      })
-      .catch(function (e) {
-        if (!unmounted) {
-          setError(true);
-          setErrorMessage(e.message);
-          setLoading(false);
-          if (axios.isCancel(e)) {
-            console.log(e.message);
-          } else {
-            console.log("another error" + e.message);
-          }
-        }
-      });
-    return () => {
-      unmounted = true;
-      source.cancel("cancelling");
-    };
-  }, []);
+
   useEffect(() => {
     setCartProduct(cart);
   }, []);
@@ -74,26 +38,6 @@ export default function Cart() {
     });
     console.log(cartProduct);
   };
-  const onCheckOut = () => {
-    if (selectedVoucher) {
-      axios
-        .put(
-          `https://petshoptmdt.herokuapp.com/voucher/${selectedVoucher._id}`,
-          {
-            countUse: selectedVoucher.countUse - 1,
-          }
-        )
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch(function (e) {
-          setError(true);
-          setErrorMessage(e.message);
-        });
-    } else {
-      console.log("Not using voucher");
-    }
-  };
 
   return (
     <>
@@ -107,12 +51,7 @@ export default function Cart() {
         <hr />
         <div className="cart-body">
           <div className="cart-list">
-            <CartInfo
-              cart={cartProduct}
-              key={key}
-              voucherList={voucherList}
-              setSelectedVoucher={setSelectedVoucher}
-            />
+            <CartInfo cart={cartProduct} key={key} />
             <br />
             <CartSimilar />
           </div>
@@ -160,10 +99,7 @@ export default function Cart() {
               {` BACK TO SHOPPING`}
             </button>
             <Link to="/home/cart/confirm">
-              <button
-                className="checkout"
-                onClick={onCheckOut}
-              >{`CHECK OUT`}</button>
+              <button className="checkout">{`CHECK OUT`}</button>
             </Link>
           </div>
         )}

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { now } from "lodash";
 export default function CartInfo(props) {
   const [voucher, setVoucher] = useState();
   const [voucherValue, setVoucherValue] = useState(0);
-  const [error, setError] = useState();
-  const voucherList = props.voucherList;
+  const [voucherList, setVoucherList] = useState();
+  const [loading, setLoading] = useState();
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState();
+
   const sum = (items, amount, price) => {
     return items.reduce((a, b) => {
       return a + b[amount] * b[price];
@@ -15,26 +17,44 @@ export default function CartInfo(props) {
   const voucherHandler = (e) => {
     setVoucher(e.target.value);
   };
-
+  useEffect(() => {
+    setLoading(true);
+    let unmounted = false;
+    let source = axios.CancelToken.source();
+    axios
+      .get("https://petshoptmdt.herokuapp.com/voucher", {
+        cancelToken: source.token,
+        timeout: 10000,
+      })
+      .then((res) => {
+        if (!unmounted) {
+          setVoucherList(res.data.vouchers);
+          setLoading(false);
+        }
+      })
+      .catch(function (e) {
+        if (!unmounted) {
+          setError(true);
+          setErrorMessage(e.message);
+          setLoading(false);
+          if (axios.isCancel(e)) {
+            console.log(e.message);
+          } else {
+            console.log("another error" + e.message);
+          }
+        }
+      });
+    return () => {
+      unmounted = true;
+      source.cancel("cancelling");
+    };
+  }, []);
   useEffect(() => {
     async function setValue() {
       const found = voucherList.find((p) => p.voucherName === voucher);
-      const today = new Date();
+      console.log(found !== undefined);
       if (found !== undefined) {
-        if (found.outDate > today.toISOString()) {
-          if (found.countUsed > 0) {
-            setVoucherValue(found.value);
-            props.setSelectedVoucher(found);
-          } else {
-            setError("Voucher is out of stock !");
-          }
-        } else {
-          setError("Voucher was out of date !");
-        }
-      } else {
-        setVoucherValue(0);
-        setError();
-        props.setSelectedVoucher();
+        setVoucherValue(found.value);
       }
     }
     if (voucherList) {
@@ -52,7 +72,6 @@ export default function CartInfo(props) {
         placeholder="Enter your promo here !"
         onChange={voucherHandler}
       />
-      {error && <h6 style={{ color: "red" }}>{error}</h6>}
       <hr />
     </div>
   );

@@ -1,0 +1,114 @@
+.orderDetail{
+    flex:4;
+    padding: 20px;
+    
+}
+.orderTitle{
+    font-weight: 600;
+}
+.orderDetailInfor{
+    margin-top: 15px;
+    display: flex;
+}
+.inforTitle{
+    font-size: 32px !important;
+    display: flex;
+    align-items: center;
+}
+.orderDetailLeft{
+    flex:1;
+    padding: 20px;
+    margin-right: 20px;
+    -webkit-box-shadow: 0px 0px 15px -10px #000;
+    box-shadow: 0px 0px 15px -10px #000;
+}
+.inforKeyName{
+    font-size: 32px !important;
+    color:gray;
+}
+.inforValueName{
+    font-size: 26px;
+    color:gray
+}
+.orderDetailLeftBottom{
+    display: flex;
+    flex-direction: column;
+    
+}
+.inforItem{
+    display: flex;
+    align-items:center;
+    margin: 10px 0px;
+}
+.inforKey{
+    display: flex;
+    align-items: center;
+    width:120px
+}
+.inforValue{
+    font-size: 16px;
+}
+.orderDetailRight{
+    flex:2;
+    padding: 20px;
+    -webkit-box-shadow: 0px 0px 15px -10px #000;
+    box-shadow: 0px 0px 15px -10px #000;
+}
+.IconKey{
+    margin-right: 10px;
+}
+.selectorStatus{
+    text-align: center;
+    background: rgb(201, 201, 201);
+    border-radius: 5px;
+}
+.orderDetailCart{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    height:90%;
+}
+.TotalCart{
+    font-size: 24px;
+    font-weight: 600;
+}
+.DetailCartTh{
+    text-align: left;
+}
+.OrderDetailTable{
+    width: 100%;
+    border-spacing: 20px;
+}
+.proImg{
+    width: 75px;
+    height: 75px;
+    border-radius: 5px;
+}
+.proValue{
+    font-size: 18px;
+    font-weight: 400;
+}
+.proValueName{
+    font-size: 15px;
+}
+.statusSelect.Approved{
+    background-color:#e5faf2;
+    color:#3bb077;
+}
+.statusSelect.Declined{
+    background-color: #fff0f1;
+    color:#d95087;
+}
+.statusSelect.Pending{
+    background-color: #ebf1fe;
+    color:#2a7ade;
+}
+.updateOrder{
+    border:none;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(240, 230, 90);
+    color:rgb(0, 0, 0);
+    font-size: 22px;
+}

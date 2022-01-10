@@ -1,0 +1,65 @@
+.brandcate{
+    flex:4;
+    display: flex;
+    flex-direction: column;
+}
+
+.bcContainer{
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    margin-bottom: 64px;
+}
+
+.categoryList{
+    padding:20px;
+    height:410px;
+ 
+    width: 500px;
+
+}
+.inputUpdate{
+    background: none ;
+    border:none;
+}
+.newBrandCate{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    margin: 0 auto;
+}
+.newItem{
+    display: flex;
+    align-items: center;
+    
+}
+.newItem>label{
+    font-weight: 600;
+    font-size: 16px;
+}
+.addNew{
+    width: 250px;
+    margin: 0 10px;
+}
+.addNewButton{
+    border:none;
+    border-radius: 10px;
+    background-color:rgb(110, 235, 110);
+    color:#fff;
+    padding: 5px;
+}
+.listEdit{
+    border:none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    background-color: #3bb077;
+    color:#fff;
+    cursor: pointer;
+    margin-right: 10px;
+    line-height:normal;
+}
+.listDelete{
+    color:red;
+    cursor: pointer;
+}

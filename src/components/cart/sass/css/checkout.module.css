@@ -1,0 +1,89 @@
+.heading{
+    color: #333;
+    text-align: center;
+}
+.heading h4 {
+    color: #0074ff;
+}
+.totalForm{
+   float:right;
+   margin-right: 20px;
+}
+.bank img{
+    padding: 10px;
+    margin:1px;
+    min-width: 87px;
+    max-width:56px;
+    cursor: pointer;
+}
+.bank{
+   display: flex;
+   flex-wrap: wrap;
+   justify-content:space-around;
+}
+.detail{
+    text-align: center;
+    margin-top:16px;
+}
+.infor{
+    flex-wrap: wrap;
+    float: left;
+    text-align:start;
+}
+.infor div {
+    font-size: 24px;
+}
+.product {
+border: 1px solid #ccc;
+border-right: none;
+display: flex;
+}
+.product img{
+    width: 120px;
+    height:110px;
+}
+.product .inforPro{
+   width:100%;
+   display:block
+}
+.product .namePro {
+    margin-left: 16px;
+    font-size: 24px;
+    float: left;
+}
+.product .quantityPro{
+    
+    font-size:24px;
+    float:right;
+    margin-right: 8px;
+}
+.product .pricePro{
+    margin-left: 16px;
+    margin-top: 60px; 
+    display: flex;
+    font-size:24px;
+    bottom: 0;
+}
+.btnBack {
+    text-align: center;
+    margin-top:64px;
+    margin-bottom:64px;
+}
+.inforicon{
+    width:16px !important;
+}
+.inforItem{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.inforItem>label{
+    font-weight: 600;
+    font-size: 18px;
+}
+.inforItem>input{
+    margin-top: 5px;
+    border: 1px solid gray;
+    padding: 10px;
+    border-radius:5px;
+}

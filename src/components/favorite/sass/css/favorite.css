@@ -1,0 +1,70 @@
+.favorite-container {
+  width: 1265px;
+  margin: 10px auto;
+  text-align: center;
+  margin-top: 50px;
+  height: 100vh;
+}
+.favorite-container button {
+  font-weight: bold;
+  border: none;
+  background-color: white;
+  color: #ddd;
+  height: min-content;
+}
+.favorite-container button:hover {
+  color: black;
+  transition: 1s;
+}
+.favorite-item {
+  display: flex;
+}
+.favorite-item-name {
+  width: 5em;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.favorite-item-info {
+  width: 100%;
+  justify-content: space-between;
+}
+.favorite-item-info h5 {
+  line-height: 1em;
+  text-align: start;
+}
+.favorite-item img {
+  max-height: 15em;
+  max-width: 20em;
+  aspect-ratio: 1;
+  margin-bottom: 2em;
+  box-shadow: 2px 2px 5px 1px;
+  margin-right: 1em;
+}
+.favorite-back {
+  border-radius: 5px;
+  height: 3rem;
+  width: 14rem;
+  color: rgba(255, 255, 255, 0.377);
+  background: black;
+}
+.favorite-back:hover {
+  color: #fff;
+  transition: 1s;
+}
+.favorite-navigate {
+  display: flex;
+  justify-content: flex-end;
+  margin: 2em 0;
+}
+.favorite-navigate button {
+  font-weight: bold;
+  border: none;
+  background-color: white;
+  color: #ddd;
+}
+.favorite-navigate button:hover {
+  color: black;
+  transition: 1s;
+}
+
+/*# sourceMappingURL=favorite.css.map */

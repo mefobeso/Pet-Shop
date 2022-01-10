@@ -1,0 +1,60 @@
+.banner2{
+    font-family: "Righteous";
+    height:100%;
+    width:100%;
+    color:white;
+    &-container{
+        margin: 10px auto;
+        display:flex;
+        width: 1265px;
+        height: 300px;
+        position: relative;
+    }
+    &-text{
+        position: absolute;
+        z-index: 1;
+        left: 150px;
+        top: 40%;
+        font-size: 40px;
+    }
+    &-btn{
+        height:40px;
+        width: 140px;
+        position: absolute;
+        left: 150px;
+        top: 80%;
+        background-color: #E18847;
+        border-radius: 5px;
+        display:flex;
+        justify-content: center;
+        cursor: pointer;
+    }
+    &-btn p{
+        font-size: 18px;
+    }
+    &-btn p:hover{
+        color: white;
+        transition: 1s;
+    }
+}
+.banner2 img{
+    position: absolute;
+    z-index: -1;
+}
+.hl{
+    left: 150px;
+    top: 35%;
+    position: absolute;
+    width: 900px;
+    border-top: 5px solid white;
+    border-radius: 5px;
+    z-index: 1;
+}
+.thin{
+    top:60%;
+    border-top: 1px solid white;
+}
+.small{
+    top: 65%;
+    font-size: 20px;
+}

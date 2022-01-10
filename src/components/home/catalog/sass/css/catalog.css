@@ -1,0 +1,70 @@
+.catalog {
+  height: 80px;
+  width: 100%;
+  display: grid;
+  justify-content: center;
+  text-align: center;
+  background-color: white;
+  grid-template-columns: 200px 200px 200px;
+}
+.catalog-container {
+  height: 1100px;
+  width: 1265px;
+  margin: 60px auto;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.catalog-wrapper {
+  width: 100%;
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  margin-top: 50px;
+}
+.catalog-items {
+  position: absolute;
+  display: grid;
+  grid-template-columns: 230px 230px 230px 230px;
+  grid-template-rows: 400px 400px;
+  grid-column-gap: 60px;
+  grid-row-gap: 80px;
+  opacity: 0;
+}
+.catalog-item {
+  background-color: white;
+  text-align: center;
+  box-shadow: 4px 8px 4px 0px;
+  border: 0.8px black solid;
+}
+.catalog-item-name {
+  padding-top: 30px;
+  font-size: 20px;
+}
+.catalog-item-price {
+  font-weight: 100;
+  font-size: 20px;
+}
+.catalog-items.active {
+  opacity: 1;
+  z-index: 1;
+  transition: 1s;
+}
+.catalog-item img {
+  width: 100%;
+  height: 250px;
+  cursor: pointer;
+  object-fit: fill;
+  border-bottom: 0.8px black solid;
+}
+.catalog-btn-item {
+  height: 80px;
+  padding-top: 30px;
+  cursor: pointer;
+}
+.catalog-btn-item.active {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  transition: 0.5s;
+}
+
+/*# sourceMappingURL=catalog.css.map */

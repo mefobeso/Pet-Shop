@@ -1,0 +1,164 @@
+// Product List
+.productlist {
+  margin-top: 100px;
+  text-align: center;
+}
+.productlist h6 {
+  color: #ddd;
+}
+
+.product {
+  box-shadow: 4px 4px 9px 0px;
+  margin-bottom: 0.5em;
+  padding: 0.5em;
+  &-container {
+    max-width: 1265px;
+    margin: 10px auto;
+    margin-top: 50px;
+    position: relative;
+    box-sizing: border-box;
+    text-align: start;
+    display: grid;
+  }
+
+  // grid view
+  &-container.grid {
+    grid-template-columns: 23% 23% 23% 23%;
+    grid-template-rows: 400px 400px;
+    grid-gap: 0px 30px;
+  }
+  // List view
+  &-container.list {
+    grid-row-gap: 0.5em;
+  }
+
+  // ProductButton.js
+  &-button {
+    max-width: 1265px;
+    height: 15px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+  }
+  &-button div {
+    display: flex;
+    line-height: 20px;
+    font-size: 20px;
+  }
+  &-button .menu {
+    box-shadow: 4px 4px 9px 0px;
+    z-index: 11;
+    padding: 1em;
+    display: flex;
+    position: absolute;
+    background-color: white;
+  }
+  // product-info
+  &-info .product-link {
+    text-decoration: none;
+    color: black;
+  }
+}
+.product-info img {
+  height: 18em;
+  width: 100%;
+}
+.product.grid {
+  &-info {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    
+  }
+  &-info .icon {
+    font-size: 20px;
+  }
+}
+
+// List view
+.list.product {
+  display: flex;
+}
+.list.product {
+  box-shadow: 4px 4px 9px 0px;
+  &-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    overflow-y: hidden;
+  }
+  &-info button {
+    height: min-content;
+  }
+}
+.product.list img {
+  height: 9em;
+  width: 9em;
+}
+
+// Product Button
+
+.product-button .icon {
+  cursor: pointer;
+}
+.product-button .icon.active {
+  color: #18bc9c;
+  transition: 0.5s;
+}
+.filter:hover .filter-menu {
+  visibility: visible;
+  opacity: 1;
+  color: black;
+  background-color: #fff;
+}
+.filter {
+  &-menu {
+    width: 50%;
+    margin-top: 1.3em;
+    justify-content: space-between;
+
+  }
+  &-inn{
+    width: 12em;
+    justify-content: space-between;
+  }
+  &-in{
+    flex-direction: column;
+  }
+  &-inner {
+    display: flex;
+    flex-direction: column;    
+  }
+  &-inner p {
+    font-size: 0.8em;
+    line-height: 0.8em;
+  }
+ 
+}
+.filter .active {
+  color: #18bc9c;
+  transition: 0.5s;
+}
+.filter-menu button {
+  background-color: white;
+  border: none;
+  box-shadow: 1px 1px 4px 0px;
+  padding: 0px 0.2em;
+  height: 2em;
+  margin-top: 2em;
+}
+.sort{
+  &-menu{
+    margin-top: 3em ;
+    right: 6em;
+    width: 8em;
+    flex-direction: column;
+  }
+  &-menu p{
+    cursor: pointer;
+  }
+  &-menu p:hover{
+    color: #18bc9c;
+  transition: 0.5s;
+  }
+}
