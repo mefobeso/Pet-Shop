@@ -22,7 +22,7 @@ function HomePage(props) {
     let source = axios.CancelToken.source();
     setLoading(true);
     axios
-      .get("http://localhost:5000/products", {
+      .get("https://petshoptmdt.herokuapp.com/products", {
         cancelToken: source.token,
         timeout: timeout,
       })

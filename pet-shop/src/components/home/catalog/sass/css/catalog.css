@@ -44,6 +44,14 @@
   font-weight: 100;
   font-size: 20px;
 }
+.catalog-items a {
+  color: black;
+  text-decoration: none;
+}
+.catalog-items a:hover {
+  color: black;
+  text-decoration: none;
+}
 .catalog-items.active {
   opacity: 1;
   z-index: 1;
