@@ -15,6 +15,7 @@ import Orders from './orders/Orders'
 import OrderDetail from './orderDetail/OrderDetail'
 import Voucher from './voucher/Voucher'
 import VoucherDetail from './voucherdetail/VoucherDetail'
+import NewVoucher from './newvoucher/NewVoucher'
 
 export default function index() {
     return (
@@ -71,6 +72,10 @@ export default function index() {
                     <Route exact
                         path={process.env.PUBLIC_URL + "/admin/vouchers/:id" }
                         component={VoucherDetail}
+                    />
+                    <Route exact
+                        path={process.env.PUBLIC_URL + "/admin/newvoucher" }
+                        component={NewVoucher}
                     />
                 </Switch>
             </div>
