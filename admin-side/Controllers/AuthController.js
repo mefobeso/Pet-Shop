@@ -93,6 +93,18 @@ module.exports.UpdateAccount = async (req, res) => {
         res.status(500).json({ success: false, message: 'lỗi server' })
     }
 }
+module.exports.UpdateAccountByEmail = async (req, res) => {
+   
+    try {
+        const user = await User.find(req.params.email)
+        lodash.extend(user,req.body)           
+           user && user.save();
+            res.status(200).json({ success: true, message: 'Thay đổi thành công'})               
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ success: false, message: 'lỗi server' })
+    }
+}
 module.exports.DeleteAccount = async (req, res) => {
     try {
         const AccountDeleteConditions = { _id: req.params.id, user: req.userId }
