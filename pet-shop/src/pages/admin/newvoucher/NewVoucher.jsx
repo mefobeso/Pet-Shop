@@ -34,7 +34,7 @@ export default function NewVoucher() {
                 </div>
                 <div className="newVoucherItem">
                     <label>Value</label>
-                    <input type="number" onChange={e=>setValue(e.target.value)}  placeholder="Enter value"  />
+                    <input type="number" min="1" onChange={e=>setValue(e.target.value)}  placeholder="Enter value"  />
                 </div>
                 <div className="newVoucherItem">
                     <label>Out Date</label>
@@ -42,7 +42,7 @@ export default function NewVoucher() {
                 </div>
                 <div className="newVoucherItem">
                     <label>Count Uses</label>
-                    <input type="number"  onChange={e=>setCountUse(e.target.value)}  placeholder="Enter amount of using"  />
+                    <input type="number" min="1" onChange={e=>setCountUse(e.target.value)}  placeholder="Enter amount of using"  />
                 </div>
                 <div className="newVoucherItem">
                     <label>Description</label>

@@ -34,6 +34,7 @@
     "react-scripts": "4.0.3",
     "react-spinners": "^0.11.0",
     "reactstrap": "^8.10.0",
+    "recharts": "^2.1.8",
     "web-vitals": "^1.1.2"
   },
   "scripts": {

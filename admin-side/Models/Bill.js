@@ -33,7 +33,7 @@ const BillSchema = new Schema({
     type:Number,
     required: true,
   },
-  phone: Number,
+  phone: String,
   address: String,
   name: String,
   paymentTMethod:{

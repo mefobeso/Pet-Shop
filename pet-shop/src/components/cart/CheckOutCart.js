@@ -36,7 +36,6 @@ function CheckOutCart (){
     }
     
     useEffect(() =>{
-        console.log(cart)
         cart.map(item=>{
             setProducts(pre=>[
                 ...pre,{
@@ -61,7 +60,7 @@ function CheckOutCart (){
             }
         }
         else if (method === "cash on delivery"){
-            axios.post("http://localhost:5000/bill",{
+            axios.post("https://petshoptmdt.herokuapp.com/bill",{
                 details:products,
                 phone,
                 address,
@@ -69,14 +68,16 @@ function CheckOutCart (){
                 user_id:user_id.id,
                 paymentMethod:payMethod,
                 totalPrice:cost
+            }).then((res)=>{
+                history.push({
+                    pathname:'/home/cart/checkout',
+                    state: {receiver,address,phone, cost,cart}
+                })
             })
-            history.push({
-                pathname:'/home/cart/checkout',
-                state: {receiver,address,phone, cost,cart}
-            })
+            
         }
         else if (method === "online banking"){
-            axios.post("http://localhost:5000/bill",{
+            axios.post("https://petshoptmdt.herokuapp.com/bill",{
                 details:products,
                 phone,
                 address,
@@ -84,10 +85,11 @@ function CheckOutCart (){
                 user_id:user_id.id, 
                 paymentMethod:payMethod,
                 totalPrice:cost
-            })
-            history.push({
-                pathname:'/home/cart/checkout',
-                state: {receiver,address,phone, cost,cart}
+            }).then((res)=>{
+                history.push({
+                    pathname:'/home/cart/checkout',
+                    state: {receiver,address,phone, cost,cart}
+                })
             })
         }
 
@@ -116,8 +118,7 @@ function CheckOutCart (){
             </Col>
             <Col>    
             </Col>
-            <Col>
-            
+            <Col>           
                 <form onSubmit={handleSubmit}>
                     <FormGroup>
                     <h3>Information</h3>

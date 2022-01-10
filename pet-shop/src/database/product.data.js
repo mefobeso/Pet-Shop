@@ -108,7 +108,7 @@ const dataProducts = [
   },
 ];
 const products = []
-axios.get("http://localhost:5000/products")
+axios.get("https://petshoptmdt.herokuapp.com/products")
 .then(res => res.data.Products.map(item=>products.push(item)))
 
 const productByCategory = (category) => {

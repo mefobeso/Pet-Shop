@@ -15,7 +15,7 @@ import CartSimilar from "../components/cart/CartSimilar";
 export default function ProductDetail() {
   const timeout = 0;
 
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState({});
   const [cate, setCate] = useState([]);
   const [mainImg, setMainImg] = useState(0);
 
@@ -28,14 +28,14 @@ export default function ProductDetail() {
     let unmounted = false;
     let source = axios.CancelToken.source();
     axios
-      .get("http://localhost:5000/products", {
+      .get(`https://petshoptmdt.herokuapp.com/products/${id}`, {
         cancelToken: source.token,
         timeout: timeout,
       })
       .then((a) => {
         if (!unmounted) {
           // @ts-ignore
-          setProduct(a.data.Products.find((p) => p._id === id));
+          setProduct(a.data);
           setLoading(false);
         }
       })
@@ -75,7 +75,7 @@ export default function ProductDetail() {
       <Container>
         <div className="ProductDetail">
           <Row>
-            {!loading && (
+            {!loading && product && (
               <Col width="25%" className="ImgProduct">
                 <div className="ImgDetail">
                   <img src={product.img[mainImg]} alt="mainImg" />
