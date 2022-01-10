@@ -7,7 +7,7 @@ export default function TopBar() {
         <div className="topbar">
             <div className="topbarWrapper">
                 <div className="topLeft">
-                    <img className="adminlogo" src="/assets/img/logo/logo.png" alt="" />
+                    <img className="adminlogo" src={process.env.PUBLIC_URL + "/logo-white.png"} alt="" />
                 </div>
                 <div className="topRight">
                     <div className="topbarIconsContainer">

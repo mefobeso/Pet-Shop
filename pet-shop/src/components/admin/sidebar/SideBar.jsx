@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import "./sidebar.css"
 import {Home, TrendingUp,Timeline,PersonOutline,Category, Storefront,
-    LocalOffer,EventNote} from '@material-ui/icons';
+    LocalOffer,EventNote, LocalAtm} from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 
 export default function SideBar() {
@@ -51,6 +51,12 @@ export default function SideBar() {
                             <li onClick={()=>handleActive(6)} className={active == 6 ? `sidebarListItem active`: "sidebarListItem"}>
                                 <LocalOffer className="sidebarIcon"/>
                                 Category
+                            </li>
+                        </Link>
+                        <Link to="/admin/vouchers">
+                            <li onClick={()=>handleActive(8)} className={active == 8 ? `sidebarListItem active`: "sidebarListItem"}>
+                                <LocalAtm className="sidebarIcon"/>
+                                Voucher
                             </li>
                         </Link>
                         <Link to="/admin/users">

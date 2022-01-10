@@ -8,7 +8,6 @@ export default function NewUser() {
     const [newUsername,setNewUsername]= useState();
     const [newName,setNewName]= useState();
     const [newPassword,setNewPassword]= useState();
-    const [newAge,setNewAge]= useState();
     const [newPhone,setNewPhone]= useState();
     const [newEmail,setNewEmail]= useState();
     const [newAddress,setNewAddress]= useState();

@@ -2,6 +2,11 @@
     flex:4;
     padding: 20px;
 }
+.VoucherDetailTop{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 .voucherDetailContainer{
     display: flex;
     margin-top: 32px;
