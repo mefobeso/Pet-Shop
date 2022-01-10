@@ -18,7 +18,6 @@ router.get("/:id", AuthController.GetDetailAccount);
 
 // cấp quyền hoạt động hoặc khóa tài khoản
 router.put("/:id", AuthController.UpdateAccount);
-router.put("/reset/:email", AuthController.UpdateAccountByEmail);
 
 // xóa tài khoản
 router.delete("/:id", AuthController.DeleteAccount);
