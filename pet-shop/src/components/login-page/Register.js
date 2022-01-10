@@ -96,6 +96,7 @@ export default function Register() {
       <div className="login-container">
         <div className="login-background"></div>
         <form className="login" onSubmit={submitHandler}>
+          <br />
           <p className="login-title">REGISTER</p>
           <input
             type="text"

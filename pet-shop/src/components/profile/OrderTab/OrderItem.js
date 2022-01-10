@@ -65,16 +65,16 @@ export default function OrderItem(props) {
                     justifyContent: "space-between",
                   }}
                 >
-                  <div>
+                  <div >
                     <b>Order #{index + 1}</b>
-                    <p>
+                    <h6 style={{color:"#ddd"}}>
                       {day} {month} {year}
-                    </p>
+                    </h6>
                   </div>
                   <div>
                     <h6
                       className={
-                        obj.status === "Cancled"
+                        obj.status === "Canceled"
                           ? "red"
                           : obj.status === "Confirmed"
                           ? "green"
