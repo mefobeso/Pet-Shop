@@ -38,6 +38,7 @@
 }
 .cart-body {
   display: flex;
+  min-height: 27em;
 }
 .cart-item {
   display: flex;
