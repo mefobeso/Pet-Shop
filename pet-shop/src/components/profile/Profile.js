@@ -50,38 +50,7 @@ export default function Profile() {
       source.cancel("Cancelling");
     };
   }, [timeout]);
-  useEffect(() => {
-    setLoading(true);
-    let unmounted = false;
-    let source = axios.CancelToken.source();
-    axios
-      .get(`http://localhost:5000/auth/${id.id}`, {
-        cancelToken: source.token,
-        timeout: timeout,
-      })
-      .then((res) => {
-        if (!unmounted) {
-          setData(res.data);
-          setLoading(false);
-        }
-      })
-      .catch((e) => {
-        if (!unmounted) {
-        }
-        setError(true);
-        setErrorMessage(e.message);
-        setLoading(false);
-        if (axios.isCancel(e)) {
-          console.log(`request cancelled:${e.message}`);
-        } else {
-          console.log("another error happened:" + e.message);
-        }
-      });
-    return () => {
-      unmounted = true;
-      source.cancel("Cancelling");
-    };
-  }, [timeout]);
+ 
   const [tab, setTab] = useState(0);
   const tabChange = (tab) => {
     setTab(tab);
