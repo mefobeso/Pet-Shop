@@ -8,6 +8,7 @@ export default function ResetDone() {
     <div className="login-container">
       <div className="login-background"></div>
       <form className="login">
+        <br />
         <h4>PASSWORD CHANGED !</h4>
 
         <button onClick={navigateTo}>Back to login</button>

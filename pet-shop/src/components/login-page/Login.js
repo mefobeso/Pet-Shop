@@ -37,16 +37,17 @@ export default function Login(props) {
     setPassword(e.target.value);
   };
   const submitHandler = async (event) => {
+    event.preventDefault();
     setLoading(true);
     // let unmounted = false;
     // const source = axios.Cancel.source();
-    event.preventDefault();
     await axios
       .post(
         "https://petshoptmdt.herokuapp.com/auth/login",
         {
           username: username,
           password: password,
+      
         }
       )
       .then((response) => {
@@ -57,7 +58,6 @@ export default function Login(props) {
           JSON.stringify({ id: response.data.userId })
         );
         history.replace("/home");
-
         setLoading(false);
       })
       .catch((error) => {

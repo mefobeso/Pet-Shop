@@ -22,6 +22,7 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   // Submit
   const submitHandler = async (event) => {
@@ -30,6 +31,9 @@ export default function Register() {
       .post("https://petshoptmdt.herokuapp.com/auth/register", {
         username: username,
         password: password,
+        email: email,
+        phone: phone,
+        address: address,
       })
       .then((response) => {
         //handle success
@@ -73,6 +77,9 @@ export default function Register() {
   const phoneChangeHandler = (e) => {
     setPhone(e.target.value);
   };
+  const addressChangeHandler = (e) => {
+    setAddress(e.target.value);
+  };
   const okayButtonHandler = () => {
     setError(null);
   };
@@ -114,7 +121,7 @@ export default function Register() {
           <br />
           <input
             type="email"
-            className="login-input confirmpassword"
+            className="login-input"
             placeholder="Email"
             name="to_email"
             onChange={emailChangeHandler}
@@ -122,10 +129,18 @@ export default function Register() {
           <br />
           <input
             type="text"
-            className="login-input confirmpassword"
+            className="login-input"
             placeholder="Phone"
             name="to_phone"
             onChange={phoneChangeHandler}
+          />
+          <br />
+          <input
+            type="text"
+            className="login-input"
+            placeholder="Address"
+            name="to_address"
+            onChange={addressChangeHandler}
           />
           <input
             type="text"

@@ -1,13 +1,13 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import axios from "axios";
 import "./sass/css/login.css";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { Fragment } from "react";
 import ErrorModal from "../UI/ErrorModal";
-export default function ResetForm() {
-  const history = useHistory();
-  const navigateTo = () => history.push("/reset-done");
+export default function ResetForm(props) {
   const passwordInputRef = useRef();
   const confirmPasswordInputRef = useRef();
+  const [errorMessage, setErrorMessage] = useState(null);
   const [error, setError] = useState();
   const onResetPasswordSubmit = (e) => {
     e.preventDefault();
@@ -21,7 +21,10 @@ export default function ResetForm() {
     if (
       passwordInputRef.current.value === confirmPasswordInputRef.current.value
     ) {
-      navigateTo();
+      axios.put(`https://petshoptmdt.herokuapp.com/auth/${props.id}`, {
+        password: passwordInputRef.current.value,
+      });
+      props.setResetState(3);
     } else {
       setError({
         title: "Wrong confirm password !",
@@ -63,7 +66,6 @@ export default function ResetForm() {
           <br />
           <br />
           <button>Next</button>
-          <br />
           <br />
           <br />
         </form>

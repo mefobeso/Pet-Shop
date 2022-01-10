@@ -1,18 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./sass/css/login.css";
-import { useHistory } from "react-router-dom";
 import { Fragment } from "react";
 import ErrorModal from "../UI/ErrorModal";
-export default function ResetCode() {
+export default function ResetCode(props) {
+  
   const [error, setError] = useState();
   const [localCode, setLocalCode] = useState();
-  const history = useHistory();
   const codeInputRef = useRef();
-  const navigateTo = () => history.push("/reset-form");
+ 
   const onResetCodeSubmit = (event) => {
     event.preventDefault();
     if (codeInputRef.current.value === localCode) {
-      navigateTo();
+      props.setResetState(2);
       localStorage.removeItem("reset-code");
     } else {
       setError({
