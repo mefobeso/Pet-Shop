@@ -191,3 +191,27 @@ $t-color: rgba(0, 0, 0, 0.5);
   width: 7em;
   object-fit: fill;
 }
+.edit {
+  border: none;
+  background-color: white;
+  outline: none;
+  float: right;
+  margin-right: 1em;
+  &-form input{
+    width: 100%;
+    margin-bottom: 1em;
+    
+  }
+  &-form button{
+    background-color: white;
+    color: black;
+    width: 25%;
+    height: 3em;
+  }
+  &-form button:hover{
+    color:white;
+    background-color: black;
+    width: 75%;
+    transition: 1s;
+  }
+}

@@ -193,4 +193,28 @@
   object-fit: fill;
 }
 
+.edit {
+  border: none;
+  background-color: white;
+  outline: none;
+  float: right;
+  margin-right: 1em;
+}
+.edit-form input {
+  width: 100%;
+  margin-bottom: 1em;
+}
+.edit-form button {
+  background-color: white;
+  color: black;
+  width: 25%;
+  height: 3em;
+}
+.edit-form button:hover {
+  color: white;
+  background-color: black;
+  width: 75%;
+  transition: 1s;
+}
+
 /*# sourceMappingURL=profile.css.map */

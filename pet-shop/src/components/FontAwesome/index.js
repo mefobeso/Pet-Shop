@@ -2,6 +2,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 
 import {
   faLock,
+  faEdit,
   faAngleDown,
   faAngleLeft,
   faAngleRight,
@@ -28,11 +29,13 @@ import {
   faChevronLeft,
   faHeart,
   faTrash,
+  faPen,
   faCartPlus,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
   faLock,
+  faEdit,
   faAngleDown,
   faAngleLeft,
   faAngleRight,
@@ -59,5 +62,6 @@ library.add(
   faChevronLeft,
   faHeart,
   faTrash,
+  faPen,
   faCartPlus
 );
