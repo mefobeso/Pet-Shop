@@ -125,11 +125,19 @@ export default function OrderDetails() {
         <div className="init">
           <h6>Hình thức thanh toán:</h6>
 
-          <p>{`${data.payment_method}`}</p>
+          <p>{`${data.paymentTMethod}`}</p>
         </div>
         <div className="init">
-          <h6>Hình thức giao hàng:</h6>
-          <p>{`${data.delivery_method}`}</p>
+          <h6>Địa chỉ giao hàng:</h6>
+          <p>{`${data.address}`}</p>
+        </div>
+        <div className="init">
+          <h6>Người nhận:</h6>
+          <p>{`${data.name}`}</p>
+        </div>
+        <div className="init">
+          <h6>Số điện thoại:</h6>
+          <p>0{`${data.phone}`}</p>
         </div>
         {data.status === "Pending" ? (
           <button className="init-cancle" onClick={cancleHandler}>

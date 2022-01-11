@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import ErrorModal from "../UI/ErrorModal";
 // Facebook and Google Login
 import GoogleLogin from "react-google-login";
-import FacebookLogin from "react-facebook-login";
 import axios from "axios";
 export default function Login(props) {
   const clientId =
@@ -26,10 +25,10 @@ export default function Login(props) {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    if(localStorage.getItem('tokenUser')){
-        history.replace('/home')
+    if (localStorage.getItem("tokenUser")) {
+      history.replace("/home");
     }
-})
+  });
   useEffect(() => {
     setLoading(true);
     let unmounted = false;
@@ -111,10 +110,6 @@ export default function Login(props) {
   const onFailGG = (res) => {
     console.log("Login fail", res);
   };
-  const responseFacebook = (res) => {
-    console.log("Login success", res);
-    navigateHome();
-  };
 
   //
   const onUserNameChange = (e) => {
@@ -134,7 +129,10 @@ export default function Login(props) {
       .then((response) => {
         //handle success
         console.log(response.data);
-        localStorage.setItem('tokenUser', "Bearer " + response.data.accessToken);
+        localStorage.setItem(
+          "tokenUser",
+          "Bearer " + response.data.accessToken
+        );
         localStorage.setItem(
           "user",
           JSON.stringify({ id: response.data.userId })
@@ -202,14 +200,7 @@ export default function Login(props) {
               cookiePolicy={"single_host_origin"}
             />
             <br />
-            <FacebookLogin
-              appId={appId}
-              autoLoad={true}
-              fields="name,email,picture"
-              callback={responseFacebook}
-              cssClass="button"
-              textButton="Facebook"
-            />
+
             <p>______________________________</p>
             <a href="/reset" className="login-link">
               CAN'T SIGN IN ?

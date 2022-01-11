@@ -51,7 +51,7 @@ function App() {
           <NewsDetails />
         </Route>
         {/* Login */}
-        <Route exact path="/login" component={() => <Login />} />
+        <Route exact path="/login" component={Login} />
         <Route exact path="/adminLogin" component={LoginAdmin} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/reset" component={Reset} />
