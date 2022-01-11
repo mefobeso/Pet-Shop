@@ -108,7 +108,11 @@ function Headerwhite(props) {
                   ref={searchInputRef}
                   className="white-header-search"
                 />
-                <FontAwesomeIcon icon="search" onClick={searchHandler} style={{marginLeft:"0.5em"}}/>
+                <FontAwesomeIcon
+                  icon="search"
+                  onClick={searchHandler}
+                  style={{ marginLeft: "0.5em" }}
+                />
               </form>
             )}
           </li>
@@ -142,7 +146,7 @@ function Headerwhite(props) {
             </a>
           </li>
         </ul>
-        <CartPopup onHover={onCartHover} />
+        {localStorage.getItem("cart") && <CartPopup onHover={onCartHover} />}
       </nav>
     </div>
   );

@@ -8,10 +8,9 @@ export default function RegisterDone() {
     <div className="login-container">
       <div className="login-background"></div>
       <form className="login">
-        <h4>REGISTER SUCESS !</h4>
-        <br/>
-        <button onClick={navigateTo}>Back to login</button>
         <br />
+        <h4>REGISTER SUCESS !</h4>
+        <button onClick={navigateTo}>Back to login</button>
         <br />
       </form>
     </div>

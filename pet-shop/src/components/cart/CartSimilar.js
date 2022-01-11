@@ -8,7 +8,7 @@ export default function CartSimilar() {
       <h6 style={{ marginTop: "-2em", color: "rgb(180,180,180)" }}>
         Looking for something ?
       </h6>
-      {products.slice(0, 3).map((product, index) => {
+      {products.slice(1, 5).map((product, index) => {
         return (
           <div key={Math.random(10,20)} className="cart-similar">
             <img src={product.img[0]} alt="" className="" />

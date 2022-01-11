@@ -6,19 +6,21 @@ import emailjs from "emailjs-com";
 import axios from "axios";
 // css
 import "./sass/css/login.css";
-
+import RegisterCode from "./Register-code";
+import RegisterDone from "./Register-done";
 export default function Register() {
   // Function
   // useHistory
   const history = useHistory();
-  const navigateTo = () => history.push("./register-code");
+
   var num = Math.floor(Math.random() * 90000) + 10000;
   // State
-
+  const [registState, setRegistState] = useState(0);
   const [error, setError] = useState();
   const [errorMessage, setErrorMessage] = useState();
   const [loading, setLoading] = useState();
   const [username, setUserName] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -30,9 +32,11 @@ export default function Register() {
     await axios
       .post("https://petshoptmdt.herokuapp.com/auth/register", {
         username: username,
+        name: name,
         password: password,
         email: email,
         phone: phone,
+        status: "Khóa",
         address: address,
       })
       .then((response) => {
@@ -51,7 +55,7 @@ export default function Register() {
               console.log(error.text);
             }
           );
-        history.replace("/register-code");
+        setRegistState(1);
       })
       .catch((error) => {
         //handle error
@@ -64,6 +68,9 @@ export default function Register() {
 
   const usernameChangeHandler = (e) => {
     setUserName(e.target.value);
+  };
+  const nameChangeHandler = (e) => {
+    setName(e.target.value);
   };
   const passwordChangeHandler = (e) => {
     setPassword(e.target.value);
@@ -93,71 +100,86 @@ export default function Register() {
           onConfirm={okayButtonHandler}
         />
       )}
+
       <div className="login-container">
         <div className="login-background"></div>
-        <form className="login" onSubmit={submitHandler}>
-          <p className="login-title">REGISTER</p>
-          <input
-            type="text"
-            className="login-input"
-            placeholder="Username"
-            onChange={usernameChangeHandler}
-            name="to_name"
-          />
-          <br />
-          <input
-            type="password"
-            className="login-input"
-            placeholder="Password"
-            onChange={passwordChangeHandler}
-          />
-          <br />
-          <input
-            type="password"
-            className="login-input confirmpassword"
-            placeholder="Confirm Password"
-            onChange={confirmPasswordChangeHandler}
-          />
-          <br />
-          <input
-            type="email"
-            className="login-input"
-            placeholder="Email"
-            name="to_email"
-            onChange={emailChangeHandler}
-          />
-          <br />
-          <input
-            type="text"
-            className="login-input"
-            placeholder="Phone"
-            name="to_phone"
-            onChange={phoneChangeHandler}
-          />
-          <br />
-          <input
-            type="text"
-            className="login-input"
-            placeholder="Address"
-            name="to_address"
-            onChange={addressChangeHandler}
-          />
-          <input
-            type="text"
-            name="confirm_code"
-            style={{ display: "none" }}
-            value={num}
-            readOnly
-          />
-          <br />
-          <button>Next</button>
-          <br />
+        {registState === 0 ? (
+          <form className="login" onSubmit={submitHandler}>
+            <p className="login-title">REGISTER</p>
+            <input
+              type="text"
+              className="login-input"
+              placeholder="Username"
+              onChange={usernameChangeHandler}
+              name="to_name"
+            />
+            <br />
+            <input
+              type="text"
+              className="login-input"
+              placeholder="Name"
+              onChange={nameChangeHandler}
+              name="to_name1"
+            />
+            <br />
+            <input
+              type="password"
+              className="login-input"
+              placeholder="Password"
+              onChange={passwordChangeHandler}
+            />
+            <br />
+            <input
+              type="password"
+              className="login-input confirmpassword"
+              placeholder="Confirm Password"
+              onChange={confirmPasswordChangeHandler}
+            />
+            <br />
+            <input
+              type="email"
+              className="login-input"
+              placeholder="Email"
+              name="to_email"
+              onChange={emailChangeHandler}
+            />
+            <br />
+            <input
+              type="text"
+              className="login-input"
+              placeholder="Phone"
+              name="to_phone"
+              onChange={phoneChangeHandler}
+            />
+            <br />
+            <input
+              type="text"
+              className="login-input"
+              placeholder="Address"
+              name="to_address"
+              onChange={addressChangeHandler}
+            />
+            <input
+              type="text"
+              name="confirm_code"
+              style={{ display: "none" }}
+              value={num}
+              readOnly
+            />
+            <br />
+            <button>Next</button>
+            <br />
 
-          <a href="/login" className="login-link">
-            ALREADY HAVE AN ACCOUNT ?
-          </a>
-          <br />
-        </form>
+            <a href="/login" className="login-link">
+              ALREADY HAVE AN ACCOUNT ?
+            </a>
+            <br />
+          </form>
+        ) : registState === 1 ? (
+          <RegisterCode email={email} setRegistState={setRegistState} />
+        ) : (
+          <RegisterDone />
+        )}
       </div>
     </Fragment>
   );

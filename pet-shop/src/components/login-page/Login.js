@@ -1,35 +1,117 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, Fragment } from "react";
 import "./sass/css/login.css";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import ErrorModal from "../UI/ErrorModal";
 // Facebook and Google Login
-import FacebookLogin from "react-facebook-login";
 import GoogleLogin from "react-google-login";
+import FacebookLogin from "react-facebook-login";
 import axios from "axios";
-import { Fragment } from "react/cjs/react.development";
-
 export default function Login(props) {
-  // Variable
   const clientId =
     "881544965186-ps5l0kdtqg35ifsbhm8gii58pbr8mlbn.apps.googleusercontent.com";
   const appId = "1821016354755986";
-
+  // Variable
   const history = useHistory();
   const navigateTo = () => history.goBack();
   const navigateHome = () => {
     history.push("/home");
   };
+  let timeout = 10000;
 
   // State
+  const [data, setData] = useState();
   const [error, setError] = useState();
   const [errorMessage, setErrorMessage] = useState("");
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  // Ref
-  const usernameInputRef = useRef("");
-  const passwordInputRef = useRef("");
+  useEffect(() => {
+    setLoading(true);
+    let unmounted = false;
+    let source = axios.CancelToken.source();
+    axios
+      .get(`https://petshoptmdt.herokuapp.com/auth`, {
+        cancelToken: source.token,
+        timeout: timeout,
+      })
+      .then((res) => {
+        if (!unmounted) {
+          setData(res.data.accounts);
+          setLoading(false);
+        }
+      })
+      .catch((e) => {
+        if (!unmounted) {
+          setError(true);
+          setErrorMessage(e.message);
+          setLoading(false);
+          if (axios.isCancel(e)) {
+            console.log(`request cancelled:${e.message}`);
+          } else {
+            console.log("another error happened:" + e.message);
+          }
+        }
+      });
+    return () => {
+      unmounted = true;
+      source.cancel("Cancelling");
+    };
+  }, [timeout]);
+  //Google
+  const onSuccessGG = async (res) => {
+    console.log("Login success", res);
+    const existed = data.find((p) => p.email === res.profileObj.email);
+    if (existed) {
+      await axios
+        .post("https://petshoptmdt.herokuapp.com/auth/login", {
+          username: res.profileObj.googleId,
+          password: "google",
+        })
+        .then((response) => {
+          //handle success
+          console.log(response.data);
+          localStorage.setItem(
+            "user",
+            JSON.stringify({ id: response.data.userId })
+          );
+          history.replace("/home");
+          setLoading(false);
+        })
+        .catch((error) => {
+          //handle error
+          setError({ title: "Error", message: error.response.data.message });
+        });
+    }
+    if (!existed) {
+      await axios
+        .post("https://petshoptmdt.herokuapp.com/auth/register", {
+          username: res.profileObj.googleId,
+          name: res.profileObj.name,
+          password: "google",
+          email: res.profileObj.email,
+          phone: 0,
+          status: "Hoạt động",
+          address: "none",
+        })
+        .then((response) => {
+          //handle success
+          console.log(response.data);
+        })
+        .catch((error) => {
+          //handle error
+          setError({ title: "Error", message: error.response.data.message });
+        });
+    }
+  };
+  const onFailGG = (res) => {
+    console.log("Login fail", res);
+  };
+  const responseFacebook = (res) => {
+    console.log("Login success", res);
+    navigateHome();
+  };
 
+  //
   const onUserNameChange = (e) => {
     setUserName(e.target.value);
   };
@@ -39,17 +121,11 @@ export default function Login(props) {
   const submitHandler = async (event) => {
     event.preventDefault();
     setLoading(true);
-    // let unmounted = false;
-    // const source = axios.Cancel.source();
     await axios
-      .post(
-        "https://petshoptmdt.herokuapp.com/auth/login",
-        {
-          username: username,
-          password: password,
-      
-        }
-      )
+      .post("https://petshoptmdt.herokuapp.com/auth/login", {
+        username: username,
+        password: password,
+      })
       .then((response) => {
         //handle success
         console.log(response.data);
@@ -67,19 +143,7 @@ export default function Login(props) {
   };
 
   // Facebook and Google Login
-  const onSuccessGG = (res) => {
-    console.log("Login success", res);
-    navigateHome();
-    props.onGGLogin();
-  };
-  const onFailGG = (res) => {
-    console.log("Login fail", res);
-  };
-  const responseFacebook = (res) => {
-    console.log("Login success", res);
-    navigateHome();
-    props.onGGLogin();
-  };
+
   const okayButtonHandler = () => {
     setError(null);
   };
@@ -117,21 +181,11 @@ export default function Login(props) {
               placeholder=" Password"
               value={password}
               onChange={onPasswordChange}
-              // ref={passwordInputRef}
             />
             <br />
             <button type="submit">Log in</button>
             <p>______________________________</p>
-            <FacebookLogin
-              appId={appId}
-              autoLoad={true}
-              fields="name,email,picture"
-              callback={responseFacebook}
-              cssClass="button"
-              textButton="Facebook"
-            />
 
-            <br />
             <GoogleLogin
               className="gg"
               onClick={navigateTo}
@@ -140,6 +194,15 @@ export default function Login(props) {
               onSuccess={onSuccessGG}
               onFailure={onFailGG}
               cookiePolicy={"single_host_origin"}
+            />
+            <br />
+            <FacebookLogin
+              appId={appId}
+              autoLoad={true}
+              fields="name,email,picture"
+              callback={responseFacebook}
+              cssClass="button"
+              textButton="Facebook"
             />
             <p>______________________________</p>
             <a href="/reset" className="login-link">

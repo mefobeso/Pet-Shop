@@ -1,9 +1,0 @@
-.cart{
-  border: none;
-  background-color: white;
-}
-.cart:hover {
-  color: green;
-  transition: 1s;
-}
-

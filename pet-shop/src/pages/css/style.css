@@ -37,11 +37,37 @@
   margin-right: 5px;
   width: 80px;
   text-align: center;
-  box-shadow: 1px 1px 3px 0px;
+  box-shadow: 1px 1px 0px 0px;
+  margin-bottom: 1em;
 }
 
 .DescriptionDetail {
 }
 .similar {
   right: 0px;
+}
+.send-btn {
+  width: 5em;
+  height: 3em;
+  background-color: black;
+  color: #ddd;
+}
+.send-btn:hover {
+  color: white;
+  transition: 1s;
+}
+.comment-input {
+  width: 100%;
+  min-height: 5em;
+  box-shadow: 1px 1px 3px 0px;
+  margin: 1em 0;
+}
+.comment-img {
+  height: 3em;
+  width: 3em;
+  border-radius: 50%;
+}
+.comment-rating {
+  width: 5em;
+  margin: 1em 0;
 }

@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import { useEffect } from "react/cjs/react.development";
 
 export default function CartQuantity(props) {
+  const [selectedQuantity, setSelectedQuantity] = useState(1);
   useEffect(() => {
     setSelectedQuantity(props.amount);
   }, []);
-
-  const [selectedQuantity, setSelectedQuantity] = useState(1);
-
   useEffect(() => {
     props.onAmountChange(selectedQuantity);
   }, [selectedQuantity]);

@@ -1,11 +1,15 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // Pages
 import HomePage from "./components/home/HomePage";
+import About from "./components/layouts/About";
+import Contact from "./components/layouts/Contact";
+import Address from "./components/layouts/Address";
+import FAQ from "./components/layouts/FAQ";
 import LandingPage from "./components/LandingPage";
 import News from "./components/news/News";
 // Login
 import Login from "./components/login-page/Login";
-import LoginAdmin from"./components/login-page/LoginAdmin"
+import LoginAdmin from "./components/login-page/LoginAdmin";
 import Register from "./components/login-page/Register";
 import Reset from "./components/login-page/Reset";
 import ResetCode from "./components/login-page/Reset-code";
@@ -28,29 +32,26 @@ import OrderedCart from "./components/cart/OrderedCart";
 import NewsDetails from "./components/news/NewsDetails";
 // Admin
 // import AdminLayout from "./components/admin/layouts/Admin";
-import AdminHome from "./pages/admin/index"
+import AdminHome from "./pages/admin/index";
+
 function App() {
   // Login State
-
-  const onGGLogin = () => {
-    localStorage.setItem("isLoggedIn", "1");
-  };
 
   return (
     <Router>
       <Switch>
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/home" component={() => <HomePage />} />
+        <Route exact path="/about" component={() => <About />} />
+        <Route exact path="/contact" component={() => <Contact />} />
+        <Route exact path="/address" component={() => <Address />} />
+        <Route exact path="/faq" component={() => <FAQ />} />
         <Route exact path="/news/page=:page" component={News} />
         <Route path="/news/details/id=:id" exact>
           <NewsDetails />
         </Route>
         {/* Login */}
-        <Route
-          exact
-          path="/login"
-          component={() => <Login onGGLogin={onGGLogin} />}
-        />
+        <Route exact path="/login" component={() => <Login />} />
         <Route exact path="/adminLogin" component={LoginAdmin} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/reset" component={Reset} />
@@ -78,15 +79,9 @@ function App() {
         <Route exact path="/home/cart/confirm" component={CheckOutCart} />
         <Route exact path="/home/cart/checkout" component={OrderedCart} />
 
-
-          {/* ADMIN SITE */}
-          <Route
-                path={process.env.PUBLIC_URL + "/admin"}
-                component={AdminHome}
-          />
-          
+        {/* ADMIN SITE */}
+        <Route path={process.env.PUBLIC_URL + "/admin"} component={AdminHome} />
       </Switch>
-    
     </Router>
   );
 }

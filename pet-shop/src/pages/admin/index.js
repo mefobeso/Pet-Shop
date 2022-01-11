@@ -16,7 +16,6 @@ import OrderDetail from './orderDetail/OrderDetail'
 import Voucher from './voucher/Voucher'
 import VoucherDetail from './voucherdetail/VoucherDetail'
 import NewVoucher from './newvoucher/NewVoucher'
-import Analytics from './analytics/Analytics'
 
 export default function index() {
     return (
@@ -77,10 +76,6 @@ export default function index() {
                     <Route exact
                         path={process.env.PUBLIC_URL + "/admin/newvoucher" }
                         component={NewVoucher}
-                    />
-                    <Route exact
-                        path={process.env.PUBLIC_URL + "/admin/analytics" }
-                        component={Analytics}
                     />
                 </Switch>
             </div>

@@ -24,16 +24,20 @@
   position: absolute;
   left: 150px;
   top: 80%;
-  background-color: #E18847;
+  background-color: #e18847;
   border-radius: 5px;
   display: flex;
   justify-content: center;
   cursor: pointer;
 }
-.banner2-btn p {
+.banner2-btn {
   font-size: 18px;
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  padding-top: 0.5em;
 }
-.banner2-btn p:hover {
+.banner2-btn:hover {
   color: white;
   transition: 1s;
 }
@@ -61,6 +65,11 @@
 .small {
   top: 65%;
   font-size: 20px;
+}
+
+.btn:hover {
+  color: white;
+  transition: 1s;
 }
 
 /*# sourceMappingURL=banner_2.css.map */
