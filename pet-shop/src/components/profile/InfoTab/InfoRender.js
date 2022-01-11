@@ -23,7 +23,6 @@ export default function InfoRender(props) {
   const okayButtonHandler = () => {
     setError(null);
   };
-  console.log(dataInfo._id);
   const onSubmit = (e) => {
     e.preventDefault();
     axios
