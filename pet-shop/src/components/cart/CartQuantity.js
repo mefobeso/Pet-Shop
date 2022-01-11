@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useEffect } from "react/cjs/react.development";
+import React, { useState, useEffect } from "react";
 
 export default function CartQuantity(props) {
   const [selectedQuantity, setSelectedQuantity] = useState(1);
@@ -14,7 +13,6 @@ export default function CartQuantity(props) {
       setSelectedQuantity(() => {
         setSelectedQuantity(selectedQuantity);
       });
-      console.log(selectedQuantity);
     }
     return;
   };
