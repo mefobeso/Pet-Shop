@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import "./newvoucher.css"
 import axios from 'axios'
 import { useHistory } from 'react-router-dom';
@@ -11,6 +11,12 @@ export default function NewVoucher() {
     const [value,setValue] = useState()
     const [countUse,setCountUse] = useState()
     const [des,setDes] = useState()
+
+    useEffect(() => {
+      if(!localStorage.getItem('token')){
+          history.push('/adminLogin')
+      }
+    })
     const CreateVoucher = () =>{
         axios.post('https://petshoptmdt.herokuapp.com/voucher',{
             voucherName:code.toUpperCase(),
@@ -18,6 +24,8 @@ export default function NewVoucher() {
             value: value,
             countUse: countUse,
             description:des
+        },{
+            headers:{"Authorization": localStorage.getItem('token')},
         }).then(res=>{
             
             alert(res.data.message)

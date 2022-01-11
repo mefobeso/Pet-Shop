@@ -4,12 +4,14 @@ import Footerwhite from "../layouts/Footer_white";
 import ProfileTab from "./ProfileTab";
 import ProfileInfo from "./ProfileInfo";
 import ProfileBody from "./ProfileBody";
+import { useHistory } from "react-router-dom";
 import "./sass/css/profile.css";
 import "../FontAwesome";
 import FadeLoader from "react-spinners/FadeLoader";
 
 import axios from "axios";
 export default function Profile() {
+  const history = useHistory()
   let timeout = 10000;
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -19,6 +21,11 @@ export default function Profile() {
   const [order, setOrder] = useState();
   const id = JSON.parse(localStorage.getItem("user"));
   useEffect(() => {
+    if(!localStorage.getItem('tokenUser')){
+        history.push('/login')
+    }
+  })
+  useEffect(() => {
     setLoading(true);
     let unmounted = false;
     let source = axios.CancelToken.source();
@@ -26,7 +33,7 @@ export default function Profile() {
       .get(`https://petshoptmdt.herokuapp.com/auth/${id.id}`, {
         cancelToken: source.token,
         timeout: timeout,
-      })
+      },{headers:{"Authorization": localStorage.getItem('tokenUser')},})
       .then((res) => {
         if (!unmounted) {
           setData(res.data);

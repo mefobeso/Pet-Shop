@@ -14,6 +14,12 @@ export default function NewProduct() {
   const [proImgs, setProImgs] = useState()
   const [proImg1, setProImg1] = useState()
   const [proImg2, setProImg2] = useState()
+
+    useEffect(() => {
+      if(!localStorage.getItem('token')){
+          history.push('/adminLogin')
+      }
+    })
   
  
   useEffect(() =>(
@@ -29,6 +35,8 @@ export default function NewProduct() {
             cate_id :proCate,
             description:proDes,
             img:[proImgs,proImg1,proImg2]
+        },{
+            headers:{"Authorization": localStorage.getItem('token')},
         }).then(res=>alert(res.data))
     }
     return (

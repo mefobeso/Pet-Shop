@@ -10,6 +10,12 @@ export default function OrderDetail() {
     const [order,setOrder] = useState({})
     const [status,setStatus] = useState()
     const [products,setProducts] = useState([])
+
+    useEffect(() => {
+      if(!localStorage.getItem('token')){
+          history.push('/adminLogin')
+      }
+    })
     
     const getProduct = (id) =>{
      const product =  products.find(item=>
@@ -22,6 +28,8 @@ export default function OrderDetail() {
     const UpdateStatus = async () =>{
         await axios.put(`https://petshoptmdt.herokuapp.com/bill/${id}`,{
             status:status,
+        },{
+            headers:{"Authorization": localStorage.getItem('token')},
         })
         .then(res=>alert(res.data.message))
         .catch(err=>console.log(err))

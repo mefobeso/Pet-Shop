@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from 'react'
+import {useHistory} from 'react-router-dom'
 import "./userlist.css"
 import { DataGrid } from '@material-ui/data-grid';
 import {DeleteOutline} from '@material-ui/icons';
@@ -9,6 +10,13 @@ import axios from 'axios'
   
  
 export default function UserList() {
+  const history = useHistory()
+
+    useEffect(() => {
+      if(!localStorage.getItem('token')){
+          history.push('/adminLogin')
+      }
+    })
 
     const columns = [
         { field: 'id', headerName: 'STT', width: 110 },
@@ -56,7 +64,9 @@ export default function UserList() {
     const [rowData,setRowData] = useState([])
     const handleDelete = (id) =>{
         setRowData(rowData.filter(item=>item._id !== id))
-        axios.delete(`https://petshoptmdt.herokuapp.com/auth/${id}`)
+        axios.delete(`https://petshoptmdt.herokuapp.com/auth/${id}`,{
+          headers:{"Authorization": localStorage.getItem('token')},
+        })
     }
     useEffect(()=>{
        axios.get('https://petshoptmdt.herokuapp.com/auth')

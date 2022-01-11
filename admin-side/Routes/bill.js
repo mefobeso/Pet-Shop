@@ -10,13 +10,13 @@ router.get("/", BillsController.GetBills);
 router.get("/:id", BillsController.GetDetailBills);
 
 // thêm hóa đơn
-router.post("/", BillsController.AddBill);
+router.post("/",verifyToken, BillsController.AddBill);
 
 //sửa hóa đơn theo id
-router.put("/:id", BillsController.UpdateBill);
+router.put("/:id",verifyToken, BillsController.UpdateBill);
 
 
 // xóa bill
-router.delete("/:id", BillsController.DeleteBill);
+router.delete("/:id",verifyToken, BillsController.DeleteBill);
 
 module.exports = router;

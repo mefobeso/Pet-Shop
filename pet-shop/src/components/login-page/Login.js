@@ -26,6 +26,11 @@ export default function Login(props) {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   useEffect(() => {
+    if(localStorage.getItem('tokenUser')){
+        history.replace('/home')
+    }
+})
+  useEffect(() => {
     setLoading(true);
     let unmounted = false;
     let source = axios.CancelToken.source();
@@ -129,6 +134,7 @@ export default function Login(props) {
       .then((response) => {
         //handle success
         console.log(response.data);
+        localStorage.setItem('tokenUser', "Bearer " + response.data.accessToken);
         localStorage.setItem(
           "user",
           JSON.stringify({ id: response.data.userId })

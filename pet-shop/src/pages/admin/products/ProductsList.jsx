@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import "./productslist.css"
 import { DataGrid } from '@material-ui/data-grid';
 import {DeleteOutline, FileCopy} from '@material-ui/icons';
-import {Link} from "react-router-dom"
+import {Link,useHistory} from "react-router-dom"
 import axios from 'axios'
 
 export default function ProductsList() {
@@ -61,9 +61,18 @@ export default function ProductsList() {
             }
         }
       ];
+      const history = useHistory()
+
+    useEffect(() => {
+      if(!localStorage.getItem('token')){
+          history.push('/adminLogin')
+      }
+    })
       const handleDelete = (id) =>{
         setRowData(rowData.filter(item=>item._id !== id))
-        axios.delete(`https://petshoptmdt.herokuapp.com/products/${id}`)
+        axios.delete(`https://petshoptmdt.herokuapp.com/products/${id}`,{
+          headers:{"Authorization": localStorage.getItem('token')},
+        })
     }
       const [rowData,setRowData] = useState([])
       useEffect(()=>{

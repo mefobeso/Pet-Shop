@@ -12,13 +12,13 @@ router.get("/",  ProductController.GetProducts)
 router.get("/:id", ProductController.GetDetailProduct)
 
 // thêm sản phẩm
-router.post('/',  ProductController.AddProduct);
+router.post('/',verifyToken,  ProductController.AddProduct);
 
 //sửa sản phẩm theo id
-router.put('/:id',  ProductController.UpdateProduct)
+router.put('/:id',verifyToken,  ProductController.UpdateProduct)
 
 // xóa Product
-router.delete('/:id',  ProductController.DeleteProduct)
+router.delete('/:id', verifyToken, ProductController.DeleteProduct)
 
 
 module.exports = router
