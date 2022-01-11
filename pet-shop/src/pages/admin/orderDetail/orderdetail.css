@@ -92,11 +92,11 @@
 .proValueName{
     font-size: 15px;
 }
-.statusSelect.Approved{
+.statusSelect.Confirmed{
     background-color:#e5faf2;
     color:#3bb077;
 }
-.statusSelect.Declined{
+.statusSelect.Canceled{
     background-color: #fff0f1;
     color:#d95087;
 }

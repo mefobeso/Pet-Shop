@@ -44,9 +44,9 @@ export default function FeaturedInfor() {
         var thisMonth = today.getMonth()+1
         const ordersThisMonth = orders.filter(item => calcMonth(item.date) === thisMonth && item.status === "Confirmed")
         const productsInOrders = []
-        console.log(ordersThisMonth)
+      
         ordersThisMonth.map(item=> item.details.map(product=>productsInOrders.push(product)))   
-        console.log(productsInOrders)  
+     
         const totalItemThisMonth =  productsInOrders.reduce((acc,product)=> acc+product.amount,0)
         return totalItemThisMonth
     }
@@ -55,7 +55,7 @@ export default function FeaturedInfor() {
             <div className="featuredItem">
                 <span className="featuredTitle">Sales This Month</span>
                 <div className="featuredMoneyContainer">
-                    <span className="featuredMoney">€{orders.length !==0 ? GetTotalThisMonth() : 0}</span>
+                    <span className="featuredMoney">${orders.length !==0 ? GetTotalThisMonth() : 0}</span>
                     <span className="featuredMoneyRate">
                         {orders.length !==0 ? percentCompare() < 100? 100 - percentCompare(): (percentCompare() -100).toFixed(1)  : 0}% {percentCompare() >100 ?<ArrowUpward className="featuredIcon "/>: <ArrowDownward className="featuredIcon negative"/>}
                     </span>

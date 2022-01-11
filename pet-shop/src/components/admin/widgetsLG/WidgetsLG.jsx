@@ -1,15 +1,24 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import "./widgetslg.css"
+import axios from 'axios'
+import ButtonStatus from '../ButtonStatus'
+
 
 export default function WidgetsLG() {
 
-    const Button = ({type}) =>{
-        return  <button className={"widgetLgButton " + type}>{type}</button>
+    const [orders,setOrders] = useState([])
+    useEffect(()=>{
+        axios.get('https://petshoptmdt.herokuapp.com/bill/',{
+            // headers:{"Authorization": localStorage.getItem('token')}
+        })
+        .then(res=>setOrders(res.data.bills))
+    },[])
+    const Get3NewOrders = () =>{
+        return orders.splice(orders.length-4, 4)
     }
-
     return (
         <div className="widgetLg">
-            <h3 className="widgetLgTitle">Lastest Transactions</h3>
+            <h3 className="widgetLgTitle">Lastest Transactions </h3>
             <table className="widgetLgTable">
                 <tr className="widgetLgTr">
                     <th className="widgetLgTh">Customer</th>
@@ -17,30 +26,21 @@ export default function WidgetsLG() {
                     <th className="widgetLgTh">Amount</th>
                     <th className="widgetLgTh">Status</th>
                 </tr>
-                <tr className="widgetLgTr">
-                    <td className="wigdetLgUser">
-                        <span className="widgetLgUsername">Huu Tin</span>
-                    </td>
-                    <td className="WidgetLgDate">31 Dec 2021</td>
-                    <td className="WidgetLgAmount">$200</td>
-                    <td className="WidgetLgStatus"><Button type="Pending"></Button></td>
-                </tr>
-                <tr className="widgetLgTr">
-                    <td className="wigdetLgUser">
-                        <span className="widgetLgUsername">Huu Tin</span>
-                    </td>
-                    <td className="WidgetLgDate">31 Dec 2021</td>
-                    <td className="WidgetLgAmount">$200</td>
-                    <td className="WidgetLgStatus"><Button type="Declined"></Button></td>
-                </tr>
-                <tr className="widgetLgTr">
-                    <td className="wigdetLgUser">
-                        <span className="widgetLgUsername">Huu Tin</span>
-                    </td>
-                    <td className="WidgetLgDate">31 Dec 2021</td>
-                    <td className="WidgetLgAmount">$200</td>
-                    <td className="WidgetLgStatus"><Button type="Approved"></Button></td>
-                </tr>
+                {orders.length !== 0 ? Get3NewOrders().map(order => 
+                    <tr className="widgetLgTr">
+                        <td className="wigdetLgUser">
+                            <span className="widgetLgUsername">{order.name}</span>
+                        </td>
+                        <td className="WidgetLgDate">{order.date.slice(0,10)}</td>
+                        <td className="WidgetLgAmount">${order.totalPrice}</td>
+                        <td className="WidgetLgStatus"><ButtonStatus type={order.status}></ButtonStatus></td>
+                    </tr>
+                )
+                
+                : ""}
+                
+                
+                
             </table>
         </div>
     )

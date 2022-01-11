@@ -21,15 +21,13 @@ export default function SideBar() {
                                 <Home className="sidebarIcon"/>
                                 Home
                             </li>
+                        </Link >
+                        <Link to="/admin/analytics">
+                            <li onClick={()=>handleActive(1)} className={active == 1 ? `sidebarListItem active`: "sidebarListItem"}>
+                                <Timeline className="sidebarIcon"/>
+                                Analytics
+                            </li>
                         </Link>
-                        <li onClick={()=>handleActive(1)} className={active == 1 ? `sidebarListItem active`: "sidebarListItem"}>
-                            <Timeline className="sidebarIcon"/>
-                            Analytics
-                        </li>
-                        <li onClick={()=>handleActive(2)} className={active == 2 ? `sidebarListItem active`: "sidebarListItem"}>
-                            <TrendingUp className="sidebarIcon"/>
-                            Sales
-                        </li>
                     </ul>
                 </div>
                 <div className="sidebarMenu">

@@ -66,8 +66,8 @@ export default function OrderDetail() {
                             <select name="status" id="status" onChange={e=>setStatus(e.target.value)} className={`selectorStatus statusSelect ${order.status}`}>
                                 <option className={`statusSelect ${order.status}`} value={order.status} hidden selected>{order.status}</option>
                                 <option className='statusSelect Pending' value="Pending">Pending</option>
-                                <option className='statusSelect Approved' value="Confirmed">Confirmed</option>
-                                <option className='statusSelect Declined' value="Canceled">Canceled</option>
+                                <option className='statusSelect Confirmed' value="Confirmed">Confirmed</option>
+                                <option className='statusSelect Canceled' value="Canceled">Canceled</option>
                             </select>
                         </div>
                         <div className="inforItem">

@@ -9,18 +9,20 @@ import styles from "./sass/css/checkout.module.css";
 import  PaymentMethod from "./PaymentMethod"
 
 
-
-
 function CheckOutCart (){   
     const history = useHistory();
     const cart =  JSON.parse(localStorage.getItem('cart'))
     const user_id = JSON.parse(localStorage.getItem('user'))
+    const [stock,setStock] =useState([])
     const total = useMemo(()=>{
         return (cart.reduce((cost,curr) => {
             return cost + curr.price * curr.amount
         },0))
     },[cart])
     
+    const getStockofPro = (id) =>{
+        return stock.find(item => item._id === id).quantity
+      }
     
     const shipFee = total > 200 ? 0: 2;
     const cost = shipFee + total
@@ -36,6 +38,8 @@ function CheckOutCart (){
     }
     
     useEffect(() =>{
+        axios.get('https://petshoptmdt.herokuapp.com/products/')
+        .then(res=>setStock(res.data.Products))
         cart.map(item=>{
             setProducts(pre=>[
                 ...pre,{
@@ -69,6 +73,13 @@ function CheckOutCart (){
                 paymentMethod:payMethod,
                 totalPrice:cost
             }).then((res)=>{
+                products.map(product=>{
+                    axios.put(`https://petshoptmdt.herokuapp.com/products/${product.product_id}`,{
+                      quantity: getStockofPro(product.product_id) - product.amount
+                    },{
+                    //   headers:{"Authorization": localStorage.getItem('tokenUser')},
+                    })
+                  })
                 history.push({
                     pathname:'/home/cart/checkout',
                     state: {receiver,address,phone, cost,cart}

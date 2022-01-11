@@ -30,6 +30,7 @@
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
+    
 }
 .widgetSmList{
     margin: 0;
@@ -38,13 +39,16 @@
 }
 .widgetSmListItem{
     display: flex;
-    align-items: center;
     justify-content: space-between;
     margin: 20px 0px;
 }
+.widgetSmItem{
+    display: flex;
+}
 .wigdetProduct{
     display: flex;
-    flex-direction: column
+    flex-direction: column;
+    margin-left: 10px !important;
 }
 .widgetSmProName{
     font-weight: 600;
@@ -70,11 +74,11 @@
     border: none;
     border-radius:10px;
 }
-.widgetLgButton.Approved{
+.widgetLgButton.Confirmed{
     background-color:#e5faf2;
     color:#3bb077;
 }
-.widgetLgButton.Declined{
+.widgetLgButton.Canceled{
     background-color: #fff0f1;
     color:#d95087;
 }

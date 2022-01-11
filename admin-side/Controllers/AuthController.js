@@ -33,6 +33,7 @@ module.exports.Login = async (req, res) => {
         message: "Đăng nhập thành công",
         accessToken,
         userId: user._id,
+        role_id:user.role_id
       });
     } else {
       // const accessToken = jwt.sign({ userId: user._id }, process.env.ACCESS_TOKEN_SECRET)

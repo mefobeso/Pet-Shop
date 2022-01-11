@@ -11,25 +11,33 @@ export default function Chart() {
         getMonths(new Date())
         axios.get("https://petshoptmdt.herokuapp.com/bill")
         .then(res=>{
-            setBill(res.data.bills)
-            console.log(res.data.bills)
-            res.data.bills.map(item =>{ getMonths(new Date(item.date))})
+            const arr = []
+            const revenue = (month) =>{
+                const ordersMonth = res.data.bills.filter(item => new Date(item.date).getMonth() === month && item.status === "Confirmed")
+                const totalMonth = ordersMonth.reduce((acc,item)=>{
+                    return acc + item.totalPrice
+                },0)
+                return totalMonth
+            } 
+                months.map((item,index) => {   
+                    const object = {}
+                    object.name = getMonths(index)
+                    object.Revenue = revenue(index)
+                    arr.push(object)
+                })
+                setData(arr)
+            
         })
     },[])
-    const getMonths = (date)=>{    
-        let month = date.getMonth()
-        console.log(months.find((item,index) => index === month))
+
+    const getMonths = (month)=>{   
         return months.find((item,index) => index === month )
-        
-       
     }
-    // data = [{
-    //     name:month,
-    //     Revenue:600
-    // }]
+   
     return (
         <div className="chart">
             <h3 className="chartTitle">Sales Analytics</h3>
+            {data.length !== 0 && 
             <ResponsiveContainer width="100%" aspect={4/1}>
                 <LineChart
                 width={500}
@@ -50,6 +58,7 @@ export default function Chart() {
           <Line type="monotone" dataKey="Revenue" stroke="#8884d8" activeDot={{ r: 8 }} />
         </LineChart>
       </ResponsiveContainer>
+        }
         </div>
     )
 }
