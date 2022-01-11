@@ -3,6 +3,7 @@ import "./category.css"
 import { DataGrid } from '@material-ui/data-grid';
 import {DeleteOutline,FileCopy} from '@material-ui/icons';
 import {Add} from '@material-ui/icons';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios'
 
 export default function BrandList() {
@@ -10,15 +11,27 @@ export default function BrandList() {
     const [cateName,setCateName] = useState()
     const [newCate,setNewCate] = useState()
 
+    const history = useHistory()
+
+    useEffect(() => {
+      if(!localStorage.getItem('token')){
+          history.push('/adminLogin')
+      }
+    })
+
     
     const handleDeleteCate = (id) =>{
-        axios.delete(`https://petshoptmdt.herokuapp.com/category/${id}`)
+        axios.delete(`https://petshoptmdt.herokuapp.com/category/${id}`,{
+            headers:{"Authorization": localStorage.getItem('token')},
+        })
         setCate(cate.filter(item=>item._id !== id))
     } 
 
     const handleSaveCate = (id) =>{
         axios.put(`https://petshoptmdt.herokuapp.com/category/${id}`,{
             cateName:cateName
+        },{
+            headers:{"Authorization": localStorage.getItem('token')},
         })
         .then(res=>alert(res.data.message))
         .catch(err=>console.log(err))
@@ -32,7 +45,9 @@ export default function BrandList() {
     
 
     const AddNewCategory = async () =>{
-        await axios.post("https://petshoptmdt.herokuapp.com/category",{cateName:newCate})
+        await axios.post("https://petshoptmdt.herokuapp.com/category",{cateName:newCate},{
+            headers:{"Authorization": localStorage.getItem('token')},
+        })
         .then(res=>{
             alert(res.data.message);
             setNewCate('')

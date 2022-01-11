@@ -14,12 +14,12 @@ router.post("/login", AuthController.Login);
 router.get("/", AuthController.GetAccounts);
 
 //xem tài khoản
-router.get("/:id", AuthController.GetDetailAccount);
+router.get("/:id",verifyToken, AuthController.GetDetailAccount);
 
 // cấp quyền hoạt động hoặc khóa tài khoản
-router.put("/:id", AuthController.UpdateAccount);
+router.put("/:id",verifyToken, AuthController.UpdateAccount);
 
 // xóa tài khoản
-router.delete("/:id", AuthController.DeleteAccount);
+router.delete("/:id",verifyToken, AuthController.DeleteAccount);
 
 module.exports = router;

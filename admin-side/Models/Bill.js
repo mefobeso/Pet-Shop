@@ -36,7 +36,7 @@ const BillSchema = new Schema({
   phone: String,
   address: String,
   name: String,
-  paymentTMethod:{
+  paymentMethod:{
     type: String,
     required: true,
   },

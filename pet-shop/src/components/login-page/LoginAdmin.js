@@ -35,14 +35,22 @@ export default function Login() {
         password: password,
       })
       .then((response) => {
+        if(response.data.userId === "61ceeba7524d7641f2801706"){
+          localStorage.setItem('token', "Bearer " + response.data.accessToken)
+          history.push('/admin')
+          localStorage.setItem(
+            "admin",
+            JSON.stringify({ id: response.data.userId })
+          );
+          history.replace("/admin");
+          setLoading(false);
+        }
+        else{
+            alert("Only admin can access this")
+            history.push('/')
+        }
         //handle success
-        console.log(response.data);
-        localStorage.setItem(
-          "admin",
-          JSON.stringify({ id: response.data.userId })
-        );
-        history.replace("/admin");
-        setLoading(false);
+        
       })
       .catch((error) => {
         //handle error

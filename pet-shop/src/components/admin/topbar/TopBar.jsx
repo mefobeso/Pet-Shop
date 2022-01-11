@@ -1,8 +1,17 @@
 import React from 'react'
 import {NotificationsNone, Language, AccountCircle} from '@material-ui/icons';
+import {useHistory} from 'react-router-dom'
 import "./topbar.css"
 
 export default function TopBar() {
+    const history = useHistory()
+    const useridAdmin = localStorage.getItem('admin')
+    const LogoutAdmin = ()=>{
+        localStorage.removeItem('admin')
+        localStorage.removeItem('token')
+        history.push('/adminLogin')
+    }
+
     return (
         <div className="topbar">
             <div className="topbarWrapper">
@@ -21,7 +30,7 @@ export default function TopBar() {
                     <div className="topbarIconsContainer">
                         <AccountCircle/>              
                     </div>
-                    <span>Xin chào</span>
+                    <span onClick={()=>LogoutAdmin()} className="buttonLogin">{useridAdmin ? "Đăng xuất": "Xin chào"}</span>
                 </div>
             </div>
         </div>

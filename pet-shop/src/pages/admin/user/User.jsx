@@ -1,6 +1,6 @@
 import React,{ useEffect,useState } from 'react'
 import './user.css'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useHistory} from 'react-router-dom'
 import {ShoppingCart,AccountCircle,PermIdentity,AttachMoney,Cake,PhoneAndroid,LocationOn, EmailOutlined} from '@material-ui/icons'
 import axios from 'axios'
 export default function User() {
@@ -13,6 +13,13 @@ export default function User() {
     const [newAddress,setNewAddress]= useState();
     const [order,setOrder]= useState([]);
     const [orderUser,setOrderUser]= useState([]);
+    const history = useHistory()
+
+    useEffect(() => {
+      if(!localStorage.getItem('token')){
+          history.push('/adminLogin')
+      }
+    })
 
     const UpdateUser = async () =>{
        await axios.put(`https://petshoptmdt.herokuapp.com/auth/${id}`,{
@@ -21,6 +28,8 @@ export default function User() {
         phone:newPhone,
         email:newEmail,
         address:newAddress
+       },{
+        headers:{"Authorization": localStorage.getItem('token')},
        })
        .then(res=>alert(res.data.message))
        await axios.get(`https://petshoptmdt.herokuapp.com/auth/${id}`)

@@ -10,13 +10,13 @@ const CatesController = require("../Controllers/CatesController")
 router.get("/", CatesController.GetCates)
 
 // thêm loại thú cưng
-router.post('/', CatesController.AddCate);
+router.post('/',verifyToken, CatesController.AddCate);
 
 //sửa sản phẩm theo id
-router.put('/:id',  CatesController.UpdateCate)
+router.put('/:id',verifyToken,  CatesController.UpdateCate)
 
 // xóa cate
-router.delete('/:id', verifyToken, CatesController.DeleteCate)
+router.delete('/:id', verifyToken,verifyToken, CatesController.DeleteCate)
 
 
 module.exports = router

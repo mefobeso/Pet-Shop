@@ -2,7 +2,7 @@ import React,{ useRef, useState, useEffect} from 'react'
 import axios from 'axios'
 
 
-export default function PayPal({phone,address,receiver,paySuccess,total}) {
+export default function PayPal({phone,address,receiver,paySuccess,total,note}) {
     const cart =  JSON.parse(localStorage.getItem('cart'))
     const userid = JSON.parse(localStorage.getItem('user'))
     const [products,setProducts] = useState([])
@@ -41,7 +41,10 @@ export default function PayPal({phone,address,receiver,paySuccess,total}) {
                     name:receiver,
                     user_id:userid.id, 
                     totalPrice:total,
-                    paymentMethod:"Paypal"
+                    paymentMethod:"Paypal",
+                    note:note
+                },{
+                    headers:{"Authorization": localStorage.getItem('tokenUser')},
                 })
                 paySuccess(true)
                 console.log(order)

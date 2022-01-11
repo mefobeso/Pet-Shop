@@ -13,6 +13,12 @@ export default function NewUser() {
     const [newAddress,setNewAddress]= useState();
     const [role,setRole]= useState();
     const [roles,setRoles]= useState([]);
+
+    useEffect(() => {
+      if(!localStorage.getItem('token')){
+          history.push('/adminLogin')
+      }
+    })
     const CreateUser = () =>{
         axios.post('https://petshoptmdt.herokuapp.com/auth/register',{
             username:newUsername,
@@ -22,6 +28,8 @@ export default function NewUser() {
             phone:newPhone,
             address:newAddress,
             role_id:role
+        },{
+            headers:{"Authorization": localStorage.getItem('token')},
         })
         .then(res=>{
             alert(res.data.message)

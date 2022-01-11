@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import "./orders.css"
 import { DataGrid } from '@material-ui/data-grid';
 import {FileCopy} from '@material-ui/icons';
-import {Link} from "react-router-dom"
+import {Link,useHistory} from "react-router-dom"
 import axios from 'axios'
 
 export default function Orders() {
@@ -56,6 +56,13 @@ export default function Orders() {
         }
       ];
     const [rowData,setRowData] = useState([])
+    const history = useHistory()
+
+    useEffect(() => {
+      if(!localStorage.getItem('token')){
+          history.push('/adminLogin')
+      }
+    })
 
     useEffect(()=>{
         axios.get('https://petshoptmdt.herokuapp.com/bill')

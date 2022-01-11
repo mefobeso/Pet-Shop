@@ -4,6 +4,13 @@ import { Link, useParams, useHistory } from 'react-router-dom'
 import "./voucherdetail.css"
 
 export default function VoucherDetail() {
+    const history = useHistory()
+
+    useEffect(() => {
+      if(!localStorage.getItem('token')){
+          history.push('/adminLogin')
+      }
+    })
     const {id} = useParams()
     const [voucher,setVoucher] = useState({})
     const [code,setCode] = useState()
@@ -16,6 +23,8 @@ export default function VoucherDetail() {
             value:value,
             outDate:new Date(outDate),
             description:des
+        },{
+            headers:{"Authorization": localStorage.getItem('token')},
         })
         .then(res=>alert(res.data.message))
         await axios.get(`https://petshoptmdt.herokuapp.com/voucher/${id}`)

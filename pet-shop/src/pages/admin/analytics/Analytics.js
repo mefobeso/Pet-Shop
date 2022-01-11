@@ -1,9 +1,18 @@
 import React,{useState,useEffect} from 'react'
 import './analytics.css'
+import {useHistory} from 'react-router-dom'
 import axios from 'axios'
 
 export default function Analytics() {
+    
     const [bill,setBill] = useState([])
+    const history = useHistory()
+
+    useEffect(() => {
+      if(!localStorage.getItem('token')){
+          history.push('/adminLogin')
+      }
+    })
     useEffect(()=>{
         axios.get('https://petshoptmdt.herokuapp.com/bill/')
         .then(res=>{ 

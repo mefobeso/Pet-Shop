@@ -12,13 +12,13 @@ router.get("/",  VoucherController.GetVouchers )
 router.get("/:id", VoucherController.GetDetailVoucher )
 
 // thêm voucher
-router.post('/', VoucherController.AddVoucher);
+router.post('/',verifyToken, VoucherController.AddVoucher);
 
 //sửa voucher theo id
-router.put('/:id', VoucherController.UpdateVoucher )
+router.put('/:id',verifyToken, VoucherController.UpdateVoucher )
 
 // xóa voucher
-router.delete('/:id', VoucherController.DeleteVoucher )
+router.delete('/:id',verifyToken, VoucherController.DeleteVoucher )
 
 
 module.exports = router

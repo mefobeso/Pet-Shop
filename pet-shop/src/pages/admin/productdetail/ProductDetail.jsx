@@ -1,5 +1,5 @@
 import React,{ useEffect,useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams,useHistory } from 'react-router-dom'
 import axios from 'axios'
 import "./productdetail.css"
 
@@ -11,6 +11,13 @@ export default function ProductDetail() {
     const [proPrice, setProPrice] = useState()
     const [proStock, setProStock] = useState()
     const [proDes, setProDes] = useState()
+    const history = useHistory()
+
+    useEffect(() => {
+      if(!localStorage.getItem('token')){
+          history.push('/adminLogin')
+      }
+    })
     const getProduct = () =>{
         return axios.get(`https://petshoptmdt.herokuapp.com/products/${id}`)   
       }
@@ -36,6 +43,8 @@ export default function ProductDetail() {
             price:proPrice,
             quantity:proStock,
             description:proDes,
+        },{
+            headers:{"Authorization": localStorage.getItem('token')},
         })
         .then(res=>alert(res.data.message))
     }

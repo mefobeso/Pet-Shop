@@ -14,12 +14,12 @@ router.get("/", PostsController.GetPosts)
 router.get("/:id", PostsController.GetDetailPost)
 
 // đăng bài viết
-router.post('/',  upload.single("image"),PostsController.AddPost);
+router.post('/',  verifyToken,PostsController.AddPost);
 
 //sửa bài post theo id
-router.put('/:id',  upload.single("image"), PostsController.UpdatePost)  
+router.put('/:id',  verifyToken, PostsController.UpdatePost)  
 
 // xóa post
-router.delete('/:id',  PostsController.DeletePost)
+router.delete('/:id',verifyToken,  PostsController.DeletePost)
 
 module.exports = router
