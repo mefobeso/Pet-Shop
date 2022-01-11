@@ -35,7 +35,7 @@ export default function Login() {
         password: password,
       })
       .then((response) => {
-        if(response.data.userId === "61ceeba7524d7641f2801706"){
+        if(response.data.role_id === "61cea5dcd6d3f5dae84b4404"){
           localStorage.setItem('token', "Bearer " + response.data.accessToken)
           history.push('/admin')
           localStorage.setItem(
