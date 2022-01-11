@@ -22,6 +22,8 @@ export default function ProductDetail() {
   const [product, setProduct] = useState();
   // user logged in?
   const [user, setUser] = useState();
+  const [bill, setBill] = useState();
+  const [bought, setBought] = useState();
   const [userList, setUserList] = useState();
   const [name, setName] = useState();
   // rating
@@ -32,52 +34,27 @@ export default function ProductDetail() {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  let endpoints = [
+    ` https://petshoptmdt.herokuapp.com/products/${id}`,
+    "https://petshoptmdt.herokuapp.com/auth",
+    `https://petshoptmdt.herokuapp.com/bill/`,
+  ];
   // get product details
   useEffect(() => {
     setLoading(true);
     let unmounted = false;
     let source = axios.CancelToken.source();
-    axios
-      .get(`https://petshoptmdt.herokuapp.com/products/${id}`, {
-        cancelToken: source.token,
-        timeout: timeout,
-      })
-      .then((a) => {
-        if (!unmounted) {
-          // @ts-ignore
-          setProduct(a.data);
-        }
-      })
-      .then(() => {
-        if (!unmounted) {
-          axios.get("https://petshoptmdt.herokuapp.com/auth").then((res) => {
-            if (!unmounted) {
-              setUserList(res.data.accounts);
-              setLoading(false);
-            }
-          });
-        }
-      })
-      .catch(function (e) {
-        if (!unmounted) {
-          setError(true);
-          setErrorMessage(e.message);
-          setLoading(false);
-
-          if (axios.isCancel(e)) {
-            console.log(`request cancelled:${e.message}`);
-          } else {
-            console.log("another error happened:" + e.message);
-          }
-        }
-      });
-
-    return () => {
-      unmounted = true;
-      source.cancel("Cancelling");
-    };
-  }, [timeout]);
+    Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
+      ([{ data: product }, { data: user }, { data: bill }]) => {
+        setUserList(user.accounts);
+        setProduct(product);
+        setBill(bill.bills);
+        setUserList(user.accounts);
+        console.log({ product, user, bill });
+        setLoading(false);
+      }
+    );
+  }, []);
 
   // set localStorage
   useEffect(() => {
@@ -86,13 +63,23 @@ export default function ProductDetail() {
   }, [addedProduct, favoriteProduct]);
   // logged in ?
   useEffect(() => {
+    async function alreadyBuy() {
+      setBought(bill.find((p) => p.user_id === user.id));
+    }
+    if (user && bill) {
+      alreadyBuy();
+    }
+    return () => {
+      setBought();
+    };
+  }, [user, bill]);
+  useEffect(() => {
     try {
       setUser(JSON.parse(localStorage.getItem("user")));
     } catch (error) {
       console.log(error);
     }
   }, []);
-
   // Change Handler
   const onCommentChange = (e) => {
     setComment(e.target.value);
@@ -200,6 +187,7 @@ export default function ProductDetail() {
                         .sort(function (a, b) {
                           return b.rating - a.rating;
                         })
+                        .slice(0, 4)
                         .map((comment, index) => {
                           return (
                             <div className="comment-display" key={index + 10}>
@@ -235,32 +223,43 @@ export default function ProductDetail() {
                 </div>
               </Col>
               <Col width="50%">
-                <form action="" onSubmit={onSubmit}>
-                  <label htmlFor="">
-                    <h4>Leave a comment !</h4>
-                  </label>
-                  <div className="product-rated text-warning">
-                    <FontAwesomeIcon icon="star" />
-                    <input
-                      type="number"
-                      placeholder="Rating"
-                      onChange={onRatingChange}
-                      className="comment-rating"
-                      max="5"
-                      min="1"
-                    />
-                  </div>
-                  <textarea
-                    type="text"
-                    className="comment-input"
-                    placeholder="Say something about this product!"
-                    onChange={onCommentChange}
-                    maxLength="300"
-                  />
-                  <button type="submit" className="send-btn">
-                    Send
-                  </button>
-                </form>
+                {user ? (
+                  bought ? (
+                    <form action="" onSubmit={onSubmit}>
+                      <h4>Leave a comment !</h4>
+                      <label htmlFor=""></label>
+                      <div className="product-rated text-warning">
+                        <FontAwesomeIcon icon="star" />
+                        <input
+                          type="number"
+                          placeholder="Rating"
+                          onChange={onRatingChange}
+                          className="comment-rating"
+                          max="5"
+                          min="1"
+                        />
+                      </div>
+                      <textarea
+                        type="text"
+                        className="comment-input"
+                        placeholder="Say something about this product!"
+                        onChange={onCommentChange}
+                        maxLength="300"
+                      />
+                      <button
+                        type="submit"
+                        className="send-btn"
+                        disabled={!user}
+                      >
+                        Send
+                      </button>
+                    </form>
+                  ) : (
+                    <p>Buy this product to comment</p>
+                  )
+                ) : (
+                  <a href="/login">Login to rate this product !</a>
+                )}
               </Col>
             </Row>
           </div>
